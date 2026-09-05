@@ -29,6 +29,7 @@ export const qualificationOutcomeEnum = pgEnum("qualification_outcome", [
   "QUALIFIED", "NOT_QUALIFIED", "INSUFFICIENT_EVIDENCE",
 ]);
 export const listingStatusEnum = pgEnum("listing_status", ["LISTED", "UNLISTED"]);
+export const lotArtifactTypeEnum = pgEnum("lot_artifact_type", ["SUPPLIER_COA", "SUPPLIER_PDF"]);
 export const requirementMatchStatusEnum = pgEnum("requirement_match_status", ["ACTIVE", "INVALIDATED"]);
 export const supplierQuoteStatusEnum = pgEnum("supplier_quote_status", ["DRAFT", "SENT", "ACCEPTED", "EXPIRED", "WITHDRAWN"]);
 export const reservationIntentStatusEnum = pgEnum("reservation_intent_status", ["ACTIVE", "CANCELLED", "EXPIRED", "INVALIDATED"]);
@@ -67,6 +68,14 @@ export const physicalLots = pgTable("physical_lots", {
   revokedAt: timestamp("revoked_at", { withTimezone: true }), transformedAt: timestamp("transformed_at", { withTimezone: true }),
   depletedAt: timestamp("depleted_at", { withTimezone: true }), createdAt: createdAt(),
 }, (table) => [uniqueIndex("physical_lot_supplier_code_uq").on(table.supplierOrganizationId, table.supplierLotCode)]);
+
+export const lotArtifacts = pgTable("lot_artifacts", {
+  id: id(), physicalLotId: uuid("physical_lot_id").notNull().references(() => physicalLots.id),
+  artifactType: lotArtifactTypeEnum("artifact_type").notNull(), fileName: text("file_name").notNull(),
+  referenceUrl: text("reference_url").notNull(), documentDate: timestamp("document_date", { withTimezone: true }),
+  notes: text("notes"), loggedByUserId: uuid("logged_by_user_id").references(() => users.id),
+  receivedAt: timestamp("received_at", { withTimezone: true }).notNull().defaultNow(), createdAt: createdAt(),
+}, (table) => [index("lot_artifact_lot_received_idx").on(table.physicalLotId, table.receivedAt)]);
 
 export const complianceProfiles = pgTable("compliance_profiles", {
   id: id(), productTypeId: uuid("product_type_id").notNull().references(() => productTypes.id),

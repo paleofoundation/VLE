@@ -58,6 +58,8 @@ For local workflow testing without creating Clerk users, set `VLE_DEV_ACTOR=ops@
 
 Evidence revocation does not terminally revoke the physical lot. For a non-terminal lot, the ops workflow returns to authenticated evidence, accepts replacement TECRID evidence, requires a new immutable qualification decision, and only then permits a new listing. Explicit physical-lot revocation remains terminal.
 
+Each ops lot detail also has a **Supplier PDF / COA log**. It records a background artifact type, original filename, secure HTTP(S) reference, optional document date, and operations notes. Logging an artifact writes an audit event but does not verify inventory, create a Sample or TECRID record, qualify the lot, or open the publication gate. VLE does not introduce an artifact storage provider in this slice.
+
 ### Phase B commercial demo
 
 The seed provides a complete inspection path at `/ops/commercial`, `/supplier`, and `/buyer`: buyer requirement → eligible match → accepted quote → active reservation intent. With `VLE_DEV_ACTOR=ops@vle.exchange`, open the seeded QUALIFIED lot from `/ops`, place it on hold, then return to `/buyer` or `/supplier`: the listing is `UNLISTED`, the `RequirementMatch` is `INVALIDATED`, and the active `ReservationIntent` is `INVALIDATED`. No Order is created.

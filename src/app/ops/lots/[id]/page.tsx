@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { getCurrentActor } from "@/lib/current-actor";
 import { formatQuantity } from "@/lib/presentation";
 import { getOpsLotWorkflow } from "@/services/vle";
-import { advanceSamplingAction, holdLotAction, issueMockEvidenceAction, publishAction, qualifyAction, revokeEvidenceAction, startSamplingAction, verifyInventoryAction } from "../../actions";
+import { advanceSamplingAction, holdLotAction, issueMockEvidenceAction, logLotArtifactAction, publishAction, qualifyAction, revokeEvidenceAction, startSamplingAction, verifyInventoryAction } from "../../actions";
 
 const nextSampling = { REQUESTED: "SCHEDULED", SCHEDULED: "COLLECTED", COLLECTED: "SHIPPED", SHIPPED: "RECEIVED", RECEIVED: "COMPLETED" } as const;
 
@@ -27,7 +27,7 @@ export default async function OpsLotPage({ params }: PageProps<"/ops/lots/[id]">
   const workflow = await getOpsLotWorkflow(id);
   if (!workflow) notFound();
 
-  const { lot, order, sample, evidence, decision, listing, profile } = workflow;
+  const { lot, order, sample, evidence, decision, listing, profile, artifacts } = workflow;
   const inventoryVerified = Boolean(lot.identityConfirmedAt && lot.quantityVerifiedAt && lot.locationVerifiedAt && lot.authorityToSellVerifiedAt);
   const samplingComplete = order?.status === "COMPLETED";
   const next = order && order.status in nextSampling ? nextSampling[order.status as keyof typeof nextSampling] : null;
@@ -100,6 +100,32 @@ export default async function OpsLotPage({ params }: PageProps<"/ops/lots/[id]">
           </section>
         </div>
       </div>
+
+      <section className="artifactPanel" aria-labelledby="artifact-heading">
+        <div className="artifactPanelHead">
+          <div><p className="eyebrow">Background artifacts · outside the gate</p><h2 id="artifact-heading">Supplier PDF / COA log</h2><p>Log where the inbound document is stored so operations can trace supplier context. VLE does not treat this reference or its contents as authenticated lab evidence.</p></div>
+          <div className="artifactBoundary" aria-label="Artifact claim boundary"><span>Artifact</span><i>≠</i><span>Sample</span><i>≠</i><span>QUALIFIED</span><i>≠</i><span>LISTED</span></div>
+        </div>
+
+        <div className="artifactLayout">
+          <form action={logLotArtifactAction} className="artifactForm">
+            <input type="hidden" name="lotId" value={lot.id} />
+            <div className="formRow">
+              <label>Artifact type<select name="artifactType" required defaultValue="SUPPLIER_COA"><option value="SUPPLIER_COA">Supplier COA</option><option value="SUPPLIER_PDF">Supplier PDF</option></select></label>
+              <label>Document date <span>optional</span><input name="documentDate" type="date" /></label>
+            </div>
+            <label>Original file name<input name="fileName" required minLength={1} maxLength={180} placeholder="supplier-lot-coa.pdf" /></label>
+            <label>Secure file reference<input name="referenceUrl" type="url" required maxLength={1000} inputMode="url" placeholder="https://…" /></label>
+            <label>Operations notes <span>optional</span><textarea name="notes" rows={3} maxLength={1000} placeholder="Source, sender, or follow-up context" /></label>
+            <div className="artifactFormFooter"><p>Logging is audit-recorded. It does not alter lot status or advance sampling, qualification, or publication.</p><button className="button" type="submit">Log background artifact</button></div>
+          </form>
+
+          <div className="artifactLog" aria-live="polite">
+            <div className="artifactLogHead"><span>Logged artifacts</span><strong>{artifacts.length.toString().padStart(2, "0")}</strong></div>
+            {artifacts.length ? <ol>{artifacts.map((artifact) => <li key={artifact.id}><div><span className="stateChip">{artifact.artifactType === "SUPPLIER_COA" ? "Supplier COA" : "Supplier PDF"}</span><time>{artifact.receivedAt.toLocaleDateString("en", { day: "2-digit", month: "short", year: "numeric" })}</time></div><strong>{artifact.fileName}</strong><p>{artifact.documentDate ? `Document dated ${artifact.documentDate.toLocaleDateString("en", { day: "2-digit", month: "short", year: "numeric" })}. ` : ""}{artifact.notes || "No operations note."}</p><a className="textLink" href={artifact.referenceUrl} target="_blank" rel="noopener noreferrer nofollow">Open stored reference <span aria-hidden="true">↗</span></a></li>)}</ol> : <div className="artifactEmpty"><strong>No supplier artifacts logged.</strong><p>The lot workflow is unchanged. Add an inbound reference only when a PDF or COA arrives.</p></div>}
+          </div>
+        </div>
+      </section>
     </main>
   );
 }

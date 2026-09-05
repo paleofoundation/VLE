@@ -87,6 +87,63 @@ afterAll(async () => {
 });
 
 describeDatabase("Postgres compliance triggers", () => {
+  it("keeps a supplier PDF or COA artifact outside every compliance gate", async () => {
+    await withRollback(async (client) => {
+      const suffix = randomUUID();
+      const supplierOrganizationId = randomUUID();
+      const lotId = randomUUID();
+      const productResult = await client.query<{ id: string }>(
+        `insert into product_types (id, code, name)
+         values ($1, 'COCOA_POWDER', 'Cocoa powder')
+         on conflict (code) do update set name = product_types.name
+         returning id`,
+        [randomUUID()],
+      );
+      await client.query("insert into organizations (id, name, slug, kind) values ($1, 'Artifact supplier', $2, 'SUPPLIER')", [supplierOrganizationId, `artifact-supplier-${suffix}`]);
+      await client.query(
+        `insert into physical_lots (id, supplier_organization_id, product_type_id, supplier_lot_code, status, quantity, quantity_unit, location_name, country_code, owner_name)
+         values ($1, $2, $3, $4, 'NOMINATED', 1000, 'kg', 'Test warehouse', 'US', 'Artifact supplier')`,
+        [lotId, supplierOrganizationId, productResult.rows[0].id, `ARTIFACT-${suffix}`],
+      );
+      await client.query(
+        `insert into lot_artifacts (physical_lot_id, artifact_type, file_name, reference_url)
+         values ($1, 'SUPPLIER_COA', 'supplier-coa.pdf', 'https://files.example.test/supplier-coa.pdf')`,
+        [lotId],
+      );
+      const result = await client.query<{
+        status: string;
+        identityConfirmedAt: Date | null;
+        quantityVerifiedAt: Date | null;
+        locationVerifiedAt: Date | null;
+        authorityVerifiedAt: Date | null;
+        samplingCount: string;
+        decisionCount: string;
+        listingCount: string;
+      }>(
+        `select l.status,
+           l.identity_confirmed_at as "identityConfirmedAt",
+           l.quantity_verified_at as "quantityVerifiedAt",
+           l.location_verified_at as "locationVerifiedAt",
+           l.authority_to_sell_verified_at as "authorityVerifiedAt",
+           (select count(*) from sampling_orders where physical_lot_id = l.id)::text as "samplingCount",
+           (select count(*) from qualification_decisions where physical_lot_id = l.id)::text as "decisionCount",
+           (select count(*) from marketplace_listings where physical_lot_id = l.id)::text as "listingCount"
+         from physical_lots l where l.id = $1`,
+        [lotId],
+      );
+      expect(result.rows[0]).toMatchObject({
+        status: "NOMINATED",
+        identityConfirmedAt: null,
+        quantityVerifiedAt: null,
+        locationVerifiedAt: null,
+        authorityVerifiedAt: null,
+        samplingCount: "0",
+        decisionCount: "0",
+        listingCount: "0",
+      });
+    });
+  });
+
   it("rejects publication until every database publication-gate fact exists", async () => {
     await withRollback(async (client) => {
       const fixture = await createQualifiedFixture(client, false);

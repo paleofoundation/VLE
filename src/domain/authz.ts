@@ -9,6 +9,7 @@ export type Actor = {
 
 const permissions = {
   NOMINATE_LOT: ["SUPPLIER", "ADMIN"],
+  MANAGE_LOT_ARTIFACTS: ["OPS", "ADMIN"],
   MANAGE_SAMPLING: ["OPS", "ADMIN"],
   INGEST_EVIDENCE: ["OPS", "ADMIN"],
   QUALIFY_LOT: ["OPS", "ADMIN"],

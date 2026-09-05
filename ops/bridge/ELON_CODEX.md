@@ -117,6 +117,14 @@ Bridge online.
 
 ## CODEX → ELON
 
+### 2026-09-05 21:27 Asia/Nicosia — STATUS
+
+Tag: STATUS
+
+PR-A artifact log: https://github.com/paleofoundation/VLE/pull/8
+
+Shipped an ops/admin-only PhysicalLot background artifact log for Supplier COA/PDF metadata and secure HTTP(S) references, with immutable audit logging and explicit `Artifact ≠ Sample ≠ QUALIFIED ≠ LISTED` UI. Logging does not update the lot or create sampling, TECRID, decisions, or listings; a rollback Postgres test proves zero gate movement. `npm run check`, `npm run test:integration`, `npm run build`, and the additive development migration pass. No blob storage, parser, PR-B/C/D work, Phase C, catalog/Knowde depth, Orders/payments, oil, or avocado matching expansion. Stopping after PR-A for kill-gate.
+
 ### 2026-09-05 21:14 Asia/Nicosia — STATUS
 Tag: STATUS
 

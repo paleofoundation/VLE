@@ -1,37 +1,125 @@
 import Link from "next/link";
+import { formatQuantity } from "@/lib/presentation";
 import { listPublicListings } from "@/services/vle";
 
 export const dynamic = "force-dynamic";
 
+const gateSteps = [
+  ["01", "Lot identity", "A named physical lot—not a generic product."],
+  ["02", "Inventory authority", "Quantity, location, and authority to sell verified."],
+  ["03", "Controlled sample", "A sampling and custody record bound to the lot."],
+  ["04", "TECRID + decision", "Current authenticated evidence and a deterministic QUALIFIED decision."],
+] as const;
+
+function formatDate(value: Date) {
+  return new Intl.DateTimeFormat("en", { day: "2-digit", month: "short", year: "numeric" }).format(value);
+}
+
 export default async function HomePage() {
   const listings = await listPublicListings();
+
   return (
-    <main>
-      <section className="hero">
-        <p className="eyebrow">Verified Lot Exchange</p>
-        <h1>Buy the lot that<br />already passed.</h1>
-        <p className="lede">Ingredient sourcing built around a frozen compliance profile, a physical lot, a controlled sample, and authenticated lab evidence.</p>
-        <div className="actions"><Link className="button" href="#passed-lots">Browse passed lots</Link><Link className="textLink" href="/find">Find me a passing lot →</Link></div>
+    <main id="main-content">
+      <section className="hero heroHome">
+        <div className="heroCopy">
+          <p className="eyebrow eyebrowLight">Verified Lot Exchange · Cocoa pilot</p>
+          <h1>Buy the lot that already passed.</h1>
+          <p className="heroLead">VLE turns a compliance requirement into a sourcing condition—before the ingredient lot is bought.</p>
+          <div className="actions">
+            <Link className="button" href="#passed-lots">View passed lots</Link>
+            <Link className="textLink textLinkLight" href="/find">Record a buyer requirement</Link>
+          </div>
+        </div>
+        <aside className="pilotCard" aria-label="Cocoa powder pilot status">
+          <div className="pilotCardTop">
+            <span className="signal"><i /> Pilot lane open</span>
+            <span className="mono">COCOA / 01</span>
+          </div>
+          <div className="pilotProduct">
+            <span>Ingredient</span>
+            <strong>Cocoa powder</strong>
+          </div>
+          <dl>
+            <div><dt>Public shelf</dt><dd>{listings.length ? `${listings.length} passed ${listings.length === 1 ? "lot" : "lots"}` : "Awaiting passed lots"}</dd></div>
+            <div><dt>Listing basis</dt><dd>Frozen profile</dd></div>
+            <div><dt>Evidence</dt><dd>TECRID-linked</dd></div>
+          </dl>
+          <p>Expanding by proof, not by catalog.</p>
+        </aside>
       </section>
-      <section className="promise" aria-label="VLE process">
-        <div><strong>01</strong><span>Identify</span><p>A specific physical lot, quantity, location, and authority to sell.</p></div>
-        <div><strong>02</strong><span>Sample</span><p>A recorded sample and custody workflow tied to that lot.</p></div>
-        <div><strong>03</strong><span>Qualify</span><p>Current TECRID-linked evidence evaluated deterministically.</p></div>
-        <div><strong>04</strong><span>List</span><p>Only lots passing a frozen profile can become public.</p></div>
+
+      <section className="networkBand" aria-labelledby="network-heading">
+        <div className="networkIntro">
+          <p className="eyebrow" id="network-heading">One evidence network. Separate responsibilities.</p>
+          <p>VLE is the sourcing layer. It does not replace scientific knowledge, authenticated evidence, or finished-product certification.</p>
+        </div>
+        <ol className="networkRail">
+          <li><span>01</span><strong>HMI</strong><small>Know</small></li>
+          <li><span>02</span><strong>TECRID</strong><small>Prove evidence</small></li>
+          <li className="active"><span>03</span><strong>VLE</strong><small>Source passed lots</small></li>
+          <li><span>04</span><strong>HMTc</strong><small>Certify finished product</small></li>
+        </ol>
       </section>
-      <section className="section" id="passed-lots">
-        <div className="sectionHeading"><div><p className="eyebrow">Cocoa powder pilot</p><h2>Currently passed lots</h2></div><span className="liveMark">{listings.length} live</span></div>
-        {listings.length ? <div className="lotGrid">{listings.map((listing) => (
-          <article className="lotCard" key={listing.id}>
-            <div className="status"><i /> Passed profile {listing.profileVersion}</div>
-            <p className="muted">{listing.product}</p>
-            <h3>{listing.lotCode}</h3>
-            <dl><div><dt>Available</dt><dd>{listing.quantity} {listing.quantityUnit}</dd></div><div><dt>Location</dt><dd>{listing.location}</dd></div><div><dt>Supplier</dt><dd>{listing.supplier}</dd></div></dl>
-            <Link className="cardLink" href={`/lots/${listing.slug}`}>View qualified lot →</Link>
-          </article>
-        ))}</div> : <div className="emptyState"><h3>No lots are public right now.</h3><p>VLE will not show a lot until every publication gate is satisfied.</p></div>}
+
+      <section className="shelfSection" id="passed-lots">
+        <div className="sectionHeading shelfHeading">
+          <div>
+            <p className="eyebrow">Public eligibility shelf</p>
+            <h2>Passed cocoa powder lots</h2>
+            <p className="sectionLead">Every lot shown here has cleared the same publication gate. If eligibility changes, the listing is withdrawn.</p>
+          </div>
+          <span className="liveMark"><i /> {listings.length} public</span>
+        </div>
+
+        {listings.length ? (
+          <div className="lotGrid">
+            {listings.map((listing) => (
+              <article className="lotCard" key={listing.id}>
+                <div className="lotCardHeader">
+                  <span className="status statusPassed"><i /> Passed Cocoa Profile v{listing.profileVersion}</span>
+                  <span className="mono lotRef">LOT</span>
+                </div>
+                <p className="productLabel">{listing.product}</p>
+                <h3>{listing.lotCode}</h3>
+                <p className="supplierLine">Supplied by <strong>{listing.supplier}</strong></p>
+                <dl className="lotFacts">
+                  <div><dt>Available quantity</dt><dd>{formatQuantity(listing.quantity)} {listing.quantityUnit}</dd></div>
+                  <div><dt>Verified location</dt><dd>{listing.location}, {listing.countryCode}</dd></div>
+                  <div><dt>Evidence status</dt><dd className="currentText">Current · to {formatDate(listing.evidenceExpiresAt)}</dd></div>
+                </dl>
+                <Link className="cardLink" href={`/lots/${listing.slug}`}>
+                  <span>Inspect qualification basis</span><span aria-hidden="true">↗</span>
+                </Link>
+              </article>
+            ))}
+          </div>
+        ) : (
+          <div className="readinessEmpty">
+            <div className="emptyCopy">
+              <span className="emptyIndex mono">SHELF / READY</span>
+              <h3>Pilot lane open.</h3>
+              <p>Lots appear here only after they pass a frozen profile. An empty shelf means the gate is working—not that qualification has been skipped.</p>
+              <Link className="textLink" href="/find">Need a passing cocoa lot? Record the requirement</Link>
+            </div>
+            <ol className="gateChecklist" aria-label="Requirements before a lot can list">
+              {gateSteps.map(([number, title, description]) => (
+                <li key={number}><span>{number}</span><div><strong>{title}</strong><p>{description}</p></div></li>
+              ))}
+            </ol>
+          </div>
+        )}
       </section>
-      <section className="guardrail"><p className="eyebrow">The claim boundary</p><h2>“Passed Compliance Profile X.”</h2><p>VLE does not claim safe, clean, zero, or guaranteed finished-product outcomes. TECRID authenticates evidence; it does not prove sampling, ownership, inventory, or finished-product safety.</p></section>
+
+      <section className="truthSection" aria-labelledby="truth-heading">
+        <div className="truthStatement">
+          <p className="eyebrow">What VLE can say</p>
+          <h2 id="truth-heading">“Passed Compliance Profile X.”</h2>
+        </div>
+        <div className="truthDetail">
+          <p>That claim belongs to one identified physical lot, one frozen profile version, and current TECRID-linked evidence.</p>
+          <p>TECRID authenticates evidence. VLE separately records lot identity, inventory facts, sampling, qualification, and listing eligibility. HMTc—not VLE—certifies finished products.</p>
+        </div>
+      </section>
     </main>
   );
 }

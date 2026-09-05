@@ -12,10 +12,10 @@ export async function getCurrentActor(): Promise<Actor> {
   const devEmail = process.env.NODE_ENV !== "production" ? process.env.VLE_DEV_ACTOR : undefined;
   const { userId: clerkUserId } = await auth();
 
-  const identity = clerkUserId
-    ? eq(users.clerkUserId, clerkUserId)
-    : devEmail
-      ? eq(users.email, devEmail)
+  const identity = devEmail
+    ? eq(users.email, devEmail)
+    : clerkUserId
+      ? eq(users.clerkUserId, clerkUserId)
       : null;
 
   if (!identity) throw new DomainError("Authentication required", "UNAUTHENTICATED");

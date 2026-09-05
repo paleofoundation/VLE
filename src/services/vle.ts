@@ -20,7 +20,7 @@ import { evaluatePublicationGate } from "@/domain/publication";
 import { qualify } from "@/domain/qualification";
 import { assertSamplingTransition } from "@/domain/sampling";
 import { assertLotTransition } from "@/domain/lot-state";
-import type { LimitRule, ResultValue, SamplingStatus } from "@/domain/types";
+import type { LimitRule, QualificationOutcome, ResultValue, SamplingStatus } from "@/domain/types";
 import type { TecridAdapter } from "@/adapters/tecrid";
 import { appendAuditEvent } from "./audit";
 
@@ -232,8 +232,11 @@ export async function listPublicListings() {
   return getDb().select({
     id: marketplaceListings.id, slug: marketplaceListings.publicSlug, lotCode: physicalLots.supplierLotCode,
     quantity: physicalLots.quantity, quantityUnit: physicalLots.quantityUnit, location: physicalLots.locationName,
+    countryCode: physicalLots.countryCode,
     supplier: organizations.name, product: productTypes.name, decision: qualificationDecisions.outcome,
-    profileVersion: complianceProfileVersions.version, publishedAt: marketplaceListings.publishedAt,
+    profileName: complianceProfiles.name, profileVersion: complianceProfileVersions.version,
+    evidenceStatus: tecridEvidence.status, evidenceExpiresAt: tecridEvidence.expiresAt,
+    publishedAt: marketplaceListings.publishedAt,
   }).from(marketplaceListings)
     .innerJoin(physicalLots, eq(physicalLots.id, marketplaceListings.physicalLotId))
     .innerJoin(organizations, eq(organizations.id, physicalLots.supplierOrganizationId))
@@ -241,6 +244,7 @@ export async function listPublicListings() {
     .innerJoin(qualificationDecisions, eq(qualificationDecisions.id, marketplaceListings.qualificationDecisionId))
     .innerJoin(tecridEvidence, eq(tecridEvidence.id, qualificationDecisions.evidenceId))
     .innerJoin(complianceProfileVersions, eq(complianceProfileVersions.id, qualificationDecisions.profileVersionId))
+    .innerJoin(complianceProfiles, eq(complianceProfiles.id, complianceProfileVersions.profileId))
     .where(and(
       eq(marketplaceListings.status, "LISTED"), eq(qualificationDecisions.outcome, "QUALIFIED"),
       eq(complianceProfileVersions.status, "FROZEN"), eq(tecridEvidence.status, "CURRENT"),
@@ -253,6 +257,30 @@ export async function listOpsLots() {
   return getDb().select({
     id: physicalLots.id, lotCode: physicalLots.supplierLotCode, status: physicalLots.status,
     supplier: organizations.name, quantity: physicalLots.quantity, quantityUnit: physicalLots.quantityUnit,
+    location: physicalLots.locationName, countryCode: physicalLots.countryCode, createdAt: physicalLots.createdAt,
+    identityConfirmedAt: physicalLots.identityConfirmedAt, quantityVerifiedAt: physicalLots.quantityVerifiedAt,
+    locationVerifiedAt: physicalLots.locationVerifiedAt, authorityToSellVerifiedAt: physicalLots.authorityToSellVerifiedAt,
+    samplingStatus: sql<SamplingStatus | null>`(
+      select status from sampling_orders
+      where physical_lot_id = ${physicalLots.id}
+      order by created_at desc limit 1
+    )`,
+    evidenceStatus: sql<"CURRENT" | "REVOKED" | null>`(
+      select e.status from tecrid_evidence e
+      join samples s on s.id = e.sample_id
+      where s.physical_lot_id = ${physicalLots.id}
+      order by e.created_at desc limit 1
+    )`,
+    decisionOutcome: sql<QualificationOutcome | null>`(
+      select outcome from qualification_decisions
+      where physical_lot_id = ${physicalLots.id}
+      order by decided_at desc limit 1
+    )`,
+    listingStatus: sql<"LISTED" | "UNLISTED" | null>`(
+      select status from marketplace_listings
+      where physical_lot_id = ${physicalLots.id}
+      order by published_at desc limit 1
+    )`,
   }).from(physicalLots).innerJoin(organizations, eq(organizations.id, physicalLots.supplierOrganizationId)).orderBy(desc(physicalLots.createdAt));
 }
 
@@ -280,7 +308,9 @@ export async function getPublicListing(slug: string) {
     quantity: physicalLots.quantity, quantityUnit: physicalLots.quantityUnit, location: physicalLots.locationName,
     countryCode: physicalLots.countryCode, supplier: organizations.name, product: productTypes.name,
     decision: qualificationDecisions.outcome, profileVersion: complianceProfileVersions.version,
-    profileName: sql<string>`(select name from compliance_profiles where id = ${complianceProfileVersions.profileId})`,
+    profileName: complianceProfiles.name, evidenceStatus: tecridEvidence.status,
+    evidenceIssuedAt: tecridEvidence.issuedAt, evidenceExpiresAt: tecridEvidence.expiresAt,
+    evidenceVerifiedAt: tecridEvidence.verifiedAt,
     publishedAt: marketplaceListings.publishedAt,
   }).from(marketplaceListings)
     .innerJoin(physicalLots, eq(physicalLots.id, marketplaceListings.physicalLotId))
@@ -289,6 +319,7 @@ export async function getPublicListing(slug: string) {
     .innerJoin(qualificationDecisions, eq(qualificationDecisions.id, marketplaceListings.qualificationDecisionId))
     .innerJoin(tecridEvidence, eq(tecridEvidence.id, qualificationDecisions.evidenceId))
     .innerJoin(complianceProfileVersions, eq(complianceProfileVersions.id, qualificationDecisions.profileVersionId))
+    .innerJoin(complianceProfiles, eq(complianceProfiles.id, complianceProfileVersions.profileId))
     .where(and(
       eq(marketplaceListings.publicSlug, slug), eq(marketplaceListings.status, "LISTED"),
       eq(qualificationDecisions.outcome, "QUALIFIED"), eq(complianceProfileVersions.status, "FROZEN"),

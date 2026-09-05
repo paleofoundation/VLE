@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { getCurrentActor } from "@/lib/current-actor";
 import { formatQuantity } from "@/lib/presentation";
-import { listAuditEvents, listOpsLots } from "@/services/vle";
+import { listAuditEvents, listOpsLots, listPilotLanes } from "@/services/vle";
 
 export const dynamic = "force-dynamic";
 
@@ -72,7 +72,7 @@ export default async function OpsPage() {
     );
   }
 
-  const [lots, events] = await Promise.all([listOpsLots(), listAuditEvents(12)]);
+  const [lots, events, lanes] = await Promise.all([listOpsLots(), listAuditEvents(12), listPilotLanes()]);
   const listedCount = lots.filter((lot) => lot.listingStatus === "LISTED").length;
   const activeCount = lots.filter((lot) => !["NOT_QUALIFIED", "HELD", "REVOKED", "TRANSFORMED", "DEPLETED"].includes(lot.status)).length;
   const needsAction = lots.filter((lot) => ["active", "attention"].includes(lotReadiness(lot).tone)).length;
@@ -81,7 +81,7 @@ export default async function OpsPage() {
     <main id="main-content" className="opsPage">
       <section className="opsHero">
         <div>
-          <p className="eyebrow">Managed cocoa pilot</p>
+          <p className="eyebrow">Managed cocoa + avocado fruit pilots</p>
           <h1>Operations board</h1>
           <p className="sectionLead">Move real physical lots through inventory verification, controlled sampling, authenticated evidence, qualification, and gated publication.</p>
         </div>
@@ -89,10 +89,18 @@ export default async function OpsPage() {
       </section>
 
       <section className="opsMetrics" aria-label="Pilot pipeline summary">
-        <div><span>Pipeline lots</span><strong>{lots.length.toString().padStart(2, "0")}</strong><small>All recorded cocoa lots</small></div>
+        <div><span>Pipeline lots</span><strong>{lots.length.toString().padStart(2, "0")}</strong><small>Across two controlled lanes</small></div>
         <div><span>Active lane</span><strong>{activeCount.toString().padStart(2, "0")}</strong><small>Not terminal or private-fail</small></div>
         <div><span>Action queue</span><strong>{needsAction.toString().padStart(2, "0")}</strong><small>Next step is named below</small></div>
         <div className="metricLive"><span>Public shelf</span><strong>{listedCount.toString().padStart(2, "0")}</strong><small>Gate-cleared listings</small></div>
+      </section>
+
+      <section className="laneOverview" aria-label="Pilot lane readiness">
+        {lanes.map((lane) => {
+          const laneLots = lots.filter(({ productCode }) => productCode === lane.productCode);
+          const publicCount = laneLots.filter(({ listingStatus }) => listingStatus === "LISTED").length;
+          return <article key={lane.productTypeId}><div><span className="mono">{lane.productCode.replaceAll("_", " / ")}</span><h2>{lane.product}</h2></div><dl><div><dt>Frozen profile</dt><dd>{lane.profileName} v{lane.profileVersion}</dd></div><div><dt>Ops queue</dt><dd>{laneLots.length} lots</dd></div><div><dt>Public</dt><dd>{publicCount} listed</dd></div></dl>{lane.productCode === "AVOCADO_FRUIT" ? <p>Fruit only · no oil marketplace · matching remains cocoa-only.</p> : <p>Phase B matching and commercial intent remain enabled for cocoa only.</p>}</article>;
+        })}
       </section>
 
       <section className="commercialCallout" aria-labelledby="commercial-heading">
@@ -110,7 +118,7 @@ export default async function OpsPage() {
           <div className="opsLotList">
             {lots.map((lot) => {
               const readiness = lotReadiness(lot);
-              const walkthrough = lot.lotCode.startsWith("COCOA-DEMO-NOMINATED") && !["HELD", "REVOKED", "TRANSFORMED", "DEPLETED"].includes(lot.status);
+              const walkthrough = lot.lotCode.includes("DEMO-NOMINATED") && !["HELD", "REVOKED", "TRANSFORMED", "DEPLETED"].includes(lot.status);
               return (
                 <article className={`opsLotRow tone-${readiness.tone}`} key={lot.id}>
                   <div className="opsLotIdentity">
@@ -118,7 +126,7 @@ export default async function OpsPage() {
                       <span className={`stateChip state-${lot.status.toLowerCase()}`}>{lot.status.replaceAll("_", " ")}</span>
                       {walkthrough ? <span className="walkthroughChip">Walkthrough lane</span> : null}
                     </div>
-                    <h3>{lot.lotCode}</h3>
+                    <p className="productLabel">{lot.product}</p><h3>{lot.lotCode}</h3>
                     <p>{lot.supplier} · {lot.location}, {lot.countryCode}</p>
                   </div>
                   <div className="opsLotInventory"><span>Inventory</span><strong>{formatQuantity(lot.quantity)} {lot.quantityUnit}</strong><small>{inventoryVerified(lot) ? "Four facts verified" : "Verification pending"}</small></div>
@@ -134,7 +142,7 @@ export default async function OpsPage() {
             })}
           </div>
         ) : (
-          <div className="opsEmpty"><span className="mono">QUEUE / READY</span><h3>Waiting on the first nomination.</h3><p>The workflow is ready. A supplier must nominate a stocked physical cocoa lot before inventory verification and sampling can begin.</p></div>
+          <div className="opsEmpty"><span className="mono">QUEUE / READY</span><h3>Waiting on the first nomination.</h3><p>The workflow is ready. A supplier must nominate a stocked physical cocoa or avocado fruit lot before inventory verification and sampling can begin.</p></div>
         )}
       </section>
 

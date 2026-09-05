@@ -16,7 +16,7 @@ export async function generateMetadata({ params }: PageProps<"/lots/[slug]">): P
   const { slug } = await params;
   const listing = await getListing(slug);
   return listing
-    ? { title: `${listing.lotCode} — Passed Cocoa Profile v${listing.profileVersion} | VLE` }
+    ? { title: `${listing.lotCode} — Passed ${listing.profileName} v${listing.profileVersion} | VLE` }
     : { title: "Lot unavailable | VLE" };
 }
 

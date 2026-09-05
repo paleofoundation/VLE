@@ -10,10 +10,12 @@ import { qualify } from "../src/domain/qualification";
 import type { LimitRule, ResultValue } from "../src/domain/types";
 
 const ids = {
-  platformOrg: "00000000-0000-4000-8000-000000000001", supplierOrg: "00000000-0000-4000-8000-000000000002", buyerOrg: "00000000-0000-4000-8000-000000000003",
+  platformOrg: "00000000-0000-4000-8000-000000000001", supplierOrg: "00000000-0000-4000-8000-000000000002", buyerOrg: "00000000-0000-4000-8000-000000000003", avocadoSupplierOrg: "00000000-0000-4000-8000-000000000004",
   opsUser: "00000000-0000-4000-8000-000000000011", adminUser: "00000000-0000-4000-8000-000000000012", supplierUser: "00000000-0000-4000-8000-000000000013", buyerUser: "00000000-0000-4000-8000-000000000014",
   cocoa: "00000000-0000-4000-8000-000000000021", profile: "00000000-0000-4000-8000-000000000022", profileV1: "00000000-0000-4000-8000-000000000023",
+  avocado: "00000000-0000-4000-8000-000000000024", avocadoProfile: "00000000-0000-4000-8000-000000000025", avocadoProfileV1: "00000000-0000-4000-8000-000000000026",
   passedLot: "00000000-0000-4000-8000-000000000031", failedLot: "00000000-0000-4000-8000-000000000032", demoLot: "00000000-0000-4000-8000-000000000033",
+  avocadoDemoLot: "00000000-0000-4000-8000-000000000034",
   passedOrder: "00000000-0000-4000-8000-000000000041", failedOrder: "00000000-0000-4000-8000-000000000042",
   passedSample: "00000000-0000-4000-8000-000000000051", failedSample: "00000000-0000-4000-8000-000000000052",
   passedEvidence: "00000000-0000-4000-8000-000000000061", failedEvidence: "00000000-0000-4000-8000-000000000062",
@@ -25,6 +27,9 @@ const ids = {
 const rules: LimitRule[] = [
   { analyte: "lead", maxPpm: 0.5 }, { analyte: "cadmium", maxPpm: 0.8 },
   { analyte: "arsenic", maxPpm: 0.3 }, { analyte: "mercury", maxPpm: 0.05 },
+];
+const avocadoRules: LimitRule[] = [
+  { analyte: "cadmium", maxPpm: 0.05 }, { analyte: "lead", maxPpm: 0.1 },
 ];
 const passedResults: ResultValue[] = [
   { analyte: "lead", valuePpm: 0.15, unit: "ppm" }, { analyte: "cadmium", valuePpm: 0.45, unit: "ppm" },
@@ -39,6 +44,7 @@ async function seed() {
     { id: ids.platformOrg, name: "VLE Managed Operations", slug: "vle-ops", kind: "PLATFORM" },
     { id: ids.supplierOrg, name: "Demo Cocoa Cooperative", slug: "demo-cocoa-coop", kind: "SUPPLIER" },
     { id: ids.buyerOrg, name: "Demo Ingredient Buyer", slug: "demo-buyer", kind: "BUYER" },
+    { id: ids.avocadoSupplierOrg, name: "Demo Avocado Grower", slug: "demo-avocado-grower", kind: "SUPPLIER" },
   ]).onConflictDoNothing();
   await db.insert(users).values([
     { id: ids.opsUser, clerkUserId: "seed_ops_replace_with_clerk_id", email: "ops@vle.exchange", displayName: "VLE Ops" },
@@ -50,17 +56,31 @@ async function seed() {
     { userId: ids.opsUser, organizationId: ids.platformOrg, role: "OPS" }, { userId: ids.adminUser, organizationId: ids.platformOrg, role: "ADMIN" },
     { userId: ids.supplierUser, organizationId: ids.supplierOrg, role: "SUPPLIER" }, { userId: ids.buyerUser, organizationId: ids.buyerOrg, role: "BUYER" },
   ]).onConflictDoNothing();
-  await db.insert(productTypes).values({ id: ids.cocoa, code: "COCOA_POWDER", name: "Cocoa powder" }).onConflictDoNothing();
-  await db.insert(complianceProfiles).values({ id: ids.profile, productTypeId: ids.cocoa, name: "Cocoa Profile" }).onConflictDoNothing();
-  await db.insert(complianceProfileVersions).values({ id: ids.profileV1, profileId: ids.profile, version: "1.0", status: "FROZEN", rules, notes: "EXAMPLE LIMITS ONLY — not a regulatory or safety standard. Replace through a new version; never edit this frozen version.", frozenAt: issuedAt, createdByUserId: ids.adminUser }).onConflictDoNothing();
+  await db.insert(productTypes).values([
+    { id: ids.cocoa, code: "COCOA_POWDER", name: "Cocoa powder" },
+    { id: ids.avocado, code: "AVOCADO_FRUIT", name: "Avocado fruit" },
+  ]).onConflictDoNothing();
+  await db.insert(complianceProfiles).values([
+    { id: ids.profile, productTypeId: ids.cocoa, name: "Cocoa Profile" },
+    { id: ids.avocadoProfile, productTypeId: ids.avocado, name: "Avocado Profile" },
+  ]).onConflictDoNothing();
+  await db.insert(complianceProfileVersions).values([
+    { id: ids.profileV1, profileId: ids.profile, version: "1.0", status: "FROZEN", rules, notes: "EXAMPLE LIMITS ONLY — not a regulatory or safety standard. Replace through a new version; never edit this frozen version.", frozenAt: issuedAt, createdByUserId: ids.adminUser },
+    { id: ids.avocadoProfileV1, profileId: ids.avocadoProfile, version: "1.0", status: "FROZEN", rules: avocadoRules, notes: "EXAMPLE LIMITS ONLY — avocado fruit metals/Cd pilot values; not a regulatory or safety standard. Replace through a new version; never edit this frozen version.", frozenAt: issuedAt, createdByUserId: ids.adminUser },
+  ]).onConflictDoNothing();
   await db.insert(physicalLots).values([
     { id: ids.passedLot, supplierOrganizationId: ids.supplierOrg, productTypeId: ids.cocoa, supplierLotCode: "COCOA-EC-2026-014", status: "QUALIFIED", quantity: "12000", quantityUnit: "kg", locationName: "Guayaquil warehouse", countryCode: "EC", ownerName: "Demo Cocoa Cooperative", identityConfirmedAt: issuedAt, quantityVerifiedAt: issuedAt, locationVerifiedAt: issuedAt, authorityToSellVerifiedAt: issuedAt },
     { id: ids.failedLot, supplierOrganizationId: ids.supplierOrg, productTypeId: ids.cocoa, supplierLotCode: "COCOA-EC-2026-015", status: "NOT_QUALIFIED", quantity: "9000", quantityUnit: "kg", locationName: "Guayaquil warehouse", countryCode: "EC", ownerName: "Demo Cocoa Cooperative", identityConfirmedAt: issuedAt, quantityVerifiedAt: issuedAt, locationVerifiedAt: issuedAt, authorityToSellVerifiedAt: issuedAt },
     { id: ids.demoLot, supplierOrganizationId: ids.supplierOrg, productTypeId: ids.cocoa, supplierLotCode: "COCOA-DEMO-NOMINATED", status: "NOMINATED", quantity: "5000", quantityUnit: "kg", locationName: "Demo origin warehouse", countryCode: "EC", ownerName: "Demo Cocoa Cooperative" },
+    { id: ids.avocadoDemoLot, supplierOrganizationId: ids.avocadoSupplierOrg, productTypeId: ids.avocado, supplierLotCode: "AVOCADO-FRUIT-DEMO-NOMINATED", status: "NOMINATED", quantity: "8000", quantityUnit: "kg", locationName: "Demo packhouse", countryCode: "MX", ownerName: "Demo Avocado Grower" },
   ]).onConflictDoNothing();
   const [openDemo] = await db.select({ id: physicalLots.id }).from(physicalLots).where(and(eq(physicalLots.status, "NOMINATED"), like(physicalLots.supplierLotCode, "COCOA-DEMO-NOMINATED%"))).limit(1);
   if (!openDemo) {
     await db.insert(physicalLots).values({ supplierOrganizationId: ids.supplierOrg, productTypeId: ids.cocoa, supplierLotCode: `COCOA-DEMO-NOMINATED-${Date.now()}`, status: "NOMINATED", quantity: "5000", quantityUnit: "kg", locationName: "Demo origin warehouse", countryCode: "EC", ownerName: "Demo Cocoa Cooperative" });
+  }
+  const [openAvocadoDemo] = await db.select({ id: physicalLots.id }).from(physicalLots).where(and(eq(physicalLots.status, "NOMINATED"), like(physicalLots.supplierLotCode, "AVOCADO-FRUIT-DEMO-NOMINATED%"))).limit(1);
+  if (!openAvocadoDemo) {
+    await db.insert(physicalLots).values({ supplierOrganizationId: ids.avocadoSupplierOrg, productTypeId: ids.avocado, supplierLotCode: `AVOCADO-FRUIT-DEMO-NOMINATED-${Date.now()}`, status: "NOMINATED", quantity: "8000", quantityUnit: "kg", locationName: "Demo packhouse", countryCode: "MX", ownerName: "Demo Avocado Grower" });
   }
   await db.insert(samplingOrders).values([
     { id: ids.passedOrder, physicalLotId: ids.passedLot, requestedByOrganizationId: ids.platformOrg, status: "COMPLETED", assignedSampler: "Independent sampler" },
@@ -100,6 +120,8 @@ async function seed() {
     { id: "00000000-0000-4000-8000-000000000094", eventType: "REQUIREMENT_MATCH_CREATED", entityType: "RequirementMatch", entityId: ids.match, data: { requirementId: ids.requirement, listingId: ids.listing, profileVersionId: ids.profileV1 } },
     { id: "00000000-0000-4000-8000-000000000095", eventType: "SUPPLIER_QUOTE_ACCEPTED", entityType: "SupplierQuote", entityId: ids.quote, data: { example: true, orderCreated: false } },
     { id: "00000000-0000-4000-8000-000000000096", eventType: "RESERVATION_INTENT_CREATED", entityType: "ReservationIntent", entityId: ids.reservation, data: { example: true, orderCreated: false } },
+    { id: "00000000-0000-4000-8000-000000000097", eventType: "PROFILE_VERSION_FROZEN", entityType: "ComplianceProfileVersion", entityId: ids.avocadoProfileV1, data: { version: "1.0", exampleLimitsOnly: true, product: "Avocado fruit" } },
+    { id: "00000000-0000-4000-8000-000000000098", eventType: "LOT_NOMINATED", entityType: "PhysicalLot", entityId: ids.avocadoDemoLot, data: { product: "Avocado fruit", public: false } },
   ];
   const [latestAudit] = await db.select({ eventHash: auditEvents.eventHash }).from(auditEvents).orderBy(desc(auditEvents.createdAt)).limit(1);
   let previousHash = latestAudit?.eventHash;
@@ -108,7 +130,7 @@ async function seed() {
     await db.insert(auditEvents).values({ ...event, actorUserId: ids.opsUser, actorOrganizationId: ids.platformOrg, previousHash, eventHash, createdAt: new Date(decidedAt.getTime() + index) }).onConflictDoNothing();
     previousHash = eventHash;
   }
-  console.log("VLE seed complete: Phase A truth spine plus requirement → match → accepted quote → active reservation intent.");
+  console.log("VLE seed complete: cocoa truth/commercial paths plus avocado fruit profile and nominated readiness lane.");
 }
 
 seed().catch((error) => { console.error(error); process.exit(1); });

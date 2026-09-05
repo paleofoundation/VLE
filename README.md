@@ -6,7 +6,7 @@ VLE is where a buyer goes when an ingredient lot must pass a defined compliance 
 
 > Do not buy the ingredient and discover whether it passes afterward. Buy the lot that already passed.
 
-Phase A is a cocoa-powder pilot. It implements the auditable path from a named physical lot through managed sampling, TECRID-linked evidence, deterministic qualification, gated publication, and automatic unlisting. It is deliberately not a broad ingredient marketplace.
+Phase A began as a cocoa-powder pilot. The same auditable path now has a second, tightly bounded avocado fruit readiness lane: named physical lot, managed sampling, TECRID-linked evidence, deterministic qualification, gated publication, and automatic unlisting. VLE is deliberately not a broad ingredient marketplace.
 
 Phase A.5 adds a production-ready **readiness surface** for the public shelf, lot detail, managed operations board, and buyer-requirement intake. Phase B adds only the cocoa buyer-to-supplier commercial-intent layer: eligible-listing matches, expiring supplier quotes, and expiring reservation intents. Catalog depth, supplier storefronts, Orders, payments, freight, messaging, and multi-ingredient support remain deferred.
 
@@ -39,9 +39,11 @@ The seed creates:
 - buyer, supplier, ops, and admin memberships
 - one cocoa product type
 - frozen **Cocoa Profile v1.0** with conspicuous **EXAMPLE LIMITS ONLY** notes
+- one avocado fruit product type and frozen **Avocado Profile v1.0** with **EXAMPLE LIMITS ONLY** metals/Cd notes
 - one QUALIFIED lot with a public listing
 - one NOT_QUALIFIED lot with no listing (private to operations)
 - one NOMINATED lot for walking through the managed demo
+- one NOMINATED avocado fruit lot for the second ops lane; no avocado listing is fabricated
 - one buyer requirement matched to the seeded eligible listing
 - one accepted example supplier quote and one active reservation intent, both explicitly time-limited
 
@@ -69,6 +71,8 @@ VLE_DEV_ACTOR=ops@vle.exchange npm run dev        # /ops: hold/revoke the lot an
 ```
 
 Only one development server should run at a time. `VLE_DEV_ACTOR` is ignored in production. Quote and reservation expiry reconciliation runs before commercial reads and actions; database triggers enforce prohibited transitions and listing-driven invalidation.
+
+The public and operations pages show separate cocoa powder and avocado fruit lanes. Phase B matching remains cocoa-only. Avocado oil, catalog taxonomy, and cross-product commercial matching are not implemented.
 
 Use a real Clerk identity in deployed environments. Map its Clerk user ID to a row in `users`, then grant organization-scoped rows in `memberships`; every server action repeats authorization checks.
 

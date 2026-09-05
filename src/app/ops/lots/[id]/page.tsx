@@ -42,7 +42,7 @@ export default async function OpsLotPage({ params }: PageProps<"/ops/lots/[id]">
 
       <section className="opsDetailHero">
         <div>
-          <div className="opsLotFlags"><span className={`stateChip state-${lot.status.toLowerCase()}`}>{lot.status.replaceAll("_", " ")}</span>{lot.supplierLotCode.startsWith("COCOA-DEMO-NOMINATED") && !["HELD", "REVOKED", "TRANSFORMED", "DEPLETED"].includes(lot.status) ? <span className="walkthroughChip">Walkthrough lane</span> : null}</div>
+          <div className="opsLotFlags"><span className={`stateChip state-${lot.status.toLowerCase()}`}>{lot.status.replaceAll("_", " ")}</span>{lot.supplierLotCode.includes("DEMO-NOMINATED") && !["HELD", "REVOKED", "TRANSFORMED", "DEPLETED"].includes(lot.status) ? <span className="walkthroughChip">Walkthrough lane</span> : null}</div>
           <p className="eyebrow">{workflow.product} · {workflow.supplier}</p>
           <h1>{lot.supplierLotCode}</h1>
           <p className="sectionLead">One physical lot. One controlled sequence. Each action unlocks only after the prior evidence exists.</p>
@@ -86,12 +86,12 @@ export default async function OpsLotPage({ params }: PageProps<"/ops/lots/[id]">
 
           <section className={stepClass(evidenceCurrent, samplingComplete && !evidence)}>
             <div className="workflowStepHead"><span>04</span><div><small>Authenticated evidence</small><h2>TECRID linkage</h2></div><b>{evidence?.status ?? "Waiting"}</b></div>
-            <div className="workflowStepBody"><div>{evidence ? <><p className="stepValue">{evidence.tecridId}</p><p>Issuer: {evidence.issuer}</p><p className="muted">Current through {evidence.expiresAt.toLocaleDateString("en", { day: "2-digit", month: "long", year: "numeric" })}</p></> : <p>Available after sampling and custody are complete.</p>}</div>{!evidence && samplingComplete && sample ? <ActionForm action={issueMockEvidenceAction} fields={{ lotId: lot.id, sampleId: sample.id, sampleCode: sample.sampleCode }} label="Issue & verify local mock TECRID" /> : null}</div>
+            <div className="workflowStepBody"><div>{evidence ? <><p className="stepValue">{evidence.tecridId}</p><p>Issuer: {evidence.issuer}</p><p className="muted">Current through {evidence.expiresAt.toLocaleDateString("en", { day: "2-digit", month: "long", year: "numeric" })}</p></> : <p>Available after sampling and custody are complete.</p>}</div>{!evidence && samplingComplete && sample ? <ActionForm action={issueMockEvidenceAction} fields={{ lotId: lot.id, sampleId: sample.id, sampleCode: sample.sampleCode, productCode: workflow.productCode }} label="Issue & verify local mock TECRID" /> : null}</div>
           </section>
 
           <section className={stepClass(decisionComplete, evidenceCurrent && !decision)}>
             <div className="workflowStepHead"><span>05</span><div><small>Deterministic rules</small><h2>Qualification decision</h2></div><b>{decision?.outcome ?? "Waiting"}</b></div>
-            <div className="workflowStepBody"><div>{decision ? <><p className="stepValue">{decision.outcome}</p><p>Frozen profile v{profile?.version}</p><p className="muted">Immutable decision · engine {decision.engineVersion}</p></> : <p>Current TECRID-linked evidence and a frozen profile are required.</p>}</div>{!decision && evidence && profile ? <ActionForm action={qualifyAction} fields={{ lotId: lot.id, evidenceId: evidence.id, profileVersionId: profile.id }} label="Run deterministic qualification" /> : null}</div>
+            <div className="workflowStepBody"><div>{decision ? <><p className="stepValue">{decision.outcome}</p><p>{profile?.profileName} v{profile?.version}</p><p className="muted">Immutable decision · engine {decision.engineVersion}</p></> : <><p>Current TECRID-linked evidence is required.</p><p className="muted">Qualification target ready: {profile?.profileName} v{profile?.version} · frozen.</p></>}</div>{!decision && evidence && profile ? <ActionForm action={qualifyAction} fields={{ lotId: lot.id, evidenceId: evidence.id, profileVersionId: profile.id }} label="Run deterministic qualification" /> : null}</div>
           </section>
 
           <section className={stepClass(listingComplete, decision?.outcome === "QUALIFIED" && !listingComplete)}>

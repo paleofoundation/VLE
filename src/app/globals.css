@@ -494,6 +494,39 @@ main { min-height: calc(100vh - 160px); }
 .workflowStepBody .muted { margin-bottom: 0; font-size: 11px; }
 .stepValue { font-family: var(--font-geist-mono), monospace; font-weight: 700; overflow-wrap: anywhere; }
 
+.artifactPanel { margin-top: 82px; padding-top: 64px; border-top: 1px solid var(--ink); }
+.artifactPanelHead { display: flex; justify-content: space-between; gap: 50px; align-items: end; margin-bottom: 30px; }
+.artifactPanelHead > div:first-child { max-width: 760px; }
+.artifactPanelHead h2 { margin-bottom: 15px; font-size: clamp(31px, 4vw, 48px); font-weight: 590; letter-spacing: -.05em; }
+.artifactPanelHead > div:first-child > p:last-child { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.65; }
+.artifactBoundary { display: flex; flex: 0 0 auto; align-items: center; gap: 10px; padding: 13px 15px; border: 1px solid #d4b58d; background: var(--amber-soft); color: #69451f; font-family: var(--font-geist-mono), monospace; font-size: 9px; font-weight: 750; }
+.artifactBoundary i { color: var(--amber); font-style: normal; }
+.artifactLayout { display: grid; grid-template-columns: minmax(360px, .8fr) minmax(0, 1.2fr); gap: 18px; align-items: start; }
+.artifactForm { display: grid; gap: 18px; padding: clamp(24px, 3vw, 34px); border: 1px solid var(--line); background: var(--white); }
+.artifactForm label { color: var(--ink-soft); font-size: 11px; font-weight: 750; }
+.artifactForm label > span { float: right; color: var(--muted); font-weight: 500; }
+.artifactForm input, .artifactForm select, .artifactForm textarea { display: block; width: 100%; min-height: 46px; margin-top: 8px; padding: 11px 12px; border: 1px solid #bfc7c0; border-radius: 0; background: var(--white); color: var(--ink); }
+.artifactForm textarea { min-height: 92px; resize: vertical; }
+.artifactForm input:focus, .artifactForm select:focus, .artifactForm textarea:focus { border-color: var(--green); outline: 3px solid rgba(35,99,72,.15); outline-offset: 0; }
+.artifactFormFooter { display: flex; justify-content: space-between; gap: 25px; align-items: center; padding-top: 6px; }
+.artifactFormFooter p { max-width: 360px; margin: 0; color: var(--muted); font-size: 10px; line-height: 1.55; }
+.artifactFormFooter .button { flex: 0 0 auto; }
+.artifactLog { border: 1px solid var(--line); background: rgba(255,254,249,.45); }
+.artifactLogHead { display: flex; justify-content: space-between; gap: 20px; align-items: center; min-height: 78px; padding: 20px 24px; border-bottom: 1px solid var(--line); }
+.artifactLogHead span { color: var(--muted); font-size: 10px; text-transform: uppercase; }
+.artifactLogHead strong { color: var(--green); font-family: var(--font-geist-mono), monospace; font-size: 26px; }
+.artifactLog ol { margin: 0; padding: 0 24px; list-style: none; }
+.artifactLog li { padding: 24px 0; border-bottom: 1px solid var(--line); }
+.artifactLog li:last-child { border-bottom: 0; }
+.artifactLog li > div:first-child { display: flex; justify-content: space-between; gap: 20px; align-items: center; }
+.artifactLog time { color: var(--muted); font-family: var(--font-geist-mono), monospace; font-size: 9px; }
+.artifactLog li > strong { display: block; overflow-wrap: anywhere; margin: 18px 0 8px; font-size: 16px; }
+.artifactLog li > p { margin-bottom: 17px; color: var(--muted); font-size: 11px; line-height: 1.55; }
+.artifactLog .textLink { font-size: 11px; }
+.artifactEmpty { padding: 48px 24px; }
+.artifactEmpty strong { display: block; margin-bottom: 9px; font-size: 16px; }
+.artifactEmpty p { max-width: 520px; margin: 0; color: var(--muted); font-size: 12px; line-height: 1.6; }
+
 .findPage { display: grid; grid-template-columns: minmax(300px, .85fr) minmax(440px, 1.15fr); gap: clamp(50px, 8vw, 120px); min-height: 760px; color: var(--white); background: var(--ink-deep); }
 .findIntro { align-self: start; }
 .findIntro h1 { max-width: 720px; margin-bottom: 28px; font-size: clamp(52px, 6.5vw, 92px); font-weight: 570; letter-spacing: -.067em; line-height: .95; }
@@ -607,6 +640,8 @@ main { min-height: calc(100vh - 160px); }
   .factGrid div:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
   .opsLotRow { grid-template-columns: 1fr 180px minmax(260px, 1fr); }
   .openLot { grid-column: 1 / -1; }
+  .artifactPanelHead { flex-direction: column; align-items: flex-start; }
+  .artifactLayout { grid-template-columns: 1fr; }
   .findPage { grid-template-columns: 1fr; }
   .findIntro { max-width: 760px; }
   .intakePanel { width: min(100%, 820px); }
@@ -657,6 +692,9 @@ main { min-height: calc(100vh - 160px); }
   .workflowStepHead { grid-template-columns: 34px 1fr; }
   .workflowStepHead b { grid-column: 2; }
   .workflowStepBody { flex-direction: column; align-items: flex-start; }
+  .artifactBoundary { flex-wrap: wrap; }
+  .artifactFormFooter { flex-direction: column; align-items: stretch; }
+  .artifactFormFooter .button { width: 100%; }
   .formRow { grid-template-columns: 1fr; }
   .formSubmit { flex-direction: column; align-items: stretch; }
   .formSubmit .button { width: 100%; }

@@ -5,6 +5,7 @@ import {
   buyerRequirements,
   complianceProfiles,
   complianceProfileVersions,
+  lotArtifacts,
   marketplaceListings,
   organizations,
   physicalLots,
@@ -38,6 +39,34 @@ export async function nominateLot(actor: Actor, input: {
     const [lot] = await tx.insert(physicalLots).values(input).returning();
     await appendAuditEvent(tx, actor, { eventType: "LOT_NOMINATED", entityType: "PhysicalLot", entityId: lot.id, data: input });
     return lot;
+  });
+}
+
+export async function logLotArtifact(actor: Actor, lotId: string, input: {
+  artifactType: "SUPPLIER_COA" | "SUPPLIER_PDF";
+  fileName: string;
+  referenceUrl: string;
+  documentDate?: Date;
+  notes?: string;
+}, now = new Date()) {
+  assertPermission(actor, "MANAGE_LOT_ARTIFACTS");
+  const db = getDb();
+  return db.transaction(async (tx) => {
+    const [lot] = await tx.select({ id: physicalLots.id, status: physicalLots.status }).from(physicalLots).where(eq(physicalLots.id, lotId)).limit(1);
+    if (!lot) throw new DomainError("Physical lot not found", "NOT_FOUND");
+    const [artifact] = await tx.insert(lotArtifacts).values({
+      physicalLotId: lotId,
+      ...input,
+      loggedByUserId: actor.userId,
+      receivedAt: now,
+    }).returning();
+    await appendAuditEvent(tx, actor, {
+      eventType: "LOT_ARTIFACT_LOGGED",
+      entityType: "LotArtifact",
+      entityId: artifact.id,
+      data: { lotId, artifactType: input.artifactType, fileName: input.fileName, referenceRecorded: true, lotStatusUnchanged: lot.status },
+    });
+    return artifact;
   });
 }
 
@@ -322,12 +351,13 @@ export async function getOpsLotWorkflow(lotId: string) {
   const [evidence] = sample ? await db.select().from(tecridEvidence).where(eq(tecridEvidence.sampleId, sample.id)).orderBy(desc(tecridEvidence.createdAt)).limit(1) : [];
   const [decision] = await db.select().from(qualificationDecisions).where(eq(qualificationDecisions.physicalLotId, lotId)).orderBy(desc(qualificationDecisions.decidedAt)).limit(1);
   const [listing] = await db.select().from(marketplaceListings).where(eq(marketplaceListings.physicalLotId, lotId)).orderBy(desc(marketplaceListings.publishedAt)).limit(1);
+  const artifacts = await db.select().from(lotArtifacts).where(eq(lotArtifacts.physicalLotId, lotId)).orderBy(desc(lotArtifacts.receivedAt));
   const [profile] = await db.select({ id: complianceProfileVersions.id, version: complianceProfileVersions.version, status: complianceProfileVersions.status, profileName: complianceProfiles.name })
     .from(complianceProfileVersions)
     .innerJoin(complianceProfiles, eq(complianceProfiles.id, complianceProfileVersions.profileId))
     .where(and(eq(complianceProfileVersions.status, "FROZEN"), eq(complianceProfiles.productTypeId, lot.lot.productTypeId)))
     .limit(1);
-  return { ...lot, order, sample, evidence, decision, listing, profile };
+  return { ...lot, order, sample, evidence, decision, listing, profile, artifacts };
 }
 
 export async function getPublicListing(slug: string) {

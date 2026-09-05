@@ -4,7 +4,7 @@ import { revalidatePath } from "next/cache";
 import { z } from "zod";
 import { MockTecridIssuer } from "@/adapters/tecrid/mock";
 import { getCurrentActor } from "@/lib/current-actor";
-import { advanceSamplingOrder, createSamplingOrder, ingestTecridEvidence, placeLotOnHold, publishListing, qualifyLot, revokeEvidence, verifyLotInventory } from "@/services/vle";
+import { advanceSamplingOrder, createSamplingOrder, ingestTecridEvidence, logLotArtifact, placeLotOnHold, publishListing, qualifyLot, revokeEvidence, verifyLotInventory } from "@/services/vle";
 
 const uuid = z.string().uuid();
 const value = (data: FormData, name: string) => z.string().min(1).parse(data.get(name));
@@ -12,6 +12,27 @@ const refresh = (lotId: string) => { revalidatePath("/"); revalidatePath("/ops")
 
 export async function verifyInventoryAction(data: FormData) {
   const lotId = uuid.parse(data.get("lotId")); await verifyLotInventory(await getCurrentActor(), lotId); refresh(lotId);
+}
+export async function logLotArtifactAction(data: FormData) {
+  const input = z.object({
+    lotId: uuid,
+    artifactType: z.enum(["SUPPLIER_COA", "SUPPLIER_PDF"]),
+    fileName: z.string().trim().min(1).max(180),
+    referenceUrl: z.string().trim().url().max(1000).refine((url) => ["https:", "http:"].includes(new URL(url).protocol), "Reference must use HTTP or HTTPS"),
+    documentDate: z.iso.date().optional(),
+    notes: z.string().trim().max(1000).optional(),
+  }).parse({
+    lotId: data.get("lotId"), artifactType: data.get("artifactType"), fileName: data.get("fileName"),
+    referenceUrl: data.get("referenceUrl"), documentDate: data.get("documentDate") || undefined, notes: data.get("notes") || undefined,
+  });
+  await logLotArtifact(await getCurrentActor(), input.lotId, {
+    artifactType: input.artifactType,
+    fileName: input.fileName,
+    referenceUrl: input.referenceUrl,
+    documentDate: input.documentDate ? new Date(`${input.documentDate}T00:00:00.000Z`) : undefined,
+    notes: input.notes,
+  });
+  refresh(input.lotId);
 }
 export async function startSamplingAction(data: FormData) {
   const lotId = uuid.parse(data.get("lotId")); await createSamplingOrder(await getCurrentActor(), lotId); refresh(lotId);

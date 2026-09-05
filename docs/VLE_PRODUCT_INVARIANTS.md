@@ -4,7 +4,7 @@ These rules are product and data-model constraints, not marketing preferences.
 
 ## Entities never collapse
 
-`Product`, `PhysicalLot`, `Sample`, `TECRID`, `ComplianceProfile`, immutable `ComplianceProfileVersion`, immutable `QualificationDecision`, `MarketplaceListing`, `BuyerRequirement`, `RequirementMatch`, `SupplierQuote`, `ReservationIntent`, `Order`, and an HMTc certificate are separate records with separate lifecycles.
+`Product`, `PhysicalLot`, `LotArtifact`, `Sample`, `TECRID`, `ComplianceProfile`, immutable `ComplianceProfileVersion`, immutable `QualificationDecision`, `MarketplaceListing`, `BuyerRequirement`, `RequirementMatch`, `SupplierQuote`, `ReservationIntent`, `Order`, and an HMTc certificate are separate records with separate lifecycles.
 
 Phase B extends the Phase A truth spine through `ReservationIntent`. `Order` and HMTc certificates are deferred; they must remain separate when introduced.
 
@@ -27,6 +27,8 @@ TECRID authenticates an evidence envelope and its sample binding. It does not pr
 - a future finished product will be safe or compliant.
 
 A supplier PDF is not sufficient evidence. Production TECRID endpoints are not guessed. Local development uses an explicitly named mock issuer.
+
+Supplier PDFs and COAs may be logged against a PhysicalLot as background artifacts for managed operations. The artifact record is not a Sample, TECRID evidence, a QualificationDecision, or a MarketplaceListing, and creating it advances no compliance or publication state.
 
 Revoking a TECRID evidence record immediately unlists every listing that depends on it. It does not by itself revoke the physical lot: an otherwise non-terminal lot returns to `EVIDENCE_RECEIVED`, allowing new authenticated evidence and a new immutable qualification decision. Explicit physical-lot revocation remains a separate terminal action.
 

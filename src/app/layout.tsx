@@ -32,6 +32,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </Link>
             <nav aria-label="Main navigation">
               <Link href="/">Passed lots</Link>
+              <Link href="/for-suppliers">For suppliers</Link>
               <Link href="/find">Buyer requirement</Link>
               <Link href="/buyer">Buyer desk</Link>
               <Link href="/supplier">Supplier desk</Link>

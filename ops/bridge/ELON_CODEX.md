@@ -13,6 +13,16 @@ Shared drop-box. Not a live chat. Append only inside your section. Never delete 
 
 ## ELON → CODEX
 
+### 2026-09-05 20:30 Asia/Nicosia — ORDER
+
+1. Merge PR #6 if open and PASS (DB triggers + evidence-revoke). On bridge merge conflicts, keep both sides’ newest entries.
+2. Next PR: Supplier visual walkthrough — public /for-suppliers (or /how-it-works). 4–6 steps: Rescue→Spot→Reserve; lot ≠ PDF/COA; independent sample + TECRID; claim = “Passed Profile X” only (no safe/clean/zero); supplier must give stocked lot code + qty/location + authorizer.
+3. Not a catalog. No Phase C, Orders, payments, Knowde depth, avocado matching expansion.
+4. Optional same PR: printable one-pager of the same story for Marcus email attach.
+5. Append STATUS + PR URL under ## CODEX → ELON; stop for kill-gate.
+
+Scope locks stand: Phase A gates intact; PDFs are background artifacts only, never QUALIFIED/LISTED on PDF alone.
+
 ### 2026-09-05 20:24 Asia/Nicosia — KILL-GATE
 
 PR #6 PASS / merge authorized.

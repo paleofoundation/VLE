@@ -1,9 +1,10 @@
 import { createHash } from "node:crypto";
-import { and, eq, like } from "drizzle-orm";
+import { and, desc, eq, like } from "drizzle-orm";
 import { getDb } from "../src/db";
 import {
-  auditEvents, complianceProfiles, complianceProfileVersions, marketplaceListings, memberships,
-  organizations, physicalLots, productTypes, qualificationDecisions, samples, samplingOrders, tecridEvidence, users,
+  auditEvents, buyerRequirements, complianceProfiles, complianceProfileVersions, marketplaceListings, memberships,
+  organizations, physicalLots, productTypes, qualificationDecisions, requirementMatches, reservationIntents,
+  samples, samplingOrders, supplierQuotes, tecridEvidence, users,
 } from "../src/db/schema";
 import { qualify } from "../src/domain/qualification";
 import type { LimitRule, ResultValue } from "../src/domain/types";
@@ -17,6 +18,8 @@ const ids = {
   passedSample: "00000000-0000-4000-8000-000000000051", failedSample: "00000000-0000-4000-8000-000000000052",
   passedEvidence: "00000000-0000-4000-8000-000000000061", failedEvidence: "00000000-0000-4000-8000-000000000062",
   passedDecision: "00000000-0000-4000-8000-000000000071", failedDecision: "00000000-0000-4000-8000-000000000072", listing: "00000000-0000-4000-8000-000000000081",
+  requirement: "00000000-0000-4000-8000-000000000101", match: "00000000-0000-4000-8000-000000000102",
+  quote: "00000000-0000-4000-8000-000000000103", reservation: "00000000-0000-4000-8000-000000000104",
 };
 
 const rules: LimitRule[] = [
@@ -79,18 +82,33 @@ async function seed() {
     { id: ids.failedDecision, physicalLotId: ids.failedLot, sampleId: ids.failedSample, evidenceId: ids.failedEvidence, profileVersionId: ids.profileV1, outcome: failed.outcome, rationale: failed.rationale, engineVersion: "vle-deterministic-1", inputHash: failed.inputHash, decidedAt, decidedByUserId: ids.opsUser },
   ]).onConflictDoNothing();
   await db.insert(marketplaceListings).values({ id: ids.listing, physicalLotId: ids.passedLot, qualificationDecisionId: ids.passedDecision, status: "LISTED", publicSlug: "cocoa-ec-2026-014", publishedAt: decidedAt }).onConflictDoNothing();
+  const commercialAt = new Date("2026-09-01T12:00:00Z");
+  const quoteExpiresAt = new Date("2030-01-10T12:00:00Z");
+  const reservationExpiresAt = new Date("2030-01-05T12:00:00Z");
+  await db.insert(buyerRequirements).values({ id: ids.requirement, buyerOrganizationId: ids.buyerOrg, productTypeId: ids.cocoa, profileVersionId: ids.profileV1, quantity: "2000", quantityUnit: "kg", destination: "Rotterdam, NL", notes: "Phase B cocoa commercial-intent walkthrough" }).onConflictDoNothing();
+  await db.insert(requirementMatches).values({ id: ids.match, buyerRequirementId: ids.requirement, marketplaceListingId: ids.listing, profileVersionId: ids.profileV1, matchedByUserId: ids.opsUser, matchedAt: commercialAt }).onConflictDoNothing();
+  await db.insert(supplierQuotes).values({ id: ids.quote, requirementMatchId: ids.match, buyerOrganizationId: ids.buyerOrg, supplierOrganizationId: ids.supplierOrg, status: "DRAFT", quantity: "2000", quantityUnit: "kg", unitPrice: "4.2500", currency: "USD", terms: "EXAMPLE commercial terms only — freight and payment excluded", expiresAt: quoteExpiresAt, createdByUserId: ids.supplierUser }).onConflictDoNothing();
+  const [seededQuote] = await db.select().from(supplierQuotes).where(eq(supplierQuotes.id, ids.quote)).limit(1);
+  if (seededQuote?.status === "DRAFT") await db.update(supplierQuotes).set({ status: "SENT", sentAt: commercialAt }).where(eq(supplierQuotes.id, ids.quote));
+  const [sentQuote] = await db.select().from(supplierQuotes).where(eq(supplierQuotes.id, ids.quote)).limit(1);
+  if (sentQuote?.status === "SENT") await db.update(supplierQuotes).set({ status: "ACCEPTED", acceptedAt: commercialAt }).where(eq(supplierQuotes.id, ids.quote));
+  await db.insert(reservationIntents).values({ id: ids.reservation, supplierQuoteId: ids.quote, requirementMatchId: ids.match, marketplaceListingId: ids.listing, buyerOrganizationId: ids.buyerOrg, supplierOrganizationId: ids.supplierOrg, status: "ACTIVE", expiresAt: reservationExpiresAt, createdByUserId: ids.buyerUser }).onConflictDoNothing();
   const seedEvents = [
     { id: "00000000-0000-4000-8000-000000000091", eventType: "QUALIFICATION_DECIDED", entityType: "QualificationDecision", entityId: ids.passedDecision, data: { outcome: passed.outcome } },
     { id: "00000000-0000-4000-8000-000000000092", eventType: "QUALIFICATION_DECIDED", entityType: "QualificationDecision", entityId: ids.failedDecision, data: { outcome: failed.outcome, private: true } },
     { id: "00000000-0000-4000-8000-000000000093", eventType: "LISTING_PUBLISHED", entityType: "MarketplaceListing", entityId: ids.listing, data: { claim: "Passed Cocoa Profile v1.0" } },
+    { id: "00000000-0000-4000-8000-000000000094", eventType: "REQUIREMENT_MATCH_CREATED", entityType: "RequirementMatch", entityId: ids.match, data: { requirementId: ids.requirement, listingId: ids.listing, profileVersionId: ids.profileV1 } },
+    { id: "00000000-0000-4000-8000-000000000095", eventType: "SUPPLIER_QUOTE_ACCEPTED", entityType: "SupplierQuote", entityId: ids.quote, data: { example: true, orderCreated: false } },
+    { id: "00000000-0000-4000-8000-000000000096", eventType: "RESERVATION_INTENT_CREATED", entityType: "ReservationIntent", entityId: ids.reservation, data: { example: true, orderCreated: false } },
   ];
-  let previousHash: string | undefined;
-  for (const event of seedEvents) {
+  const [latestAudit] = await db.select({ eventHash: auditEvents.eventHash }).from(auditEvents).orderBy(desc(auditEvents.createdAt)).limit(1);
+  let previousHash = latestAudit?.eventHash;
+  for (const [index, event] of seedEvents.entries()) {
     const eventHash = createHash("sha256").update(JSON.stringify({ ...event, previousHash })).digest("hex");
-    await db.insert(auditEvents).values({ ...event, actorUserId: ids.opsUser, actorOrganizationId: ids.platformOrg, previousHash, eventHash, createdAt: decidedAt }).onConflictDoNothing();
+    await db.insert(auditEvents).values({ ...event, actorUserId: ids.opsUser, actorOrganizationId: ids.platformOrg, previousHash, eventHash, createdAt: new Date(decidedAt.getTime() + index) }).onConflictDoNothing();
     previousHash = eventHash;
   }
-  console.log("VLE seed complete: 1 public QUALIFIED lot, 1 private NOT_QUALIFIED lot, 1 nominated workflow lot.");
+  console.log("VLE seed complete: Phase A truth spine plus requirement → match → accepted quote → active reservation intent.");
 }
 
 seed().catch((error) => { console.error(error); process.exit(1); });

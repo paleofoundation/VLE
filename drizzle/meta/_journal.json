@@ -15,6 +15,13 @@
       "when": 1788607440584,
       "tag": "0001_harden-bindings",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1788624117890,
+      "tag": "0002_silent_molecule_man",
+      "breakpoints": true
     }
   ]
 }

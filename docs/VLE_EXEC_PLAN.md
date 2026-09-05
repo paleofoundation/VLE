@@ -25,17 +25,24 @@
 - cohesive responsive visual system, focus treatment, semantic headings, and claim-boundary copy
 - no new domain records, catalog depth, or commercial workflows
 
-## Phase B — deferred pending explicit Elon GO
+## Phase B — implemented
 
-When explicitly authorized, build only the buyer-to-supplier commercial intent layer on top of Phase A:
+- cocoa-only `RequirementMatch` creation against currently eligible public `LISTED` lots on the requirement's exact frozen profile version
+- supplier quotes with explicit expiry and allow-listed `DRAFT → SENT → ACCEPTED` / expiry / withdrawal transitions
+- tenant-bound buyer and supplier parties on every quote
+- reservation intents with explicit expiry and allow-listed active / cancelled / expired / invalidated states
+- database-triggered match and reservation invalidation whenever the bound listing unlists
+- expiry reconciliation before commercial reads and actions
+- managed commercial ops board plus thin buyer and supplier desks
+- immutable audit events for commercial creation, transitions, expiry, and service-driven listing invalidation
+- seed path from buyer requirement through active reservation intent
+- tests for match eligibility, tenant visibility, expiry, prohibited transitions, and unlist propagation
 
-> Expand `BuyerRequirement` into Find-me-a-passing-lot matching for cocoa only. Match exclusively against currently eligible public listings and a frozen profile version. Add supplier quote and buyer reservation-intent records, each with explicit expiry and state machines. Do not add payments, freight booking, chat, warranties, ratings, or Orders yet. Preserve all Phase A entity boundaries and automatic unlisting behavior; a reservation intent must become invalid if its listing unlists. Add tests for tenant visibility, expired quotes, prohibited transitions, and listing-invalidation propagation.
-
-Expected Phase B records: `RequirementMatch`, `SupplierQuote`, and `ReservationIntent`. They remain distinct from `MarketplaceListing` and the future `Order`.
+`RequirementMatch`, `SupplierQuote`, and `ReservationIntent` remain distinct from `BuyerRequirement`, `MarketplaceListing`, and the future `Order`. A reservation intent records commercial intent only; it cannot keep an ineligible listing alive.
 
 ## Phase C — deferred
 
-Order formation, accepted commercial terms, payment adapter selection, and freight handoff. No financing or insurance.
+Order formation, binding commercial terms, payment adapter selection, and freight handoff. No financing or insurance.
 
 ## Phase D — deferred
 

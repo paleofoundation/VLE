@@ -6,7 +6,7 @@ VLE is where a buyer goes when an ingredient lot must pass a defined compliance 
 
 Phase A is a cocoa-powder pilot. It implements the auditable path from a named physical lot through managed sampling, TECRID-linked evidence, deterministic qualification, gated publication, and automatic unlisting. It is deliberately not a broad ingredient marketplace.
 
-Phase A.5 adds a production-ready **readiness surface** for the public shelf, lot detail, managed operations board, and buyer-requirement intake. It adds no catalog depth or commercial workflow: rich taxonomy, supplier storefronts, matching, quotes, reservations, payments, freight, messaging, and multi-ingredient support remain deferred.
+Phase A.5 adds a production-ready **readiness surface** for the public shelf, lot detail, managed operations board, and buyer-requirement intake. Phase B adds only the cocoa buyer-to-supplier commercial-intent layer: eligible-listing matches, expiring supplier quotes, and expiring reservation intents. Catalog depth, supplier storefronts, Orders, payments, freight, messaging, and multi-ingredient support remain deferred.
 
 ## Stack
 
@@ -40,6 +40,8 @@ The seed creates:
 - one QUALIFIED lot with a public listing
 - one NOT_QUALIFIED lot with no listing (private to operations)
 - one NOMINATED lot for walking through the managed demo
+- one buyer requirement matched to the seeded eligible listing
+- one accepted example supplier quote and one active reservation intent, both explicitly time-limited
 
 For local workflow testing without creating Clerk users, set `VLE_DEV_ACTOR=ops@vle.exchange`. This bypass is ignored in production. Then open `/ops`, choose `COCOA-DEMO-NOMINATED`, and execute:
 
@@ -49,6 +51,22 @@ For local workflow testing without creating Clerk users, set `VLE_DEV_ACTOR=ops@
 4. run deterministic qualification;
 5. publish the passed lot;
 6. revoke evidence or hold the lot and observe automatic unlisting.
+
+### Phase B commercial demo
+
+The seed provides a complete inspection path at `/ops/commercial`, `/supplier`, and `/buyer`: buyer requirement → eligible match → accepted quote → active reservation intent. With `VLE_DEV_ACTOR=ops@vle.exchange`, open the seeded QUALIFIED lot from `/ops`, place it on hold, then return to `/buyer` or `/supplier`: the listing is `UNLISTED`, the `RequirementMatch` is `INVALIDATED`, and the active `ReservationIntent` is `INVALIDATED`. No Order is created.
+
+To create a fresh commercial path through the role-specific UI, restart `npm run dev` with each development actor as the handoff changes:
+
+```bash
+VLE_DEV_ACTOR=buyer@example.test npm run dev      # /find: record the requirement
+VLE_DEV_ACTOR=ops@vle.exchange npm run dev        # /ops/commercial: run eligible matching
+VLE_DEV_ACTOR=supplier@example.test npm run dev   # /supplier: draft and send the quote
+VLE_DEV_ACTOR=buyer@example.test npm run dev      # /buyer: accept and create reservation intent
+VLE_DEV_ACTOR=ops@vle.exchange npm run dev        # /ops: hold/revoke the lot and observe invalidation
+```
+
+Only one development server should run at a time. `VLE_DEV_ACTOR` is ignored in production. Quote and reservation expiry reconciliation runs before commercial reads and actions; database triggers enforce prohibited transitions and listing-driven invalidation.
 
 Use a real Clerk identity in deployed environments. Map its Clerk user ID to a row in `users`, then grant organization-scoped rows in `memberships`; every server action repeats authorization checks.
 
@@ -66,6 +84,6 @@ npm run db:seed      # idempotent demo seed
 
 - [Product invariants](docs/VLE_PRODUCT_INVARIANTS.md)
 - [TECRID adapter contract](docs/TECRID_ADAPTER.md)
-- [Execution plan and Phase B handoff](docs/VLE_EXEC_PLAN.md)
+- [Execution plan and deferred Phase C–D work](docs/VLE_EXEC_PLAN.md)
 
 VLE is separate from `tecrid.com`. The primary VLE domain is `vle.exchange`. HMI informs, TECRID authenticates evidence, VLE sources passed lots, and HMTc certifies finished products.

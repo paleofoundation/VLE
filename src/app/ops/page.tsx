@@ -95,6 +95,11 @@ export default async function OpsPage() {
         <div className="metricLive"><span>Public shelf</span><strong>{listedCount.toString().padStart(2, "0")}</strong><small>Gate-cleared listings</small></div>
       </section>
 
+      <section className="commercialCallout" aria-labelledby="commercial-heading">
+        <div><p className="eyebrow">Phase B · Commercial intent</p><h2 id="commercial-heading">Requirement → match → quote → reservation intent</h2><p>Run the buyer and supplier handoff without creating an Order or allowing commercial records to override listing eligibility.</p></div>
+        <Link className="button" href="/ops/commercial">Open commercial board</Link>
+      </section>
+
       <section className="opsBoard" aria-labelledby="pipeline-heading">
         <div className="boardHeading">
           <div><p className="eyebrow">Truth-spine queue</p><h2 id="pipeline-heading">Physical lots</h2></div>

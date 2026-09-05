@@ -10,6 +10,7 @@ import {
   physicalLots,
   productTypes,
   qualificationDecisions,
+  reservationIntents,
   samples,
   samplingOrders,
   tecridEvidence,
@@ -173,10 +174,12 @@ export async function revokeEvidence(actor: Actor, evidenceId: string, reason: s
     const [lot] = await tx.select().from(physicalLots).where(eq(physicalLots.id, sample.physicalLotId)).limit(1);
     assertLotTransition(lot.status, "REVOKED");
     const activeListings = await tx.select({ id: marketplaceListings.id }).from(marketplaceListings).where(and(eq(marketplaceListings.physicalLotId, sample.physicalLotId), eq(marketplaceListings.status, "LISTED")));
+    const activeReservations = activeListings.length ? await tx.select({ id: reservationIntents.id }).from(reservationIntents).where(and(inArray(reservationIntents.marketplaceListingId, activeListings.map(({ id }) => id)), eq(reservationIntents.status, "ACTIVE"))) : [];
     const [evidence] = await tx.update(tecridEvidence).set({ status: "REVOKED", revokedAt: now, revocationReason: reason }).where(eq(tecridEvidence.id, evidenceId)).returning();
     await tx.update(physicalLots).set({ status: "REVOKED", revokedAt: now }).where(eq(physicalLots.id, sample.physicalLotId));
     await tx.update(marketplaceListings).set({ status: "UNLISTED", unpublishedAt: now, unpublishReason: `TECRID revoked: ${reason}` }).where(and(eq(marketplaceListings.physicalLotId, sample.physicalLotId), eq(marketplaceListings.status, "LISTED")));
     await appendAuditEvent(tx, actor, { eventType: "TECRID_EVIDENCE_REVOKED", entityType: "TECRID", entityId: evidence.id, data: { reason, automaticallyUnlisted: activeListings.map((item) => item.id) } });
+    for (const reservation of activeReservations) await appendAuditEvent(tx, actor, { eventType: "RESERVATION_INTENT_INVALIDATED", entityType: "ReservationIntent", entityId: reservation.id, data: { reason: `TECRID revoked: ${reason}`, listingIds: activeListings.map(({ id }) => id) } });
     return { evidence, unpublished: activeListings };
   });
 }
@@ -189,9 +192,11 @@ export async function placeLotOnHold(actor: Actor, lotId: string, reason: string
     if (!current) throw new DomainError("Physical lot not found", "NOT_FOUND");
     assertLotTransition(current.status, "HELD");
     const activeListings = await tx.select({ id: marketplaceListings.id }).from(marketplaceListings).where(and(eq(marketplaceListings.physicalLotId, lotId), eq(marketplaceListings.status, "LISTED")));
+    const activeReservations = activeListings.length ? await tx.select({ id: reservationIntents.id }).from(reservationIntents).where(and(inArray(reservationIntents.marketplaceListingId, activeListings.map(({ id }) => id)), eq(reservationIntents.status, "ACTIVE"))) : [];
     const [lot] = await tx.update(physicalLots).set({ status: "HELD", heldAt: now, holdReason: reason }).where(eq(physicalLots.id, lotId)).returning();
     await tx.update(marketplaceListings).set({ status: "UNLISTED", unpublishedAt: now, unpublishReason: `Lot hold: ${reason}` }).where(and(eq(marketplaceListings.physicalLotId, lotId), eq(marketplaceListings.status, "LISTED")));
     await appendAuditEvent(tx, actor, { eventType: "LOT_HELD", entityType: "PhysicalLot", entityId: lotId, data: { reason, automaticallyUnlisted: activeListings.map((item) => item.id) } });
+    for (const reservation of activeReservations) await appendAuditEvent(tx, actor, { eventType: "RESERVATION_INTENT_INVALIDATED", entityType: "ReservationIntent", entityId: reservation.id, data: { reason: `Lot hold: ${reason}`, listingIds: activeListings.map(({ id }) => id) } });
     return { lot, unpublished: activeListings };
   });
 }
@@ -209,8 +214,10 @@ export async function reconcileExpiredListings(now = new Date()) {
     ));
   if (!expired.length) return 0;
   return db.transaction(async (tx) => {
+    const activeReservations = await tx.select({ id: reservationIntents.id, listingId: reservationIntents.marketplaceListingId }).from(reservationIntents).where(and(inArray(reservationIntents.marketplaceListingId, expired.map((item) => item.listingId)), eq(reservationIntents.status, "ACTIVE")));
     await tx.update(marketplaceListings).set({ status: "UNLISTED", unpublishedAt: now, unpublishReason: "Automatic eligibility reconciliation" }).where(inArray(marketplaceListings.id, expired.map((item) => item.listingId)));
     for (const item of expired) await appendAuditEvent(tx, null, { eventType: "LISTING_AUTO_UNLISTED", entityType: "MarketplaceListing", entityId: item.listingId, data: { lotId: item.lotId } });
+    for (const reservation of activeReservations) await appendAuditEvent(tx, null, { eventType: "RESERVATION_INTENT_INVALIDATED", entityType: "ReservationIntent", entityId: reservation.id, data: { reason: "Automatic listing eligibility reconciliation", listingId: reservation.listingId } });
     return expired.length;
   });
 }

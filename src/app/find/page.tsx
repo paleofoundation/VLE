@@ -26,15 +26,15 @@ export default async function FindPage({ searchParams }: PageProps<"/find">) {
       <section className="findIntro">
         <p className="eyebrow eyebrowLight">Buyer intake · Cocoa powder pilot</p>
         <h1>Find me a passing lot.</h1>
-        <p className="heroLead">Tell VLE what must pass, how much you need, and where it needs to go. We record the requirement against a frozen profile now.</p>
+        <p className="heroLead">Tell VLE what must pass, how much you need, and where it needs to go. The requirement stays bound to one frozen profile version while VLE checks eligible public lots.</p>
         <div className="intakeBoundary">
           <span className="mono">SCOPE / NOW</span>
-          <p><strong>Matching comes next.</strong> This intake creates a BuyerRequirement for managed follow-up. It does not create a quote, reservation, order, or guarantee of supply.</p>
+          <p><strong>Matching is eligibility-bound.</strong> This intake creates a BuyerRequirement. Ops may match it only to a currently LISTED, QUALIFIED cocoa lot on the same frozen profile. It does not create a quote, reservation intent, Order, or guarantee of supply.</p>
         </div>
         <ol className="intakeSteps">
           <li><span>01</span><div><strong>Record the requirement</strong><p>Quantity, destination, timing, and named profile.</p></div></li>
           <li><span>02</span><div><strong>Preserve the standard</strong><p>The request stays bound to Cocoa Profile v{profile.version}.</p></div></li>
-          <li><span>03</span><div><strong>Managed follow-up</strong><p>VLE operations can use the requirement to prepare the pilot lane.</p></div></li>
+          <li><span>03</span><div><strong>Match the live shelf</strong><p>VLE operations checks only currently eligible public lots.</p></div></li>
         </ol>
       </section>
 
@@ -43,7 +43,7 @@ export default async function FindPage({ searchParams }: PageProps<"/find">) {
           <div><p className="eyebrow">Requirement record</p><h2 id="intake-heading">Buyer need</h2></div>
           <span className="stateChip state-qualified">Profile frozen</span>
         </div>
-        {created ? <div className="success" role="status" aria-live="polite"><strong>Requirement recorded.</strong><span>VLE operations can now see this buyer need for managed follow-up.</span></div> : null}
+        {created ? <div className="success" role="status" aria-live="polite"><strong>Requirement recorded.</strong><span>Continue in the buyer desk while VLE operations runs eligible matching.</span></div> : null}
         <form action={createRequirementAction} className="formCard">
           <input type="hidden" name="productTypeId" value={product.id} />
           <input type="hidden" name="profileVersionId" value={profile.id} />
@@ -57,7 +57,7 @@ export default async function FindPage({ searchParams }: PageProps<"/find">) {
           </div>
           <label>Requirement notes <span>optional</span><textarea name="notes" rows={5} maxLength={1000} placeholder="Timing, handling, packaging, or procurement context" /></label>
           <div className="formSubmit">
-            <p>Submitting records a requirement only. No commercial commitment is created.</p>
+            <p>Submitting records a requirement only. Matches, quotes, reservation intents, and Orders remain distinct records.</p>
             <button className="button" type="submit">Record buyer requirement</button>
           </div>
         </form>

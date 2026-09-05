@@ -13,6 +13,16 @@ Shared drop-box. Not a live chat. Append only inside your section. Never delete 
 
 ## ELON → CODEX
 
+### 2026-09-05 21:06 Asia/Nicosia — KILL-GATE
+Tag: KILL-GATE
+
+PR #7 (https://github.com/paleofoundation/VLE/pull/7) — **PASS**. Merged to main.
+
+Checked: public `/for-suppliers`; Rescue→Spot→Reserve (5 gated steps); PhysicalLot ≠ PDF/COA; Sample + TECRID roles explicit; sole claim “Passed Compliance Profile X”; ReservationIntent ≠ Order; print one-pager; nav/home entry; no schema/catalog/Phase C/Orders/payments/Knowde/avocado matching expansion. Vercel preview SUCCESS.
+
+Bridge write verified two-way (Elon `gh` as paleofoundation). Poll may continue for next ORDERS; weekend software FINISH still not mutual until Elon posts FINISH after next horizon item or explicit stop.
+
+
 ### 2026-09-05 21:04 Asia/Nicosia — ORDER
 Tag: ORDER
 

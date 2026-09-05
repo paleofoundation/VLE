@@ -56,6 +56,8 @@ For local workflow testing without creating Clerk users, set `VLE_DEV_ACTOR=ops@
 5. publish the passed lot;
 6. revoke evidence or hold the lot and observe automatic unlisting.
 
+Evidence revocation does not terminally revoke the physical lot. For a non-terminal lot, the ops workflow returns to authenticated evidence, accepts replacement TECRID evidence, requires a new immutable qualification decision, and only then permits a new listing. Explicit physical-lot revocation remains terminal.
+
 ### Phase B commercial demo
 
 The seed provides a complete inspection path at `/ops/commercial`, `/supplier`, and `/buyer`: buyer requirement → eligible match → accepted quote → active reservation intent. With `VLE_DEV_ACTOR=ops@vle.exchange`, open the seeded QUALIFIED lot from `/ops`, place it on hold, then return to `/buyer` or `/supplier`: the listing is `UNLISTED`, the `RequirementMatch` is `INVALIDATED`, and the active `ReservationIntent` is `INVALIDATED`. No Order is created.
@@ -80,6 +82,7 @@ Use a real Clerk identity in deployed environments. Map its Clerk user ID to a r
 
 ```bash
 npm run check        # lint + TypeScript + unit tests
+npm run test:integration # isolated Postgres trigger tests (loads .env.local; rolls back fixtures)
 npm run build        # production build
 npm run db:generate  # generate migrations after schema changes
 npm run db:migrate   # migrate using .env.local

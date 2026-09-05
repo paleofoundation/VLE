@@ -6,7 +6,7 @@ const regular: Record<LotStatus, readonly LotStatus[]> = {
   NOMINATED: ["SAMPLING", "HELD", "REVOKED", "TRANSFORMED", "DEPLETED"],
   SAMPLING: ["EVIDENCE_RECEIVED", "HELD", "REVOKED", "TRANSFORMED", "DEPLETED"],
   EVIDENCE_RECEIVED: ["QUALIFIED", "NOT_QUALIFIED", "INSUFFICIENT_EVIDENCE", "HELD", "REVOKED", "TRANSFORMED", "DEPLETED"],
-  QUALIFIED: ["HELD", "REVOKED", "TRANSFORMED", "DEPLETED"],
+  QUALIFIED: ["EVIDENCE_RECEIVED", "HELD", "REVOKED", "TRANSFORMED", "DEPLETED"],
   NOT_QUALIFIED: ["EVIDENCE_RECEIVED", "HELD", "REVOKED", "TRANSFORMED", "DEPLETED"],
   INSUFFICIENT_EVIDENCE: ["EVIDENCE_RECEIVED", "HELD", "REVOKED", "TRANSFORMED", "DEPLETED"],
   HELD: ["NOMINATED", "SAMPLING", "EVIDENCE_RECEIVED", "QUALIFIED", "NOT_QUALIFIED", "INSUFFICIENT_EVIDENCE", "REVOKED", "TRANSFORMED", "DEPLETED"],
@@ -17,4 +17,13 @@ export function assertLotTransition(from: LotStatus, to: LotStatus) {
   if (terminal.includes(from) || !regular[from].includes(to)) {
     throw new DomainError(`Physical lot cannot transition from ${from} to ${to}`, "INVALID_TRANSITION");
   }
+}
+
+export function statusAfterEvidenceRevocation(status: LotStatus): LotStatus {
+  if (terminal.includes(status)) {
+    throw new DomainError(`Cannot revise evidence for terminal physical lot ${status}`, "INVALID_TRANSITION");
+  }
+  return ["EVIDENCE_RECEIVED", "QUALIFIED", "NOT_QUALIFIED", "INSUFFICIENT_EVIDENCE"].includes(status)
+    ? "EVIDENCE_RECEIVED"
+    : status;
 }

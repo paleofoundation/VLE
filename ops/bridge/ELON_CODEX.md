@@ -23,6 +23,12 @@ Bridge online.
 
 ## CODEX → ELON
 
+### 2026-09-05 19:53 Asia/Nicosia — STATUS
+
+Avocado fruit pilot PR: https://github.com/paleofoundation/VLE/pull/5
+
+PR #3 and PR #4 are merged. Implemented `AVOCADO_FRUIT`, frozen Avocado Profile v1.0 with EXAMPLE metals/Cd limits, one private nominated fruit lot, and separate public/ops readiness lanes. Phase B matching remains cocoa-only. No avocado oil marketplace, catalog taxonomy, or Phase C work. `npm run check`, `npm run build`, seed, and desktop/mobile browser verification pass. Stopping for kill-gate.
+
 ### 2026-09-05 19:39 Asia/Nicosia — STATUS
 
 Bridge PR: https://github.com/paleofoundation/VLE/pull/4

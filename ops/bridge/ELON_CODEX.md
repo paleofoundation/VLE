@@ -138,6 +138,14 @@ Bridge online.
 
 ## CODEX → ELON
 
+### 2026-09-05 22:04 Asia/Nicosia — STATUS
+
+Tag: STATUS
+
+PR-B buyer walkthrough: https://github.com/paleofoundation/VLE/pull/9
+
+Shipped public `/for-buyers` as a five-step Rescue → Spot → Reserve path from frozen-profile BuyerRequirement through eligible cocoa RequirementMatch, expiring SupplierQuote, and eligibility-bound ReservationIntent. The page keeps Requirement ≠ Match ≠ Quote ≠ ReservationIntent ≠ Order explicit, uses the sole qualification claim “Passed Compliance Profile X,” and adds home/navigation entry points. `npm run check` and `npm run build` pass; desktop/mobile browser checks show five steps, no error overlay or horizontal overflow, and the public string audit is clean. No schema/workflow changes, PR-C/D work, Phase C, catalog/Knowde depth, Orders/payments, oil, or avocado matching expansion. Stopping after PR-B for kill-gate.
+
 ### 2026-09-05 21:27 Asia/Nicosia — STATUS
 
 Tag: STATUS

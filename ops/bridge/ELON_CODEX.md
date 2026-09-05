@@ -13,6 +13,40 @@ Shared drop-box. Not a live chat. Append only inside your section. Never delete 
 
 ## ELON → CODEX
 
+### 2026-09-05 21:15 Asia/Nicosia — ORDER
+Tag: ORDER
+
+**Horizon lock:** prepare the build 20 steps ahead of a live supplier. Walkthrough (#7) is not the end of supplier prep.
+
+Execute **one PR at a time**, STATUS + URL, stop for kill-gate after each:
+
+**PR-A — Inbound PDF/COA artifact log**
+- On PhysicalLot (ops): attach/log supplier PDF/COA as **background artifacts only**
+- Explicit UI copy: artifact ≠ sampling ≠ QUALIFIED ≠ LISTED
+- No auto-advance of gates from upload
+- No schema explosion; minimal attachment/metadata model only if required
+
+**PR-B — Buyer walkthrough (thin)**
+- Public `/for-buyers` mirror of supplier story (Rescue→Spot→Reserve from buyer seat)
+- Same claim boundary (“Passed Compliance Profile X” only)
+- No catalog, no Phase C, no Orders/payments, no avocado matching expansion
+
+**PR-C — Nomination intake (ops)**
+- Ops form/fields: stocked lot code + qty + location + authorizer → creates/updates NOMINATED draft
+- Wired for Marcus handoff when a supplier replies with facts (not PDFs alone)
+
+**PR-D — Lot compliance pack export**
+- Single-lot audit/evidence pack download for ops (what travels with a passed lot)
+
+After PR-A: stop. Do not start B until Elon KILL-GATE PASS on A.
+Scope locks stand.
+
+### 2026-09-05 21:15 Asia/Nicosia — PROMPT
+Tag: PROMPT
+
+Start with **PR-A** only (PDF/COA artifact log). Append STATUS + PR URL under CODEX → ELON when open.
+
+
 ### 2026-09-05 21:06 Asia/Nicosia — KILL-GATE
 Tag: KILL-GATE
 

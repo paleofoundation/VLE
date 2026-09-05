@@ -29,6 +29,9 @@ export const qualificationOutcomeEnum = pgEnum("qualification_outcome", [
   "QUALIFIED", "NOT_QUALIFIED", "INSUFFICIENT_EVIDENCE",
 ]);
 export const listingStatusEnum = pgEnum("listing_status", ["LISTED", "UNLISTED"]);
+export const requirementMatchStatusEnum = pgEnum("requirement_match_status", ["ACTIVE", "INVALIDATED"]);
+export const supplierQuoteStatusEnum = pgEnum("supplier_quote_status", ["DRAFT", "SENT", "ACCEPTED", "EXPIRED", "WITHDRAWN"]);
+export const reservationIntentStatusEnum = pgEnum("reservation_intent_status", ["ACTIVE", "CANCELLED", "EXPIRED", "INVALIDATED"]);
 
 export const organizations = pgTable("organizations", {
   id: id(), name: text("name").notNull(), slug: text("slug").notNull().unique(),
@@ -125,6 +128,44 @@ export const buyerRequirements = pgTable("buyer_requirements", {
   quantity: numeric("quantity", { precision: 14, scale: 3 }).notNull(), quantityUnit: text("quantity_unit").notNull(),
   destination: text("destination").notNull(), notes: text("notes"), createdAt: createdAt(),
 });
+
+export const requirementMatches = pgTable("requirement_matches", {
+  id: id(), buyerRequirementId: uuid("buyer_requirement_id").notNull().references(() => buyerRequirements.id),
+  marketplaceListingId: uuid("marketplace_listing_id").notNull().references(() => marketplaceListings.id),
+  profileVersionId: uuid("profile_version_id").notNull().references(() => complianceProfileVersions.id),
+  status: requirementMatchStatusEnum("status").notNull().default("ACTIVE"),
+  matchedByUserId: uuid("matched_by_user_id").references(() => users.id), matchedAt: timestamp("matched_at", { withTimezone: true }).notNull(),
+  invalidatedAt: timestamp("invalidated_at", { withTimezone: true }), invalidationReason: text("invalidation_reason"),
+}, (table) => [
+  uniqueIndex("requirement_listing_match_uq").on(table.buyerRequirementId, table.marketplaceListingId),
+  index("requirement_match_status_idx").on(table.buyerRequirementId, table.status),
+]);
+
+export const supplierQuotes = pgTable("supplier_quotes", {
+  id: id(), requirementMatchId: uuid("requirement_match_id").notNull().references(() => requirementMatches.id),
+  buyerOrganizationId: uuid("buyer_organization_id").notNull().references(() => organizations.id),
+  supplierOrganizationId: uuid("supplier_organization_id").notNull().references(() => organizations.id),
+  status: supplierQuoteStatusEnum("status").notNull().default("DRAFT"),
+  quantity: numeric("quantity", { precision: 14, scale: 3 }).notNull(), quantityUnit: text("quantity_unit").notNull(),
+  unitPrice: numeric("unit_price", { precision: 14, scale: 4 }).notNull(), currency: text("currency").notNull(),
+  terms: text("terms"), expiresAt: timestamp("expires_at", { withTimezone: true }).notNull(),
+  createdByUserId: uuid("created_by_user_id").references(() => users.id), createdAt: createdAt(),
+  sentAt: timestamp("sent_at", { withTimezone: true }), acceptedAt: timestamp("accepted_at", { withTimezone: true }),
+  expiredAt: timestamp("expired_at", { withTimezone: true }), withdrawnAt: timestamp("withdrawn_at", { withTimezone: true }),
+}, (table) => [index("supplier_quote_tenant_status_idx").on(table.supplierOrganizationId, table.buyerOrganizationId, table.status)]);
+
+export const reservationIntents = pgTable("reservation_intents", {
+  id: id(), supplierQuoteId: uuid("supplier_quote_id").notNull().references(() => supplierQuotes.id).unique(),
+  requirementMatchId: uuid("requirement_match_id").notNull().references(() => requirementMatches.id),
+  marketplaceListingId: uuid("marketplace_listing_id").notNull().references(() => marketplaceListings.id),
+  buyerOrganizationId: uuid("buyer_organization_id").notNull().references(() => organizations.id),
+  supplierOrganizationId: uuid("supplier_organization_id").notNull().references(() => organizations.id),
+  status: reservationIntentStatusEnum("status").notNull().default("ACTIVE"),
+  expiresAt: timestamp("expires_at", { withTimezone: true }).notNull(), createdByUserId: uuid("created_by_user_id").references(() => users.id),
+  createdAt: createdAt(), cancelledAt: timestamp("cancelled_at", { withTimezone: true }),
+  expiredAt: timestamp("expired_at", { withTimezone: true }), invalidatedAt: timestamp("invalidated_at", { withTimezone: true }),
+  statusReason: text("status_reason"),
+}, (table) => [index("reservation_listing_status_idx").on(table.marketplaceListingId, table.status)]);
 
 export const auditEvents = pgTable("audit_events", {
   id: id(), actorUserId: uuid("actor_user_id").references(() => users.id),

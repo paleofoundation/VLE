@@ -16,6 +16,11 @@ const permissions = {
   HOLD_OR_REVOKE: ["OPS", "ADMIN"],
   MANAGE_PROFILES: ["ADMIN"],
   CREATE_REQUIREMENT: ["BUYER", "ADMIN"],
+  MANAGE_MATCHES: ["OPS", "ADMIN"],
+  CREATE_QUOTE: ["SUPPLIER", "OPS", "ADMIN"],
+  RESPOND_TO_QUOTE: ["BUYER", "OPS", "ADMIN"],
+  CREATE_RESERVATION_INTENT: ["BUYER", "OPS", "ADMIN"],
+  CANCEL_RESERVATION_INTENT: ["BUYER", "SUPPLIER", "OPS", "ADMIN"],
 } as const satisfies Record<string, readonly Role[]>;
 
 export type Permission = keyof typeof permissions;

@@ -4,9 +4,16 @@ These rules are product and data-model constraints, not marketing preferences.
 
 ## Entities never collapse
 
-`Product`, `PhysicalLot`, `Sample`, `TECRID`, `ComplianceProfile`, immutable `ComplianceProfileVersion`, immutable `QualificationDecision`, `MarketplaceListing`, `BuyerRequirement`, `Order`, and an HMTc certificate are separate records with separate lifecycles.
+`Product`, `PhysicalLot`, `Sample`, `TECRID`, `ComplianceProfile`, immutable `ComplianceProfileVersion`, immutable `QualificationDecision`, `MarketplaceListing`, `BuyerRequirement`, `RequirementMatch`, `SupplierQuote`, `ReservationIntent`, `Order`, and an HMTc certificate are separate records with separate lifecycles.
 
-Phase A implements all through `MarketplaceListing` plus a minimal `BuyerRequirement`. `Order` and HMTc certificates are deferred; they must remain separate when introduced.
+Phase B extends the Phase A truth spine through `ReservationIntent`. `Order` and HMTc certificates are deferred; they must remain separate when introduced.
+
+## Commercial intent boundary
+
+- A `RequirementMatch` may be created only for cocoa powder, the requirement's exact frozen profile version, and a currently eligible public `LISTED` lot with enough recorded quantity.
+- A `SupplierQuote` is tenant-bound, expiring, and governed by an allow-listed state machine. An expired or ineligible quote cannot be accepted.
+- A `ReservationIntent` requires an accepted quote and a currently eligible listing. It is not an inventory allocation, contract, or Order.
+- When a listing unlists, active matches and reservation intents are invalidated by the database. Commercial intent can never override the publication gate.
 
 ## Evidence boundary
 
@@ -51,4 +58,4 @@ Disallowed: safe, clean, zero, toxin-free, guaranteed, or any implication that t
 
 ## Scope exclusions
 
-No blockchain, owned laboratory, warehouse, inventory, insurance, financing, AI-as-assay, rich taxonomy, payments, freight, messaging, ratings, warranties, or Knowde-grade storefronts in Phase A.
+No blockchain, owned laboratory, warehouse, inventory, insurance, financing, AI-as-assay, rich taxonomy, payments, freight booking, messaging, ratings, warranties, Orders, or Knowde-grade storefronts through Phase B.

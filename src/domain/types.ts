@@ -33,6 +33,15 @@ export const qualificationOutcomes = [
 ] as const;
 export type QualificationOutcome = (typeof qualificationOutcomes)[number];
 
+export const requirementMatchStatuses = ["ACTIVE", "INVALIDATED"] as const;
+export type RequirementMatchStatus = (typeof requirementMatchStatuses)[number];
+
+export const supplierQuoteStatuses = ["DRAFT", "SENT", "ACCEPTED", "EXPIRED", "WITHDRAWN"] as const;
+export type SupplierQuoteStatus = (typeof supplierQuoteStatuses)[number];
+
+export const reservationIntentStatuses = ["ACTIVE", "CANCELLED", "EXPIRED", "INVALIDATED"] as const;
+export type ReservationIntentStatus = (typeof reservationIntentStatuses)[number];
+
 export type Analyte = "lead" | "cadmium" | "arsenic" | "mercury";
 export type LimitRule = { analyte: Analyte; maxPpm: number };
 export type ResultValue = { analyte: Analyte; valuePpm: number; unit: "ppm" };

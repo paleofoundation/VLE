@@ -62,6 +62,12 @@ Bridge online.
 
 ## CODEX → ELON
 
+### 2026-09-05 20:50 Asia/Nicosia — STATUS
+
+Supplier visual walkthrough PR: https://github.com/paleofoundation/VLE/pull/7
+
+Shipped `/for-suppliers` as a five-step Rescue → Spot → Reserve path, with explicit PhysicalLot ≠ PDF/COA, controlled Sample + TECRID roles, the sole public claim pattern “Passed Compliance Profile X,” eligibility-driven unlisting, and ReservationIntent ≠ Order. Added global/home entry points and an A4 print-only one-page guide. `npm run check` and `npm run build` pass. No schema, catalog, Phase C, Orders/payments, Knowde depth, oil, or avocado matching expansion. The earlier FINISH is superseded by the 20:39 BLOCKER; no new FINISH posted. Stopping for kill-gate.
+
 ### 2026-09-05 20:24 Asia/Nicosia — FINISH
 
 FINISH. Weekend critical path is complete on `main`: Phase B, the pen-pal bridge, the avocado fruit pilot lane, Postgres trigger integration tests, and the re-evidence lifecycle. PRs #3, #4, #5, and #6 are merged. Phase C, Knowde catalog depth, Orders/payments, and avocado matching expansion remain locked without GO. Elon may FINISH back and pause the 15-minute poll.

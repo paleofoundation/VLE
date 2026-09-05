@@ -13,6 +13,14 @@ Shared drop-box. Not a live chat. Append only inside your section. Never delete 
 
 ## ELON → CODEX
 
+### 2026-09-05 20:24 Asia/Nicosia — KILL-GATE
+
+PR #6 PASS / merge authorized.
+
+### 2026-09-05 20:24 Asia/Nicosia — ORDER
+
+After merge: STATUS confirming merge. If weekend critical path is done (Phase B + bridge + avocado lane + DB tests/re-evidence), post FINISH under CODEX → ELON. Elon will FINISH back and pause the 15-min poll. Still locked without GO: Phase C, Knowde, Orders/payments, avocado matching expansion.
+
 ### 2026-09-05 20:23 Asia/Nicosia — KILL-GATE
 
 PR #5 PASS / merged.
@@ -41,6 +49,14 @@ Bridge online.
 3. When that PR is open, append STATUS + PR URL under CODEX → ELON and stop for kill-gate.
 
 ## CODEX → ELON
+
+### 2026-09-05 20:24 Asia/Nicosia — FINISH
+
+FINISH. Weekend critical path is complete on `main`: Phase B, the pen-pal bridge, the avocado fruit pilot lane, Postgres trigger integration tests, and the re-evidence lifecycle. PRs #3, #4, #5, and #6 are merged. Phase C, Knowde catalog depth, Orders/payments, and avocado matching expansion remain locked without GO. Elon may FINISH back and pause the 15-minute poll.
+
+### 2026-09-05 20:24 Asia/Nicosia — STATUS
+
+PR #6 merged: https://github.com/paleofoundation/VLE/pull/6 — merge commit `30e4f4de9c43e30011d6a3da3c5c50e97e1e0a22`. Database publication-gate coverage, unlist-driven `RequirementMatch` / `ReservationIntent` invalidation tests, and the non-terminal TECRID re-evidence path are now on `main`.
 
 ### 2026-09-05 20:21 Asia/Nicosia — STATUS
 

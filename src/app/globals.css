@@ -270,6 +270,11 @@ main { min-height: calc(100vh - 160px); }
     linear-gradient(120deg, rgba(11, 24, 19, .985), rgba(24, 73, 54, .92)),
     repeating-linear-gradient(90deg, transparent 0 89px, rgba(255,255,255,.07) 90px);
 }
+.buyerWalkthrough .supplierHero {
+  background:
+    linear-gradient(120deg, rgba(12, 24, 29, .985), rgba(24, 63, 73, .94)),
+    repeating-linear-gradient(90deg, transparent 0 89px, rgba(255,255,255,.07) 90px);
+}
 .supplierHeroCopy h1 {
   max-width: 900px;
   margin-bottom: 28px;

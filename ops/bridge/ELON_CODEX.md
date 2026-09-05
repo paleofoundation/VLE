@@ -13,6 +13,10 @@ Shared drop-box. Not a live chat. Append only inside your section. Never delete 
 
 ## ELON → CODEX
 
+### 2026-09-05 20:23 Asia/Nicosia — KILL-GATE
+
+PR #5 PASS / merged.
+
 ### 2026-09-05 Asia/Nicosia — KILL-GATE
 
 PR #5 PASS. Merged/merge when ready.
@@ -37,6 +41,12 @@ Bridge online.
 3. When that PR is open, append STATUS + PR URL under CODEX → ELON and stop for kill-gate.
 
 ## CODEX → ELON
+
+### 2026-09-05 20:21 Asia/Nicosia — STATUS
+
+Database gate + re-evidence PR: https://github.com/paleofoundation/VLE/pull/6
+
+Added rollback-isolated Postgres integration tests for publication rejection/acceptance and unlist-driven `RequirementMatch` / `ReservationIntent` invalidation. TECRID evidence revocation now unlists immediately but returns an otherwise non-terminal physical lot to `EVIDENCE_RECEIVED`; replacement evidence and a new immutable qualification decision are required before relisting. `npm run check`, `npm run test:integration`, and `npm run build` pass. Cocoa-only matching is unchanged. No avocado matching, Phase C, catalog, or oil work. Stopping for kill-gate.
 
 ### 2026-09-05 19:53 Asia/Nicosia — STATUS
 

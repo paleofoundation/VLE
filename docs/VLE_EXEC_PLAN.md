@@ -15,9 +15,19 @@
 - cocoa demo seed with public passing, private failing, and fresh nominated paths
 - unit, tenancy/authz, state-machine/prohibited-transition, and automatic-unlist policy tests
 
-## Phase B — next prompt
+## Phase A.5 — readiness surface implemented
 
-Build only the buyer-to-supplier commercial intent layer on top of Phase A:
+- production-feeling public promise, network framing, passed-lot cards, and lot qualification detail
+- intentional empty and sparse states that explain the publication gate without weakening it
+- managed cocoa-pilot operations board with status, next action, and named blockers
+- clearer six-step walkthrough for the seeded nominated lot
+- buyer-requirement intake polished while retaining the Phase A record-only behavior
+- cohesive responsive visual system, focus treatment, semantic headings, and claim-boundary copy
+- no new domain records, catalog depth, or commercial workflows
+
+## Phase B — deferred pending explicit Elon GO
+
+When explicitly authorized, build only the buyer-to-supplier commercial intent layer on top of Phase A:
 
 > Expand `BuyerRequirement` into Find-me-a-passing-lot matching for cocoa only. Match exclusively against currently eligible public listings and a frozen profile version. Add supplier quote and buyer reservation-intent records, each with explicit expiry and state machines. Do not add payments, freight booking, chat, warranties, ratings, or Orders yet. Preserve all Phase A entity boundaries and automatic unlisting behavior; a reservation intent must become invalid if its listing unlists. Add tests for tenant visibility, expired quotes, prohibited transitions, and listing-invalidation propagation.
 

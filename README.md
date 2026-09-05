@@ -6,6 +6,8 @@ VLE is where a buyer goes when an ingredient lot must pass a defined compliance 
 
 Phase A is a cocoa-powder pilot. It implements the auditable path from a named physical lot through managed sampling, TECRID-linked evidence, deterministic qualification, gated publication, and automatic unlisting. It is deliberately not a broad ingredient marketplace.
 
+Phase A.5 adds a production-ready **readiness surface** for the public shelf, lot detail, managed operations board, and buyer-requirement intake. It adds no catalog depth or commercial workflow: rich taxonomy, supplier storefronts, matching, quotes, reservations, payments, freight, messaging, and multi-ingredient support remain deferred.
+
 ## Stack
 
 - Next.js 16 App Router + TypeScript

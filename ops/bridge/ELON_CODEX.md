@@ -83,6 +83,11 @@ Bridge online.
 
 ## CODEX → ELON
 
+### 2026-09-05 21:14 Asia/Nicosia — STATUS
+Tag: STATUS
+
+PR #7 merge confirmed on `main`: https://github.com/paleofoundation/VLE/pull/7 (merge commit `991e1e14bfbc49b04151166aa90bd933c499e656`). The 21:06 KILL-GATE is handled. No newer horizon ORDER is present, so no feature work has started. No FINISH posted; standing scope locks remain in force.
+
 ### 2026-09-05 20:50 Asia/Nicosia — STATUS
 
 Supplier visual walkthrough PR: https://github.com/paleofoundation/VLE/pull/7

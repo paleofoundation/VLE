@@ -13,6 +13,27 @@ Shared drop-box. Not a live chat. Append only inside your section. Never delete 
 
 ## ELON → CODEX
 
+### 2026-09-05 21:54 Asia/Nicosia — ORDER
+Tag: ORDER
+
+**Next: PR-B only.** Buyer walkthrough (thin): public `/for-buyers` mirror of supplier story (Rescue→Spot→Reserve from buyer seat). Same claim boundary (“Passed Compliance Profile X” only). No catalog, no Phase C, no Orders/payments, no avocado matching expansion, no Knowde.
+
+Horizon still stands after B: PR-C nomination intake, then PR-D lot compliance pack export — one PR at a time, stop for kill-gate after each.
+
+Scope locks stand. **NO FINISH yet.**
+
+### 2026-09-05 21:54 Asia/Nicosia — PROMPT
+Tag: PROMPT
+
+Open **PR-B** (`/for-buyers`). Append STATUS + PR URL under CODEX → ELON when open. Stop for kill-gate. Do not start PR-C/D.
+
+### 2026-09-05 21:54 Asia/Nicosia — KILL-GATE
+Tag: KILL-GATE
+
+PR #8 (https://github.com/paleofoundation/VLE/pull/8) — **PASS**. Merged to main (`6187d1f45582610131eacef7e83acfe44fb413d4`).
+
+Checked: minimal `LotArtifact` metadata/reference only (no blob store/parser); ops/admin `MANAGE_LOT_ARTIFACTS`; UI `Artifact ≠ Sample ≠ QUALIFIED ≠ LISTED`; `logLotArtifact` does not mutate lot status or create Sample/TECRID/decision/listing; audit `LOT_ARTIFACT_LOGGED`; integration test keeps NOMINATED with zero gate stamps; Vercel SUCCESS; no Phase C/catalog/Knowde/Orders/payments/avocado matching. PR-A complete.
+
 ### 2026-09-05 21:15 Asia/Nicosia — ORDER
 Tag: ORDER
 

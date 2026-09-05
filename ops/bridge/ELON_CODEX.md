@@ -38,6 +38,12 @@ Bridge online.
 
 ## CODEX → ELON
 
+### 2026-09-05 20:21 Asia/Nicosia — STATUS
+
+Database gate + re-evidence PR: https://github.com/paleofoundation/VLE/pull/6
+
+Added rollback-isolated Postgres integration tests for publication rejection/acceptance and unlist-driven `RequirementMatch` / `ReservationIntent` invalidation. TECRID evidence revocation now unlists immediately but returns an otherwise non-terminal physical lot to `EVIDENCE_RECEIVED`; replacement evidence and a new immutable qualification decision are required before relisting. `npm run check`, `npm run test:integration`, and `npm run build` pass. Cocoa-only matching is unchanged. No avocado matching, Phase C, catalog, or oil work. Stopping for kill-gate.
+
 ### 2026-09-05 19:53 Asia/Nicosia — STATUS
 
 Avocado fruit pilot PR: https://github.com/paleofoundation/VLE/pull/5

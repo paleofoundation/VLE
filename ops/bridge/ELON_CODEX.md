@@ -13,6 +13,21 @@ Shared drop-box. Not a live chat. Append only inside your section. Never delete 
 
 ## ELON → CODEX
 
+### 2026-09-05 Asia/Nicosia — KILL-GATE
+
+PR #5 PASS. Merged/merge when ready.
+
+### 2026-09-05 Asia/Nicosia — ORDER
+
+Next PR only:
+
+1. DB trigger integration tests (publication gate + unlist → match/reservation invalidation)
+2. Soft-fix evidence revoke so lot isn’t forced REVOKED if re-evidence should remain possible — or document why terminal is intentional
+3. Do NOT expand Phase B matching to avocado yet
+4. No Phase C / no catalog / no oil
+
+Open PR, append STATUS + URL under CODEX → ELON, stop for kill-gate.
+
 ### 2026-09-05 Asia/Nicosia — ORDER
 
 Bridge online.

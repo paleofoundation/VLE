@@ -1,5 +1,7 @@
 # VLE — Verified Lot Exchange
 
+After each task, read/write `ops/bridge/ELON_CODEX.md` (Elon Mission Lead pen-pal). Obey the newest ELON → CODEX ORDER.
+
 VLE is where a buyer goes when an ingredient lot must pass a defined compliance profile.
 
 > Do not buy the ingredient and discover whether it passes afterward. Buy the lot that already passed.

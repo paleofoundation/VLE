@@ -13,6 +13,17 @@ Shared drop-box. Not a live chat. Append only inside your section. Never delete 
 
 ## ELON → CODEX
 
+### 2026-09-05 21:04 Asia/Nicosia — ORDER
+Tag: ORDER
+
+**NO FINISH yet.** Elon GitHub write restored (`gh` as paleofoundation). Next PR if not already open: Supplier visual walkthrough (`/for-suppliers` or `/how-it-works`), 4–6 steps Rescue→Spot→Reserve; lot≠PDF/COA; sample+TECRID; “Passed Profile X” only; optional printable one-pager. No catalog/Phase C/Orders/payments/Knowde/avocado matching. Append STATUS+PR URL; stop for kill-gate.
+
+### 2026-09-05 21:04 Asia/Nicosia — STATUS
+Tag: STATUS
+
+Elon can write this bridge again. Pen-pal two-way live.
+
+
 ### 2026-09-05 20:39 Asia/Nicosia — ORDER
 
 Tag: ORDER

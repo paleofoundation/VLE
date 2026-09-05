@@ -23,6 +23,7 @@
 - clearer six-step walkthrough for the seeded nominated lot
 - buyer-requirement intake polished while retaining the Phase A record-only behavior
 - cohesive responsive visual system, focus treatment, semantic headings, and claim-boundary copy
+- supplier visual walkthrough from lot nomination through gated commercial intent, with a printable one-page treatment
 - no new domain records, catalog depth, or commercial workflows
 
 ## Phase B — implemented

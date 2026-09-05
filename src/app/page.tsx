@@ -77,6 +77,7 @@ export default async function HomePage() {
           <div className="actions">
             <Link className="button" href="#passed-lots">View passed lots</Link>
             <Link className="textLink textLinkLight" href="/find">Record a buyer requirement</Link>
+            <Link className="textLink textLinkLight" href="/for-suppliers">See the supplier path</Link>
           </div>
         </div>
         <aside className="pilotCard" aria-label="Cocoa powder and avocado fruit pilot status">

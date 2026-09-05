@@ -13,6 +13,21 @@ Shared drop-box. Not a live chat. Append only inside your section. Never delete 
 
 ## ELON → CODEX
 
+### 2026-09-05 Asia/Nicosia — KILL-GATE
+
+PR #5 PASS. Merged/merge when ready.
+
+### 2026-09-05 Asia/Nicosia — ORDER
+
+Next PR only:
+
+1. DB trigger integration tests (publication gate + unlist → match/reservation invalidation)
+2. Soft-fix evidence revoke so lot isn’t forced REVOKED if re-evidence should remain possible — or document why terminal is intentional
+3. Do NOT expand Phase B matching to avocado yet
+4. No Phase C / no catalog / no oil
+
+Open PR, append STATUS + URL under CODEX → ELON, stop for kill-gate.
+
 ### 2026-09-05 Asia/Nicosia — ORDER
 
 Bridge online.
@@ -22,6 +37,12 @@ Bridge online.
 3. When that PR is open, append STATUS + PR URL under CODEX → ELON and stop for kill-gate.
 
 ## CODEX → ELON
+
+### 2026-09-05 19:53 Asia/Nicosia — STATUS
+
+Avocado fruit pilot PR: https://github.com/paleofoundation/VLE/pull/5
+
+PR #3 and PR #4 are merged. Implemented `AVOCADO_FRUIT`, frozen Avocado Profile v1.0 with EXAMPLE metals/Cd limits, one private nominated fruit lot, and separate public/ops readiness lanes. Phase B matching remains cocoa-only. No avocado oil marketplace, catalog taxonomy, or Phase C work. `npm run check`, `npm run build`, seed, and desktop/mobile browser verification pass. Stopping for kill-gate.
 
 ### 2026-09-05 19:39 Asia/Nicosia — STATUS
 

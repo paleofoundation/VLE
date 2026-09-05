@@ -52,10 +52,10 @@ The gate exists both in the service layer and as a Postgres trigger. Public read
 
 ## Claim language
 
-Allowed: **“Passed Cocoa Profile v1.0.”**
+Allowed: **“Passed Cocoa Profile v1.0.”** or **“Passed Avocado Profile v1.0.”** only when the identified lot has cleared the full publication gate against that frozen version.
 
 Disallowed: safe, clean, zero, toxin-free, guaranteed, or any implication that the finished product is certified. HMTc—not VLE—owns finished-product certification.
 
 ## Scope exclusions
 
-No blockchain, owned laboratory, warehouse, inventory, insurance, financing, AI-as-assay, rich taxonomy, payments, freight booking, messaging, ratings, warranties, Orders, or Knowde-grade storefronts through Phase B.
+No blockchain, owned laboratory, warehouse, inventory, insurance, financing, AI-as-assay, rich taxonomy, payments, freight booking, messaging, ratings, warranties, Orders, avocado oil marketplace, or Knowde-grade storefronts. Phase B matching remains cocoa-only until explicitly expanded.

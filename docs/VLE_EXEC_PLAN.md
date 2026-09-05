@@ -40,10 +40,20 @@
 
 `RequirementMatch`, `SupplierQuote`, and `ReservationIntent` remain distinct from `BuyerRequirement`, `MarketplaceListing`, and the future `Order`. A reservation intent records commercial intent only; it cannot keep an ineligible listing alive.
 
+## Avocado fruit pilot lane — readiness implemented
+
+- separate `AVOCADO_FRUIT` product type; no avocado oil product or marketplace
+- frozen Avocado Profile v1.0 with conspicuous EXAMPLE metals/Cd limits
+- one nominated avocado fruit demo lot, with no fabricated passing decision or public listing
+- separate public and operations readiness lanes using the existing Phase A truth spine
+- product-scoped profile selection in operations and cocoa buyer intake
+- Phase B matching remains explicitly cocoa-only
+- no category tree, faceting, supplier storefront, or other catalog depth
+
 ## Phase C — deferred
 
 Order formation, binding commercial terms, payment adapter selection, and freight handoff. No financing or insurance.
 
 ## Phase D — deferred
 
-Production TECRID contract/webhooks, broader operational automation, additional ingredient types only after the cocoa pilot proves the workflow, and an explicit adapter to HMTc for finished-product certification.
+Production TECRID contract/webhooks, broader operational automation, any ingredient types beyond the approved cocoa powder and avocado fruit lanes, and an explicit adapter to HMTc for finished-product certification.

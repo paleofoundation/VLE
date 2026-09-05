@@ -146,18 +146,20 @@ export async function qualifyLot(actor: Actor, lotId: string, evidenceId: string
   });
 }
 
-export async function publishListing(actor: Actor, lotId: string, decisionId: string, publicSlug: string, now = new Date()) {
+export async function publishListing(actor: Actor, lotId: string, decisionId: string, now = new Date()) {
   assertPermission(actor, "PUBLISH_LISTING");
   const db = getDb();
   return db.transaction(async (tx) => {
-    const [row] = await tx.select({ lot: physicalLots, decision: qualificationDecisions, evidence: tecridEvidence, profile: complianceProfileVersions }).from(qualificationDecisions)
+    const [row] = await tx.select({ lot: physicalLots, decision: qualificationDecisions, evidence: tecridEvidence, profile: complianceProfileVersions, productCode: productTypes.code }).from(qualificationDecisions)
       .innerJoin(physicalLots, eq(physicalLots.id, qualificationDecisions.physicalLotId)).innerJoin(tecridEvidence, eq(tecridEvidence.id, qualificationDecisions.evidenceId))
       .innerJoin(complianceProfileVersions, eq(complianceProfileVersions.id, qualificationDecisions.profileVersionId))
+      .innerJoin(productTypes, eq(productTypes.id, physicalLots.productTypeId))
       .where(and(eq(qualificationDecisions.id, decisionId), eq(physicalLots.id, lotId))).limit(1);
     if (!row) throw new DomainError("Decision does not belong to physical lot", "INPUT_MISMATCH");
     const [sampling] = await tx.select({ id: samples.id }).from(samples).where(eq(samples.physicalLotId, lotId)).limit(1);
     const gate = evaluatePublicationGate({ identityConfirmedAt: row.lot.identityConfirmedAt, quantityVerifiedAt: row.lot.quantityVerifiedAt, locationVerifiedAt: row.lot.locationVerifiedAt, authorityToSellVerifiedAt: row.lot.authorityToSellVerifiedAt, samplingRecorded: Boolean(sampling), evidenceStatus: row.evidence.status, evidenceExpiresAt: row.evidence.expiresAt, decisionOutcome: row.decision.outcome, profileFrozen: row.profile.status === "FROZEN", heldAt: row.lot.heldAt, revokedAt: row.lot.revokedAt, transformedAt: row.lot.transformedAt, depletedAt: row.lot.depletedAt }, now);
     if (!gate.allowed) throw new DomainError(gate.reasons.join("; "), "PUBLICATION_GATE_FAILED");
+    const publicSlug = `${row.productCode.toLowerCase().replaceAll("_", "-")}-${lotId.slice(0, 8)}-${now.getTime()}`;
     const [listing] = await tx.insert(marketplaceListings).values({ physicalLotId: lotId, qualificationDecisionId: decisionId, status: "LISTED", publicSlug, publishedAt: now }).returning();
     await appendAuditEvent(tx, actor, { eventType: "LISTING_PUBLISHED", entityType: "MarketplaceListing", entityId: listing.id, data: { lotId, decisionId } });
     return listing;
@@ -240,7 +242,7 @@ export async function listPublicListings() {
     id: marketplaceListings.id, slug: marketplaceListings.publicSlug, lotCode: physicalLots.supplierLotCode,
     quantity: physicalLots.quantity, quantityUnit: physicalLots.quantityUnit, location: physicalLots.locationName,
     countryCode: physicalLots.countryCode,
-    supplier: organizations.name, product: productTypes.name, decision: qualificationDecisions.outcome,
+    supplier: organizations.name, product: productTypes.name, productCode: productTypes.code, decision: qualificationDecisions.outcome,
     profileName: complianceProfiles.name, profileVersion: complianceProfileVersions.version,
     evidenceStatus: tecridEvidence.status, evidenceExpiresAt: tecridEvidence.expiresAt,
     publishedAt: marketplaceListings.publishedAt,
@@ -260,9 +262,21 @@ export async function listPublicListings() {
     ));
 }
 
+export async function listPilotLanes() {
+  return getDb().select({
+    productTypeId: productTypes.id, productCode: productTypes.code, product: productTypes.name,
+    profileName: complianceProfiles.name, profileVersion: complianceProfileVersions.version,
+  }).from(productTypes)
+    .innerJoin(complianceProfiles, eq(complianceProfiles.productTypeId, productTypes.id))
+    .innerJoin(complianceProfileVersions, eq(complianceProfileVersions.profileId, complianceProfiles.id))
+    .where(and(inArray(productTypes.code, ["COCOA_POWDER", "AVOCADO_FRUIT"]), eq(complianceProfileVersions.status, "FROZEN")))
+    .orderBy(productTypes.name);
+}
+
 export async function listOpsLots() {
   return getDb().select({
     id: physicalLots.id, lotCode: physicalLots.supplierLotCode, status: physicalLots.status,
+    product: productTypes.name, productCode: productTypes.code,
     supplier: organizations.name, quantity: physicalLots.quantity, quantityUnit: physicalLots.quantityUnit,
     location: physicalLots.locationName, countryCode: physicalLots.countryCode, createdAt: physicalLots.createdAt,
     identityConfirmedAt: physicalLots.identityConfirmedAt, quantityVerifiedAt: physicalLots.quantityVerifiedAt,
@@ -288,12 +302,15 @@ export async function listOpsLots() {
       where physical_lot_id = ${physicalLots.id}
       order by published_at desc limit 1
     )`,
-  }).from(physicalLots).innerJoin(organizations, eq(organizations.id, physicalLots.supplierOrganizationId)).orderBy(desc(physicalLots.createdAt));
+  }).from(physicalLots)
+    .innerJoin(organizations, eq(organizations.id, physicalLots.supplierOrganizationId))
+    .innerJoin(productTypes, eq(productTypes.id, physicalLots.productTypeId))
+    .orderBy(desc(physicalLots.createdAt));
 }
 
 export async function getOpsLotWorkflow(lotId: string) {
   const db = getDb();
-  const [lot] = await db.select({ lot: physicalLots, supplier: organizations.name, product: productTypes.name })
+  const [lot] = await db.select({ lot: physicalLots, supplier: organizations.name, product: productTypes.name, productCode: productTypes.code })
     .from(physicalLots)
     .innerJoin(organizations, eq(organizations.id, physicalLots.supplierOrganizationId))
     .innerJoin(productTypes, eq(productTypes.id, physicalLots.productTypeId))
@@ -304,7 +321,11 @@ export async function getOpsLotWorkflow(lotId: string) {
   const [evidence] = sample ? await db.select().from(tecridEvidence).where(eq(tecridEvidence.sampleId, sample.id)).orderBy(desc(tecridEvidence.createdAt)).limit(1) : [];
   const [decision] = await db.select().from(qualificationDecisions).where(eq(qualificationDecisions.physicalLotId, lotId)).orderBy(desc(qualificationDecisions.decidedAt)).limit(1);
   const [listing] = await db.select().from(marketplaceListings).where(eq(marketplaceListings.physicalLotId, lotId)).orderBy(desc(marketplaceListings.publishedAt)).limit(1);
-  const [profile] = await db.select().from(complianceProfileVersions).where(eq(complianceProfileVersions.status, "FROZEN")).limit(1);
+  const [profile] = await db.select({ id: complianceProfileVersions.id, version: complianceProfileVersions.version, status: complianceProfileVersions.status, profileName: complianceProfiles.name })
+    .from(complianceProfileVersions)
+    .innerJoin(complianceProfiles, eq(complianceProfiles.id, complianceProfileVersions.profileId))
+    .where(and(eq(complianceProfileVersions.status, "FROZEN"), eq(complianceProfiles.productTypeId, lot.lot.productTypeId)))
+    .limit(1);
   return { ...lot, order, sample, evidence, decision, listing, profile };
 }
 
@@ -341,7 +362,11 @@ export async function getCocoaReferenceData() {
   const db = getDb();
   const [product] = await db.select().from(productTypes).where(eq(productTypes.code, "COCOA_POWDER")).limit(1);
   const [profile] = product
-    ? await db.select().from(complianceProfileVersions).where(eq(complianceProfileVersions.status, "FROZEN")).limit(1)
+    ? await db.select({ id: complianceProfileVersions.id, profileId: complianceProfileVersions.profileId, version: complianceProfileVersions.version, status: complianceProfileVersions.status, rules: complianceProfileVersions.rules, notes: complianceProfileVersions.notes, frozenAt: complianceProfileVersions.frozenAt, createdByUserId: complianceProfileVersions.createdByUserId, createdAt: complianceProfileVersions.createdAt })
+      .from(complianceProfileVersions)
+      .innerJoin(complianceProfiles, eq(complianceProfiles.id, complianceProfileVersions.profileId))
+      .where(and(eq(complianceProfileVersions.status, "FROZEN"), eq(complianceProfiles.productTypeId, product.id)))
+      .limit(1)
     : [];
   return { product, profile };
 }

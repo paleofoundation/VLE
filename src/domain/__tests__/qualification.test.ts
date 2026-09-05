@@ -23,4 +23,15 @@ describe("deterministic qualification", () => {
   it("reports insufficient evidence when evidence is expired", () => {
     expect(qualify(profile, evidence([], { expiresAt: new Date("2025-01-01T00:00:00Z") }), now).outcome).toBe("INSUFFICIENT_EVIDENCE");
   });
+  it("evaluates the avocado fruit EXAMPLE metals/Cd profile without changing the engine", () => {
+    const avocadoProfile = { id: "avocado-profile-v1", version: "1.0", status: "FROZEN" as const, rules: [
+      { analyte: "cadmium" as const, maxPpm: 0.05 }, { analyte: "lead" as const, maxPpm: 0.1 },
+    ] };
+    expect(qualify(avocadoProfile, evidence([
+      { analyte: "cadmium", valuePpm: 0.02, unit: "ppm" }, { analyte: "lead", valuePpm: 0.04, unit: "ppm" },
+    ]), now).outcome).toBe("QUALIFIED");
+    expect(qualify(avocadoProfile, evidence([
+      { analyte: "cadmium", valuePpm: 0.06, unit: "ppm" }, { analyte: "lead", valuePpm: 0.04, unit: "ppm" },
+    ]), now).outcome).toBe("NOT_QUALIFIED");
+  });
 });

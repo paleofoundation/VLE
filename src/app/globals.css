@@ -188,6 +188,14 @@ main { min-height: calc(100vh - 160px); }
 
 .shelfSection, .opsPage, .lotDetailPage, .findPage { padding: clamp(70px, 8vw, 112px) clamp(24px, 7vw, 108px); }
 .sectionHeading { display: flex; justify-content: space-between; gap: 40px; align-items: flex-end; }
+.pilotLanes { display: grid; gap: 54px; margin-top: 46px; }
+.laneShelf { padding-top: 30px; border-top: 1px solid var(--line); }
+.laneHeader { display: flex; justify-content: space-between; gap: 32px; align-items: flex-end; }
+.laneHeader .mono { color: var(--green); font-size: 9px; }
+.laneHeader h3 { margin: 10px 0 7px; font-size: clamp(28px, 4vw, 42px); letter-spacing: -.045em; }
+.laneHeader p { margin: 0; color: var(--muted); font-size: 12px; }
+.laneShelf .lotGrid, .laneShelf .readinessEmpty { margin-top: 24px; }
+.laneBoundary { padding-top: 18px; border-top: 1px solid var(--line); font-size: 11px; }
 .sectionHeading h2, .detailSectionHeading h2, .boardHeading h2, .lotBoundary h2 {
   margin-bottom: 16px;
   font-size: clamp(34px, 4vw, 55px);
@@ -309,6 +317,16 @@ main { min-height: calc(100vh - 160px); }
 .opsMetrics .metricLive { background: var(--green-deep); color: var(--white); }
 .opsMetrics .metricLive span, .opsMetrics .metricLive small { color: #b9cec1; }
 .opsMetrics .metricLive strong { color: var(--signal); }
+.laneOverview { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; margin-top: 18px; }
+.laneOverview article { padding: 26px; border: 1px solid var(--line); background: var(--white); }
+.laneOverview article > div > span { color: var(--green); font-size: 9px; }
+.laneOverview h2 { margin: 10px 0 20px; font-size: 28px; }
+.laneOverview dl { display: grid; grid-template-columns: repeat(3, 1fr); margin: 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.laneOverview dl div { padding: 16px 10px; border-right: 1px solid var(--line); }
+.laneOverview dl div:last-child { border-right: 0; }
+.laneOverview dt { color: var(--muted); font-size: 9px; text-transform: uppercase; }
+.laneOverview dd { margin: 7px 0 0; font-size: 12px; font-weight: 750; }
+.laneOverview article > p { margin: 18px 0 0; color: var(--muted); font-size: 11px; }
 .opsBoard, .auditPanel { margin-top: 70px; }
 .boardHeading { display: flex; justify-content: space-between; gap: 40px; align-items: end; margin-bottom: 26px; }
 .boardHeading h2 { margin-bottom: 0; font-size: clamp(31px, 3.5vw, 46px); }
@@ -489,6 +507,7 @@ main { min-height: calc(100vh - 160px); }
   .pilotCard { max-width: 680px; }
   .networkBand { grid-template-columns: 1fr; }
   .lotGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .laneOverview { grid-template-columns: 1fr; }
   .readinessEmpty { grid-template-columns: 1fr; }
   .emptyCopy { min-height: auto; border-right: 0; border-bottom: 1px solid var(--line); }
   .detailHero { grid-template-columns: 1fr; }
@@ -515,7 +534,7 @@ main { min-height: calc(100vh - 160px); }
   .networkRail { grid-template-columns: repeat(2, 1fr); row-gap: 30px; }
   .lotGrid { grid-template-columns: 1fr; }
   .lotCard { min-height: 420px; }
-  .sectionHeading, .opsHero, .boardHeading, .commercialHero, .commercialCallout { flex-direction: column; align-items: flex-start; }
+  .sectionHeading, .laneHeader, .opsHero, .boardHeading, .commercialHero, .commercialCallout { flex-direction: column; align-items: flex-start; }
   .truthSection, .lotBoundary { grid-template-columns: 1fr; }
   .truthStatement { border-right: 0; border-bottom: 1px solid var(--line-dark); }
   .detailBreadcrumb { margin-bottom: 36px; }
@@ -559,6 +578,9 @@ main { min-height: calc(100vh - 160px); }
   .networkBand { padding-left: 18px; padding-right: 18px; }
   .truthSection { margin-left: 18px; margin-right: 18px; }
   .opsMetrics { grid-template-columns: 1fr; }
+  .laneOverview dl { grid-template-columns: 1fr; }
+  .laneOverview dl div { border-right: 0; border-bottom: 1px solid var(--line); }
+  .laneOverview dl div:last-child { border-bottom: 0; }
   .opsMetrics > div { border-right: 0; border-bottom: 1px solid var(--line); }
   .opsMetrics > div:last-child { border-bottom: 0; }
   .workflowIndex ol { grid-template-columns: repeat(2, 1fr); }

@@ -20,7 +20,7 @@ import { DomainError } from "@/domain/errors";
 import { evaluatePublicationGate } from "@/domain/publication";
 import { qualify } from "@/domain/qualification";
 import { assertSamplingTransition } from "@/domain/sampling";
-import { assertLotTransition } from "@/domain/lot-state";
+import { assertLotTransition, statusAfterEvidenceRevocation } from "@/domain/lot-state";
 import type { LimitRule, QualificationOutcome, ResultValue, SamplingStatus } from "@/domain/types";
 import type { TecridAdapter } from "@/adapters/tecrid";
 import { appendAuditEvent } from "./audit";
@@ -117,7 +117,7 @@ export async function ingestTecridEvidence(actor: Actor, sampleId: string, tecri
   if (envelope.sampleCode !== sample.sampleCode) throw new DomainError("TECRID sample binding does not match", "SAMPLE_MISMATCH");
   return db.transaction(async (tx) => {
     const [lot] = await tx.select().from(physicalLots).where(eq(physicalLots.id, sample.physicalLotId)).limit(1);
-    assertLotTransition(lot.status, "EVIDENCE_RECEIVED");
+    if (lot.status !== "EVIDENCE_RECEIVED") assertLotTransition(lot.status, "EVIDENCE_RECEIVED");
     const [evidence] = await tx.insert(tecridEvidence).values({ sampleId, tecridId: envelope.tecridId, issuer: envelope.issuer, issuedAt: new Date(envelope.issuedAt), expiresAt: new Date(envelope.expiresAt), results: envelope.results, payloadHash: envelope.payloadHash, verifiedAt: new Date(envelope.verifiedAt) }).returning();
     await tx.update(physicalLots).set({ status: "EVIDENCE_RECEIVED" }).where(eq(physicalLots.id, sample.physicalLotId));
     await appendAuditEvent(tx, actor, { eventType: "TECRID_EVIDENCE_VERIFIED", entityType: "TECRID", entityId: evidence.id, data: { tecridId, sampleId } });
@@ -174,13 +174,14 @@ export async function revokeEvidence(actor: Actor, evidenceId: string, reason: s
     if (!currentEvidence) throw new DomainError("TECRID evidence not found", "NOT_FOUND");
     const [sample] = await tx.select().from(samples).where(eq(samples.id, currentEvidence.sampleId)).limit(1);
     const [lot] = await tx.select().from(physicalLots).where(eq(physicalLots.id, sample.physicalLotId)).limit(1);
-    assertLotTransition(lot.status, "REVOKED");
+    const nextLotStatus = statusAfterEvidenceRevocation(lot.status);
+    if (nextLotStatus !== lot.status) assertLotTransition(lot.status, nextLotStatus);
     const activeListings = await tx.select({ id: marketplaceListings.id }).from(marketplaceListings).where(and(eq(marketplaceListings.physicalLotId, sample.physicalLotId), eq(marketplaceListings.status, "LISTED")));
     const activeReservations = activeListings.length ? await tx.select({ id: reservationIntents.id }).from(reservationIntents).where(and(inArray(reservationIntents.marketplaceListingId, activeListings.map(({ id }) => id)), eq(reservationIntents.status, "ACTIVE"))) : [];
     const [evidence] = await tx.update(tecridEvidence).set({ status: "REVOKED", revokedAt: now, revocationReason: reason }).where(eq(tecridEvidence.id, evidenceId)).returning();
-    await tx.update(physicalLots).set({ status: "REVOKED", revokedAt: now }).where(eq(physicalLots.id, sample.physicalLotId));
+    if (nextLotStatus !== lot.status) await tx.update(physicalLots).set({ status: nextLotStatus }).where(eq(physicalLots.id, sample.physicalLotId));
     await tx.update(marketplaceListings).set({ status: "UNLISTED", unpublishedAt: now, unpublishReason: `TECRID revoked: ${reason}` }).where(and(eq(marketplaceListings.physicalLotId, sample.physicalLotId), eq(marketplaceListings.status, "LISTED")));
-    await appendAuditEvent(tx, actor, { eventType: "TECRID_EVIDENCE_REVOKED", entityType: "TECRID", entityId: evidence.id, data: { reason, automaticallyUnlisted: activeListings.map((item) => item.id) } });
+    await appendAuditEvent(tx, actor, { eventType: "TECRID_EVIDENCE_REVOKED", entityType: "TECRID", entityId: evidence.id, data: { reason, automaticallyUnlisted: activeListings.map((item) => item.id), physicalLotStatus: nextLotStatus, physicalLotRevoked: false } });
     for (const reservation of activeReservations) await appendAuditEvent(tx, actor, { eventType: "RESERVATION_INTENT_INVALIDATED", entityType: "ReservationIntent", entityId: reservation.id, data: { reason: `TECRID revoked: ${reason}`, listingIds: activeListings.map(({ id }) => id) } });
     return { evidence, unpublished: activeListings };
   });

@@ -28,6 +28,8 @@ TECRID authenticates an evidence envelope and its sample binding. It does not pr
 
 A supplier PDF is not sufficient evidence. Production TECRID endpoints are not guessed. Local development uses an explicitly named mock issuer.
 
+Revoking a TECRID evidence record immediately unlists every listing that depends on it. It does not by itself revoke the physical lot: an otherwise non-terminal lot returns to `EVIDENCE_RECEIVED`, allowing new authenticated evidence and a new immutable qualification decision. Explicit physical-lot revocation remains a separate terminal action.
+
 ## Publication gate
 
 A listing may be `LISTED` only when all are true:

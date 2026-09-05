@@ -32,7 +32,7 @@ export default async function OpsLotPage({ params }: PageProps<"/ops/lots/[id]">
   const samplingComplete = order?.status === "COMPLETED";
   const next = order && order.status in nextSampling ? nextSampling[order.status as keyof typeof nextSampling] : null;
   const evidenceCurrent = evidence?.status === "CURRENT" && evidence.expiresAt > new Date();
-  const decisionComplete = Boolean(decision);
+  const decisionComplete = Boolean(decision && evidenceCurrent && decision.evidenceId === evidence?.id);
   const listingComplete = listing?.status === "LISTED";
   const completedCount = [inventoryVerified, samplingComplete, Boolean(sample), evidenceCurrent, decisionComplete, listingComplete].filter(Boolean).length;
 
@@ -64,7 +64,7 @@ export default async function OpsLotPage({ params }: PageProps<"/ops/lots/[id]">
             <li className={sample ? "done" : ""}><span>03</span>Sample</li>
             <li className={evidenceCurrent ? "done" : samplingComplete ? "current" : ""}><span>04</span>TECRID</li>
             <li className={decisionComplete ? "done" : evidenceCurrent ? "current" : ""}><span>05</span>Decision</li>
-            <li className={listingComplete ? "done" : decision?.outcome === "QUALIFIED" ? "current" : ""}><span>06</span>Listing</li>
+            <li className={listingComplete ? "done" : decisionComplete && decision?.outcome === "QUALIFIED" ? "current" : ""}><span>06</span>Listing</li>
           </ol>
         </nav>
 
@@ -84,19 +84,19 @@ export default async function OpsLotPage({ params }: PageProps<"/ops/lots/[id]">
             <div className="workflowStepBody"><div>{sample ? <><p className="stepValue">{sample.sampleCode}</p><p>{sample.method} · {sample.samplerName}</p><p className="muted">Created at recorded collection and bound to this lot.</p></> : <p>The sample record is created only when collection is recorded.</p>}</div></div>
           </section>
 
-          <section className={stepClass(evidenceCurrent, samplingComplete && !evidence)}>
+          <section className={stepClass(evidenceCurrent, samplingComplete && !evidenceCurrent)}>
             <div className="workflowStepHead"><span>04</span><div><small>Authenticated evidence</small><h2>TECRID linkage</h2></div><b>{evidence?.status ?? "Waiting"}</b></div>
-            <div className="workflowStepBody"><div>{evidence ? <><p className="stepValue">{evidence.tecridId}</p><p>Issuer: {evidence.issuer}</p><p className="muted">Current through {evidence.expiresAt.toLocaleDateString("en", { day: "2-digit", month: "long", year: "numeric" })}</p></> : <p>Available after sampling and custody are complete.</p>}</div>{!evidence && samplingComplete && sample ? <ActionForm action={issueMockEvidenceAction} fields={{ lotId: lot.id, sampleId: sample.id, sampleCode: sample.sampleCode, productCode: workflow.productCode }} label="Issue & verify local mock TECRID" /> : null}</div>
+            <div className="workflowStepBody"><div>{evidence ? <><p className="stepValue">{evidence.tecridId}</p><p>Issuer: {evidence.issuer}</p><p className="muted">{evidenceCurrent ? `Current through ${evidence.expiresAt.toLocaleDateString("en", { day: "2-digit", month: "long", year: "numeric" })}` : "This evidence is no longer current. The lot remains unlisted until replacement evidence is authenticated and a new decision is recorded."}</p></> : <p>Available after sampling and custody are complete.</p>}</div>{!evidenceCurrent && samplingComplete && sample ? <ActionForm action={issueMockEvidenceAction} fields={{ lotId: lot.id, sampleId: sample.id, sampleCode: sample.sampleCode, productCode: workflow.productCode }} label={evidence ? "Issue replacement mock TECRID" : "Issue & verify local mock TECRID"} /> : null}</div>
           </section>
 
-          <section className={stepClass(decisionComplete, evidenceCurrent && !decision)}>
-            <div className="workflowStepHead"><span>05</span><div><small>Deterministic rules</small><h2>Qualification decision</h2></div><b>{decision?.outcome ?? "Waiting"}</b></div>
-            <div className="workflowStepBody"><div>{decision ? <><p className="stepValue">{decision.outcome}</p><p>{profile?.profileName} v{profile?.version}</p><p className="muted">Immutable decision · engine {decision.engineVersion}</p></> : <><p>Current TECRID-linked evidence is required.</p><p className="muted">Qualification target ready: {profile?.profileName} v{profile?.version} · frozen.</p></>}</div>{!decision && evidence && profile ? <ActionForm action={qualifyAction} fields={{ lotId: lot.id, evidenceId: evidence.id, profileVersionId: profile.id }} label="Run deterministic qualification" /> : null}</div>
+          <section className={stepClass(decisionComplete, evidenceCurrent && !decisionComplete)}>
+            <div className="workflowStepHead"><span>05</span><div><small>Deterministic rules</small><h2>Qualification decision</h2></div><b>{decisionComplete ? decision?.outcome : "Waiting"}</b></div>
+            <div className="workflowStepBody"><div>{decisionComplete && decision ? <><p className="stepValue">{decision.outcome}</p><p>{profile?.profileName} v{profile?.version}</p><p className="muted">Immutable decision · engine {decision.engineVersion}</p></> : <><p>{evidenceCurrent ? "Current evidence is ready for a new decision." : "Current TECRID-linked evidence is required."}</p><p className="muted">Qualification target ready: {profile?.profileName} v{profile?.version} · frozen. Earlier decisions remain immutable history.</p></>}</div>{!decisionComplete && evidenceCurrent && evidence && profile ? <ActionForm action={qualifyAction} fields={{ lotId: lot.id, evidenceId: evidence.id, profileVersionId: profile.id }} label="Run deterministic qualification" /> : null}</div>
           </section>
 
-          <section className={stepClass(listingComplete, decision?.outcome === "QUALIFIED" && !listingComplete)}>
+          <section className={stepClass(listingComplete, decisionComplete && decision?.outcome === "QUALIFIED" && !listingComplete)}>
             <div className="workflowStepHead"><span>06</span><div><small>Public eligibility</small><h2>Marketplace listing</h2></div><b>{listing?.status ?? "Gate closed"}</b></div>
-            <div className="workflowStepBody"><div>{listing ? <><p className="stepValue">{listing.status}</p><p>{listing.publicSlug}</p><p className="muted">The public read independently re-checks eligibility.</p></> : <p>{decision?.outcome === "QUALIFIED" ? "All qualification inputs are ready for the publication gate." : "Only a QUALIFIED decision can reach this step."}</p>}</div>{!listing && decision?.outcome === "QUALIFIED" ? <ActionForm action={publishAction} fields={{ lotId: lot.id, decisionId: decision.id }} label="Publish passed lot" /> : listingComplete && evidence ? <div className="buttonRow"><ActionForm action={revokeEvidenceAction} fields={{ lotId: lot.id, evidenceId: evidence.id }} label="Revoke evidence & unlist" danger /><ActionForm action={holdLotAction} fields={{ lotId: lot.id }} label="Hold lot & unlist" danger /></div> : null}</div>
+            <div className="workflowStepBody"><div>{listing ? <><p className="stepValue">{listing.status}</p><p>{listing.publicSlug}</p><p className="muted">{listingComplete ? "The public read independently re-checks eligibility." : "Historical listing retained. A new listing requires current evidence and a new QUALIFIED decision."}</p></> : <p>{decisionComplete && decision?.outcome === "QUALIFIED" ? "All qualification inputs are ready for the publication gate." : "Only a current QUALIFIED decision can reach this step."}</p>}</div>{decisionComplete && decision?.outcome === "QUALIFIED" && !listingComplete ? <ActionForm action={publishAction} fields={{ lotId: lot.id, decisionId: decision.id }} label="Publish passed lot" /> : listingComplete && evidenceCurrent && evidence ? <div className="buttonRow"><ActionForm action={revokeEvidenceAction} fields={{ lotId: lot.id, evidenceId: evidence.id }} label="Revoke evidence & unlist" danger /><ActionForm action={holdLotAction} fields={{ lotId: lot.id }} label="Hold lot & unlist" danger /></div> : null}</div>
           </section>
         </div>
       </div>

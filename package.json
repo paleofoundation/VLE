@@ -9,6 +9,7 @@
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
+    "test:integration": "dotenv -e .env.local -- vitest run src/db/__tests__/triggers.integration.test.ts",
     "check": "npm run lint && npm run typecheck && npm test",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "dotenv -e .env.local -- drizzle-kit migrate",

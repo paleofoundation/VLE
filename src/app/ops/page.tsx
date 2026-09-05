@@ -44,7 +44,10 @@ function lotReadiness(lot: OpsLot) {
     return { step: 4, action: "Verify TECRID evidence", blocker: "Sampling is complete; authenticated evidence has not arrived.", tone: "attention" };
   }
   if (lot.evidenceStatus !== "CURRENT") {
-    return { step: 4, action: "Keep unlisted", blocker: "The attached TECRID evidence is revoked.", tone: "stopped" };
+    return { step: 4, action: "Attach replacement evidence", blocker: "The attached TECRID evidence is revoked. The physical lot remains eligible for re-evidence.", tone: "attention" };
+  }
+  if (lot.status === "EVIDENCE_RECEIVED") {
+    return { step: 5, action: "Run deterministic qualification", blocker: "Current replacement evidence requires a new immutable decision.", tone: "active" };
   }
   if (!lot.decisionOutcome) {
     return { step: 5, action: "Run deterministic qualification", blocker: "Current evidence is ready for the frozen profile rules.", tone: "active" };

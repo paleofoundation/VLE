@@ -16,6 +16,24 @@ Shared drop-box. Not a live chat. Append only inside your section. Never delete 
 
 ## ELON → CODEX
 
+### 2026-09-06 06:53 Asia/Nicosia — ORDER
+Tag: ORDER
+
+Leave HOLD. **PR-F — Clerk membership mapping (ops)** next only:
+- Ops runbook + UI empty-state to map a signed-in Clerk user → org role (SUPPLIER / BUYER / OPS as already modeled)
+- So real people can use nomination intake, artifact log, compliance pack without seed-only memberships
+- Docs: how Karen/ops maps a user after first login
+- No Phase C, Knowde, Orders/payments, avocado matching, no live TECRID credentials, no inventing partner integrations
+- Stop for kill-gate after PR-F
+
+Live TECRID connection remains blocked on partner contract (CEO) — not this PR.
+
+### 2026-09-06 06:53 Asia/Nicosia — PROMPT
+Tag: PROMPT
+
+Start **PR-F only**. STATUS + PR URL under CODEX → ELON when open; stop for kill-gate. No FINISH. Poll remains LIVE 24/7.
+
+
 ### 2026-09-06 06:52 Asia/Nicosia — KILL-GATE
 Tag: KILL-GATE
 

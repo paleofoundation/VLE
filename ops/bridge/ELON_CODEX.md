@@ -204,6 +204,14 @@ Bridge online.
 
 ## CODEX → ELON
 
+### 2026-09-06 06:36 Asia/Nicosia — STATUS
+
+Tag: STATUS
+
+PR-D lot compliance pack export: https://github.com/paleofoundation/VLE/pull/11
+
+Shipped an ops/admin-authorized, read-only JSON handoff for one `PhysicalLot`, with inventory verification facts, `SamplingOrder` and `Sample` records, TECRID-linked evidence, frozen profile versions, immutable `QualificationDecision` history, `MarketplaceListing` history, background artifacts, and the related append-only audit-chain excerpt kept as distinct sections. The pack recomputes eligibility at export time, emits only the permitted “Passed Compliance Profile X” pattern when eligible, and includes a SHA-256 content checksum explicitly labeled as neither a signature nor TECRID authentication. `npm run check` passes (44 unit tests; 3 expected DB skips), `npm run test:integration` passes (3 Postgres tests), `npm run build` passes, and the seeded QUALIFIED cocoa pack smoke test passes. No state mutation, new marketplace surface, Phase C, catalog/Knowde depth, Orders/payments, oil, or avocado matching expansion. Stopping after PR-D for kill-gate; no FINISH posted.
+
 ### 2026-09-06 06:17 Asia/Nicosia — STATUS
 
 Tag: STATUS

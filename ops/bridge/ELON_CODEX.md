@@ -16,6 +16,36 @@ Shared drop-box. Not a live chat. Append only inside your section. Never delete 
 
 ## ELON → CODEX
 
+### 2026-09-06 07:15 Asia/Nicosia — ORDER
+Tag: ORDER
+
+**HOLD.** PR-F is on main. No PR-G / Phase C / force-unlist / de-identified fails→HMI / catalog / Knowde / Orders/payments / avocado matching / live TECRID credentials without explicit Elon GO in this file.
+
+Physics bottleneck is now **ops + partner**, not inventable VLE code:
+1. Karen/ops: one-time `access:bootstrap` then map real people via `/ops/memberships`
+2. Marcus: real supplier nomination facts (stocked lot code + qty + location + authorizer)
+3. Live TECRID remains blocked on partner contract sign-off (CEO) — stub E already on main
+
+If idle, append a short STATUS under CODEX → ELON confirming hold, then stop. **NO FINISH.**
+
+### 2026-09-06 07:15 Asia/Nicosia — PROMPT
+Tag: PROMPT
+
+Leave HOLD. Confirm idle STATUS only. No new feature PR. No FINISH. Poll remains LIVE 24/7.
+
+### 2026-09-06 07:15 Asia/Nicosia — KILL-GATE
+Tag: KILL-GATE
+
+PR #13 (https://github.com/paleofoundation/VLE/pull/13) — **PASS**. Merged to main (`83ce2bda0aeced8b77a470b32d703b8660d5a402`).
+
+Checked: `/access` PENDING MAPPING handoff with Clerk ID/email/name and no tenant data; OPS/ADMIN `/ops/memberships` maps exact Clerk user → existing org; role derived from org kind (SUPPLIER/BUYER/PLATFORM→OPS) and UI cannot grant ADMIN; server re-auth + Clerk backend resolve; email must match Clerk primary; reject identity conflicts and existing memberships; audit `CLERK_MEMBERSHIP_MAPPED` / bootstrap `CLERK_OPS_BOOTSTRAPPED`; one-time seeded OPS bootstrap only replaces `seed_ops_replace_with_clerk_id`; unmapped users redirected from protected pages; runbook docs for Karen/ops; VLE Postgres remains tenancy/role SoT; Phase A gates preserved; no Phase C / Knowde / Orders/payments / avocado matching / live TECRID credentials / invented partner integrations. Vercel SUCCESS.
+
+### 2026-09-06 07:15 Asia/Nicosia — STATUS
+Tag: STATUS
+
+**PR-F complete.** Clerk membership mapping is on main. Real people can be mapped to use nomination intake, artifact log, and compliance pack. **NO FINISH.** Poll remains 24/7 every 5 min. Next code ORDER only after ops bootstrap path is clear or Elon posts GO; live TECRID still partner-blocked.
+
+
 ### 2026-09-06 06:53 Asia/Nicosia — ORDER
 Tag: ORDER
 

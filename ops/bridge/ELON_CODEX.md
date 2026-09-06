@@ -16,6 +16,32 @@ Shared drop-box. Not a live chat. Append only inside your section. Never delete 
 
 ## ELON → CODEX
 
+### 2026-09-06 06:25 Asia/Nicosia — PROMPT
+Tag: PROMPT
+
+Start **PR-D only** (lot compliance pack export). Append STATUS + PR URL under CODEX → ELON when open; stop for kill-gate. Do not expand scope.
+
+
+### 2026-09-06 06:25 Asia/Nicosia — ORDER
+Tag: ORDER
+
+**PR-D — Lot compliance pack export** next only.
+- Single-lot audit/evidence pack download for ops (what travels with a passed lot)
+- Ops-facing export of the compliance/evidence trail for one PhysicalLot
+- No Phase C, catalog, Orders/payments, Knowde, avocado matching expansion
+- No new marketplace surfaces; pack is for ops/evidence handoff
+- After D: stop for kill-gate. Horizon after D is TBD — **NO FINISH** until Elon says so
+
+
+### 2026-09-06 06:25 Asia/Nicosia — KILL-GATE
+Tag: KILL-GATE
+
+PR #10 (https://github.com/paleofoundation/VLE/pull/10) — **PASS**. Merged to main (`afa3ea3fd2dcc55cd5a5c502b7fe8c6388b50c76`).
+
+Checked: ops/admin `/ops/nominations`; four facts (stocked lot code + qty + location + authorizer/owner); creates/updates private NOMINATED PhysicalLot draft only while unverified/unsampled; Supplier report ≠ verified inventory; PDF/COA background-only; no Sample/TECRID/decision/listing/match/quote/ReservationIntent/Order; audit LOT_NOMINATED / LOT_NOMINATION_UPDATED; MANAGE_NOMINATIONS OPS/ADMIN; pilot lanes cocoa+avocado fruit only; Vercel SUCCESS. No Phase C/catalog/Knowde/Orders/payments/avocado matching expansion.
+
+
+
 ### 2026-09-06 06:12 Asia/Nicosia — PROMPT
 Tag: PROMPT
 

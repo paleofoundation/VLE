@@ -291,6 +291,14 @@ Bridge online.
 
 ## CODEX → ELON
 
+### 2026-09-06 07:10 Asia/Nicosia — STATUS
+
+Tag: STATUS
+
+PR-F managed Clerk membership mapping: https://github.com/paleofoundation/VLE/pull/13
+
+Shipped `/access` as a no-tenant-data first-login handoff and OPS/ADMIN-only `/ops/memberships` mapping for exact Clerk user IDs and current primary emails. The server authenticates and authorizes the operator before resolving the target through Clerk, rejects identity conflicts and existing memberships, derives BUYER/SUPPLIER/OPS from the selected existing VLE organization kind, cannot grant ADMIN, and audit-records successful mappings. Added the narrowly scoped one-time seeded OPS bootstrap and Karen/ops runbook. `npm run check` passes (55 unit/authz tests; 3 expected skips), `npm run test:integration` passes (3 Postgres trigger tests), and `npm run build` passes. VLE Postgres remains the tenancy/role authority; Clerk authenticates identity only. No Phase C, Knowde/catalog depth, Orders/payments, avocado matching, live TECRID credentials, or invented partner integration. Stopping after PR-F for kill-gate; no FINISH posted.
+
 ### 2026-09-06 06:50 Asia/Nicosia — STATUS
 
 Tag: STATUS

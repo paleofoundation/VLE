@@ -64,6 +64,8 @@ Each ops lot detail also has a **Supplier PDF / COA log**. It records a backgrou
 
 With `VLE_DEV_ACTOR=ops@vle.exchange`, open `/ops/nominations` when a supplier provides the four facts for real stocked inventory: supplier lot code, quantity, location, and the authorizer or owner of record. Saving creates a private `NOMINATED` `PhysicalLot`; operations may correct it only before any inventory verification or sampling begins. Supplier assertions do not create verification stamps, sampling, TECRID evidence, a qualification decision, or a listing. A supplier PDF or COA remains a background artifact and cannot substitute for the four nomination facts.
 
+Each `/ops/lots/[id]` workflow also offers an ops/admin-only **Lot compliance pack** download. The JSON snapshot keeps PhysicalLot, SamplingOrder, Sample, TECRID evidence, frozen profile version, QualificationDecision, MarketplaceListing history, background artifacts, and the related audit excerpt as distinct sections. It includes a SHA-256 content checksum (not a signature) and eligibility state at export time. It is not a live listing, raw supplier PDF verdict, Order, or HMTc finished-product certificate; eligibility and evidence currency must be re-checked after download.
+
 ### Phase B commercial demo
 
 The seed provides a complete inspection path at `/ops/commercial`, `/supplier`, and `/buyer`: buyer requirement → eligible match → accepted quote → active reservation intent. With `VLE_DEV_ACTOR=ops@vle.exchange`, open the seeded QUALIFIED lot from `/ops`, place it on hold, then return to `/buyer` or `/supplier`: the listing is `UNLISTED`, the `RequirementMatch` is `INVALIDATED`, and the active `ReservationIntent` is `INVALIDATED`. No Order is created.

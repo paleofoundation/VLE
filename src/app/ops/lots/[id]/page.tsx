@@ -101,6 +101,21 @@ export default async function OpsLotPage({ params }: PageProps<"/ops/lots/[id]">
         </div>
       </div>
 
+      <section className="compliancePackPanel" aria-labelledby="compliance-pack-heading">
+        <div className="compliancePackCopy">
+          <p className="eyebrow">Ops evidence handoff · single physical lot</p>
+          <h2 id="compliance-pack-heading">Lot compliance pack</h2>
+          <p>Download the lot identity, verification timestamps, SamplingOrders, Samples, TECRID-linked evidence, frozen profile versions, immutable decisions, listing history, background artifact references, and related audit-chain excerpt as one JSON snapshot.</p>
+          <div className="compliancePackBoundary"><strong>Snapshot ≠ live eligibility.</strong><span>The pack records state at export time. It cannot keep a dead listing alive, turn a supplier PDF into proof, create an Order, or certify a finished product.</span></div>
+        </div>
+        <aside className="compliancePackAction">
+          <span className="mono">PACK / V1.0</span>
+          <dl><div><dt>Physical lot</dt><dd>{lot.supplierLotCode}</dd></div><div><dt>Decision</dt><dd>{decision?.outcome ?? "Not recorded"}</dd></div><div><dt>Listing now</dt><dd>{listing?.status ?? "Not created"}</dd></div><div><dt>Evidence now</dt><dd>{evidence?.status ?? "Not recorded"}</dd></div></dl>
+          <a className="button buttonDark" href={`/api/ops/lots/${lot.id}/compliance-pack`} download>Download JSON pack</a>
+          <small>Ops/admin authentication is re-checked by the download route.</small>
+        </aside>
+      </section>
+
       <section className="artifactPanel" aria-labelledby="artifact-heading">
         <div className="artifactPanelHead">
           <div><p className="eyebrow">Background artifacts · outside the gate</p><h2 id="artifact-heading">Supplier PDF / COA log</h2><p>Log where the inbound document is stored so operations can trace supplier context. VLE does not treat this reference or its contents as authenticated lab evidence.</p></div>

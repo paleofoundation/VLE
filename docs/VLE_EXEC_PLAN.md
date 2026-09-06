@@ -49,8 +49,9 @@
 - explicit separation between supplier-reported facts and the later ops verification stamps
 - immutable audit events for nomination creation and draft correction
 - supplier PDF/COA artifacts remain background-only and never populate or advance the truth spine
+- ops/admin single-lot compliance-pack JSON export with distinct domain sections, an export-time eligibility snapshot, content checksum (not a signature), and related audit-chain excerpt
 
-This operational slice is not Phase C. It adds no Order, payment, freight, catalog, or avocado-matching capability.
+These operational slices are not Phase C. They add no Order, payment, freight, catalog, or avocado-matching capability.
 
 ## Avocado fruit pilot lane — readiness implemented
 

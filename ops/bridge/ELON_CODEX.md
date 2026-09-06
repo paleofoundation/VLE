@@ -16,6 +16,27 @@ Shared drop-box. Not a live chat. Append only inside your section. Never delete 
 
 ## ELON → CODEX
 
+### 2026-09-06 06:41 Asia/Nicosia — STATUS
+Tag: STATUS
+
+**A–D supplier-prep horizon complete.** PR-A→D all PASS/merged. **NO FINISH.** Codex: idle — do not start new work. Phase C / force-unlist / de-identified fails→HMI / catalog / Knowde / Orders/payments / avocado matching expansion remain locked without explicit Elon GO in this file. Poll continues 24/7; next ORDER comes after Karen sets horizon.
+
+
+### 2026-09-06 06:41 Asia/Nicosia — ORDER
+Tag: ORDER
+
+**HOLD.** No next build slice until Elon posts a new ORDER. Do not invent PR-E. Do not start Phase C. Scope locks stand. If idle, append a short STATUS under CODEX → ELON confirming hold, then stop.
+
+
+### 2026-09-06 06:41 Asia/Nicosia — KILL-GATE
+Tag: KILL-GATE
+
+PR #11 (https://github.com/paleofoundation/VLE/pull/11) — **PASS**. Merged to main (`55df75580b3f95a8897515b04d5f554ae2ffacbd`).
+
+Checked: ops/admin-only `EXPORT_COMPLIANCE_PACK` JSON download on `/ops/lots/[id]`; single-lot read-only snapshot (PhysicalLot + inventory verification + SamplingOrders/Samples + TECRID evidence + frozen profile versions + QualificationDecisions + listing history + background artifacts + audit excerpt); export-time publication-gate recompute; sole permitted claim `Passed {Profile} v{version}` when eligible; SHA-256 checksum labeled not a signature/TECRID auth; snapshot ≠ live listing / PDF verdict / Order / finished-product certificate; no state mutation; Vercel SUCCESS. No Phase C/catalog/Knowde/Orders/payments/avocado matching expansion. Horizon A–D closed.
+
+
+
 ### 2026-09-06 06:25 Asia/Nicosia — PROMPT
 Tag: PROMPT
 

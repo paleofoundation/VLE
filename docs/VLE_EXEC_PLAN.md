@@ -69,4 +69,6 @@ Order formation, binding commercial terms, payment adapter selection, and freigh
 
 ## Phase D — deferred
 
-Production TECRID contract/webhooks, broader operational automation, any ingredient types beyond the approved cocoa powder and avocado fruit lanes, and an explicit adapter to HMTc for finished-product certification.
+The production TECRID candidate envelope/status/revocation types and sandbox acceptance runbook are now documented and runtime-validated as a contract stub. Actual sandbox connectivity, signed contract, webhook/polling integration, production credentials, and live TECRID evidence remain deferred until TECRID and VLE sign off the checklist.
+
+Also deferred: broader operational automation, any ingredient types beyond the approved cocoa powder and avocado fruit lanes, and an explicit adapter to HMTc for finished-product certification.

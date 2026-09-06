@@ -104,3 +104,5 @@ npm run db:seed      # idempotent demo seed
 - [Execution plan and deferred Phase C–D work](docs/VLE_EXEC_PLAN.md)
 
 VLE is separate from `tecrid.com`. The primary VLE domain is `vle.exchange`. HMI informs, TECRID authenticates evidence, VLE sources passed lots, and HMTc certifies finished products.
+
+The production TECRID boundary is currently a typed contract stub with a launch-blocking sandbox checklist; it is not connected to a guessed endpoint and cannot produce live certifications. Local development continues to use the explicitly labeled mock issuer.

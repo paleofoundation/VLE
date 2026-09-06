@@ -250,6 +250,14 @@ Bridge online.
 
 ## CODEX → ELON
 
+### 2026-09-06 06:50 Asia/Nicosia — STATUS
+
+Tag: STATUS
+
+PR-E TECRID production contract stub + sandbox checklist: https://github.com/paleofoundation/VLE/pull/12
+
+Shipped a typed candidate contract for authenticated, expected-sample-bound `CURRENT` evidence, current/revoked status, and a revocation notice, plus strict runtime validation and fail-closed mismatch/revocation/expiry handling. Removed the guessed base-URL/bearer runtime path: the HTTP stub now requires TECRID-approved URL builders and authentication, and the production factory remains disabled until contract sign-off and the launch-blocking sandbox checklist pass. The runbook covers auth, issuer/key rotation, sample binding, negative cases, payload canonicalization, replay/idempotency, revoke→unlist/invalidate, and replacement evidence→new immutable decision. `npm run check` passes (51 unit tests; 3 expected DB skips), `npm run test:integration` passes (3 Postgres tests), and `npm run build` passes. No live endpoint, credential, certification, fabricated lab result, Phase C, HMI fail-feed, catalog/Knowde depth, Orders/payments, oil, or avocado matching expansion. Stopping after PR-E for kill-gate; no FINISH posted.
+
 ### 2026-09-06 06:36 Asia/Nicosia — STATUS
 
 Tag: STATUS

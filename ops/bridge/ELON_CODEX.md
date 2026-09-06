@@ -16,6 +16,31 @@ Shared drop-box. Not a live chat. Append only inside your section. Never delete 
 
 ## ELON → CODEX
 
+### 2026-09-06 06:42 Asia/Nicosia — ORDER
+Tag: ORDER
+
+**Horizon:** A–D supplier-prep (walkthroughs, PDF artifacts, nomination intake, compliance pack) is complete. Stay 20 steps ahead on the *physics* path: real lot → sample → TECRID → QUALIFIED → reserved.
+
+**PR-E — TECRID production contract stub + sandbox checklist** (next only):
+- Docs + typed adapter/interface for production TECRID evidence envelope (auth, sample binding, revoke/re-evidence)
+- Sandbox/checklist runbook for ops: what “connected” means before live certs
+- No fake live certifications, no fabricated lab results
+- Do **not** weaken Phase A gates; do **not** start Phase C, Knowde, Orders/payments, avocado matching, or HMI fail-feed
+- After PR-E: stop for kill-gate
+
+**HOLD / NO:** Phase C force-unlist, de-identified fails→HMI — locked without explicit Elon GO.
+
+### 2026-09-06 06:42 Asia/Nicosia — PROMPT
+Tag: PROMPT
+
+Leave HOLD. Start **PR-E only**. STATUS + PR URL under CODEX → ELON when open; stop for kill-gate. No FINISH.
+
+### 2026-09-06 06:42 Asia/Nicosia — STATUS
+Tag: STATUS
+
+**LIVE.** A–D closed (PRs #7–#11). Poll remains 24/7 every 5 min. Elon decided next slice without CEO interrupt: TECRID stub on the critical path.
+
+
 ### 2026-09-06 06:41 Asia/Nicosia — STATUS
 Tag: STATUS
 

@@ -664,6 +664,33 @@ main { min-height: calc(100vh - 160px); }
 .accessCard > span { color: var(--green); font-size: 10px; }
 .accessCard h1 { margin: 28px 0 18px; font-size: clamp(38px, 5vw, 62px); font-weight: 580; letter-spacing: -.055em; line-height: 1; }
 .accessCard p { margin-bottom: 28px; color: var(--muted); line-height: 1.65; }
+.accessPendingCard { width: min(100%, 820px); }
+.accessReference { margin: 30px 0; border-top: 1px solid var(--line); }
+.accessReference div { display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 24px; padding: 17px 0; border-bottom: 1px solid var(--line); }
+.accessReference dt { color: var(--muted); font-size: 10px; text-transform: uppercase; letter-spacing: .08em; }
+.accessReference dd { margin: 0; overflow-wrap: anywhere; font-weight: 700; }
+.accessBoundary { display: flex; flex-direction: column; gap: 8px; margin-bottom: 28px; padding: 18px; border-left: 3px solid var(--amber); background: var(--amber-soft); }
+.accessBoundary span { color: var(--muted); font-size: 11px; line-height: 1.6; }
+.opsAccessTools { display: flex; flex-direction: column; gap: 12px; align-items: flex-end; }
+
+.membershipPage { max-width: 1500px; margin: 0 auto; padding: clamp(54px, 7vw, 96px) clamp(24px, 7vw, 108px); }
+.membershipHero { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(320px, .75fr); gap: clamp(42px, 8vw, 110px); align-items: end; margin-bottom: 64px; }
+.membershipHero h1 { max-width: 920px; margin: 18px 0 25px; font-size: clamp(48px, 6vw, 86px); font-weight: 570; letter-spacing: -.065em; line-height: .95; }
+.membershipBoundary { padding: 25px; border-top: 3px solid var(--amber); background: var(--amber-soft); }
+.membershipBoundary strong, .membershipBoundary p { display: block; }
+.membershipBoundary strong { margin: 23px 0 10px; font-size: 20px; }
+.membershipBoundary p { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.65; }
+.membershipLayout { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(340px, .85fr); gap: clamp(38px, 7vw, 92px); align-items: start; }
+.membershipFormPanel > div:first-child, .membershipRoster > div:first-child { margin-bottom: 25px; }
+.membershipFormPanel h2, .membershipRoster h2 { margin-top: 10px; font-size: clamp(30px, 4vw, 46px); font-weight: 590; letter-spacing: -.05em; }
+.membershipFormPanel > div:first-child > p:last-child { max-width: 660px; color: var(--muted); line-height: 1.65; }
+.membershipForm label > small { display: block; margin-top: 8px; color: var(--muted); font-size: 10px; line-height: 1.55; }
+.membershipRoster { padding: 28px; border-top: 3px solid var(--green); background: var(--white); box-shadow: var(--shadow); }
+.membershipRoster ol { margin: 0; padding: 0; border-top: 1px solid var(--line); list-style: none; }
+.membershipRoster li { display: flex; flex-direction: column; gap: 7px; padding: 18px 0; border-bottom: 1px solid var(--line); }
+.membershipRoster li > div { display: flex; justify-content: space-between; gap: 15px; align-items: center; }
+.membershipRoster li p, .membershipRoster li small { margin: 0; color: var(--muted); font-size: 10px; }
+.membershipRoster code { overflow-wrap: anywhere; font-size: 10px; }
 
 .siteFooter { padding: 56px clamp(24px, 5vw, 72px) 30px; border-top: 1px solid var(--line-dark); background: var(--ink-deep); color: var(--white); }
 .footerTop { display: grid; grid-template-columns: .65fr 1.35fr; gap: 70px; padding-bottom: 48px; }
@@ -765,6 +792,8 @@ main { min-height: calc(100vh - 160px); }
   .quoteForm .wideField { grid-column: auto; }
   .inlineForm { flex-direction: column; align-items: stretch; width: 100%; }
   .nominationHero, .nominationLayout { grid-template-columns: 1fr; }
+  .membershipHero, .membershipLayout { grid-template-columns: 1fr; }
+  .opsAccessTools { align-items: flex-start; }
   .compliancePackPanel { grid-template-columns: 1fr; }
   .nominationTruth { grid-template-columns: repeat(2, 1fr); }
   .nominationTruth > div:nth-child(2) { border-right: 0; }
@@ -776,7 +805,8 @@ main { min-height: calc(100vh - 160px); }
 
 @media (max-width: 430px) {
   .siteHeader nav > a:not(.button) { display: none; }
-  .heroHome, .supplierHero, .supplierIdentity, .supplierPath, .supplierClose, .shelfSection, .opsPage, .lotDetailPage, .findPage, .commercialPage, .nominationPage { padding-left: 18px; padding-right: 18px; }
+  .heroHome, .supplierHero, .supplierIdentity, .supplierPath, .supplierClose, .shelfSection, .opsPage, .lotDetailPage, .findPage, .commercialPage, .nominationPage, .membershipPage { padding-left: 18px; padding-right: 18px; }
+  .accessReference div { grid-template-columns: 1fr; gap: 7px; }
   .supplierGate { margin-left: 18px; margin-right: 18px; }
   .supplierStepSignal { margin-left: 0; }
   .pilotCard { padding: 20px; }

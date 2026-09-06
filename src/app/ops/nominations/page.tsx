@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { getCurrentActor } from "@/lib/current-actor";
+import { getCurrentPageActor } from "@/lib/page-actor";
 import { formatQuantity } from "@/lib/presentation";
 import { getNominationIntakeData } from "@/services/vle";
 import { saveNominationDraftAction } from "../actions";
@@ -11,7 +11,7 @@ type NominationPageProps = {
 };
 
 export default async function NominationPage({ searchParams }: NominationPageProps) {
-  const actor = await getCurrentActor();
+  const actor = await getCurrentPageActor();
   if (!actor.roles.some((role) => role === "OPS" || role === "ADMIN")) {
     return <main id="main-content" className="accessPage"><div className="accessCard"><span className="mono">AUTHZ / OPS</span><h1>Operations access required.</h1><p>Your active VLE organization membership cannot manage supplier nominations.</p><Link className="textLink" href="/">Return to the public shelf</Link></div></main>;
   }

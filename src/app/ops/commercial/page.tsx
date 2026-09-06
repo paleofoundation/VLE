@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { matchRequirementAction } from "@/app/commercial-actions";
-import { getCurrentActor } from "@/lib/current-actor";
+import { getCurrentPageActor } from "@/lib/page-actor";
 import { formatQuantity } from "@/lib/presentation";
 import { listCommercialWorkspace } from "@/services/commercial";
 
@@ -11,7 +11,7 @@ function formatDate(value: Date) {
 }
 
 export default async function CommercialOpsPage() {
-  const actor = await getCurrentActor();
+  const actor = await getCurrentPageActor();
   if (!actor.roles.some((role) => role === "OPS" || role === "ADMIN")) {
     return <main id="main-content" className="accessPage"><div className="accessCard"><span className="mono">AUTHZ / OPS</span><h1>Operations access required.</h1><Link className="textLink" href="/">Return to the public shelf</Link></div></main>;
   }

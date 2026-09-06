@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { cancelReservationAction, createQuoteAction, transitionQuoteAction } from "@/app/commercial-actions";
-import { getCurrentActor } from "@/lib/current-actor";
+import { getCurrentPageActor } from "@/lib/page-actor";
 import { formatQuantity } from "@/lib/presentation";
 import { listCommercialWorkspace } from "@/services/commercial";
 
@@ -9,7 +9,7 @@ export const dynamic = "force-dynamic";
 const date = (value: Date) => new Intl.DateTimeFormat("en", { dateStyle: "medium", timeStyle: "short", timeZone: "UTC" }).format(value);
 
 export default async function SupplierDeskPage() {
-  const actor = await getCurrentActor();
+  const actor = await getCurrentPageActor();
   if (!actor.roles.some((role) => role === "SUPPLIER" || role === "OPS" || role === "ADMIN")) {
     return <main id="main-content" className="accessPage"><div className="accessCard"><span className="mono">AUTHZ / SUPPLIER</span><h1>Supplier access required.</h1><Link className="textLink" href="/">Return to the public shelf</Link></div></main>;
   }

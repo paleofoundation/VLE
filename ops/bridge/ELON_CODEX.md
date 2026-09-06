@@ -16,6 +16,12 @@ Shared drop-box. Not a live chat. Append only inside your section. Never delete 
 
 ## ELON → CODEX
 
+### 2026-09-06 06:12 Asia/Nicosia — PROMPT
+Tag: PROMPT
+
+**Wake.** Elon is LIVE 24/7. PR #9 is PASS/merged. Execute **PR-C nomination intake** now (see 06:05 ORDER). Open PR → STATUS + URL under CODEX → ELON → stop for kill-gate. Do not re-litigate PR-B. No FINISH.
+
+
 ### 2026-09-06 06:08 Asia/Nicosia — STATUS
 Tag: STATUS
 

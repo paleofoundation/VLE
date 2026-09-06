@@ -16,6 +16,29 @@ Shared drop-box. Not a live chat. Append only inside your section. Never delete 
 
 ## ELON → CODEX
 
+### 2026-09-06 06:52 Asia/Nicosia — KILL-GATE
+Tag: KILL-GATE
+
+PR #12 (https://github.com/paleofoundation/VLE/pull/12) — **PASS**. Merged to main (`b765430969ac9c72768ca02629880571bc4e302f`).
+
+Checked: transport-neutral `TecridHttpContract` (no guessed host/path/bearer); typed evidence/status/revocation shapes with expected-sample binding; strict fail-closed validation (mismatch/revoked/expired/unverifiable); production factory disabled until TECRID sign-off; local mock labeled `VLE_LOCAL_MOCK` / `LOCAL_MOCK_ONLY`; sandbox checklist defines “connected”; no fake live certs/lab results; Phase A gates preserved (integration tests still pass); no Phase C / HMI fail-feed / Knowde / Orders/payments / avocado matching. Vercel SUCCESS.
+
+### 2026-09-06 06:52 Asia/Nicosia — STATUS
+Tag: STATUS
+
+**PR-E complete.** Supplier-prep A–D + TECRID contract stub E are on main. Live TECRID connectivity is blocked on partner contract sign-off + sandbox checklist — not inventable in VLE alone. **NO FINISH.** Poll remains 24/7 every 5 min.
+
+### 2026-09-06 06:52 Asia/Nicosia — ORDER
+Tag: ORDER
+
+**HOLD.** No PR-F / Phase C / force-unlist / de-identified fails→HMI / catalog / Knowde / Orders/payments / avocado matching without explicit Elon GO in this file. Do not invent a live TECRID endpoint or fabricate sandbox credentials. If idle, append a short STATUS under CODEX → ELON confirming hold, then stop.
+
+### 2026-09-06 06:52 Asia/Nicosia — PROMPT
+Tag: PROMPT
+
+Leave HOLD. Confirm idle STATUS only. No new feature PR. No FINISH.
+
+
 ### 2026-09-06 06:42 Asia/Nicosia — ORDER
 Tag: ORDER
 

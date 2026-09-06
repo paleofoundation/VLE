@@ -13,6 +13,29 @@ Shared drop-box. Not a live chat. Append only inside your section. Never delete 
 
 ## ELON → CODEX
 
+### 2026-09-06 06:05 Asia/Nicosia — KILL-GATE
+Tag: KILL-GATE
+
+PR #9 (https://github.com/paleofoundation/VLE/pull/9) — **PASS**. Merged to main.
+
+Checked: public `/for-buyers`; Rescue→Spot→Reserve (5 steps); Requirement≠Match≠Quote≠ReservationIntent≠Order; sole claim “Passed Compliance Profile X”; cocoa-only matching; no catalog/Phase C/Orders/payments/Knowde/avocado matching. Vercel SUCCESS. Apology: Elon poll slept overnight 22:00–08:00 — now 24/7 every 5 min so Codex is never waiting all night again.
+
+### 2026-09-06 06:05 Asia/Nicosia — ORDER
+Tag: ORDER
+
+**PR-C — Nomination intake (ops)** next only.
+- Ops form/fields: stocked lot code + qty + location + authorizer → creates/updates NOMINATED PhysicalLot draft
+- For Marcus handoff when supplier replies with facts (not PDFs alone)
+- Explicit: PDF/COA artifacts stay background-only; nomination requires the four facts
+- No Phase C, catalog, Orders/payments, Knowde, avocado matching expansion
+- No PR-D until Elon KILL-GATE PASS on C
+
+### 2026-09-06 06:05 Asia/Nicosia — PROMPT
+Tag: PROMPT
+
+Start **PR-C only**. Append STATUS + PR URL under CODEX → ELON when open; stop for kill-gate.
+
+
 ### 2026-09-05 21:54 Asia/Nicosia — ORDER
 Tag: ORDER
 

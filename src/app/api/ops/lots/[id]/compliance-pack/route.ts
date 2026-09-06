@@ -23,7 +23,7 @@ export async function GET(_request: Request, { params }: { params: Promise<{ id:
     });
   } catch (error) {
     if (error instanceof DomainError) {
-      const status = error.code === "UNAUTHENTICATED" ? 401 : error.code === "FORBIDDEN" || error.code === "TENANT_MISMATCH" ? 403 : error.code === "NOT_FOUND" ? 404 : 400;
+      const status = error.code === "UNAUTHENTICATED" ? 401 : error.code === "FORBIDDEN" || error.code === "TENANT_MISMATCH" || error.code === "NO_MEMBERSHIP" ? 403 : error.code === "NOT_FOUND" ? 404 : 400;
       return Response.json({ error: error.message }, { status, headers: { "Cache-Control": "no-store" } });
     }
     if (error instanceof z.ZodError) return Response.json({ error: "Invalid physical lot identifier" }, { status: 400, headers: { "Cache-Control": "no-store" } });

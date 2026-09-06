@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { getCurrentActor } from "@/lib/current-actor";
+import { getCurrentPageActor } from "@/lib/page-actor";
 import { formatQuantity } from "@/lib/presentation";
 import { listAuditEvents, listOpsLots, listPilotLanes } from "@/services/vle";
 
@@ -66,7 +66,7 @@ function formatTime(value: Date) {
 }
 
 export default async function OpsPage() {
-  const actor = await getCurrentActor();
+  const actor = await getCurrentPageActor();
   if (!actor.roles.some((role) => role === "OPS" || role === "ADMIN")) {
     return (
       <main id="main-content" className="accessPage">
@@ -88,7 +88,7 @@ export default async function OpsPage() {
           <h1>Operations board</h1>
           <p className="sectionLead">Move real physical lots through inventory verification, controlled sampling, authenticated evidence, qualification, and gated publication.</p>
         </div>
-        <span className="roleBadge">{actor.roles.join(" · ")}</span>
+        <div className="opsAccessTools"><span className="roleBadge">{actor.roles.join(" · ")}</span><Link className="textLink" href="/ops/memberships">Map Clerk access →</Link></div>
       </section>
 
       <section className="opsMetrics" aria-label="Pilot pipeline summary">

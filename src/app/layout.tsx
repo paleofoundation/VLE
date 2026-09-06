@@ -38,7 +38,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <Link href="/supplier">Supplier desk</Link>
               <Link href="/ops">Operations</Link>
               <Show when="signed-out"><Link className="button buttonSmall buttonDark" href="/sign-in">Sign in</Link></Show>
-              <Show when="signed-in"><UserButton /></Show>
+              <Show when="signed-in"><Link href="/access">Access</Link><UserButton /></Show>
             </nav>
           </header>
           {children}

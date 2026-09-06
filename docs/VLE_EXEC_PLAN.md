@@ -72,3 +72,7 @@ Order formation, binding commercial terms, payment adapter selection, and freigh
 The production TECRID candidate envelope/status/revocation types and sandbox acceptance runbook are now documented and runtime-validated as a contract stub. Actual sandbox connectivity, signed contract, webhook/polling integration, production credentials, and live TECRID evidence remain deferred until TECRID and VLE sign off the checklist.
 
 Also deferred: broader operational automation, any ingredient types beyond the approved cocoa powder and avocado fruit lanes, and an explicit adapter to HMTc for finished-product certification.
+
+## Identity operations readiness
+
+Clerk first-login identity handoff and managed VLE membership mapping are implemented. An unmapped signed-in user sees no tenant data; OPS/ADMIN maps the exact Clerk ID to one existing organization, role is derived from organization kind, and the action is audit-recorded. Bulk invitations, self-service organization creation, SSO/SCIM, Clerk Organizations synchronization, and webhook provisioning remain deferred. This is identity operations readiness, not Phase C.

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { createReservationAction, transitionQuoteAction, cancelReservationAction } from "@/app/commercial-actions";
-import { getCurrentActor } from "@/lib/current-actor";
+import { getCurrentPageActor } from "@/lib/page-actor";
 import { formatQuantity } from "@/lib/presentation";
 import { listCommercialWorkspace } from "@/services/commercial";
 
@@ -10,7 +10,7 @@ const date = (value: Date) => new Intl.DateTimeFormat("en", { dateStyle: "medium
 
 export default async function BuyerDeskPage({ searchParams }: PageProps<"/buyer">) {
   const { created } = await searchParams;
-  const actor = await getCurrentActor();
+  const actor = await getCurrentPageActor();
   if (!actor.roles.some((role) => role === "BUYER" || role === "OPS" || role === "ADMIN")) {
     return <main id="main-content" className="accessPage"><div className="accessCard"><span className="mono">AUTHZ / BUYER</span><h1>Buyer access required.</h1><Link className="textLink" href="/">Return to the public shelf</Link></div></main>;
   }

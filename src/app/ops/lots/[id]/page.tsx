@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getCurrentActor } from "@/lib/current-actor";
+import { getCurrentPageActor } from "@/lib/page-actor";
 import { formatQuantity } from "@/lib/presentation";
 import { getOpsLotWorkflow } from "@/services/vle";
 import { advanceSamplingAction, holdLotAction, issueMockEvidenceAction, logLotArtifactAction, publishAction, qualifyAction, revokeEvidenceAction, startSamplingAction, verifyInventoryAction } from "../../actions";
@@ -18,7 +18,7 @@ function stepClass(done: boolean, active: boolean) {
 export const dynamic = "force-dynamic";
 
 export default async function OpsLotPage({ params }: PageProps<"/ops/lots/[id]">) {
-  const actor = await getCurrentActor();
+  const actor = await getCurrentPageActor();
   if (!actor.roles.some((role) => role === "OPS" || role === "ADMIN")) {
     return <main id="main-content" className="accessPage"><div className="accessCard"><span className="mono">AUTHZ / OPS</span><h1>Operations access required.</h1><p>Your active VLE organization membership does not include an operations role.</p><Link className="textLink" href="/">Return to the public shelf</Link></div></main>;
   }

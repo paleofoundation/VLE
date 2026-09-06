@@ -16,6 +16,10 @@ describe("server authorization", () => {
     expect(() => assertPermission({ userId: "u3", organizationId: "platform", roles: ["OPS"] }, "MANAGE_NOMINATIONS")).not.toThrow();
     expect(() => assertPermission(supplier, "MANAGE_NOMINATIONS")).toThrowError(/not permitted/);
   });
+  it("keeps Clerk membership mapping inside managed operations", () => {
+    expect(() => assertPermission({ userId: "u3", organizationId: "platform", roles: ["OPS"] }, "MANAGE_MEMBERSHIPS")).not.toThrow();
+    expect(() => assertPermission(supplier, "MANAGE_MEMBERSHIPS")).toThrowError(/not permitted/);
+  });
   it("keeps single-lot compliance packs inside managed operations", () => {
     expect(() => assertPermission({ userId: "u3", organizationId: "platform", roles: ["OPS"] }, "EXPORT_COMPLIANCE_PACK")).not.toThrow();
     expect(() => assertPermission(supplier, "EXPORT_COMPLIANCE_PACK")).toThrowError(/not permitted/);

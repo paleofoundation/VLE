@@ -1,12 +1,12 @@
 import Link from "next/link";
-import { getCurrentActor } from "@/lib/current-actor";
+import { getCurrentPageActor } from "@/lib/page-actor";
 import { getCocoaReferenceData } from "@/services/vle";
 import { createRequirementAction } from "./actions";
 
 export const dynamic = "force-dynamic";
 
 export default async function FindPage({ searchParams }: PageProps<"/find">) {
-  const actor = await getCurrentActor();
+  const actor = await getCurrentPageActor();
   if (!actor.roles.some((role) => role === "BUYER" || role === "ADMIN")) {
     return (
       <main id="main-content" className="accessPage">

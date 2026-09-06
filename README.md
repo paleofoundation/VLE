@@ -101,8 +101,13 @@ npm run db:seed      # idempotent demo seed
 
 - [Product invariants](docs/VLE_PRODUCT_INVARIANTS.md)
 - [TECRID adapter contract](docs/TECRID_ADAPTER.md)
+- [Clerk identity membership mapping](docs/CLERK_MEMBERSHIP_MAPPING.md)
 - [Execution plan and deferred Phase C–D work](docs/VLE_EXEC_PLAN.md)
 
 VLE is separate from `tecrid.com`. The primary VLE domain is `vle.exchange`. HMI informs, TECRID authenticates evidence, VLE sources passed lots, and HMTc certifies finished products.
 
 The production TECRID boundary is currently a typed contract stub with a launch-blocking sandbox checklist; it is not connected to a guessed endpoint and cannot produce live certifications. Local development continues to use the explicitly labeled mock issuer.
+
+### Real-user access mapping
+
+After a first Clerk sign-in, `/access` shows an unmapped user's identity handoff without exposing tenant data. An existing OPS/ADMIN user maps that Clerk ID to one existing VLE organization at `/ops/memberships`; organization kind deterministically grants `SUPPLIER`, `BUYER`, or `OPS`, and the mutation is audit-recorded. See [the Clerk membership mapping runbook](docs/CLERK_MEMBERSHIP_MAPPING.md), including the one-time seeded OPS bootstrap for a new environment. VLE's database—not Clerk metadata or client UI—remains the server-side authorization source.

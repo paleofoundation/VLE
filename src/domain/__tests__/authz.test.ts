@@ -12,6 +12,10 @@ describe("server authorization", () => {
     expect(() => assertPermission({ userId: "u3", organizationId: "platform", roles: ["OPS"] }, "MANAGE_LOT_ARTIFACTS")).not.toThrow();
     expect(() => assertPermission(supplier, "MANAGE_LOT_ARTIFACTS")).toThrowError(/not permitted/);
   });
+  it("keeps managed nomination intake with ops and admin", () => {
+    expect(() => assertPermission({ userId: "u3", organizationId: "platform", roles: ["OPS"] }, "MANAGE_NOMINATIONS")).not.toThrow();
+    expect(() => assertPermission(supplier, "MANAGE_NOMINATIONS")).toThrowError(/not permitted/);
+  });
   it("allows platform ops to work across supplier tenants", () => expect(() => assertTenant({ userId: "u3", organizationId: "platform", roles: ["OPS"] }, "supplier-a")).not.toThrow());
   it("reserves compliance profile versioning for admins", () => expect(() => assertPermission({ userId: "u3", organizationId: "platform", roles: ["OPS"] }, "MANAGE_PROFILES")).toThrowError(/not permitted/));
   it("keeps matching with ops and quote creation with suppliers", () => {

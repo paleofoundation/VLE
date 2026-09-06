@@ -98,6 +98,11 @@ export default async function OpsPage() {
         <div className="metricLive"><span>Public shelf</span><strong>{listedCount.toString().padStart(2, "0")}</strong><small>Gate-cleared listings</small></div>
       </section>
 
+      <section className="nominationCallout" aria-labelledby="nomination-heading">
+        <div><p className="eyebrow">Supplier reply → private draft</p><h2 id="nomination-heading">Nomination intake is open.</h2><p>Record a stocked lot code, quantity, location, and supplier authorizer. The result stays NOMINATED until operations independently verifies all four publication-gate facts.</p></div>
+        <Link className="button buttonDark" href="/ops/nominations">Open nomination intake</Link>
+      </section>
+
       <section className="laneOverview" aria-label="Pilot lane readiness">
         {lanes.map((lane) => {
           const laneLots = lots.filter(({ productCode }) => productCode === lane.productCode);

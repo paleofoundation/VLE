@@ -42,6 +42,16 @@
 
 `RequirementMatch`, `SupplierQuote`, and `ReservationIntent` remain distinct from `BuyerRequirement`, `MarketplaceListing`, and the future `Order`. A reservation intent records commercial intent only; it cannot keep an ineligible listing alive.
 
+## Pilot operations readiness — implemented
+
+- ops-managed supplier nomination intake for a stocked lot code, quantity, location, and authorizer/owner of record
+- private `NOMINATED` PhysicalLot creation plus corrections only while the draft remains unverified and unsampled
+- explicit separation between supplier-reported facts and the later ops verification stamps
+- immutable audit events for nomination creation and draft correction
+- supplier PDF/COA artifacts remain background-only and never populate or advance the truth spine
+
+This operational slice is not Phase C. It adds no Order, payment, freight, catalog, or avocado-matching capability.
+
 ## Avocado fruit pilot lane — readiness implemented
 
 - separate `AVOCADO_FRUIT` product type; no avocado oil product or marketplace

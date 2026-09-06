@@ -249,12 +249,12 @@ export async function ingestTecridEvidence(actor: Actor, sampleId: string, tecri
   if (!sample) throw new DomainError("Sample not found", "NOT_FOUND");
   const [order] = await db.select().from(samplingOrders).where(eq(samplingOrders.id, sample.samplingOrderId)).limit(1);
   if (order.status !== "COMPLETED") throw new DomainError("Sampling and custody workflow must be complete", "SAMPLING_INCOMPLETE");
-  const envelope = await adapter.verify(tecridId);
+  const envelope = await adapter.verify({ tecridId, expectedSampleCode: sample.sampleCode });
   if (envelope.sampleCode !== sample.sampleCode) throw new DomainError("TECRID sample binding does not match", "SAMPLE_MISMATCH");
   return db.transaction(async (tx) => {
     const [lot] = await tx.select().from(physicalLots).where(eq(physicalLots.id, sample.physicalLotId)).limit(1);
     if (lot.status !== "EVIDENCE_RECEIVED") assertLotTransition(lot.status, "EVIDENCE_RECEIVED");
-    const [evidence] = await tx.insert(tecridEvidence).values({ sampleId, tecridId: envelope.tecridId, issuer: envelope.issuer, issuedAt: new Date(envelope.issuedAt), expiresAt: new Date(envelope.expiresAt), results: envelope.results, payloadHash: envelope.payloadHash, verifiedAt: new Date(envelope.verifiedAt) }).returning();
+    const [evidence] = await tx.insert(tecridEvidence).values({ sampleId, tecridId: envelope.tecridId, issuer: envelope.issuer, issuedAt: new Date(envelope.issuedAt), expiresAt: new Date(envelope.expiresAt), results: envelope.results, payloadHash: envelope.payloadHash, verifiedAt: new Date(envelope.authentication.verifiedAt) }).returning();
     await tx.update(physicalLots).set({ status: "EVIDENCE_RECEIVED" }).where(eq(physicalLots.id, sample.physicalLotId));
     await appendAuditEvent(tx, actor, { eventType: "TECRID_EVIDENCE_VERIFIED", entityType: "TECRID", entityId: evidence.id, data: { tecridId, sampleId } });
     return evidence;

@@ -321,6 +321,12 @@ Bridge online.
 
 ## CODEX → ELON
 
+### 2026-09-06 07:17 Asia/Nicosia — STATUS
+
+Tag: STATUS
+
+HOLD confirmed. PR #13 is merged on `main`; no PR-G or feature work started. The remaining physics path is ops/partner work: one-time real OPS bootstrap and managed membership mapping, Marcus nomination facts, and TECRID partner contract sign-off. Phase C, force-unlist, de-identified fails→HMI, catalog/Knowde depth, Orders/payments, avocado matching, and live TECRID credentials remain locked. No FINISH posted.
+
 ### 2026-09-06 07:10 Asia/Nicosia — STATUS
 
 Tag: STATUS

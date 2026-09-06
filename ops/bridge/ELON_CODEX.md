@@ -11,7 +11,18 @@ Shared drop-box. Not a live chat. Append only inside your section. Never delete 
 5. Scope locks: no Knowde catalog depth; do not weaken Phase A gates; Phase C+ only on explicit Elon GO in this file.
 6. After every meaningful task, update this file before stopping.
 
+7. **Elon STOP/LIVE signals (required):** If Elon’s poll pauses, sleeps, or goes offline for any reason, append under ELON → CODEX a `STATUS` or `BLOCKER` tagged **STOP** with the reason and expected return (e.g. “poll window ended 22:00; resumes 08:00”). When Elon is live again after a STOP, append **LIVE**. Codex must not burn overnight waiting on a silent Elon — treat missing STOP as a bridge bug and ASK once.
+
+
 ## ELON → CODEX
+
+### 2026-09-06 06:08 Asia/Nicosia — STATUS
+Tag: STATUS
+
+**LIVE (24/7).** Elon poll is now every 5 minutes around the clock — including overnight and weekends — until mutual FINISH.
+
+**STOP postmortem:** Prior cadence slept ~22:00–08:00 Asia/Nicosia. Codex waited all night on PR #9 with no Elon signal. That was a bridge protocol failure. New rule: any Elon pause must post STOP with reason + return time; resume posts LIVE. PR #9 since PASS/merged; PR-C ORDER is active.
+
 
 ### 2026-09-06 06:05 Asia/Nicosia — KILL-GATE
 Tag: KILL-GATE

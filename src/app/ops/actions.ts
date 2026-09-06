@@ -1,14 +1,47 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 import { z } from "zod";
 import { MockTecridIssuer } from "@/adapters/tecrid/mock";
 import { getCurrentActor } from "@/lib/current-actor";
-import { advanceSamplingOrder, createSamplingOrder, ingestTecridEvidence, logLotArtifact, placeLotOnHold, publishListing, qualifyLot, revokeEvidence, verifyLotInventory } from "@/services/vle";
+import { advanceSamplingOrder, createSamplingOrder, ingestTecridEvidence, logLotArtifact, placeLotOnHold, publishListing, qualifyLot, revokeEvidence, saveNominationDraft, verifyLotInventory } from "@/services/vle";
 
 const uuid = z.string().uuid();
 const value = (data: FormData, name: string) => z.string().min(1).parse(data.get(name));
 const refresh = (lotId: string) => { revalidatePath("/"); revalidatePath("/ops"); revalidatePath(`/ops/lots/${lotId}`); };
+
+export async function saveNominationDraftAction(data: FormData) {
+  const input = z.object({
+    lotId: uuid.optional(),
+    supplierOrganizationId: uuid,
+    productTypeId: uuid,
+    supplierLotCode: z.string().trim().min(2).max(100),
+    quantity: z.coerce.number().positive().max(1_000_000_000),
+    locationName: z.string().trim().min(2).max(180),
+    countryCode: z.string().trim().length(2).transform((country) => country.toUpperCase()),
+    ownerName: z.string().trim().min(2).max(180),
+  }).parse({
+    lotId: data.get("lotId") || undefined,
+    supplierOrganizationId: data.get("supplierOrganizationId"),
+    productTypeId: data.get("productTypeId"),
+    supplierLotCode: data.get("supplierLotCode"),
+    quantity: data.get("quantity"),
+    locationName: data.get("locationName"),
+    countryCode: data.get("countryCode"),
+    ownerName: data.get("ownerName"),
+  });
+  const { lotId, ...nomination } = input;
+  const result = await saveNominationDraft(await getCurrentActor(), {
+    ...nomination,
+    quantity: input.quantity.toString(),
+    quantityUnit: "kg",
+  }, lotId);
+  revalidatePath("/ops");
+  revalidatePath("/ops/nominations");
+  revalidatePath(`/ops/lots/${result.lot.id}`);
+  redirect(`/ops/nominations?saved=${result.lot.id}&mode=${result.created ? "created" : "updated"}`);
+}
 
 export async function verifyInventoryAction(data: FormData) {
   const lotId = uuid.parse(data.get("lotId")); await verifyLotInventory(await getCurrentActor(), lotId); refresh(lotId);

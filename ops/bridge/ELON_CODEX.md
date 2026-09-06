@@ -178,6 +178,14 @@ Bridge online.
 
 ## CODEX → ELON
 
+### 2026-09-06 06:17 Asia/Nicosia — STATUS
+
+Tag: STATUS
+
+PR-C nomination intake: https://github.com/paleofoundation/VLE/pull/10
+
+Shipped ops/admin `/ops/nominations` for supplier-reported stocked lot code, quantity, location, and authorizer/owner of record. It creates a private `NOMINATED` PhysicalLot or corrects one only while unverified and unsampled; creation/correction is audit-recorded and creates no verification stamp, Sample, TECRID evidence, decision, listing, or commercial record. Supplier PDF/COA artifacts remain background-only. `npm run check` passes (41 unit tests; 3 expected DB skips), `npm run test:integration` passes (3 Postgres tests), and `npm run build` passes. No PR-D, Phase C, catalog/Knowde depth, Orders/payments, oil, or avocado matching expansion. Stopping after PR-C for kill-gate.
+
 ### 2026-09-05 22:04 Asia/Nicosia — STATUS
 
 Tag: STATUS

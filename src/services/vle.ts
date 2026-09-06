@@ -1,4 +1,4 @@
-import { and, desc, eq, inArray, sql } from "drizzle-orm";
+import { and, asc, desc, eq, inArray, sql } from "drizzle-orm";
 import { getDb } from "@/db";
 import {
   auditEvents,
@@ -22,6 +22,7 @@ import { evaluatePublicationGate } from "@/domain/publication";
 import { qualify } from "@/domain/qualification";
 import { assertSamplingTransition } from "@/domain/sampling";
 import { assertLotTransition, statusAfterEvidenceRevocation } from "@/domain/lot-state";
+import { assertNominationDraftEditable } from "@/domain/nomination";
 import type { LimitRule, QualificationOutcome, ResultValue, SamplingStatus } from "@/domain/types";
 import type { TecridAdapter } from "@/adapters/tecrid";
 import { appendAuditEvent } from "./audit";
@@ -40,6 +41,112 @@ export async function nominateLot(actor: Actor, input: {
     await appendAuditEvent(tx, actor, { eventType: "LOT_NOMINATED", entityType: "PhysicalLot", entityId: lot.id, data: input });
     return lot;
   });
+}
+
+export type NominationDraftInput = {
+  supplierOrganizationId: string;
+  productTypeId: string;
+  supplierLotCode: string;
+  quantity: string;
+  quantityUnit: "kg";
+  locationName: string;
+  countryCode: string;
+  ownerName: string;
+};
+
+export async function saveNominationDraft(actor: Actor, input: NominationDraftInput, lotId?: string) {
+  assertPermission(actor, "MANAGE_NOMINATIONS");
+  assertTenant(actor, input.supplierOrganizationId);
+  const db = getDb();
+  return db.transaction(async (tx) => {
+    const [[supplier], [product]] = await Promise.all([
+      tx.select({ id: organizations.id, kind: organizations.kind }).from(organizations).where(eq(organizations.id, input.supplierOrganizationId)).limit(1),
+      tx.select({ id: productTypes.id, code: productTypes.code, active: productTypes.active }).from(productTypes).where(eq(productTypes.id, input.productTypeId)).limit(1),
+    ]);
+    if (!supplier || supplier.kind !== "SUPPLIER") throw new DomainError("Nomination requires a supplier organization", "INPUT_MISMATCH");
+    if (!product || !product.active || !["COCOA_POWDER", "AVOCADO_FRUIT"].includes(product.code)) {
+      throw new DomainError("Nomination product is outside the active VLE pilot lanes", "INPUT_MISMATCH");
+    }
+
+    if (!lotId) {
+      const [lot] = await tx.insert(physicalLots).values({ ...input, status: "NOMINATED" }).returning();
+      await appendAuditEvent(tx, actor, {
+        eventType: "LOT_NOMINATED",
+        entityType: "PhysicalLot",
+        entityId: lot.id,
+        data: { ...input, supplierReported: true, verificationStampsCreated: false },
+      });
+      return { lot, created: true } as const;
+    }
+
+    const [current] = await tx.select().from(physicalLots).where(eq(physicalLots.id, lotId)).limit(1);
+    if (!current) throw new DomainError("Physical lot not found", "NOT_FOUND");
+    const [sampling] = await tx.select({ id: samplingOrders.id }).from(samplingOrders).where(eq(samplingOrders.physicalLotId, lotId)).limit(1);
+    assertNominationDraftEditable({
+      status: current.status,
+      identityConfirmedAt: current.identityConfirmedAt,
+      quantityVerifiedAt: current.quantityVerifiedAt,
+      locationVerifiedAt: current.locationVerifiedAt,
+      authorityToSellVerifiedAt: current.authorityToSellVerifiedAt,
+      hasSamplingOrder: Boolean(sampling),
+    });
+    const [lot] = await tx.update(physicalLots).set(input).where(eq(physicalLots.id, lotId)).returning();
+    await appendAuditEvent(tx, actor, {
+      eventType: "LOT_NOMINATION_UPDATED",
+      entityType: "PhysicalLot",
+      entityId: lot.id,
+      data: {
+        previous: {
+          supplierOrganizationId: current.supplierOrganizationId,
+          productTypeId: current.productTypeId,
+          supplierLotCode: current.supplierLotCode,
+          quantity: current.quantity,
+          quantityUnit: current.quantityUnit,
+          locationName: current.locationName,
+          countryCode: current.countryCode,
+          ownerName: current.ownerName,
+        },
+        next: input,
+        supplierReported: true,
+        verificationStampsCreated: false,
+      },
+    });
+    return { lot, created: false } as const;
+  });
+}
+
+export async function getNominationIntakeData() {
+  const db = getDb();
+  const [suppliers, products, drafts] = await Promise.all([
+    db.select({ id: organizations.id, name: organizations.name }).from(organizations).where(eq(organizations.kind, "SUPPLIER")).orderBy(asc(organizations.name)),
+    db.select({ id: productTypes.id, code: productTypes.code, name: productTypes.name }).from(productTypes)
+      .where(and(eq(productTypes.active, true), inArray(productTypes.code, ["COCOA_POWDER", "AVOCADO_FRUIT"]))).orderBy(asc(productTypes.name)),
+    db.select({
+      id: physicalLots.id,
+      supplierOrganizationId: physicalLots.supplierOrganizationId,
+      productTypeId: physicalLots.productTypeId,
+      supplierLotCode: physicalLots.supplierLotCode,
+      quantity: physicalLots.quantity,
+      quantityUnit: physicalLots.quantityUnit,
+      locationName: physicalLots.locationName,
+      countryCode: physicalLots.countryCode,
+      ownerName: physicalLots.ownerName,
+      supplier: organizations.name,
+      product: productTypes.name,
+      createdAt: physicalLots.createdAt,
+    }).from(physicalLots)
+      .innerJoin(organizations, eq(organizations.id, physicalLots.supplierOrganizationId))
+      .innerJoin(productTypes, eq(productTypes.id, physicalLots.productTypeId))
+      .where(and(
+        eq(physicalLots.status, "NOMINATED"),
+        sql`${physicalLots.identityConfirmedAt} IS NULL`,
+        sql`${physicalLots.quantityVerifiedAt} IS NULL`,
+        sql`${physicalLots.locationVerifiedAt} IS NULL`,
+        sql`${physicalLots.authorityToSellVerifiedAt} IS NULL`,
+        sql`NOT EXISTS (SELECT 1 FROM ${samplingOrders} so WHERE so.physical_lot_id = ${physicalLots.id})`,
+      )).orderBy(desc(physicalLots.createdAt)),
+  ]);
+  return { suppliers, products, drafts };
 }
 
 export async function logLotArtifact(actor: Actor, lotId: string, input: {

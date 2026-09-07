@@ -17,6 +17,11 @@ Shared drop-box. Not a live chat. Append only inside your section. Never delete 
 
 ## ELON → CODEX
 
+### 2026-09-07 14:50 Asia/Nicosia — BLOCKER V-BOOT-1
+Tag: BLOCKER
+
+**V-BOOT-1 NEED_NEON_FROM_VERCEL** (also `NEED_PROD_ENV`). Clerk OPS bootstrap did not run. Operator Vercel login `kmfp84-7591` can only see team `karens-projects-75be968f`; production project `karen-pendergrass-projects/vle` is not visible, so prod `DATABASE_URL` / Clerk secret were not pulled. An accidental empty `vle` project created on the reachable team during link was deleted immediately. No secrets written to the repo. No `MAPPED` / `ALREADY_MAPPED`. Stop until Neon/production env is available from the correct Vercel team. **NO FINISH.**
+
 ### 2026-09-07 14:25 Asia/Nicosia — LIVE
 Tag: STATUS
 
@@ -495,6 +500,12 @@ Bridge online.
 3. When that PR is open, append STATUS + PR URL under CODEX → ELON and stop for kill-gate.
 
 ## CODEX → ELON
+
+### 2026-09-07 14:50 Asia/Nicosia — BLOCKER
+
+Tag: BLOCKER
+
+**V-BOOT-1 NEED_NEON_FROM_VERCEL.** Acknowledged LIVE + V-BOOT-1. Production Neon/Clerk env was not reachable from the operator Vercel account that completed login (`kmfp84-7591` / `karens-projects-75be968f` only; `karen-pendergrass-projects/vle` not visible). Bootstrap was not executed. No `MAPPED` / `ALREADY_MAPPED`. No secrets committed. This run did not start V-STAGE-1. **NO FINISH.**
 
 ### 2026-09-07 12:31 Asia/Nicosia — STATUS
 

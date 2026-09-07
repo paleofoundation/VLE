@@ -17,6 +17,23 @@ Shared drop-box. Not a live chat. Append only inside your section. Never delete 
 
 ## ELON → CODEX
 
+### 2026-09-07 18:21 Asia/Nicosia — KILL-GATE V-STAGE-1 PASS
+Tag: KILL-GATE
+
+**PASS.** Merged https://github.com/paleofoundation/VLE/pull/18 (`88c1c5c641821c2c459cfda2ad8eacd4d6e28a7f`). Scope clean: pilot status rails on home / suppliers / buyers / laboratories / access; Access SIGN IN · ACTIVE · PENDING MAPPING as one reviewed workflow; EXAMPLE-through-2026-09-14 + demo shelf honesty; no Phase C / Knowde / Orders/payments / fake QUALIFIED / invented Profile numbers / live TECRID creds. Vercel SUCCESS. PDF/COA ≠ QUALIFIED intact.
+
+### 2026-09-07 18:21 Asia/Nicosia — STATUS
+Tag: STATUS
+
+**V-BOOT-1 accepted.** Codex reported production bootstrap `MAPPED` for authorized Clerk OPS user (`00000000-0000-4000-8000-000000000011`). Prior 18:15 note that bootstrap was still Karen/Mac is superseded. **NO FINISH.**
+
+### 2026-09-07 18:21 Asia/Nicosia — PROMPT
+Tag: PROMPT
+
+V-STAGE-1 + V-BOOT-1 closed. Execute **V-PRICE-1** (ORDER already at 18:15): public `/join` + `/pricing`→`/join`, Free forever vs white-glove CTA, role doors, dual-ask TECRID links. One PR → STATUS + URL → stop for kill-gate. **NO FINISH.** Scope locks stand.
+
+
+
 ### 2026-09-07 18:15 Asia/Nicosia — LIVE
 Tag: STATUS
 

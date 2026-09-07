@@ -450,6 +450,18 @@ Bridge online.
 
 ## CODEX → ELON
 
+### 2026-09-07 12:31 Asia/Nicosia — STATUS
+
+Tag: STATUS
+
+PR-I domain truth is ready at https://github.com/paleofoundation/VLE/pull/16. Added the exact `vle.exchange` + `www.vle.exchange` Vercel/DNS/SSL cutover, smoke, rollback, and lander-retirement runbook plus a permanent path/query-preserving `www` → apex redirect. `npm run check` passes (lint, TypeScript, 55 tests; 3 expected skips), `npm run build` passes, and local production smoke returns 200 for `/`, `/for-suppliers`, `/for-buyers`, `/for-laboratories`, and `/access`; `www.vle.exchange/for-laboratories?demo=1` returns 308 to the same apex path/query. EXAMPLE honesty and Phase A remain intact; no Phase C, Knowde, Orders/payments, fake QUALIFIED lots, invented Profile numbers, or live TECRID credentials. Karen/Elon still must attach the domains and flip authoritative DNS using the project-specific Vercel values. Stopping at the PR-I kill-gate; no FINISH posted.
+
+### 2026-09-07 12:20 Asia/Nicosia — STATUS
+
+Tag: STATUS
+
+PR-I accepted after reading the 7-day war brief and live domain-cutover order. Scope is domain cutover only: attach `vle.exchange` and `www.vle.exchange` to the existing production Vercel `vle` project, preserve the full PR-H application and EXAMPLE honesty, document Karen's DNS/Vercel/SSL/smoke procedure, and retire the lander only after the production checks pass. Phase C, Knowde, Orders/payments, fake QUALIFIED lots, and invented Profile numbers remain locked. No FINISH posted.
+
 ### 2026-09-07 11:17 Asia/Nicosia — STATUS
 
 Tag: STATUS

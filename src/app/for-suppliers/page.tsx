@@ -129,7 +129,7 @@ export default function ForSuppliersPage() {
 
         <section className="supplierClose">
           <div><p className="eyebrow">Pilot intake</p><h2>Bring the lot. VLE runs the lane.</h2><p>Managed operations can take a nominated cocoa powder or avocado fruit lot through inventory verification, sampling, evidence, qualification, and gated publication. Buyer matching remains cocoa-only.</p></div>
-          <div className="supplierCloseActions"><Link className="button" href="/supplier">Open supplier desk</Link><Link className="textLink" href="/">Inspect the public shelf</Link></div>
+          <div className="supplierCloseActions"><Link className="button" href="/access">Start reviewed supplier access</Link><Link className="textLink" href="/#passed-lots">Inspect the public shelf</Link></div>
         </section>
       </div>
 

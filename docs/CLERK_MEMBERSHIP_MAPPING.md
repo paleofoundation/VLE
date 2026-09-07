@@ -26,6 +26,18 @@ The managed mapping UI supports only the existing operational roles:
 6. The server re-authenticates the operator before calling Clerk, resolves the target user through Clerk's backend, requires the copied email to match Clerk's current primary email, rejects existing memberships and identity/email conflicts, derives the role from organization kind, and records `CLERK_MEMBERSHIP_MAPPED` in the immutable audit chain. The display name is read from Clerk, not trusted from the form.
 7. The new user refreshes `/access` and enters the buyer, supplier, or ops workspace. A stale Clerk session is not used for authorization; VLE reads the database on each protected request.
 
+## Stakeholder demo path
+
+Use the real review state in demos; do not pre-seed a bypass or weaken the Phase A gate.
+
+1. Begin on the public home page and choose the supplier, buyer, or laboratory walkthrough. These pages require no tenancy context and explain the complete pilot path.
+2. Open `/access` and sign in with the stakeholder's Clerk identity.
+3. If the identity is not mapped, present `PENDING MAPPING` as the expected review lane. The progress rail shows that identity is complete, organization and role review is pending, and workspace access follows only after approval. The page exposes the exact handoff reference and no tenant data.
+4. Continue the demo on the public shelf while an authorized operator independently verifies the stakeholder through the agreed external channel. A pending mapping is not treated as an application error.
+5. The operator maps the reviewed identity at `/ops/memberships` using the existing organization. The stakeholder refreshes `/access` and enters only the server-authorized workspace.
+
+This flow demonstrates a complete product handoff without implying that sign-in grants authority, creating a fake tenant, or exposing another organization's records.
+
 ## One-time first operator bootstrap
 
 The mapping UI requires an already-authorized operator. On a newly seeded environment only, Karen performs one controlled trust-root bootstrap after signing into Clerk and copying her values from `/access`:

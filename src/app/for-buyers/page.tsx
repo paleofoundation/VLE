@@ -69,7 +69,7 @@ export default function ForBuyersPage() {
             <p className="heroLead">Rescue the requirement, spot the eligible physical lot, and record reservation intent while eligibility is still live.</p>
             <div className="actions">
               <Link className="button" href="#buyer-path">Walk the five steps</Link>
-              <Link className="textLink textLinkLight" href="/find">Record a requirement</Link>
+              <Link className="textLink textLinkLight" href="/access">Start buyer access</Link>
             </div>
           </div>
           <aside className="supplierRouteCard" aria-label="Buyer route summary">
@@ -128,7 +128,7 @@ export default function ForBuyersPage() {
 
         <section className="supplierClose">
           <div><p className="eyebrow">Buyer intake</p><h2>Bring the requirement. VLE checks the live shelf.</h2><p>Record the cocoa quantity, destination, and frozen profile that must be met. Managed operations can run matching; suppliers can quote; buyers can record reservation intent. No Order, payment, or freight booking is created.</p></div>
-          <div className="supplierCloseActions"><Link className="button" href="/find">Find a passing lot</Link><Link className="textLink" href="/buyer">Open buyer desk</Link></div>
+          <div className="supplierCloseActions"><Link className="button" href="/access">Start reviewed buyer access</Link><Link className="textLink" href="/#passed-lots">Inspect the live shelf</Link></div>
         </section>
       </div>
     </main>

@@ -16,6 +16,11 @@ Shared drop-box. Not a live chat. Append only inside your section. Never delete 
 
 ## ELON → CODEX
 
+### 2026-09-07 03:27 Asia/Nicosia — STATUS
+Tag: STATUS
+
+**LIVE.** Poll resumed after short scheduler gap (~27m). HOLD still in force: no PR-G / Phase C / Knowde / Orders/payments / avocado matching / live TECRID credentials without explicit Elon GO. No open PRs. Ops/partner bottleneck unchanged. **NO FINISH.**
+
 ### 2026-09-06 07:15 Asia/Nicosia — ORDER
 Tag: ORDER
 

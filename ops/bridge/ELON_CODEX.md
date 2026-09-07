@@ -542,6 +542,12 @@ Bridge online.
 
 ## CODEX → ELON
 
+### 2026-09-07 18:31 Asia/Nicosia — STATUS
+
+Tag: STATUS
+
+V-PRICE-1 is ready at https://github.com/paleofoundation/VLE/pull/19. Added `/join`, a permanent `/pricing` → `/join` redirect, and discoverable Join paths from the live navigation, home hero, and footer. The page presents free-forever core access, optional ICS white-glove human help with no invented price or checkout, supplier/buyer/laboratory doors, reviewed `/access`, and both requested TECRID handoffs. Qualification, listing eligibility, and TECRID authenticity are explicitly non-purchasable; PDF/COA ≠ QUALIFIED; the merged EXAMPLE-through-2026-09-14 honesty remains visible. `npm run check` passes (lint, TypeScript, 55 tests; 3 expected skips), `npm run build` passes, local production smoke returns `/join` 200 and `/pricing` 308 to `/join`, and desktop plus 390px browser checks pass without a framework error. No Phase C, Knowde/catalog depth, Orders/payments, live TECRID credentials, invented Profile numbers, or fake QUALIFIED inventory. Stopping at the V-PRICE-1 kill-gate; deploy only after PASS. No FINISH posted.
+
 ### 2026-09-07 18:20 Asia/Nicosia — STATUS
 
 Tag: STATUS

@@ -17,6 +17,34 @@ Shared drop-box. Not a live chat. Append only inside your section. Never delete 
 
 ## ELON → CODEX
 
+### 2026-09-07 19:07 Asia/Nicosia — KILL-GATE V-PRICE-1 PASS
+Tag: KILL-GATE
+
+**PASS.** Merged https://github.com/paleofoundation/VLE/pull/19 (`4783807b438b713e86f0d9f3061716ad314df619`). Scope clean: `/join` free-forever core + optional white-glove (no invented price/checkout); `/pricing`→`/join`; Join in nav/home/footer; supplier/buyer/laboratory doors; TECRID dual-ask links; PENDING MAPPING honesty; PDF/COA ≠ QUALIFIED; no Phase C / Knowde / Orders/payments / fake QUALIFIED / invented Profile numbers / live TECRID creds. Vercel SUCCESS. Deploy follows main.
+
+### 2026-09-07 19:07 Asia/Nicosia — STATUS
+Tag: STATUS
+
+**Apex soft path closed for now.** V-STAGE-1 + V-BOOT-1 + V-PRICE-1 on main. Public join/pricing story live after deploy. **NO FINISH.**
+
+Physics bottleneck (not inventable VLE chrome):
+1. Marcus: real supplier nomination facts (stocked lot code + qty + location + authorizer)
+2. Live TECRID remains blocked on partner contract sign-off (CEO)
+3. Ops: map real people via `/ops/memberships` as they arrive
+
+### 2026-09-07 19:07 Asia/Nicosia — ORDER
+Tag: ORDER
+
+**HOLD.** No new feature PR. No Phase C / Knowde / Orders/payments / fake QUALIFIED / invented Profile numbers / live TECRID credentials without explicit Elon GO in this file.
+
+If idle, append a short STATUS under CODEX → ELON confirming hold, then stop. **NO FINISH.**
+
+### 2026-09-07 19:07 Asia/Nicosia — PROMPT
+Tag: PROMPT
+
+Leave HOLD. Confirm idle STATUS only. No new feature PR. No FINISH. Poll stays LIVE for ASK/BLOCKER only.
+
+
 ### 2026-09-07 18:21 Asia/Nicosia — KILL-GATE V-STAGE-1 PASS
 Tag: KILL-GATE
 

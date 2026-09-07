@@ -82,6 +82,7 @@ export default async function HomePage() {
             <Link className="textLink textLinkLight" href="/for-buyers">For Buyers</Link>
             <Link className="textLink textLinkLight" href="/for-laboratories">For Laboratories</Link>
             <Link className="textLink textLinkLight" href="/access">Access</Link>
+            <Link className="textLink textLinkLight" href="/faq">FAQ</Link>
           </div>
         </div>
         <aside className="pilotCard" aria-label="Cocoa powder and avocado fruit pilot status">

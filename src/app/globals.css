@@ -349,6 +349,67 @@ main { min-height: calc(100vh - 160px); }
 .joinBoundary { display: grid; grid-template-columns: minmax(160px, .35fr) minmax(0, 1.65fr); gap: clamp(26px, 6vw, 90px); align-items: center; margin: clamp(60px, 7vw, 94px) clamp(24px, 7vw, 108px); padding: clamp(28px, 4vw, 48px); border: 1px solid #d4b58d; background: var(--amber-soft); color: #69451f; }
 .joinBoundary > span { font-size: 10px; font-weight: 800; letter-spacing: .11em; }
 .joinBoundary p { max-width: 980px; margin: 0; line-height: 1.7; }
+.joinBoundary .textLink { margin-left: 7px; }
+
+.faqHero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(320px, .65fr);
+  gap: clamp(50px, 9vw, 140px);
+  align-items: end;
+  min-height: 620px;
+  padding: clamp(84px, 10vw, 140px) clamp(24px, 7vw, 108px) clamp(70px, 8vw, 106px);
+  color: var(--white);
+  background:
+    linear-gradient(120deg, rgba(11, 24, 19, .99), rgba(24, 73, 54, .93)),
+    repeating-linear-gradient(90deg, transparent 0 89px, rgba(255,255,255,.07) 90px);
+}
+.faqHero h1 { max-width: 880px; margin-bottom: 28px; font-size: clamp(54px, 7.4vw, 104px); font-weight: 560; letter-spacing: -.068em; line-height: .93; }
+.faqHero > div > p:not(.eyebrow) { max-width: 760px; margin-bottom: 34px; color: #c2cec7; font-size: clamp(17px, 1.7vw, 23px); line-height: 1.55; }
+.faqOperator { padding: 27px; border: 1px solid #50685b; background: rgba(7,19,14,.42); box-shadow: 0 28px 80px rgba(0,0,0,.2); }
+.faqOperator > .mono { color: var(--signal); font-size: 9px; letter-spacing: .1em; }
+.faqOperator h2 { margin: 48px 0 12px; color: var(--signal); font-size: clamp(30px, 3vw, 43px); font-weight: 570; letter-spacing: -.045em; }
+.faqOperator > p { color: #aebdb4; font-size: 13px; line-height: 1.65; }
+.faqOperator dl { margin: 28px 0 0; }
+.faqOperator dl div { display: flex; justify-content: space-between; gap: 18px; padding: 13px 0; border-top: 1px solid #50685b; font-size: 11px; }
+.faqOperator dt { color: #91a198; }
+.faqOperator dd { margin: 0; font-weight: 750; text-align: right; }
+.faqNetwork, .faqWorkflow, .faqQuestions { padding: clamp(72px, 8vw, 116px) clamp(24px, 7vw, 108px); }
+.faqNetwork { border-bottom: 1px solid var(--line); background: var(--paper-deep); }
+.faqNetwork > div { max-width: 900px; }
+.faqNetwork h2, .faqSectionHeading h2 { margin-bottom: 18px; font-size: clamp(40px, 5vw, 68px); font-weight: 570; letter-spacing: -.058em; line-height: 1; }
+.faqNetwork ol { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); margin: 46px 0 0; padding: 0; border-top: 1px solid var(--ink); list-style: none; }
+.faqNetwork li { min-height: 180px; padding: 24px; border-right: 1px solid var(--line); }
+.faqNetwork li:last-child { border-right: 0; }
+.faqNetwork li span, .faqNetwork li strong, .faqNetwork li small { display: block; }
+.faqNetwork li span { color: var(--green); font-family: var(--font-geist-mono), monospace; font-size: 9px; }
+.faqNetwork li strong { margin-top: 48px; font-size: 22px; }
+.faqNetwork li small { margin-top: 8px; color: var(--muted); font-size: 11px; }
+.faqNetworkBoundary { margin: 0; padding: 25px 28px; border-left: 3px solid var(--amber); background: var(--amber-soft); color: #624324; font-size: 13px; line-height: 1.7; }
+.faqWorkflow { background: var(--paper); }
+.faqSectionHeading { max-width: 900px; margin-bottom: 46px; }
+.faqSectionHeading > p:last-child { max-width: 720px; margin: 0; color: var(--muted); line-height: 1.7; }
+.faqWorkflow > ol { margin: 0; padding: 0; border-top: 1px solid var(--ink); list-style: none; }
+.faqWorkflow > ol > li { display: grid; grid-template-columns: 84px 1fr; gap: 28px; min-height: 145px; align-items: center; padding: 24px 12px; border-bottom: 1px solid var(--line); }
+.faqWorkflow > ol > li > span { color: var(--green); font-size: 22px; }
+.faqWorkflow strong { display: block; margin-bottom: 10px; font-size: clamp(22px, 2.4vw, 33px); font-weight: 590; letter-spacing: -.035em; }
+.faqWorkflow li p { max-width: 830px; margin: 0; color: var(--muted); font-size: 13px; line-height: 1.65; }
+.faqQuestions { border-top: 1px solid var(--line); background: var(--white); }
+.faqList { border-top: 1px solid var(--ink); }
+.faqList details { border-bottom: 1px solid var(--line); }
+.faqList summary { display: grid; grid-template-columns: 54px 1fr 32px; gap: 22px; align-items: center; min-height: 104px; padding: 23px 10px; cursor: pointer; list-style: none; }
+.faqList summary::-webkit-details-marker { display: none; }
+.faqList summary > span { color: var(--green); font-size: 10px; }
+.faqList summary strong { font-size: clamp(17px, 2vw, 24px); font-weight: 620; letter-spacing: -.025em; }
+.faqList summary i { color: var(--green); font-size: 26px; font-style: normal; text-align: center; transition: transform 160ms ease; }
+.faqList details[open] summary i { transform: rotate(45deg); }
+.faqList details > div { padding: 0 64px 30px 86px; }
+.faqList details p { max-width: 900px; margin: 0 0 12px; color: var(--muted); line-height: 1.75; }
+.faqList details p:last-child { margin-bottom: 0; }
+.faqNext { display: grid; grid-template-columns: minmax(0, 1fr) minmax(300px, .7fr); gap: clamp(48px, 8vw, 120px); padding: clamp(66px, 8vw, 104px) clamp(24px, 7vw, 108px); color: var(--white); background: var(--ink); }
+.faqNext h2 { max-width: 760px; margin-bottom: 20px; font-size: clamp(40px, 5vw, 68px); font-weight: 560; letter-spacing: -.058em; line-height: 1; }
+.faqNext > div:first-child > p:last-child { max-width: 690px; margin: 0; color: #afbeb5; line-height: 1.7; }
+.faqNextActions { display: flex; flex-direction: column; align-items: stretch; justify-content: center; gap: 14px; }
+.faqNextActions .textLink { align-self: center; margin-top: 9px; }
 
 .supplierPrintSheet { display: none; }
 .supplierHero {
@@ -848,6 +909,8 @@ main { min-height: calc(100vh - 160px); }
 @media (max-width: 1050px) {
   .heroHome { grid-template-columns: 1fr; }
   .joinHero { grid-template-columns: 1fr; }
+  .faqHero { grid-template-columns: 1fr; }
+  .faqOperator { max-width: 680px; }
   .joinPromise { max-width: 680px; }
   .supplierHero, .supplierIdentity { grid-template-columns: 1fr; }
   .supplierRouteCard { max-width: 660px; }
@@ -892,6 +955,10 @@ main { min-height: calc(100vh - 160px); }
   .joinHero { min-height: auto; padding-top: 78px; }
   .joinHeroCopy h1 { font-size: clamp(48px, 14vw, 72px); }
   .joinPlanGrid, .joinEvidence { grid-template-columns: 1fr; }
+  .faqNetwork ol { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .faqNetwork li:nth-child(2) { border-right: 0; }
+  .faqNetwork li:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
+  .faqNext { grid-template-columns: 1fr; }
   .joinPlan + .joinPlan { border-left: 0; border-top-width: 4px; }
   .joinRoleGrid { grid-template-columns: 1fr; }
   .joinRole { min-height: 330px; border-right: 0; border-bottom: 1px solid var(--line); }
@@ -970,8 +1037,11 @@ main { min-height: calc(100vh - 160px); }
   .accessPage { padding: 34px 18px 48px; }
   .accessPage > .pilotStatusRail { grid-template-columns: 1fr 1fr; padding: 0; }
   .accessStatusHead { align-items: flex-start; flex-direction: column; }
-  .heroHome, .joinHero, .joinPlans, .joinRoles, .joinEvidence, .supplierHero, .supplierIdentity, .supplierPath, .supplierClose, .shelfSection, .opsPage, .lotDetailPage, .findPage, .commercialPage, .nominationPage, .membershipPage { padding-left: 18px; padding-right: 18px; }
+  .heroHome, .joinHero, .joinPlans, .joinRoles, .joinEvidence, .faqHero, .faqNetwork, .faqWorkflow, .faqQuestions, .faqNext, .supplierHero, .supplierIdentity, .supplierPath, .supplierClose, .shelfSection, .opsPage, .lotDetailPage, .findPage, .commercialPage, .nominationPage, .membershipPage { padding-left: 18px; padding-right: 18px; }
   .joinBoundary { margin-left: 18px; margin-right: 18px; }
+  .faqWorkflow > ol > li { grid-template-columns: 52px 1fr; gap: 16px; }
+  .faqList summary { grid-template-columns: 36px 1fr 24px; gap: 10px; }
+  .faqList details > div { padding-right: 38px; padding-left: 46px; }
   .accessReference div { grid-template-columns: 1fr; gap: 7px; }
   .accessReviewRail { grid-template-columns: 1fr; }
   .accessReviewRail li { min-height: 0; border-right: 0; border-bottom: 1px solid var(--line); }

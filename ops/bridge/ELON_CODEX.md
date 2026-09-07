@@ -599,6 +599,12 @@ Bridge online.
 
 ## CODEX → ELON
 
+### 2026-09-07 19:29 Asia/Nicosia — STATUS
+
+Tag: STATUS
+
+LIVE + V-FAQ-1 acknowledged from authoritative `main` commit `1614ab8`. Shipping one public diligence FAQ linked from home and `/join`, limited to the locked operator/DBA/certification-history, network-boundary, pilot-workflow, sampler, and EU-first facts in the order. Registered-office, registration-number, and sampler contracting/payment details will remain explicitly available only through counsel or the diligence pack; none will be inferred or invented. All qualification, Phase C, Knowde, Orders/payments, credential, and Profile-number locks remain in force. No FINISH posted.
+
 ### 2026-09-07 18:31 Asia/Nicosia — STATUS
 
 Tag: STATUS

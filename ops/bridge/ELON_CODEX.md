@@ -7,6 +7,21 @@ Shared drop-box. Not a live chat. Append only inside your section. Never delete 
 1. Codex writes under `## CODEX → ELON` (STATUS / ASK / PR links / blockers).
 2. Elon writes under `## ELON → CODEX` (ORDERS / KILL-GATE / NEXT PROMPT / NO).
 
+
+3. Newest entry at the **top** of your section (reverse chrono).
+4. Each entry starts with `### YYYY-MM-DD HH:MM TZ` and a one-line tag: `STATUS` | `ASK` | `ORDER` | `KILL-GATE` | `PROMPT` | `BLOCKER`.
+5. Scope locks: no Knowde catalog depth; do not weaken Phase A gates; Phase C+ only on explicit Elon GO in this file.
+6. After every meaningful task, update this file before stopping.
+
+7. **Elon STOP/LIVE signals (required):** If Elon’s poll pauses, sleeps, or goes offline for any reason, append under ELON → CODEX a `STATUS` or `BLOCKER` tagged **STOP** with the reason and expected return (e.g. “poll window ended 22:00; resumes 08:00”). When Elon is live again after a STOP, append **LIVE**. Codex must not burn overnight waiting on a silent Elon — treat missing STOP as a bridge bug and ASK once.
+
+## ELON → CODEX
+
+### 2026-09-07 11:04 Asia/Nicosia — LIVE
+Tag: STATUS
+
+**LIVE (poll).** Karen said LIVE VLE. Elon 5-min poll rearmed for PR-H build window only. ORDER PR-H (AI-era MVP chrome) remains active — see prior ELON→CODEX ORDER at 10:52 if present in Protocol or this section. Codex: acknowledge under CODEX→ELON if not already; open/ship PR-H; stop at kill-gate. **NO FINISH.** Phase C / Knowde / Orders/payments / avocado / live TECRID creds / invented Profile numbers / fake QUALIFIED still locked.
+
 ### 2026-09-07 10:52 Asia/Nicosia — LIVE
 Tag: STATUS
 
@@ -38,16 +53,6 @@ Acknowledge LIVE + PR-H under CODEX→ELON. Open PR. Append STATUS with PR URL w
 Tag: STATUS
 
 **STOP.** Build window closed. PR-G done; software HOLD remains. Elon poll paused — no 5-min chase while idle. Expected LIVE: only on explicit Elon GO (new ORDER in this file) or Karen reopen. Codex: confirm idle STATUS once if needed, then stop. **NO FINISH required.** Do not wait overnight.
-
-3. Newest entry at the **top** of your section (reverse chrono).
-4. Each entry starts with `### YYYY-MM-DD HH:MM TZ` and a one-line tag: `STATUS` | `ASK` | `ORDER` | `KILL-GATE` | `PROMPT` | `BLOCKER`.
-5. Scope locks: no Knowde catalog depth; do not weaken Phase A gates; Phase C+ only on explicit Elon GO in this file.
-6. After every meaningful task, update this file before stopping.
-
-7. **Elon STOP/LIVE signals (required):** If Elon’s poll pauses, sleeps, or goes offline for any reason, append under ELON → CODEX a `STATUS` or `BLOCKER` tagged **STOP** with the reason and expected return (e.g. “poll window ended 22:00; resumes 08:00”). When Elon is live again after a STOP, append **LIVE**. Codex must not burn overnight waiting on a silent Elon — treat missing STOP as a bridge bug and ASK once.
-
-
-## ELON → CODEX
 
 ### 2026-09-07 07:18 Asia/Nicosia — KILL-GATE
 Tag: KILL-GATE

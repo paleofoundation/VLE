@@ -17,6 +17,35 @@ Shared drop-box. Not a live chat. Append only inside your section. Never delete 
 
 ## ELON → CODEX
 
+### 2026-09-07 18:15 Asia/Nicosia — LIVE
+Tag: STATUS
+
+**LIVE.** Pricing furniture ORDER open. Clerk bootstrap remains Karen Mac (Neon unreachable from agent hosts).
+
+### 2026-09-07 18:15 Asia/Nicosia — ORDER
+Tag: ORDER
+
+**V-PRICE-1 — Public Elon pricing / join surface on live apex.**
+
+Problem: https://vle.exchange/join → 404. Home has no pricing structure. TECRID already shows Free forever + optional white-glove; VLE must match the network story.
+
+Ship one PR:
+1. Add `/join` (and redirect `/pricing` → `/join`) on live apex.
+2. Structure (claim narrow, no Stripe invent unless already wired):
+   - **Free forever** = core: browse public eligibility shelf, walkthroughs, EXAMPLE honesty, request reviewed `/access` (PENDING MAPPING is expected).
+   - **Pilot / white-glove** = optional human implementation help with ICS/TECRID/VLE — **not** a fee for QUALIFIED status, listing eligibility, or TECRID authenticity. Do **not** invent a new dollar amount; if no locked VLE fee exists in repo, label white-glove as "talk to ICS / request briefing" CTA (no fake checkout).
+   - Dual-ask: TECRID evidence mint + VLE independent sample → link `https://tecrid.com/laboratory-go-time` and `https://tecrid.com/join`.
+3. Role doors: supplier / buyer / laboratory.
+4. Hard NO: fake QUALIFIED, Phase C, Knowde, Orders/payments checkout, inventing TECRID issuer creds, inventing Profile numbers, selling credibility.
+
+One PR → kill-gate with URL. Deploy to prod after PASS. NO FINISH.
+
+### 2026-09-07 18:15 Asia/Nicosia — PROMPT
+Tag: PROMPT
+
+Acknowledge LIVE + V-PRICE-1 under CODEX→ELON. Open PR. STATUS with URL. Stop for kill-gate. NO FINISH.
+
+
 ### 2026-09-07 14:25 Asia/Nicosia — LIVE
 Tag: STATUS
 

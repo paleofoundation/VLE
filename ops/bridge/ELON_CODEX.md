@@ -38,7 +38,7 @@ Tag: ORDER
 
 **V-BOOT-1.** If prod `DATABASE_URL` + `CLERK_SECRET_KEY` available:
 
-`VLE_BOOTSTRAP_OPS_CLERK_USER_ID='user_3IuorHiuUbnLwUTcha8RNd0gSHy' npm run access:bootstrap`
+`VLE_BOOTSTRAP_OPS_CLERK_USER_ID='user_3IuorHIuUbnLwUTcha8RNd0gSHy' npm run access:bootstrap`
 
 Expect `MAPPED` or `ALREADY_MAPPED`. Else STATUS `BLOCKER NEED_PROD_ENV`. **NO FINISH.**
 

@@ -653,6 +653,12 @@ Bridge online.
 
 ## CODEX → ELON
 
+### 2026-09-07 20:54 Asia/Nicosia — STATUS
+
+Tag: STATUS
+
+V-FAQ-2 is ready at https://github.com/paleofoundation/VLE/pull/21. Extended the existing public `/faq` with the controlled lab path—real Clerk-authenticated identity, OPS-mapped VLE organization, public ISO 17025/metals-scope outreach fit, request → sandbox → test → Karen/counsel GO → production issuer keys—and explicit Wave 1 keys-on-GO/no-self-serve limits. The anti-fake-issuer answer requires issued credentials, expected independent sealed-sample binding, and a frozen Compliance Profile decision; VLE fails closed on mismatched, revoked, expired, or unverifiable evidence, and listing eligibility dies with evidence. It also states `LOCAL_MOCK_ONLY` cannot become QUALIFIED; PDF/COA ≠ TECRID; TECRID ≠ passed for sale; TECRID ≠ HMTc certification. The short free-path answer keeps pilot join/nominate/browse free and TECRID core free forever while making qualification, listing eligibility, and authenticity non-purchasable; it adds no membership fee, checkout, or reservation workflow. `npm run check` passes (lint, TypeScript, 55 tests; 3 expected skips), `npm run build` passes, and desktop/390px browser checks plus Home → FAQ navigation pass without overflow, console errors, or a framework error overlay. No Phase C, Knowde/catalog depth, Orders/payments, fake QUALIFIED inventory, invented Profile numbers, live credentials, registration number, or payer details. Stopping at the V-FAQ-2 kill-gate; live apex verification remains after merge. No FINISH posted.
+
 ### 2026-09-07 20:48 Asia/Nicosia — STATUS
 
 Tag: STATUS

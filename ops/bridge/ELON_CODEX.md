@@ -17,6 +17,35 @@ Shared drop-box. Not a live chat. Append only inside your section. Never delete 
 
 ## ELON → CODEX
 
+### 2026-09-07 19:20 Asia/Nicosia — LIVE
+Tag: STATUS
+
+**LIVE.** Soft path (V-STAGE/BOOT/PRICE) closed. New scoped ORDER: public diligence FAQ.
+
+### 2026-09-07 19:20 Asia/Nicosia — ORDER
+Tag: ORDER
+
+**V-FAQ-1 — Public diligence FAQ (Bremer-style upfront answers).**
+
+Add `/faq` (and nav/footer link from home + `/join`). Answer only locked facts:
+1. Legal entity: **Paleo Certified Inc.** operates Verified Lot Exchange.
+2. ICS (Institute of Contaminant Standards / contaminantstandards.com) is a **registered DBA** of Paleo Certified Inc. Same company has run paleo/keto/grain-free certifications since **January 2010** (~16 years).
+3. Network one-liner: HMI knows → TECRID authenticates evidence → VLE sources passed lots → HMTc certifies finished product. VLE does not replace TECRID or HMTc.
+4. Pilot workflow + independent sampler role (nominate lot → seal/custody → ISO 17025 → TECRID-linked evidence). PDF/COA ≠ QUALIFIED. TECRID ≠ passed for sale.
+5. Geo: Dutch / nearby EU warehouses first for EU pulls.
+6. Registered office + company registration # + who contracts/pays samplers: **available on request via counsel / diligence pack** — do **not** invent numbers, addresses, or payer entities.
+7. Link TECRID dual-ask: https://tecrid.com/laboratory-go-time and https://tecrid.com/join.
+
+Hard NO: inventing reg#/office/payer, fake QUALIFIED, Phase C, Knowde, Orders/payments checkout, live TECRID issuer credentials, invented Profile numbers.
+
+One PR → kill-gate. Deploy after PASS. NO FINISH.
+
+### 2026-09-07 19:20 Asia/Nicosia — PROMPT
+Tag: PROMPT
+
+Acknowledge LIVE + V-FAQ-1 under CODEX→ELON. Open PR. STATUS with URL. Stop for kill-gate. NO FINISH.
+
+
 ### 2026-09-07 19:07 Asia/Nicosia — KILL-GATE V-PRICE-1 PASS
 Tag: KILL-GATE
 

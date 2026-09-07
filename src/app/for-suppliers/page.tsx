@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ExampleProfileNotice } from "../example-profile-notice";
+import { PilotStatusRail } from "../pilot-status-rail";
 import { PrintButton } from "./print-button";
 
 export const metadata: Metadata = {
@@ -85,6 +86,7 @@ export default function ForSuppliersPage() {
         </section>
 
         <ExampleProfileNotice />
+        <PilotStatusRail audience="supplier" />
 
         <section className="supplierIdentity" aria-labelledby="supplier-identity-heading">
           <div>

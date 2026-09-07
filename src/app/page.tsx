@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ExampleProfileNotice } from "./example-profile-notice";
+import { PilotStatusRail } from "./pilot-status-rail";
 import { formatQuantity } from "@/lib/presentation";
 import { listPilotLanes, listPublicListings } from "@/services/vle";
 
@@ -24,15 +25,15 @@ function LaneShelf({ lane, listings }: { lane: PilotLane; listings: PublicListin
   return (
     <section className="laneShelf" aria-labelledby={`lane-${lane.productCode}`}>
       <div className="laneHeader">
-        <div><span className="mono">{lane.productCode.replaceAll("_", " / ")}</span><h3 id={`lane-${lane.productCode}`}>{lane.product}</h3><p>{lane.profileName} v{lane.profileVersion} · frozen profile</p></div>
-        <span className="liveMark"><i /> {listings.length} public</span>
+        <div><span className="mono">{lane.productCode.replaceAll("_", " / ")}</span><h3 id={`lane-${lane.productCode}`}>{lane.product}</h3><p>{lane.profileName} v{lane.profileVersion} · EXAMPLE pilot profile</p></div>
+        <span className="liveMark"><i /> {listings.length} demo</span>
       </div>
       {listings.length ? (
         <div className="lotGrid">
           {listings.map((listing) => (
             <article className="lotCard" key={listing.id}>
               <div className="lotCardHeader">
-                <span className="status statusPassed"><i /> Passed {listing.profileName} v{listing.profileVersion}</span>
+                <span className="status statusExample"><i /> Example publication record</span>
                 <span className="mono lotRef">LOT</span>
               </div>
               <p className="productLabel">{listing.product}</p>
@@ -41,9 +42,9 @@ function LaneShelf({ lane, listings }: { lane: PilotLane; listings: PublicListin
               <dl className="lotFacts">
                 <div><dt>Available quantity</dt><dd>{formatQuantity(listing.quantity)} {listing.quantityUnit}</dd></div>
                 <div><dt>Verified location</dt><dd>{listing.location}, {listing.countryCode}</dd></div>
-                <div><dt>Evidence status</dt><dd className="currentText">Current · to {formatDate(listing.evidenceExpiresAt)}</dd></div>
+                <div><dt>Evidence status</dt><dd className="currentText">Example timeline · to {formatDate(listing.evidenceExpiresAt)}</dd></div>
               </dl>
-              <Link className="cardLink" href={`/lots/${listing.slug}`}><span>Inspect qualification basis</span><span aria-hidden="true">↗</span></Link>
+              <Link className="cardLink" href={`/lots/${listing.slug}`}><span>Inspect example gate record</span><span aria-hidden="true">↗</span></Link>
             </article>
           ))}
         </div>
@@ -92,8 +93,8 @@ export default async function HomePage() {
             <strong>Cocoa powder + avocado fruit</strong>
           </div>
           <dl>
-            <div><dt>Public shelf</dt><dd>{listings.length ? `${listings.length} passed ${listings.length === 1 ? "lot" : "lots"}` : "Awaiting passed lots"}</dd></div>
-            <div><dt>Lane profiles</dt><dd>{lanes.length} frozen</dd></div>
+            <div><dt>Pilot shelf</dt><dd>{listings.length ? `${listings.length} demo ${listings.length === 1 ? "record" : "records"}` : "Awaiting real lot facts"}</dd></div>
+            <div><dt>Profile mode</dt><dd>EXAMPLE · to 14 Sep</dd></div>
             <div><dt>Evidence</dt><dd>TECRID-linked</dd></div>
           </dl>
           <p>Expanding by proof, not by catalog.</p>
@@ -101,6 +102,8 @@ export default async function HomePage() {
       </section>
 
       <ExampleProfileNotice />
+
+      <PilotStatusRail audience="exchange" />
 
       <section className="networkBand" aria-labelledby="network-heading">
         <div className="networkIntro">
@@ -118,11 +121,11 @@ export default async function HomePage() {
       <section className="shelfSection" id="passed-lots">
         <div className="sectionHeading shelfHeading">
           <div>
-            <p className="eyebrow">Public eligibility shelf</p>
-            <h2>Passed lots, separated by pilot lane</h2>
-            <p className="sectionLead">Every lot shown has cleared the same publication gate against its lane-specific frozen profile. If eligibility changes, the listing is withdrawn.</p>
+            <p className="eyebrow">Pilot publication preview</p>
+            <h2>The eligibility shelf, without invented inventory</h2>
+            <p className="sectionLead">Demo-labeled records show how the gate reads; they are not available qualified inventory. A real lot appears only after it clears the lane-specific profile and current-evidence gate.</p>
           </div>
-          <span className="liveMark"><i /> {listings.length} public</span>
+          <span className="liveMark"><i /> {listings.length} demo</span>
         </div>
 
         <div className="pilotLanes">{lanes.map((lane) => <LaneShelf key={lane.productTypeId} lane={lane} listings={listings.filter(({ productCode }) => productCode === lane.productCode)} />)}</div>

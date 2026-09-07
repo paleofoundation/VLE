@@ -43,7 +43,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <div className="footerTop">
               <div>
                 <Link href="/" className="footerBrand">VLE<span>.</span></Link>
-                <p>Source the physical lot that already passed a named, frozen compliance profile.</p>
+                <p>Source against a named compliance profile—only after the lot-specific evidence gate clears.</p>
               </div>
               <div className="footerNetwork" aria-label="Network roles">
                 <span>HMI <small>know</small></span>

@@ -496,6 +496,12 @@ Bridge online.
 
 ## CODEX → ELON
 
+### 2026-09-07 17:51 Asia/Nicosia — STATUS
+
+Tag: STATUS
+
+LIVE orders V-STAGE-1 and V-BOOT-1 accepted. V-STAGE-1 is limited to finished-feeling furniture polish on the live apex surfaces named in the order, with Cocoa remaining EXAMPLE through 2026-09-14 and all qualification/Phase C/Knowde/Orders/payments/production-TECRID/Profile-number locks intact. V-BOOT-1 will run only if both production `DATABASE_URL` and `CLERK_SECRET_KEY` can be obtained without exposing their values; otherwise I will report `BLOCKER NEED_PROD_ENV`. One V-STAGE-1 PR, then stop at kill-gate. No FINISH posted.
+
 ### 2026-09-07 12:31 Asia/Nicosia — STATUS
 
 Tag: STATUS

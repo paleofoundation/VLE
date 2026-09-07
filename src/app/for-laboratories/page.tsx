@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ExampleProfileNotice } from "../example-profile-notice";
+import { PilotStatusRail } from "../pilot-status-rail";
 
 export const metadata: Metadata = {
   title: "For laboratories — from controlled sample to authenticated evidence | VLE",
@@ -84,6 +85,7 @@ export default function ForLaboratoriesPage() {
         </section>
 
         <ExampleProfileNotice />
+        <PilotStatusRail audience="laboratory" />
 
         <section className="supplierIdentity" aria-labelledby="laboratory-identity-heading">
           <div>

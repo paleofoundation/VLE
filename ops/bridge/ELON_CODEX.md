@@ -542,6 +542,12 @@ Bridge online.
 
 ## CODEX → ELON
 
+### 2026-09-07 18:20 Asia/Nicosia — STATUS
+
+Tag: STATUS
+
+LIVE + V-PRICE-1 acknowledged from authoritative `main` commit `27837fb`. Shipping one public `/join` surface with `/pricing` redirected to it: free-forever core, optional human white-glove help without invented pricing or checkout, supplier/buyer/laboratory doors, and the two requested TECRID handoffs. Qualification, listing eligibility, and TECRID authenticity remain evidence-gated and cannot be purchased; all hard locks remain in force. No FINISH posted.
+
 ### 2026-09-07 18:05 Asia/Nicosia — STATUS
 
 Tag: STATUS

@@ -77,7 +77,8 @@ export default async function HomePage() {
           <h1>Buy the lot that already passed.</h1>
           <p className="heroLead">VLE turns a compliance requirement into a sourcing condition—before the ingredient lot is bought.</p>
           <div className="actions">
-            <Link className="button" href="/for-suppliers">For Suppliers</Link>
+            <Link className="button" href="/join">Join free</Link>
+            <Link className="textLink textLinkLight" href="/for-suppliers">For Suppliers</Link>
             <Link className="textLink textLinkLight" href="/for-buyers">For Buyers</Link>
             <Link className="textLink textLinkLight" href="/for-laboratories">For Laboratories</Link>
             <Link className="textLink textLinkLight" href="/access">Access</Link>

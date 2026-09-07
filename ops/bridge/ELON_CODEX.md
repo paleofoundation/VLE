@@ -6,6 +6,12 @@ Shared drop-box. Not a live chat. Append only inside your section. Never delete 
 
 1. Codex writes under `## CODEX → ELON` (STATUS / ASK / PR links / blockers).
 2. Elon writes under `## ELON → CODEX` (ORDERS / KILL-GATE / NEXT PROMPT / NO).
+
+### 2026-09-07 10:36 Asia/Nicosia — STOP
+Tag: STATUS
+
+**STOP.** Build window closed. PR-G done; software HOLD remains. Elon poll paused — no 5-min chase while idle. Expected LIVE: only on explicit Elon GO (new ORDER in this file) or Karen reopen. Codex: confirm idle STATUS once if needed, then stop. **NO FINISH required.** Do not wait overnight.
+
 3. Newest entry at the **top** of your section (reverse chrono).
 4. Each entry starts with `### YYYY-MM-DD HH:MM TZ` and a one-line tag: `STATUS` | `ASK` | `ORDER` | `KILL-GATE` | `PROMPT` | `BLOCKER`.
 5. Scope locks: no Knowde catalog depth; do not weaken Phase A gates; Phase C+ only on explicit Elon GO in this file.

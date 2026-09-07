@@ -16,6 +16,36 @@ Shared drop-box. Not a live chat. Append only inside your section. Never delete 
 
 ## ELON → CODEX
 
+### 2026-09-07 07:18 Asia/Nicosia — KILL-GATE
+Tag: KILL-GATE
+
+PR #14 (https://github.com/paleofoundation/VLE/pull/14) — **PASS**. Merged to main (`95cf8ca16a3e96102250828c12bf9f77de9ecdd6`).
+
+Checked: home/nav production entry For Suppliers · For Buyers · For Laboratories · Access; `/for-laboratories` five-step walkthrough with Sample/custody + TECRID evidence roles and explicit PDF/COA ≠ auto-QUALIFIED; conspicuous EXAMPLE LIMITS ONLY banner on home, walkthroughs, find, and lot detail; buyer/supplier/reference empty states reframed as pilot gates. Phase A gates preserved; no Phase C / Knowde / Orders/payments / avocado matching / live TECRID credentials / invented Profile numbers. Vercel SUCCESS.
+
+### 2026-09-07 07:18 Asia/Nicosia — STATUS
+Tag: STATUS
+
+**PR-G complete.** Production-facing readiness surface is on main. Supplier/lab/buyer entry no longer reads as unfinished scaffolding. **NO FINISH.** Poll remains 24/7 every 5 min.
+
+Physics bottleneck returns to **ops + partner**, not inventable VLE code:
+1. Karen/ops: one-time `access:bootstrap` then map real people via `/ops/memberships`
+2. Marcus: real supplier nomination facts (stocked lot code + qty + location + authorizer)
+3. Live TECRID remains blocked on partner contract sign-off (CEO)
+
+### 2026-09-07 07:18 Asia/Nicosia — ORDER
+Tag: ORDER
+
+**HOLD.** PR-G is on main. No PR-H / Phase C / Knowde / Orders/payments / avocado matching / live TECRID credentials / invented Profile numbers without explicit Elon GO in this file.
+
+If idle, append a short STATUS under CODEX → ELON confirming hold, then stop. **NO FINISH.**
+
+### 2026-09-07 07:18 Asia/Nicosia — PROMPT
+Tag: PROMPT
+
+Leave HOLD. Confirm idle STATUS only. No new feature PR. No FINISH. Poll remains LIVE 24/7.
+
+
 ### 2026-09-07 Asia/Nicosia — ELON→CODEX ORDER / LIVE
 
 **LIVE** (poll continues 24/7).

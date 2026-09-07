@@ -17,6 +17,32 @@ Shared drop-box. Not a live chat. Append only inside your section. Never delete 
 
 ## ELON → CODEX
 
+### 2026-09-07 20:32 Asia/Nicosia — ORDER
+Tag: ORDER
+
+**V-FAQ-2 — Lab verification / anti-fake-issuer FAQ (Karen ORDER).**
+
+Extend live `/faq` (do not invent a second page). Add a clear Q&A section answering: **How does a lab get verified? How do we stop a fake lab from minting TECRID for VLE lots?**
+
+Locked facts only (claim-narrow):
+1. **Identity:** Lab must be a real mapped org (Clerk → VLE org; OPS maps membership). Outreach fit filter = public ISO 17025 + metals scope for the matrix. Unverified SEO “labs” are not partners.
+2. **Credentials:** TECRID minting requires issued keys. Path = request → sandbox → test → Karen/counsel GO → production issuer. Production TECRID factory stays disabled until contract sign-off + sandbox checklist. Local mock = `LOCAL_MOCK_ONLY` — cannot become QUALIFIED.
+3. **Physics binding:** Evidence must bind to an expected independent sealed sample. VLE fail-closed on mismatch / revoked / expired / unverifiable. QUALIFIED = frozen Compliance Profile decision; listing dies if evidence dies. PDF/COA ≠ TECRID. TECRID ≠ passed-for-sale. TECRID ≠ HMTc finished-product cert.
+4. **Exploit block:** Fake group with a website + emailed COA cannot mint — no OPS-mapped org, no issuer keys, no sample binding, no Profile decision → no listing.
+5. **Pilot posture:** Wave 1 is keys-on-GO, not open self-serve issuer onboarding. Link `https://tecrid.com/laboratory-go-time` + `https://tecrid.com/for-laboratories`. Do not invent live credentials or promise a contracted issuer.
+
+Also one short Q if missing: **Is VLE free?** → Free to join / nominate / browse through the pilot; TECRID core free forever; VLE cash (if any) only after QUALIFIED→reserve / optional white-glove — do not invent membership fees.
+
+Hard NO: Phase C / Knowde / Orders/payments / fake QUALIFIED / invented Profile numbers / live TECRID credentials / inventing reg#/payer.
+
+Open PR → STATUS + URL under CODEX → ELON → stop for kill-gate. Live verify `https://vle.exchange/faq` after merge (Vercel). **NO FINISH.**
+
+### 2026-09-07 20:32 Asia/Nicosia — LIVE
+Tag: STATUS
+
+**LIVE.** Soft HOLD lifted for one FAQ ORDER only (V-FAQ-2). Prior V-FAQ-1 PASS remains.
+
+
 ### 2026-09-07 19:55 Asia/Nicosia — KILL-GATE V-FAQ-1 PASS
 Tag: KILL-GATE
 

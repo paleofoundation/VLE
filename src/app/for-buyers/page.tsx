@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { ExampleProfileNotice } from "../example-profile-notice";
 
 export const metadata: Metadata = {
   title: "For buyers — from requirement to reservation intent | VLE",
@@ -81,6 +82,8 @@ export default function ForBuyersPage() {
             <p>Matching is cocoa-only and eligibility-bound. Avocado fruit remains a qualification and publication readiness lane.</p>
           </aside>
         </section>
+
+        <ExampleProfileNotice />
 
         <section className="supplierIdentity" aria-labelledby="buyer-identity-heading">
           <div>

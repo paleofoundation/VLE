@@ -31,14 +31,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <span className="brandName">Verified Lot Exchange</span>
             </Link>
             <nav aria-label="Main navigation">
-              <Link href="/for-suppliers">For suppliers</Link>
-              <Link href="/for-buyers">For buyers</Link>
-              <Link href="/find">Buyer requirement</Link>
-              <Link href="/buyer">Buyer desk</Link>
-              <Link href="/supplier">Supplier desk</Link>
-              <Link href="/ops">Operations</Link>
-              <Show when="signed-out"><Link className="button buttonSmall buttonDark" href="/sign-in">Sign in</Link></Show>
-              <Show when="signed-in"><Link href="/access">Access</Link><UserButton /></Show>
+              <Link href="/for-suppliers">For Suppliers</Link>
+              <Link href="/for-buyers">For Buyers</Link>
+              <Link href="/for-laboratories">For Laboratories</Link>
+              <Link className="button buttonSmall buttonDark" href="/access">Access</Link>
+              <Show when="signed-in"><UserButton /></Show>
             </nav>
           </header>
           {children}

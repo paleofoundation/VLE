@@ -91,6 +91,24 @@ main { min-height: calc(100vh - 160px); }
 .siteHeader nav > a:not(.button) { padding: 27px 0 25px; border-bottom: 2px solid transparent; }
 .siteHeader nav > a:not(.button):hover { border-color: var(--green); }
 
+.exampleProfileNotice {
+  display: grid;
+  grid-template-columns: minmax(150px, .35fr) minmax(0, 1.65fr);
+  gap: clamp(22px, 5vw, 72px);
+  padding: 24px clamp(24px, 7vw, 108px);
+  border-top: 1px solid #d4b58d;
+  border-bottom: 1px solid #d4b58d;
+  background: var(--amber-soft);
+  color: #69451f;
+}
+.exampleProfileNotice > span { align-self: center; font-size: 10px; font-weight: 800; letter-spacing: .1em; }
+.exampleProfileNotice p { max-width: 980px; margin: 0; font-size: 12px; line-height: 1.65; }
+.exampleProfileNoticeDark { border-color: #796341; background: #2f2b20; color: #ead5b4; }
+.supplierScreen > .exampleProfileNotice { margin: 0; }
+.intakePanel > .exampleProfileNotice { display: block; margin: calc(clamp(28px, 4vw, 48px) * -1) calc(clamp(28px, 4vw, 48px) * -1) 28px; padding: 18px clamp(28px, 4vw, 48px); }
+.intakePanel > .exampleProfileNotice > span { display: block; margin-bottom: 9px; }
+.lotDetailPage > .exampleProfileNotice { margin: 0 calc(clamp(24px, 7vw, 108px) * -1) 70px; }
+
 .button {
   display: inline-flex;
   min-height: 46px;
@@ -736,10 +754,12 @@ main { min-height: calc(100vh - 160px); }
 }
 
 @media (max-width: 760px) {
-  .siteHeader { min-height: 66px; }
-  .brandName, .siteHeader nav > a:not(.button):not(:nth-child(2)) { display: none; }
-  .siteHeader nav { gap: 14px; }
+  .siteHeader { min-height: 66px; gap: 14px; padding-right: 14px; padding-left: 14px; }
+  .brandName { display: none; }
+  .siteHeader nav { gap: 10px; font-size: 10px; }
   .siteHeader nav > a:not(.button) { padding: 23px 0 21px; }
+  .siteHeader .buttonSmall { min-height: 34px; padding: 7px 10px; font-size: 10px; }
+  .exampleProfileNotice { grid-template-columns: 1fr; gap: 10px; }
   .heroHome { min-height: auto; padding-top: 78px; }
   .supplierHero { min-height: auto; padding-top: 78px; }
   .heroCopy h1 { font-size: clamp(50px, 15vw, 74px); }
@@ -804,7 +824,10 @@ main { min-height: calc(100vh - 160px); }
 }
 
 @media (max-width: 430px) {
-  .siteHeader nav > a:not(.button) { display: none; }
+  .siteHeader { position: static; display: grid; grid-template-columns: 1fr; gap: 0; padding: 13px 14px 0; }
+  .siteHeader .brand { justify-self: center; }
+  .siteHeader nav { width: 100%; justify-content: space-between; gap: 7px; }
+  .siteHeader nav > a:not(.button) { padding: 14px 0 13px; }
   .heroHome, .supplierHero, .supplierIdentity, .supplierPath, .supplierClose, .shelfSection, .opsPage, .lotDetailPage, .findPage, .commercialPage, .nominationPage, .membershipPage { padding-left: 18px; padding-right: 18px; }
   .accessReference div { grid-template-columns: 1fr; gap: 7px; }
   .supplierGate { margin-left: 18px; margin-right: 18px; }

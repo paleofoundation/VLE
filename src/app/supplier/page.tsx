@@ -35,7 +35,7 @@ export default async function SupplierDeskPage() {
               {match.status === "INVALIDATED" ? <p className="warningText">No new quote is permitted: {match.invalidationReason}</p> : null}
             </article>;
           })}
-          {!workspace.matches.length ? <div className="opsEmpty"><h3>No eligible demand is matched to your listed lots.</h3><p>Supplier quoting begins only after ops binds a cocoa requirement to a currently eligible public listing.</p></div> : null}
+          {!workspace.matches.length ? <div className="opsEmpty"><span className="mono">PILOT GATE / ELIGIBLE MATCH</span><h3>Quote queue ready; eligibility handoff pending.</h3><p>Supplier quoting opens only after operations binds a reviewed cocoa requirement to one of your currently eligible public listings. An empty queue means that gate has not been bypassed.</p></div> : null}
         </div>
       </section>
     </main>

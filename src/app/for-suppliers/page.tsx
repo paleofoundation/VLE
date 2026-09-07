@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { ExampleProfileNotice } from "../example-profile-notice";
 import { PrintButton } from "./print-button";
 
 export const metadata: Metadata = {
@@ -82,6 +83,8 @@ export default function ForSuppliersPage() {
             <p>Cocoa powder pilot · avocado fruit readiness. Commercial matching remains cocoa-only.</p>
           </aside>
         </section>
+
+        <ExampleProfileNotice />
 
         <section className="supplierIdentity" aria-labelledby="supplier-identity-heading">
           <div>

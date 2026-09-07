@@ -49,7 +49,7 @@ export default async function BuyerDeskPage({ searchParams }: PageProps<"/buyer"
               })}
             </article>;
           })}
-          {!workspace.requirements.length ? <div className="opsEmpty"><h3>No buyer requirements yet.</h3><p>Record the cocoa quantity, destination, and frozen profile that must be met.</p><Link className="button buttonSmall" href="/find">Find a passing lot</Link></div> : null}
+          {!workspace.requirements.length ? <div className="opsEmpty"><span className="mono">PILOT GATE / REQUIREMENT</span><h3>Ready for the first reviewed requirement.</h3><p>The buyer pipeline opens when you record the cocoa quantity, destination, and frozen Profile that must be met. Until then, nothing incomplete is matched.</p><Link className="button buttonSmall" href="/find">Record a requirement</Link></div> : null}
         </div>
       </section>
     </main>

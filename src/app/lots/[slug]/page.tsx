@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { cache } from "react";
+import { ExampleProfileNotice } from "../../example-profile-notice";
 import { formatQuantity } from "@/lib/presentation";
 import { getPublicListing } from "@/services/vle";
 
@@ -54,6 +55,8 @@ export default async function LotPage({ params }: PageProps<"/lots/[slug]">) {
           </dl>
         </aside>
       </section>
+
+      <ExampleProfileNotice />
 
       <section className="detailFacts" aria-labelledby="lot-facts-heading">
         <div className="detailSectionHeading">

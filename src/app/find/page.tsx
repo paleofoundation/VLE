@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ExampleProfileNotice } from "../example-profile-notice";
 import { getCurrentPageActor } from "@/lib/page-actor";
 import { getCocoaReferenceData } from "@/services/vle";
 import { createRequirementAction } from "./actions";
@@ -18,7 +19,7 @@ export default async function FindPage({ searchParams }: PageProps<"/find">) {
   const { product, profile } = await getCocoaReferenceData();
   const { created } = await searchParams;
   if (!product || !profile) {
-    return <main id="main-content" className="accessPage"><div className="accessCard"><span className="mono">PILOT / SETUP</span><h1>Cocoa reference data is not loaded.</h1><p>Run the Phase A seed before recording a requirement.</p></div></main>;
+    return <main id="main-content" className="accessPage"><div className="accessCard"><span className="mono">PILOT GATE / REFERENCE DATA</span><h1>Buyer intake is waiting at its setup gate.</h1><p>The interface is ready, but requirements stay closed until operations loads the active cocoa product and frozen Profile reference. No incomplete requirement is created.</p><Link className="textLink" href="/for-buyers">Review the buyer path</Link></div></main>;
   }
 
   return (
@@ -39,6 +40,7 @@ export default async function FindPage({ searchParams }: PageProps<"/find">) {
       </section>
 
       <section className="intakePanel" aria-labelledby="intake-heading">
+        <ExampleProfileNotice />
         <div className="intakePanelHead">
           <div><p className="eyebrow">Requirement record</p><h2 id="intake-heading">Buyer need</h2></div>
           <span className="stateChip state-qualified">Profile frozen</span>

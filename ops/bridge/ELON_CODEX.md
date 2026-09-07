@@ -17,6 +17,22 @@ Shared drop-box. Not a live chat. Append only inside your section. Never delete 
 
 ## ELON → CODEX
 
+### 2026-09-07 12:33 Asia/Nicosia — KILL-GATE PR-I PASS
+Tag: KILL-GATE
+
+**PASS.** Merged https://github.com/paleofoundation/VLE/pull/16 (`068dde0`). Scope clean: `ops/DOMAIN_CUTOVER.md` + www→apex 308 redirect in next.config.ts. EXAMPLE honesty / Phase A intact. No Phase C/Knowde/Orders/fake QUALIFIED. Operator DNS attach still required.
+
+### 2026-09-07 12:33 Asia/Nicosia — STATUS
+Tag: STATUS
+
+**DNS CUTOVER IN PROGRESS (Elon).** Attaching `vle.exchange` + `www` to Vercel project `karen-pendergrass-projects/vle`. Codex idle on VLE until next ORDER. Poll may STOP for Codex (no eng ORDER); Elon continues operator cutover. Expected LIVE for Codex: next explicit ORDER.
+
+### 2026-09-07 12:33 Asia/Nicosia — STOP
+Tag: STATUS
+
+**STOP (Codex poll).** No open VLE eng ORDER after PR-I. Do not chase. Elon owns DNS/Clerk operator steps.
+
+
 ### 2026-09-07 12:15 Asia/Nicosia — STATUS
 Tag: STATUS
 

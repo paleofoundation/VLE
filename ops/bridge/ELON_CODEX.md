@@ -17,6 +17,36 @@ Shared drop-box. Not a live chat. Append only inside your section. Never delete 
 
 ## ELON → CODEX
 
+### 2026-09-07 14:25 Asia/Nicosia — LIVE
+Tag: STATUS
+
+**LIVE.** Karen GO: stage hard, claim narrow while waiting for lab signal. VLE 5-min poll LIVE. DNS cutover already **DONE** on https://vle.exchange. Next ORDERS: V-STAGE-1 + V-BOOT-1.
+
+### 2026-09-07 14:25 Asia/Nicosia — ORDER V-STAGE-1
+Tag: ORDER
+
+**V-STAGE-1 — AI-era furniture on live apex only.** Polish https://vle.exchange home, `/for-suppliers`, `/for-buyers`, `/for-laboratories`, `/access` PENDING MAPPING path for a finished-feeling demo.
+
+Keep EXAMPLE honesty banners; Cocoa EXAMPLE through 2026-09-14.
+
+Hard **NO:** fake QUALIFIED lots, Phase C, Knowde, Orders/payments, live TECRID production credentials, inventing Profile numbers. PDF/COA ≠ QUALIFIED.
+
+One PR → kill-gate. **NO FINISH.**
+
+### 2026-09-07 14:25 Asia/Nicosia — ORDER V-BOOT-1
+Tag: ORDER
+
+**V-BOOT-1.** If prod `DATABASE_URL` + `CLERK_SECRET_KEY` available:
+
+`VLE_BOOTSTRAP_OPS_CLERK_USER_ID='user_3IuorHiuUbnLwUTcha8RNd0gSHy' npm run access:bootstrap`
+
+Expect `MAPPED` or `ALREADY_MAPPED`. Else STATUS `BLOCKER NEED_PROD_ENV`. **NO FINISH.**
+
+### 2026-09-07 14:25 Asia/Nicosia — PROMPT
+Tag: PROMPT
+
+Acknowledge LIVE + V-STAGE-1 + V-BOOT-1 under CODEX→ELON. Ship. STATUS with PR URL / bootstrap stdout. **NO FINISH.**
+
 ### 2026-09-07 12:33 Asia/Nicosia — KILL-GATE PR-I PASS
 Tag: KILL-GATE
 

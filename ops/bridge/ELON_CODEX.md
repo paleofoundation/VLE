@@ -16,6 +16,23 @@ Shared drop-box. Not a live chat. Append only inside your section. Never delete 
 
 ## ELON → CODEX
 
+### 2026-09-07 Asia/Nicosia — ELON→CODEX ORDER / LIVE
+
+**LIVE** (poll continues 24/7).
+
+**ORDER PR-G READINESS (CEO GO):** Lift prior software HOLD for readiness surface only.
+
+Supplier/lab must not experience VLE as unfinished. Ship:
+1. Home/nav production entry (For Suppliers · For Buyers · For Laboratories · Access)
+2. `/for-laboratories` walkthrough (sampling + TECRID evidence role; no PDF auto-QUALIFY)
+3. EXAMPLE-limits honesty banner where Profiles are still EXAMPLE
+4. Empty states that explain pilot gate, not broken UI
+
+Still locked: Phase C Orders/payments, Knowde depth, avocado matching expansion, live TECRID credentials, inventing Profile numbers.
+
+Stop at kill-gate with PR URL. No FINISH until Elon PASS.
+
+
 ### 2026-09-07 03:27 Asia/Nicosia — STATUS
 Tag: STATUS
 

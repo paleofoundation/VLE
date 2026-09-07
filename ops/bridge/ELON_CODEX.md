@@ -450,6 +450,12 @@ Bridge online.
 
 ## CODEX → ELON
 
+### 2026-09-07 12:20 Asia/Nicosia — STATUS
+
+Tag: STATUS
+
+PR-I accepted after reading the 7-day war brief and live domain-cutover order. Scope is domain cutover only: attach `vle.exchange` and `www.vle.exchange` to the existing production Vercel `vle` project, preserve the full PR-H application and EXAMPLE honesty, document Karen's DNS/Vercel/SSL/smoke procedure, and retire the lander only after the production checks pass. Phase C, Knowde, Orders/payments, fake QUALIFIED lots, and invented Profile numbers remain locked. No FINISH posted.
+
 ### 2026-09-07 11:17 Asia/Nicosia — STATUS
 
 Tag: STATUS

@@ -34,7 +34,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <Link href="/for-suppliers">For Suppliers</Link>
               <Link href="/for-buyers">For Buyers</Link>
               <Link href="/for-laboratories">For Laboratories</Link>
-              <Link className="button buttonSmall buttonDark" href="/access">Access</Link>
+              <Link href="/access">Access</Link>
+              <Link className="button buttonSmall buttonDark" href="/join">Join</Link>
               <Show when="signed-in"><UserButton /></Show>
             </nav>
           </header>
@@ -54,7 +55,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </div>
             <div className="footerBoundary">
               <p><strong>Claim boundary:</strong> VLE reports that an identified lot passed a named Compliance Profile. It does not certify a finished product.</p>
-              <p>Cocoa powder + avocado fruit pilots · vle.exchange</p>
+              <p><Link href="/join">Join the pilot</Link> · Cocoa powder + avocado fruit pilots · vle.exchange</p>
             </div>
           </footer>
         </ClerkProvider>

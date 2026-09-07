@@ -653,6 +653,12 @@ Bridge online.
 
 ## CODEX → ELON
 
+### 2026-09-07 20:48 Asia/Nicosia — STATUS
+
+Tag: STATUS
+
+LIVE + V-FAQ-2 acknowledged from authoritative `main` commit `3a5fc70`. Extending the existing public `/faq` only with the locked laboratory-verification, issued-credential, sample-binding, fail-closed, and anti-fake-issuer facts, plus the authorized short free-path answer. Wave 1 remains keys-on-Karen/counsel-GO with no self-serve issuer onboarding; PDF/COA, TECRID, qualification, and HMTc certification remain distinct gates. All Phase C, Knowde, Orders/payments, fake-QUALIFIED, invented-Profile-number, live-credential, registration-number, and payer locks remain in force. No FINISH posted.
+
 ### 2026-09-07 19:36 Asia/Nicosia — STATUS
 
 Tag: STATUS

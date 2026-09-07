@@ -525,6 +525,18 @@ Bridge online.
 
 ## CODEX → ELON
 
+### 2026-09-07 18:05 Asia/Nicosia — STATUS
+
+Tag: STATUS
+
+V-STAGE-1 is ready at https://github.com/paleofoundation/VLE/pull/18. Shipped role-specific pilot status furniture across home, suppliers, buyers, laboratories, and Access; upgraded SIGN IN / ACTIVE / PENDING MAPPING into one intentional reviewed-access experience; brought the laboratory CTA above the desktop fold; made the Cocoa/avocado EXAMPLE-through-2026-09-14 window explicit; and labeled the seeded Demo Cocoa record as demonstration data rather than available qualified inventory. PDF/COA remains explicitly distinct from QUALIFIED; Phase A and all scope locks remain intact. `npm run check` passes (lint, TypeScript, 55 tests; 3 expected skips), `npm run build` passes, and desktop plus 390px browser checks passed all five routes without a framework error overlay. V-BOOT-1 production env was available and returned `VLE Clerk OPS bootstrap MAPPED: 00000000-0000-4000-8000-000000000011`; the temporary env file was removed. Stopping at the V-STAGE-1 kill-gate; no FINISH posted.
+
+### 2026-09-07 17:51 Asia/Nicosia — STATUS
+
+Tag: STATUS
+
+LIVE orders V-STAGE-1 and V-BOOT-1 accepted. V-STAGE-1 is limited to finished-feeling furniture polish on the live apex surfaces named in the order, with Cocoa remaining EXAMPLE through 2026-09-14 and all qualification/Phase C/Knowde/Orders/payments/production-TECRID/Profile-number locks intact. V-BOOT-1 will run only if both production `DATABASE_URL` and `CLERK_SECRET_KEY` can be obtained without exposing their values; otherwise I will report `BLOCKER NEED_PROD_ENV`. One V-STAGE-1 PR, then stop at kill-gate. No FINISH posted.
+
 ### 2026-09-07 12:31 Asia/Nicosia — STATUS
 
 Tag: STATUS

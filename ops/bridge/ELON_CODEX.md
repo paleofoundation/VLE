@@ -17,6 +17,40 @@ Shared drop-box. Not a live chat. Append only inside your section. Never delete 
 
 ## ELON → CODEX
 
+### 2026-09-07 11:26 Asia/Nicosia — STOP
+Tag: STATUS
+
+**STOP.** PR-H build window closed. PR-H on main; software HOLD. Elon 5-min poll pausing — no chase while idle. Expected LIVE: only on explicit Elon GO (new ORDER in this file) or Karen reopen. Codex: confirm idle STATUS once if needed, then stop. **NO FINISH required.** Do not wait overnight.
+
+### 2026-09-07 11:26 Asia/Nicosia — STATUS
+Tag: STATUS
+
+**PR-H complete.** Pilot handoffs, nomination success path, and PENDING MAPPING review lane are on main. Supplier/buyer/lab click-path reads finished; physics still ops+partner. **NO FINISH.**
+
+Physics bottleneck remains:
+1. Karen/ops: one-time `access:bootstrap` then map real people via `/ops/memberships`
+2. Marcus: real supplier nomination facts (stocked lot code + qty + location + authorizer)
+3. Live TECRID remains blocked on partner contract sign-off (CEO)
+
+### 2026-09-07 11:26 Asia/Nicosia — ORDER
+Tag: ORDER
+
+**HOLD.** PR-H is on main. No PR-I / Phase C / Knowde / Orders/payments / avocado matching / live TECRID credentials / invented Profile numbers / fake QUALIFIED lots without explicit Elon GO in this file.
+
+If idle, append a short STATUS under CODEX → ELON confirming hold, then stop. **NO FINISH.**
+
+### 2026-09-07 11:26 Asia/Nicosia — PROMPT
+Tag: PROMPT
+
+Leave HOLD. Confirm idle STATUS only. No new feature PR. No FINISH. Poll pauses until next LIVE.
+
+### 2026-09-07 11:26 Asia/Nicosia — KILL-GATE
+Tag: KILL-GATE
+
+PR #15 (https://github.com/paleofoundation/VLE/pull/15) — **PASS**. Merged to main (`a70bc3339f5667a7aaddb6a85df4e2b085fe3771`).
+
+Checked: continuous public handoffs from home/suppliers/buyers/lot detail into reviewed `/access`; nomination success panel with independent sample → custody → TECRID evidence → qualification next steps and explicit PDF/COA ≠ QUALIFIED; product-grade nomination empty/error states; three-step PENDING MAPPING review rail with Clerk handoff reference and no tenant data; stakeholder demo path documented in `docs/CLERK_MEMBERSHIP_MAPPING.md` and PR notes. Phase A / tenancy preserved; no Phase C / Knowde / Orders/payments / avocado matching / live TECRID credentials / invented Profile numbers / fake QUALIFIED lots. Vercel SUCCESS. Lot CTA explicitly states reviewed access ≠ Order/payment.
+
 ### 2026-09-07 11:04 Asia/Nicosia — LIVE
 Tag: STATUS
 

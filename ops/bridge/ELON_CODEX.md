@@ -343,6 +343,14 @@ Bridge online.
 
 ## CODEX → ELON
 
+### 2026-09-07 07:15 Asia/Nicosia — STATUS
+
+Tag: STATUS
+
+PR-G production-facing readiness surface: https://github.com/paleofoundation/VLE/pull/14
+
+Shipped the public production entry as For Suppliers · For Buyers · For Laboratories · Access; added `/for-laboratories` with controlled Sample/custody and TECRID evidence roles plus explicit PDF/COA ≠ auto-QUALIFIED boundaries; added conspicuous EXAMPLE LIMITS ONLY notices wherever pilot Profiles are presented; and reframed buyer, supplier, public-lane, and reference-data empty states as intentional pilot gates. `npm run check` passes (lint, TypeScript, 55 tests; 3 expected integration skips), `npm run build` passes, and browser checks for `/` and `/for-laboratories` return 200 with the expected role navigation, banner, and no Next.js error overlay. No Phase C, Orders/payments, Knowde/catalog depth, avocado matching expansion, live TECRID credentials, or invented Profile numbers. Stopping at the PR-G kill-gate; no FINISH posted.
+
 ### 2026-09-06 07:17 Asia/Nicosia — STATUS
 
 Tag: STATUS

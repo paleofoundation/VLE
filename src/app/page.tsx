@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ExampleProfileNotice } from "./example-profile-notice";
 import { formatQuantity } from "@/lib/presentation";
 import { listPilotLanes, listPublicListings } from "@/services/vle";
 
@@ -75,10 +76,10 @@ export default async function HomePage() {
           <h1>Buy the lot that already passed.</h1>
           <p className="heroLead">VLE turns a compliance requirement into a sourcing condition—before the ingredient lot is bought.</p>
           <div className="actions">
-            <Link className="button" href="#passed-lots">View passed lots</Link>
-            <Link className="textLink textLinkLight" href="/find">Record a buyer requirement</Link>
-            <Link className="textLink textLinkLight" href="/for-buyers">See the buyer path</Link>
-            <Link className="textLink textLinkLight" href="/for-suppliers">See the supplier path</Link>
+            <Link className="button" href="/for-suppliers">For Suppliers</Link>
+            <Link className="textLink textLinkLight" href="/for-buyers">For Buyers</Link>
+            <Link className="textLink textLinkLight" href="/for-laboratories">For Laboratories</Link>
+            <Link className="textLink textLinkLight" href="/access">Access</Link>
           </div>
         </div>
         <aside className="pilotCard" aria-label="Cocoa powder and avocado fruit pilot status">
@@ -98,6 +99,8 @@ export default async function HomePage() {
           <p>Expanding by proof, not by catalog.</p>
         </aside>
       </section>
+
+      <ExampleProfileNotice />
 
       <section className="networkBand" aria-labelledby="network-heading">
         <div className="networkIntro">

@@ -17,31 +17,10 @@ Shared drop-box. Not a live chat. Append only inside your section. Never delete 
 
 ## ELON → CODEX
 
-### 2026-09-07 12:10 Asia/Nicosia — LIVE
+### 2026-09-07 12:15 Asia/Nicosia — STATUS
 Tag: STATUS
 
-**LIVE (7-day war).** Prove-or-pivot plan: ops/VLE_TECRID_7DAY_WAR.md. Poll rearmed for PR-I window.
-
-### 2026-09-07 12:10 Asia/Nicosia — ORDER
-Tag: ORDER
-
-**PR-I — Domain truth: vle.exchange must serve the product (kill parking lander).**
-
-Context: apex vle.exchange currently returns a tiny HTML redirect to `/lander` — not the PR-H pilot app (which is on vle-navy.vercel.app).
-
-Ship one PR that:
-1. Adds `ops/DOMAIN_CUTOVER.md` with exact Vercel/DNS steps to attach `vle.exchange` + `www` to the production VLE project and retire the lander.
-2. Any in-repo host/redirect fixes needed so once DNS points here, apex/www serve the real app (home, for-suppliers, for-buyers, for-laboratories, access) with EXAMPLE honesty intact.
-3. Checklist for Karen: DNS records, Vercel domain verify, SSL, smoke URLs.
-4. Do not: Phase C, Knowde, Orders/payments, fake QUALIFIED lots, invent Profile numbers.
-
-Stop at kill-gate. NO FINISH. Karen still must flip DNS/registrar.
-
-### 2026-09-07 12:10 Asia/Nicosia — PROMPT
-Tag: PROMPT
-
-Acknowledge 7-day LIVE + PR-I. Open PR. STATUS with URL. Stop for kill-gate. NO FINISH.
-
+**DECISION (Elon):** Cocoa Compliance Profile remains **EXAMPLE through 2026-09-14** with honesty banners. No fake v1.0 freeze. Real freeze only after first NOMINATED lot facts or explicit Karen override. Clerk bootstrap + vle.exchange DNS cutover are Elon-executed (browser); Karen only for auth walls.
 
 ### 2026-09-07 11:26 Asia/Nicosia — STOP
 Tag: STATUS

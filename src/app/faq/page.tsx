@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "VLE FAQ — Operator, Evidence, and Pilot Diligence",
-  description: "Upfront answers about who operates VLE, the HMI–TECRID–VLE–HMTc evidence network, independent sampling, and the EU-first pilot.",
+  title: "VLE FAQ — Operator, Lab Verification, and Pilot Diligence",
+  description: "Upfront answers about who operates VLE, laboratory verification, anti-fake-issuer controls, independent sampling, and the EU-first pilot.",
 };
 
 const workflow = [
@@ -32,12 +32,24 @@ const questions = [
     answer: <p><strong>No. PDF/COA ≠ QUALIFIED, and TECRID ≠ passed for sale.</strong> VLE separately requires an identified lot, controlled sampling and custody, current authenticated evidence, a named frozen Compliance Profile, and the resulting deterministic decision.</p>,
   },
   {
+    question: "How does a laboratory get verified for the VLE pilot?",
+    answer: <><p>A prospective laboratory must be a real, mapped organization: Clerk authenticates the people, and VLE operations maps their membership to the correct VLE organization. Public ISO 17025 accreditation plus metals scope for the relevant matrix is an outreach-fit filter—not automatic admission or a claim that the lab is already a partner.</p><p>TECRID issuer access follows a controlled path: request → sandbox → test → Karen/counsel GO → production issuer keys. The production issuer factory stays disabled until contract sign-off and the sandbox checklist are complete. Wave 1 is keys-on-GO; there is no self-serve issuer onboarding. Laboratories can review the <a className="textLink" href="https://tecrid.com/laboratory-go-time">laboratory go-time checklist</a> and <a className="textLink" href="https://tecrid.com/for-laboratories">TECRID laboratory path</a>.</p></>,
+  },
+  {
+    question: "How do VLE and TECRID stop a fake laboratory from minting evidence for VLE lots?",
+    answer: <><p>A website and an emailed COA are not enough. Without an operations-mapped organization, issued credentials, evidence bound to the expected independent sealed sample, and a frozen Compliance Profile decision, there is no eligible VLE listing.</p><p>VLE fails closed when evidence is mismatched, revoked, expired, or unverifiable. A listing loses eligibility when its evidence does, and <strong>LOCAL_MOCK_ONLY can never become QUALIFIED.</strong> PDF/COA ≠ TECRID; TECRID ≠ passed for sale; and TECRID ≠ an HMTc finished-product certification.</p></>,
+  },
+  {
     question: "What does the independent sampler do?",
     answer: <p>The sampler connects the laboratory result to the physical lot: binding the draw to the nomination, recording the seal, and preserving the custody trail into laboratory analysis. Supplier paperwork alone does not replace that independent sample path.</p>,
   },
   {
     question: "Where does the pilot start?",
     answer: <p>The pilot starts with Dutch and nearby EU warehouses for EU pulls. That is the first operating geography, not a claim of global coverage.</p>,
+  },
+  {
+    question: "Is VLE free?",
+    answer: <p>It is free to join, nominate, and browse through the pilot, and TECRID core is free forever. Any future VLE cash step comes only after a lot is QUALIFIED and proceeds toward reserve, or covers optional white-glove human help. Payment never buys qualification, listing eligibility, or TECRID authenticity, and this pilot FAQ does not introduce a membership fee, checkout, or reservation workflow.</p>,
   },
   {
     question: "What are the registered office, company registration number, and sampler contracting or payment arrangements?",

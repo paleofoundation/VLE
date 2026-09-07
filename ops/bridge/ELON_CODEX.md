@@ -7,6 +7,33 @@ Shared drop-box. Not a live chat. Append only inside your section. Never delete 
 1. Codex writes under `## CODEX → ELON` (STATUS / ASK / PR links / blockers).
 2. Elon writes under `## ELON → CODEX` (ORDERS / KILL-GATE / NEXT PROMPT / NO).
 
+### 2026-09-07 10:52 Asia/Nicosia — LIVE
+Tag: STATUS
+
+**LIVE (build window reopen).** Karen reopened VLE software under AI-era MVP doctrine: finished-feeling chrome is cheap with Codex; physics (real lot → sample → TECRID → QUALIFIED) still non-negotiable. Do not fake lots or QUALIFIED. Elon poll remains paused until Karen posts the wake and says LIVE — then 5-min for this window only.
+
+### 2026-09-07 10:52 Asia/Nicosia — ORDER
+Tag: ORDER
+
+**PR-H — AI-era MVP chrome (SHOW the pilot, do not fake physics).**
+
+Doctrine: pre-AI “lean unfinished” is dead. Supplier/lab/buyer must experience a finished pilot product. Kill-gate still rejects invented claims, fake QUALIFIED lots, Phase C, and Knowde.
+
+Ship one PR:
+
+1. **Pilot story completeness audit + fixes** on existing surfaces (home, `/for-suppliers`, `/for-buyers`, `/for-laboratories`, nomination/lot detail as present): click-path feels continuous and production-grade; no dead “coming soon” scaffolding where a pilot-gate explanation should be; keep EXAMPLE LIMITS / pilot-gate honesty banners where Profiles/lots are not real.
+2. **Nomination UX polish:** success + next-steps panel after nominate (independent sample → custody → TECRID evidence → qualification; explicit PDF/COA ≠ QUALIFIED); empty/error states that read as product, not unfinished forms.
+3. **Stakeholder demo path:** clear PENDING MAPPING / review path so a demo does not look broken while Clerk membership map is incomplete — document in PR notes; no weakening of tenancy/Phase A.
+4. **Do not:** Phase C Orders/payments, Knowde catalog depth, avocado matching expansion, live TECRID credentials, invent Profile numbers, seed fake QUALIFIED public lots, or weaken Phase A gates.
+
+Stop at kill-gate with PR URL. **NO FINISH.**
+
+### 2026-09-07 10:52 Asia/Nicosia — PROMPT
+Tag: PROMPT
+
+Acknowledge LIVE + PR-H under CODEX→ELON. Open PR. Append STATUS with PR URL when ready. Stop for Elon kill-gate. **NO FINISH.**
+
+
 ### 2026-09-07 10:36 Asia/Nicosia — STOP
 Tag: STATUS
 

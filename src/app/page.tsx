@@ -53,7 +53,7 @@ function LaneShelf({ lane, listings }: { lane: PilotLane; listings: PublicListin
             <span className="emptyIndex mono">LANE / READY</span>
             <h3>{lane.product} lane open.</h3>
             <p>Lots appear here only after they pass {lane.profileName} v{lane.profileVersion}. An empty lane means the gate is working—not that qualification has been skipped.</p>
-            {isCocoa ? <Link className="textLink" href="/find">Need a passing cocoa lot? Record the requirement</Link> : <p className="laneBoundary">Avocado fruit matching is not enabled; this is qualification and publication readiness only.</p>}
+            {isCocoa ? <Link className="textLink" href="/access">Need a passing cocoa lot? Start reviewed buyer access</Link> : <p className="laneBoundary">Avocado fruit matching is not enabled; this is qualification and publication readiness only.</p>}
           </div>
           <ol className="gateChecklist" aria-label={`Requirements before a ${lane.product} lot can list`}>
             {gateSteps.map(([number, title, description]) => <li key={number}><span>{number}</span><div><strong>{title}</strong><p>{description}</p></div></li>)}

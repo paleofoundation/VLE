@@ -87,7 +87,7 @@ export default async function LotPage({ params }: PageProps<"/lots/[slug]">) {
 
       <section className="lotBoundary">
         <div><p className="eyebrow">Claim boundary</p><h2>Passed profile. Specific lot.</h2></div>
-        <p>Publication is withdrawn if evidence expires or is revoked, or if the lot is held, transformed, or depleted. TECRID authenticates evidence; it does not prove sampling, ownership, inventory, or finished-product outcomes.</p>
+        <div className="lotBoundaryAction"><p>Publication is withdrawn if evidence expires or is revoked, or if the lot is held, transformed, or depleted. TECRID authenticates evidence; it does not prove sampling, ownership, inventory, or finished-product outcomes.</p><Link className="button" href="/access">Bring a requirement to VLE</Link><small>Reviewed pilot access records commercial intent only. It does not create an Order or payment.</small></div>
       </section>
     </main>
   );

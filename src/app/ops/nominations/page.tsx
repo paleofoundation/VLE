@@ -33,7 +33,22 @@ export default async function NominationPage({ searchParams }: NominationPagePro
         <div className="nominationBoundary"><span className="mono">BOUNDARY / INTAKE</span><strong>Supplier report ≠ verified inventory</strong><p>Saving this form creates or corrects a private NOMINATED PhysicalLot draft. It does not create a Sample, TECRID evidence, QualificationDecision, or MarketplaceListing.</p></div>
       </section>
 
-      {savedId ? <div className="success" role="status" aria-live="polite"><strong>Nomination {savedMode}.</strong><span>The lot remains private and unverified. Open it from the draft queue to begin the separate verification workflow.</span></div> : null}
+      {savedId ? (
+        <section className="nominationSuccess" aria-labelledby="nomination-success-heading">
+          <div className="nominationSuccessCopy">
+            <span className="mono">INTAKE / SAVED</span>
+            <h2 id="nomination-success-heading">Nomination {savedMode}. The verification lane is ready.</h2>
+            <p>The lot is still private and unverified. Open its workflow to confirm inventory before any controlled sample is created.</p>
+            <Link className="button buttonDark" href={`/ops/lots/${savedId}`}>Open lot workflow</Link>
+          </div>
+          <ol aria-label="Next steps after nomination">
+            <li><span>01</span><div><strong>Independent sample</strong><p>After inventory verification, create the controlled SamplingOrder and bind a distinct Sample to this lot.</p></div></li>
+            <li><span>02</span><div><strong>Custody</strong><p>Record collection, seals, shipment, receipt, and completion without collapsing the handoffs.</p></div></li>
+            <li><span>03</span><div><strong>TECRID evidence</strong><p>Authenticate structured evidence and its sample binding through the TECRID contract.</p></div></li>
+            <li><span>04</span><div><strong>Qualification</strong><p>Apply one frozen Profile deterministically. A PDF or COA never auto-QUALIFIES the lot.</p></div></li>
+          </ol>
+        </section>
+      ) : null}
       {editId && !draft ? <div className="nominationNotice" role="status"><strong>This lot is no longer an editable nomination draft.</strong><span>Once verification or sampling starts, its physical facts cannot be silently rewritten here.</span></div> : null}
 
       <div className="nominationLayout">
@@ -56,13 +71,13 @@ export default async function NominationPage({ searchParams }: NominationPagePro
               <div className="formSubmit"><p>PDFs and COAs remain background artifacts. They cannot fill these fields or advance a compliance gate.</p><button className="button" type="submit">{draft ? "Save draft correction" : "Create nominated lot"}</button></div>
               {draft ? <Link className="textLink" href="/ops/nominations">Cancel edit</Link> : null}
             </form>
-          ) : <div className="opsEmpty compact"><h3>Reference data required.</h3><p>Load an active pilot product and supplier organization before recording a nomination.</p></div>}
+          ) : <div className="opsEmpty compact"><span className="mono">PILOT GATE / REFERENCE DATA</span><h3>Nomination intake is ready; its approved references are not.</h3><p>An active pilot product and reviewed supplier organization must exist before operations can identify a physical lot. This gate prevents an unscoped or orphaned nomination.</p><Link className="textLink" href="/ops">Return to operations board</Link></div>}
         </section>
 
         <aside className="nominationQueue" aria-labelledby="draft-queue-heading">
           <div className="nominationSectionHead"><div><p className="eyebrow">Private intake queue</p><h2 id="draft-queue-heading">Editable drafts</h2></div><strong>{intake.drafts.length.toString().padStart(2, "0")}</strong></div>
           <p className="nominationQueueIntro">Only untouched NOMINATED lots appear here. A draft leaves this correction queue as soon as inventory verification or sampling begins.</p>
-          {intake.drafts.length ? <ol>{intake.drafts.map((item) => <li key={item.id} className={draft?.id === item.id ? "isEditing" : undefined}><div><span className="stateChip">NOMINATED</span><small>{item.product}</small></div><h3>{item.supplierLotCode}</h3><p>{item.supplier} · {formatQuantity(item.quantity)} {item.quantityUnit}</p><p>{item.locationName}, {item.countryCode} · {item.ownerName}</p><div className="nominationQueueActions"><Link className="textLink" href={`/ops/nominations?edit=${item.id}`}>Edit facts</Link><Link className="textLink" href={`/ops/lots/${item.id}`}>Open workflow</Link></div></li>)}</ol> : <div className="artifactEmpty"><strong>Waiting on supplier facts.</strong><p>When Marcus or another supplier provides a stocked lot code, quantity, location, and authorizer, record the private nomination here.</p></div>}
+          {intake.drafts.length ? <ol>{intake.drafts.map((item) => <li key={item.id} className={draft?.id === item.id ? "isEditing" : undefined}><div><span className="stateChip">NOMINATED</span><small>{item.product}</small></div><h3>{item.supplierLotCode}</h3><p>{item.supplier} · {formatQuantity(item.quantity)} {item.quantityUnit}</p><p>{item.locationName}, {item.countryCode} · {item.ownerName}</p><div className="nominationQueueActions"><Link className="textLink" href={`/ops/nominations?edit=${item.id}`}>Edit facts</Link><Link className="textLink" href={`/ops/lots/${item.id}`}>Open workflow</Link></div></li>)}</ol> : <div className="artifactEmpty nominationQueueEmpty"><span className="mono">QUEUE / CLEAR</span><strong>No nomination is waiting for correction.</strong><p>That is a valid pilot state. When a supplier provides the required stocked-lot facts, use the intake beside this queue; the saved lot then moves into the private verification workflow.</p></div>}
         </aside>
       </div>
 

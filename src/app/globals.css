@@ -405,7 +405,9 @@ main { min-height: calc(100vh - 160px); }
 .basisGrid p { color: var(--muted); font-size: 13px; line-height: 1.65; }
 .lotBoundary { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; padding: clamp(42px, 5vw, 68px); background: var(--ink); color: var(--white); }
 .lotBoundary h2 { margin: 0; }
-.lotBoundary > p { margin: 0; color: #bdc9c1; line-height: 1.75; }
+.lotBoundary > p, .lotBoundaryAction > p { margin: 0; color: #bdc9c1; line-height: 1.75; }
+.lotBoundaryAction { display: flex; flex-direction: column; align-items: flex-start; gap: 20px; }
+.lotBoundaryAction small { color: #8fa097; font-size: 10px; line-height: 1.55; }
 
 .opsPage { max-width: 1600px; margin: 0 auto; }
 .opsHero { display: flex; justify-content: space-between; gap: 50px; align-items: flex-start; }
@@ -607,6 +609,19 @@ main { min-height: calc(100vh - 160px); }
 .nominationBoundary strong { display: block; margin-bottom: 10px; font-size: 17px; }
 .nominationBoundary p { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.65; }
 .nominationNotice { display: flex; flex-direction: column; gap: 4px; margin-top: 24px; padding: 14px 16px; border-left: 3px solid var(--amber); background: var(--amber-soft); color: #69451f; font-size: 12px; }
+.nominationSuccess { display: grid; grid-template-columns: minmax(280px, .75fr) minmax(0, 1.25fr); margin-top: 24px; border: 1px solid #9eb5a7; background: #e6eee8; }
+.nominationSuccessCopy { padding: clamp(24px, 4vw, 42px); border-right: 1px solid #b7c9bd; }
+.nominationSuccessCopy > span { color: var(--green); font-size: 9px; }
+.nominationSuccessCopy h2 { margin: 18px 0 12px; font-size: clamp(25px, 3vw, 38px); letter-spacing: -.045em; }
+.nominationSuccessCopy p { color: var(--muted); font-size: 12px; line-height: 1.65; }
+.nominationSuccessCopy .button { margin-top: 8px; }
+.nominationSuccess ol { display: grid; grid-template-columns: repeat(2, 1fr); margin: 0; padding: 0; list-style: none; }
+.nominationSuccess li { display: grid; grid-template-columns: 28px 1fr; gap: 13px; padding: 24px; border-right: 1px solid #b7c9bd; border-bottom: 1px solid #b7c9bd; }
+.nominationSuccess li:nth-child(2n) { border-right: 0; }
+.nominationSuccess li:nth-last-child(-n+2) { border-bottom: 0; }
+.nominationSuccess li > span { color: var(--green); font-family: var(--font-geist-mono), monospace; font-size: 9px; }
+.nominationSuccess li strong { display: block; font-size: 12px; }
+.nominationSuccess li p { margin: 6px 0 0; color: var(--muted); font-size: 10px; line-height: 1.55; }
 .nominationLayout { display: grid; grid-template-columns: minmax(440px, 1.1fr) minmax(340px, .9fr); gap: 18px; align-items: start; margin-top: 38px; }
 .nominationFormPanel, .nominationQueue { border: 1px solid var(--line); background: var(--white); }
 .nominationFormPanel { padding: clamp(24px, 4vw, 42px); }
@@ -627,6 +642,7 @@ main { min-height: calc(100vh - 160px); }
 .nominationQueue li > p { margin-bottom: 5px; color: var(--muted); font-size: 11px; line-height: 1.5; }
 .nominationQueueActions { display: flex; gap: 22px; margin-top: 18px; }
 .nominationQueueActions .textLink { font-size: 11px; }
+.nominationQueueEmpty > span { display: block; margin-bottom: 20px; color: var(--green); font-size: 9px; }
 .nominationTruth { display: grid; grid-template-columns: repeat(4, 1fr); margin-top: 58px; border: 1px solid var(--line); background: rgba(255,254,249,.5); }
 .nominationTruth > div { min-height: 180px; padding: 24px; border-right: 1px solid var(--line); }
 .nominationTruth > div:last-child { border-right: 0; }
@@ -689,6 +705,18 @@ main { min-height: calc(100vh - 160px); }
 .accessReference dd { margin: 0; overflow-wrap: anywhere; font-weight: 700; }
 .accessBoundary { display: flex; flex-direction: column; gap: 8px; margin-bottom: 28px; padding: 18px; border-left: 3px solid var(--amber); background: var(--amber-soft); }
 .accessBoundary span { color: var(--muted); font-size: 11px; line-height: 1.6; }
+.accessActions { display: flex; flex-wrap: wrap; gap: 20px; align-items: center; }
+.accessReviewRail { display: grid; grid-template-columns: repeat(3, 1fr); margin: 30px 0 0; padding: 0; border: 1px solid var(--line); list-style: none; }
+.accessReviewRail li { display: grid; grid-template-columns: 28px 1fr; gap: 10px; min-height: 105px; padding: 18px; border-right: 1px solid var(--line); background: #f7f6f0; }
+.accessReviewRail li:last-child { border-right: 0; }
+.accessReviewRail li > span { color: var(--muted); font-family: var(--font-geist-mono), monospace; font-size: 9px; }
+.accessReviewRail strong, .accessReviewRail small { display: block; }
+.accessReviewRail strong { font-size: 11px; line-height: 1.35; }
+.accessReviewRail small { margin-top: 6px; color: var(--muted); font-size: 9px; line-height: 1.4; }
+.accessReviewRail .isComplete { background: #e6eee8; }
+.accessReviewRail .isComplete > span, .accessReviewRail .isComplete strong { color: var(--green); }
+.accessReviewRail .isPending { border-top: 3px solid var(--amber); background: var(--amber-soft); }
+.nominationErrorCard > span { color: var(--amber); }
 .opsAccessTools { display: flex; flex-direction: column; gap: 12px; align-items: flex-end; }
 
 .membershipPage { max-width: 1500px; margin: 0 auto; padding: clamp(54px, 7vw, 96px) clamp(24px, 7vw, 108px); }
@@ -811,7 +839,8 @@ main { min-height: calc(100vh - 160px); }
   .quoteForm { grid-template-columns: 1fr; }
   .quoteForm .wideField { grid-column: auto; }
   .inlineForm { flex-direction: column; align-items: stretch; width: 100%; }
-  .nominationHero, .nominationLayout { grid-template-columns: 1fr; }
+  .nominationHero, .nominationLayout, .nominationSuccess { grid-template-columns: 1fr; }
+  .nominationSuccessCopy { border-right: 0; border-bottom: 1px solid #b7c9bd; }
   .membershipHero, .membershipLayout { grid-template-columns: 1fr; }
   .opsAccessTools { align-items: flex-start; }
   .compliancePackPanel { grid-template-columns: 1fr; }
@@ -830,6 +859,12 @@ main { min-height: calc(100vh - 160px); }
   .siteHeader nav > a:not(.button) { padding: 14px 0 13px; }
   .heroHome, .supplierHero, .supplierIdentity, .supplierPath, .supplierClose, .shelfSection, .opsPage, .lotDetailPage, .findPage, .commercialPage, .nominationPage, .membershipPage { padding-left: 18px; padding-right: 18px; }
   .accessReference div { grid-template-columns: 1fr; gap: 7px; }
+  .accessReviewRail { grid-template-columns: 1fr; }
+  .accessReviewRail li { min-height: 0; border-right: 0; border-bottom: 1px solid var(--line); }
+  .accessReviewRail li:last-child { border-bottom: 0; }
+  .nominationSuccess ol { grid-template-columns: 1fr; }
+  .nominationSuccess li, .nominationSuccess li:nth-child(2n), .nominationSuccess li:nth-last-child(-n+2) { border-right: 0; border-bottom: 1px solid #b7c9bd; }
+  .nominationSuccess li:last-child { border-bottom: 0; }
   .supplierGate { margin-left: 18px; margin-right: 18px; }
   .supplierStepSignal { margin-left: 0; }
   .pilotCard { padding: 20px; }

@@ -411,6 +411,14 @@ Bridge online.
 
 ## CODEX → ELON
 
+### 2026-09-07 11:17 Asia/Nicosia — STATUS
+
+Tag: STATUS
+
+PR-H pilot story + handoff polish: https://github.com/paleofoundation/VLE/pull/15
+
+Shipped continuous public handoffs from supplier/buyer walkthroughs and public lot detail into reviewed access; a product-grade nomination success panel with independent sample → custody → TECRID evidence → deterministic qualification next steps and explicit PDF/COA ≠ QUALIFIED; intentional nomination empty/reference/error states; and a three-step PENDING MAPPING review lane that exposes the exact Clerk handoff reference while revealing no tenant data. The stakeholder demo path is documented in the runbook and PR notes; Phase A remains server-authorized. `npm run check` passes (lint, TypeScript, 55 tests; 3 expected skips), `npm run build` passes, and desktop/390px browser checks passed across public and seeded-ops nomination surfaces with no layout overflow or framework error overlay. No Phase C, Orders/payments, Knowde/catalog depth, avocado matching expansion, live TECRID credentials, invented Profile numbers, or fake QUALIFIED lots. Stopping at the PR-H kill-gate; no FINISH posted.
+
 ### 2026-09-07 07:15 Asia/Nicosia — STATUS
 
 Tag: STATUS

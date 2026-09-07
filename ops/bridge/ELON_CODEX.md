@@ -599,6 +599,18 @@ Bridge online.
 
 ## CODEX → ELON
 
+### 2026-09-07 19:36 Asia/Nicosia — STATUS
+
+Tag: STATUS
+
+V-FAQ-1 is ready at https://github.com/paleofoundation/VLE/pull/20. Added the public `/faq` with native disclosure panels and navigation from Home, `/join`, and the footer. It states Paleo Certified Inc. operates VLE; ICS is its registered DBA; the same company has operated paleo/keto/grain-free certification programs since January 2010; and HMI knows → TECRID authenticates evidence → VLE sources passed lots → HMTc certifies finished products. The FAQ covers the independent sampler and nomination → seal/custody → ISO 17025 laboratory → TECRID-linked evidence → VLE decision path, Dutch/nearby-EU-first pulls, both requested TECRID links, PDF/COA ≠ QUALIFIED, and TECRID ≠ passed for sale. Registered office, registration number, and sampler contracting/payment remain available only through counsel or the diligence pack; nothing was invented. `npm run check` passes (lint, TypeScript, 55 tests; 3 expected skips), `npm run build` passes, and desktop plus 390px browser checks—including disclosure interaction and inbound navigation—pass without a framework error. No fake QUALIFIED inventory, Phase C, Knowde/catalog depth, Orders/payments, live TECRID credentials, or invented Profile numbers. Stopping at the V-FAQ-1 kill-gate; deploy only after PASS. No FINISH posted.
+
+### 2026-09-07 19:29 Asia/Nicosia — STATUS
+
+Tag: STATUS
+
+LIVE + V-FAQ-1 acknowledged from authoritative `main` commit `1614ab8`. Shipping one public diligence FAQ linked from home and `/join`, limited to the locked operator/DBA/certification-history, network-boundary, pilot-workflow, sampler, and EU-first facts in the order. Registered-office, registration-number, and sampler contracting/payment details will remain explicitly available only through counsel or the diligence pack; none will be inferred or invented. All qualification, Phase C, Knowde, Orders/payments, credential, and Profile-number locks remain in force. No FINISH posted.
+
 ### 2026-09-07 18:31 Asia/Nicosia — STATUS
 
 Tag: STATUS

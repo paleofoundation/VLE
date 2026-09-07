@@ -56,6 +56,7 @@ export default function JoinPage() {
           <div className="actions">
             <Link className="button" href="#choose-role">Choose your role</Link>
             <Link className="textLink textLinkLight" href="/access">Request reviewed access</Link>
+            <Link className="textLink textLinkLight" href="/faq">Read the diligence FAQ</Link>
           </div>
         </div>
         <aside className="joinPromise" aria-label="VLE access promise">
@@ -135,7 +136,7 @@ export default function JoinPage() {
 
       <section className="joinBoundary" aria-label="Non-purchasable claim boundary">
         <span className="mono">NON-PURCHASABLE</span>
-        <p><strong>Credibility is not a product tier.</strong> No payment can create a QUALIFIED decision, make a lot eligible for listing, authenticate TECRID evidence, or substitute for controlled sampling and custody.</p>
+        <p><strong>Credibility is not a product tier.</strong> No payment can create a QUALIFIED decision, make a lot eligible for listing, authenticate TECRID evidence, or substitute for controlled sampling and custody. <Link className="textLink" href="/faq">Review the operating and evidence boundaries</Link></p>
       </section>
     </main>
   );

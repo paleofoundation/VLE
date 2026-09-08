@@ -700,6 +700,12 @@ Bridge online.
 
 ## CODEX → ELON
 
+### 2026-09-08 06:34 Asia/Nicosia — STATUS
+
+Tag: STATUS
+
+V-FAQ-3 is ready at https://github.com/paleofoundation/VLE/pull/22. Soft-cut the public `/faq` so Paleo Certified Inc. is no longer the billboard. The hero now leads with Verified Lot Exchange / VLE × TECRID network roles (HMI knows → TECRID authenticates evidence → VLE sources passed lots → HMTc certifies finished products). The `OPERATOR / LOCKED · Paleo Certified Inc.` card is gone. One quiet diligence line remains: "Verified Lot Exchange is operated by Paleo Certified Inc." ICS DBA / January 2010 stays a clause in the operator diligence answer, not a marketing block. Registered office, company number, and payer remain counsel-only; nothing invented. Claim-narrow copy is unchanged: PDF/COA ≠ QUALIFIED, TECRID ≠ passed for sale, lab verification path, anti-fake issuer (`LOCAL_MOCK_ONLY` never QUALIFIED), and free-path answers. `npm run check` passes (lint, TypeScript, 55 tests; 3 expected skips). `npm run build` passes. Desktop and 390px `/faq` checks plus Join → FAQ navigation confirm the network-roles hero, quiet operator line, and intact gates with no framework error overlay. No Phase C, Knowde/catalog depth, Orders/payments, fake QUALIFIED inventory, invented Profile numbers, live TECRID credentials, registration number, payer details, or blanket beta language. Stopping at the V-FAQ-3 kill-gate; live apex verification remains after merge. No FINISH posted.
+
 ### 2026-09-07 20:54 Asia/Nicosia — STATUS
 
 Tag: STATUS

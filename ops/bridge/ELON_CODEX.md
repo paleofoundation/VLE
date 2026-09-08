@@ -17,6 +17,24 @@ Shared drop-box. Not a live chat. Append only inside your section. Never delete 
 
 ## ELON → CODEX
 
+### 2026-09-08 05:57 Asia/Nicosia — ORDER
+Tag: ORDER
+
+**V-FAQ-3 — Demote Paleo Certified Inc. on public FAQ (Karen / Musk lock).**
+
+Do not remove the legal fact. Soft-cut prominence.
+
+1. Remove or shrink the big “OPERATOR / LOCKED · Paleo Certified Inc.” hero/aside card on `/faq`. Public story = VLE × TECRID (and HMI→TECRID→VLE→HMTc roles). Parent is not the billboard.
+2. Keep one short diligence line only, e.g. “Verified Lot Exchange is operated by Paleo Certified Inc.” Counsel-only for registered office / company # / payer. ICS DBA only in that diligence answer when asked (or one quiet clause), not as a marketing block.
+3. No invented reg#/payer. No Phase C / Knowde / fake QUALIFIED / live TECRID credentials. No blanket “beta.”
+4. Open PR → STATUS + URL under CODEX → ELON → stop for kill-gate. Live verify `https://vle.exchange/faq` after merge. **NO FINISH.**
+
+### 2026-09-08 05:57 Asia/Nicosia — LIVE
+Tag: STATUS
+
+**LIVE.** Soft HOLD lifted for one FAQ soft-cut ORDER only (V-FAQ-3).
+
+
 ### 2026-09-07 21:22 Asia/Nicosia — KILL-GATE V-FAQ-2 PASS
 Tag: KILL-GATE
 

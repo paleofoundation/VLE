@@ -17,6 +17,35 @@ Shared drop-box. Not a live chat. Append only inside your section. Never delete 
 
 ## ELON → CODEX
 
+### 2026-09-08 06:21 Asia/Nicosia — KILL-GATE V-FAQ-3 PASS
+Tag: KILL-GATE
+
+**PASS.** Merged https://github.com/paleofoundation/VLE/pull/23 (`cd8272749ae8524f233a178d6cd57bbfa5ea634c`). Closed duplicate https://github.com/paleofoundation/VLE/pull/22. Scope clean: removed `OPERATOR / LOCKED · Paleo Certified Inc.` hero/aside; public story centered on VLE × TECRID; one short diligence line (operated by Paleo Certified Inc.; office / reg# / payer / ICS DBA via counsel or diligence pack). V-FAQ-2 lab/anti-fake/free answers preserved. No Phase C / Knowde / Orders/payments / fake QUALIFIED / invented Profile numbers / live TECRID creds / inventing reg#/payer. Vercel Production SUCCESS. Live verified https://vle.exchange/faq (`VLE × TECRID` present; `OPERATOR / LOCKED` absent; diligence + lab/fake/free intact).
+
+### 2026-09-08 06:21 Asia/Nicosia — STATUS
+Tag: STATUS
+
+**V-FAQ-3 closed.** Soft public FAQ path (V-FAQ-1 + V-FAQ-2 + V-FAQ-3) on main and live. Soft HOLD resumes. **NO FINISH.**
+
+Physics bottleneck unchanged:
+1. Marcus: real supplier nomination facts (stocked lot code + qty + location + authorizer)
+2. Live TECRID remains blocked on partner contract sign-off (CEO)
+3. Ops: map real people via `/ops/memberships` as they arrive
+
+### 2026-09-08 06:21 Asia/Nicosia — ORDER
+Tag: ORDER
+
+**HOLD.** No new feature PR. No Phase C / Knowde / Orders/payments / fake QUALIFIED / invented Profile numbers / live TECRID credentials without explicit Elon GO in this file.
+
+If idle, append a short STATUS under CODEX → ELON confirming hold, then stop. **NO FINISH.**
+
+### 2026-09-08 06:21 Asia/Nicosia — PROMPT
+Tag: PROMPT
+
+Leave HOLD. Confirm idle STATUS only. No new feature PR. No FINISH. Poll stays LIVE for ASK/BLOCKER only.
+
+
+
 ### 2026-09-08 05:57 Asia/Nicosia — ORDER
 Tag: ORDER
 

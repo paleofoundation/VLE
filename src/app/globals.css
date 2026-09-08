@@ -353,7 +353,7 @@ main { min-height: calc(100vh - 160px); }
 
 .faqHero {
   display: grid;
-  grid-template-columns: minmax(0, 1.35fr) minmax(320px, .65fr);
+  grid-template-columns: minmax(0, 1fr);
   gap: clamp(50px, 9vw, 140px);
   align-items: end;
   min-height: 620px;
@@ -365,14 +365,6 @@ main { min-height: calc(100vh - 160px); }
 }
 .faqHero h1 { max-width: 880px; margin-bottom: 28px; font-size: clamp(54px, 7.4vw, 104px); font-weight: 560; letter-spacing: -.068em; line-height: .93; }
 .faqHero > div > p:not(.eyebrow) { max-width: 760px; margin-bottom: 34px; color: #c2cec7; font-size: clamp(17px, 1.7vw, 23px); line-height: 1.55; }
-.faqOperator { padding: 27px; border: 1px solid #50685b; background: rgba(7,19,14,.42); box-shadow: 0 28px 80px rgba(0,0,0,.2); }
-.faqOperator > .mono { color: var(--signal); font-size: 9px; letter-spacing: .1em; }
-.faqOperator h2 { margin: 48px 0 12px; color: var(--signal); font-size: clamp(30px, 3vw, 43px); font-weight: 570; letter-spacing: -.045em; }
-.faqOperator > p { color: #aebdb4; font-size: 13px; line-height: 1.65; }
-.faqOperator dl { margin: 28px 0 0; }
-.faqOperator dl div { display: flex; justify-content: space-between; gap: 18px; padding: 13px 0; border-top: 1px solid #50685b; font-size: 11px; }
-.faqOperator dt { color: #91a198; }
-.faqOperator dd { margin: 0; font-weight: 750; text-align: right; }
 .faqNetwork, .faqWorkflow, .faqQuestions { padding: clamp(72px, 8vw, 116px) clamp(24px, 7vw, 108px); }
 .faqNetwork { border-bottom: 1px solid var(--line); background: var(--paper-deep); }
 .faqNetwork > div { max-width: 900px; }
@@ -910,7 +902,6 @@ main { min-height: calc(100vh - 160px); }
   .heroHome { grid-template-columns: 1fr; }
   .joinHero { grid-template-columns: 1fr; }
   .faqHero { grid-template-columns: 1fr; }
-  .faqOperator { max-width: 680px; }
   .joinPromise { max-width: 680px; }
   .supplierHero, .supplierIdentity { grid-template-columns: 1fr; }
   .supplierRouteCard { max-width: 660px; }

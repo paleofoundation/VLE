@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "VLE FAQ — Operator, Lab Verification, and Pilot Diligence",
-  description: "Upfront answers about who operates VLE, laboratory verification, anti-fake-issuer controls, independent sampling, and the EU-first pilot.",
+  title: "VLE FAQ — TECRID, Lab Verification, and Pilot Diligence",
+  description: "Upfront answers about the VLE and TECRID evidence path, laboratory verification, anti-fake-issuer controls, independent sampling, and the EU-first pilot.",
 };
 
 const workflow = [
@@ -17,11 +17,7 @@ const workflow = [
 const questions = [
   {
     question: "Who operates Verified Lot Exchange?",
-    answer: <p><strong>Paleo Certified Inc.</strong> operates Verified Lot Exchange (VLE).</p>,
-  },
-  {
-    question: "What is ICS, and how long has the company operated certification programs?",
-    answer: <p><a className="textLink" href="https://contaminantstandards.com">Institute of Contaminant Standards (ICS)</a> is a registered DBA of Paleo Certified Inc. The same company has operated paleo, keto, and grain-free certification programs since January 2010.</p>,
+    answer: <p>Verified Lot Exchange is operated by Paleo Certified Inc. Its registered office, company registration number, payer and contracting details—and the ICS DBA relationship—are available through counsel or the diligence pack.</p>,
   },
   {
     question: "How do HMI, TECRID, VLE, and HMTc divide responsibility?",
@@ -51,10 +47,6 @@ const questions = [
     question: "Is VLE free?",
     answer: <p>It is free to join, nominate, and browse through the pilot, and TECRID core is free forever. Any future VLE cash step comes only after a lot is QUALIFIED and proceeds toward reserve, or covers optional white-glove human help. Payment never buys qualification, listing eligibility, or TECRID authenticity, and this pilot FAQ does not introduce a membership fee, checkout, or reservation workflow.</p>,
   },
-  {
-    question: "What are the registered office, company registration number, and sampler contracting or payment arrangements?",
-    answer: <p>Those details are available on request through counsel or the diligence pack. VLE does not publish or infer an address, registration number, payer, or contracting entity on this page.</p>,
-  },
 ] as const;
 
 export default function FaqPage() {
@@ -63,23 +55,13 @@ export default function FaqPage() {
       <section className="faqHero" aria-labelledby="faq-heading">
         <div>
           <p className="eyebrow eyebrowLight">Public diligence FAQ</p>
-          <h1 id="faq-heading">The operating facts, up front.</h1>
-          <p>Who runs VLE, what each evidence-network layer does, and where the physical pilot begins—without filling diligence gaps with invented facts.</p>
+          <h1 id="faq-heading">VLE × TECRID,<br />up front.</h1>
+          <p>How authenticated evidence becomes an eligible lot-specific decision, what each network layer does, and where the physical pilot begins.</p>
           <div className="actions">
             <Link className="button" href="#questions">Read the answers</Link>
             <Link className="textLink textLinkLight" href="/access">Request diligence access</Link>
           </div>
         </div>
-        <aside className="faqOperator" aria-label="VLE operator summary">
-          <span className="mono">OPERATOR / LOCKED</span>
-          <h2>Paleo Certified Inc.</h2>
-          <p>Operates Verified Lot Exchange and the registered ICS DBA.</p>
-          <dl>
-            <div><dt>Certification programs</dt><dd>Since January 2010</dd></div>
-            <div><dt>Pilot geography</dt><dd>EU first</dd></div>
-            <div><dt>Unpublished legal facts</dt><dd>Via counsel</dd></div>
-          </dl>
-        </aside>
       </section>
 
       <section className="faqNetwork" aria-labelledby="network-summary-heading">

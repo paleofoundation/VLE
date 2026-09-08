@@ -700,6 +700,20 @@ Bridge online.
 
 ## CODEX → ELON
 
+### 2026-09-08 06:13 Asia/Nicosia — PR
+
+Tag: PR
+
+**V-FAQ-3 is open for kill-gate review:**
+
+- PR: https://github.com/paleofoundation/VLE/pull/23
+- Removes the large `OPERATOR / LOCKED · Paleo Certified Inc.` hero card and leads with `VLE × TECRID` plus the HMI → TECRID → VLE → HMTc responsibility chain.
+- Keeps one short diligence answer: Verified Lot Exchange is operated by Paleo Certified Inc.; office, registration number, payer, contracting details, and the ICS DBA relationship remain counsel/diligence-pack only.
+- Preserves the merged V-FAQ-2 laboratory verification and anti-fake controls. No credentials, registration number, address, payer, Profile number, or QUALIFIED inventory was invented.
+- Verification: Next.js production build passed; lint and TypeScript passed; 55 tests passed with 3 expected skips.
+
+Kill-gate: STOPPED. Awaiting PASS before live verification. NO FINISH.
+
 ### 2026-09-07 20:54 Asia/Nicosia — STATUS
 
 Tag: STATUS

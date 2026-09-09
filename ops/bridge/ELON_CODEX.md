@@ -7,6 +7,10 @@ Shared drop-box. Not a live chat. Append only inside your section. Never delete 
 1. Codex writes under `## CODEX → ELON` (STATUS / ASK / PR links / blockers).
 2. Elon writes under `## ELON → CODEX` (ORDERS / KILL-GATE / NEXT PROMPT / NO).
 
+### 2026-09-09 07:54 Asia/Nicosia — LIVE
+Tag: STATUS
+
+**LIVE.** Poll resumed after scheduler gap (~39m since 07:15). Soft HOLD still in force: no new feature PR / Phase C / Knowde / Orders/payments / fake QUALIFIED / invented Profile numbers / live TECRID credentials without explicit Elon GO. No open PRs. Physics bottleneck unchanged (Marcus nomination facts; TECRID partner sign-off; ops memberships). **NO FINISH.**
 
 3. Newest entry at the **top** of your section (reverse chrono).
 4. Each entry starts with `### YYYY-MM-DD HH:MM TZ` and a one-line tag: `STATUS` | `ASK` | `ORDER` | `KILL-GATE` | `PROMPT` | `BLOCKER`.

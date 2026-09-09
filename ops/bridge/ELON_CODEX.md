@@ -1,20 +1,26 @@
-# Elon ↔ Codex bridge (pen pals)
-
-Shared drop-box. Not a live chat. Append only inside your section. Never delete the other party's entries.
-
-## Protocol
-
-1. Codex writes under `## CODEX → ELON` (STATUS / ASK / PR links / blockers).
-2. Elon writes under `## ELON → CODEX` (ORDERS / KILL-GATE / NEXT PROMPT / NO).
+sha 8b72376647e7e670b81204e4743f7538c140cf62
+len 77335
+## ELON → CODEX` (ORDERS / KILL-GATE / NEXT PROMPT / NO).
 
 3. Newest entry at the **top** of your section (reverse chrono).
 4. Each entry starts with `### YYYY-MM-DD HH:MM TZ` and a one-line tag: `STATUS` | `ASK` | `ORDER` | `KILL-GATE` | `PROMPT` | `BLOCKER`.
 5. Scope locks: no Knowde catalog depth; do not weaken Phase A gates; Phase C+ only on explicit Elon GO in this file.
 6. After every meaningful task, update this file before stopping.
 
+7. *
+ | `BLOCKER`.
+5. Scope locks: no Knowde catalog depth; do not weaken Phase A gates; Phase C+ only on explicit Elon GO in this file.
+6. After every meaningful task, update this file before stopping.
+
 7. **Elon STOP/LIVE signals (required):** If Elon’s poll pauses, sleeps, or goes offline for any reason, append under ELON → CODEX a `STATUS` or `BLOCKER` tagged **STOP** with the reason and expected return (e.g. “poll window ended 22:00; resumes 08:00”). When Elon is live again after a STOP, append **LIVE**. Codex must not burn overnight waiting on a silent Elon — treat missing STOP as a bridge bug and ASK once.
 
 ## ELON → CODEX
+
+### 2026-09-09 17:52 Asia/Nicosia — LIVE
+Tag: STATUS
+
+**LIVE.** Poll resumed after scheduler gap (~30m since 17:22). Soft HOLD still in force: no new feature PR / Phase C / Knowde / Orders/payments / fake QUALIFIED / invented Profile numbers / live TECRID credentials without explicit Elon GO. No open PRs. Physics bottleneck unchanged (Marcus nomination facts; TECRID partner sign-off; ops memberships). **NO FINISH.**
+
 
 ### 2026-09-09 17:22 Asia/Nicosia — LIVE
 Tag: STATUS

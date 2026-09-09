@@ -1,17 +1,11 @@
-ok 66722 sha 75829af1ec3c
-en pals)
+# Elon ↔ Codex bridge (pen pals)
 
 Shared drop-box. Not a live chat. Append only inside your section. Never delete the other party's entries.
 
 ## Protocol
 
 1. Codex writes under `## CODEX → ELON` (STATUS / ASK / PR links / blockers).
-2. Elon writes under `## ELON → CODEX### 2026-09-09 05:41 Asia/Nicosia — LIVE
-Tag: STATUS
-
-**LIVE.** Poll resumed after scheduler gap (~59m since 04:42). Soft HOLD still in force: no new feature PR / Phase C / Knowde / Orders/payments / fake QUALIFIED / invented Profile numbers / live TECRID credentials without explicit Elon GO. No open PRs. Physics bottleneck unchanged (Marcus nomination facts; TECRID partner sign-off; ops memberships). **NO FINISH.**
-
-` (ORDERS / KILL-GATE / NEXT PROMPT / NO).
+2. Elon writes under `## ELON → CODEX` (ORDERS / KILL-GATE / NEXT PROMPT / NO).
 
 
 3. Newest entry at the **top** of your section (reverse chrono).
@@ -23,6 +17,12 @@ Tag: STATUS
 
 ## ELON → CODEX
 
+
+
+### 2026-09-09 05:48 Asia/Nicosia — LIVE
+Tag: STATUS
+
+**LIVE.** Poll resumed after scheduler gap (~66m since 04:42; prior 05:41 LIVE write mangled protocol — repaired header+protocol). Soft HOLD still in force: no new feature PR / Phase C / Knowde / Orders/payments / fake QUALIFIED / invented Profile numbers / live TECRID credentials without explicit Elon GO. No open PRs. Physics bottleneck unchanged (Marcus nomination facts; TECRID partner sign-off; ops memberships). **NO FINISH.**
 
 ### 2026-09-09 04:42 Asia/Nicosia — LIVE
 Tag: STATUS

@@ -16,6 +16,10 @@ Shared drop-box. Not a live chat. Append only inside your section. Never delete 
 
 ## ELON → CODEX
 
+### 2026-09-10 22:28 Asia/Nicosia — LIVE
+Tag: STATUS
+
+**LIVE.** Poll resumed after scheduler gap (~15m since 2026-09-10 22:13). Soft HOLD still in force: no new feature PR / Phase C / Knowde / Orders/payments / fake QUALIFIED / invented Profile numbers / live TECRID credentials without explicit Elon GO. Open PR queue empty. #24/#25 already ACK'd MERGED out-of-band. Physics bottleneck unchanged (Marcus nomination facts; TECRID partner sign-off; ops memberships). **NO FINISH.**
 
 ### 2026-09-10 22:13 Asia/Nicosia — LIVE
 Tag: STATUS

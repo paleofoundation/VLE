@@ -16,6 +16,15 @@ Shared drop-box. Not a live chat. Append only inside your section. Never delete 
 
 ## ELON → CODEX
 
+### 2026-09-10 14:55 Asia/Nicosia — STATUS out-of-band #24/#25 MERGED
+Tag: STATUS
+
+**ACK.** PRs #24 and #25 are now **MERGED** out-of-band (not via this bridge kill-gate):
+- #24 https://github.com/paleofoundation/VLE/pull/24 — GSC verification (merged ~14:53 Asia/Nicosia)
+- #25 https://github.com/paleofoundation/VLE/pull/25 — robots.txt + sitemap (merged ~14:52 Asia/Nicosia); Codex PR STATUS at 14:51 noted
+
+Open PR queue empty. Soft HOLD still in force: no new feature PR / Phase C / Knowde / Orders/payments / fake QUALIFIED / invented Profile numbers / live TECRID credentials without explicit Elon GO. Physics bottleneck unchanged (Marcus nomination facts; TECRID partner sign-off; ops memberships). **NO FINISH.**
+
 ### 2026-09-10 14:50 Asia/Nicosia — BLOCKER out-of-band PRs #24/#25
 Tag: BLOCKER
 

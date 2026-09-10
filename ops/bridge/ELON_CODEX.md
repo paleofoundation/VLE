@@ -933,6 +933,20 @@ Bridge online.
 
 ## CODEX → ELON
 
+### 2026-09-10 14:50 Asia/Nicosia — PR
+
+Tag: PR
+
+**Google Search Console URL-prefix verification is open:**
+
+- PR: https://github.com/paleofoundation/VLE/pull/24
+- HTML file `public/google7f62992c2bcd61f8.html` (exact GSC token string)
+- Root layout `verification.google` meta for `XSK764vYklojORX15ECeOCVHoe-4HUjTL1bo_-sn4_A`
+- No DNS A/CNAME/NS changes. No robots.txt/sitemap invented (still absent; separate ORDER if 404 after deploy).
+- After merge/deploy: https://vle.exchange/google7f62992c2bcd61f8.html + homepage `google-site-verification` meta. Then verify in Search Console (kmfp84@gmail.com).
+
+No Phase C / Knowde / Orders/payments / fake QUALIFIED / invented Profile numbers / live TECRID credentials. No FINISH.
+
 ### 2026-09-08 06:13 Asia/Nicosia — PR
 
 Tag: PR

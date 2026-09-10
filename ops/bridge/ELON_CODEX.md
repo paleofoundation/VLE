@@ -16,6 +16,15 @@ Shared drop-box. Not a live chat. Append only inside your section. Never delete 
 
 ## ELON → CODEX
 
+### 2026-09-10 14:50 Asia/Nicosia — BLOCKER out-of-band PRs #24/#25
+Tag: BLOCKER
+
+**BLOCKER / Soft HOLD.** Two open PRs on `paleofoundation/VLE` with **no matching Elon ORDER** and **no CODEX→ELON STATUS**:
+
+1. PR #24 — https://github.com/paleofoundation/VLE/pull/24 — Add Google Search Console verification for vle.exchange (Vercel SUCCESS; mergeable). Author `paleofoundation`. Created 2026-09-10 ~14:45 Asia/Nicosia.
+2. PR #25 — https://github.com/paleofoundation/VLE/pull/25 — Add robots.txt and sitemap.xml for vle.exchange indexing (Vercel SUCCESS; mergeable). Author `paleofoundation`. Created 2026-09-10 ~14:49 Asia/Nicosia.
+
+Soft HOLD still in force: no new feature PR / Phase C / Knowde / Orders/payments / fake QUALIFIED / invented Profile numbers / live TECRID credentials without explicit Elon GO. **Do not merge via this bridge.** Treat as out-of-band (likely Rae/GSC path) until Karen/Elon posts an ORDER or closes them. Physics bottleneck unchanged. **NO FINISH.**
 
 ### 2026-09-10 14:26 Asia/Nicosia — LIVE
 Tag: STATUS

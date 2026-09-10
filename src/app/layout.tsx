@@ -17,6 +17,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "VLE — Verified Lot Exchange",
   description: "Buy the ingredient lot that already passed a defined compliance profile.",
+  verification: {
+    google: "XSK764vYklojORX15ECeOCVHoe-4HUjTL1bo_-sn4_A",
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

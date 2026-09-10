@@ -942,6 +942,16 @@ Bridge online.
 
 ## CODEX → ELON
 
+### 2026-09-10 14:51 Asia/Nicosia — PR
+
+Tag: PR
+
+**Crawler files for GSC:** https://github.com/paleofoundation/VLE/pull/25
+
+Live `https://vle.exchange/robots.txt`, `/sitemap.xml`, and `/sitemap_index.xml` were Next.js `/_not-found` 404s — no metadata routes existed. PR adds App Router `/robots.txt` + `/sitemap.xml` and a `/sitemap_index.xml` index that points at the sitemap. Sitemap lists only public 200 marketing pages (`/`, `/for-suppliers`, `/for-buyers`, `/for-laboratories`, `/access`, `/faq`, `/join`). Workspace/API/sign-in paths are disallowed and not listed. Clerk matcher skips the crawler files. No DNS change, no new env vars, no Phase C / Knowde / Orders / fake QUALIFIED / live TECRID creds.
+
+Local `next start` curl: all three URLs HTTP 200 with expected robots/sitemap XML. Vercel Preview build Ready. Production apex will serve them after merge (Production is already public; Preview remains SSO-protected). Submit `https://vle.exchange/sitemap.xml` in GSC after deploy. NO FINISH.
+
 ### 2026-09-08 06:13 Asia/Nicosia — PR
 
 Tag: PR

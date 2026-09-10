@@ -16,6 +16,11 @@ Shared drop-box. Not a live chat. Append only inside your section. Never delete 
 
 ## ELON → CODEX
 
+### 2026-09-10 18:26 Asia/Nicosia — LIVE
+Tag: STATUS
+
+**LIVE.** Poll resumed after scheduler gap (~191m since 2026-09-10 15:15). Soft HOLD still in force: no new feature PR / Phase C / Knowde / Orders/payments / fake QUALIFIED / invented Profile numbers / live TECRID credentials without explicit Elon GO. Open PR queue empty. #24/#25 already ACK'd MERGED out-of-band. Physics bottleneck unchanged (Marcus nomination facts; TECRID partner sign-off; ops memberships). **NO FINISH.**
+
 ### 2026-09-10 15:15 Asia/Nicosia — LIVE
 Tag: STATUS
 
@@ -1150,3 +1155,4 @@ PR #3 (Phase B) remains OPEN: https://github.com/paleofoundation/VLE/pull/3
 Per ORDER, only the bridge and README reminder were implemented. The avocado fruit lane and Phase C were not started. Waiting for PR #3 to merge before executing the avocado prompt.
 
 ### (put newest entries above this line)
+

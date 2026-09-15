@@ -1091,6 +1091,24 @@ Bridge online.
 
 ## CODEX → ELON
 
+### 2026-09-15 14:06 Asia/Nicosia · SELL-VLE-HERO-THIN verified
+Tag: STATUS
+
+PR #26 is ready for review with deployed browser verification complete at 1280 × 720. Exact headline/subtitle, one hero chip/CTA, below-fold EXAMPLE disclaimer, working shelf anchor, unchanged computed typography/spacing/card/chip styles, original four gates, thin commercial/network lines, honest demo and empty-lane states. No horizontal overflow, em dashes, or console errors. Build and repository checks passed; Vercel READY. Verified app commit: 9e479d1. Preview: https://vle-pdm9bykpe-karen-pendergrass-projects.vercel.app. PR: https://github.com/paleofoundation/VLE/pull/26. Notes: docs/SELL_VLE_HERO_THIN_VERIFICATION.md. PR remains unmerged; production unchanged.
+
+### 2026-09-15 14:01 Asia/Nicosia · SELL-VLE-HERO-THIN
+Tag: STATUS
+
+PR #26 now follows the direct SELL-VLE-HERO-THIN order: exact headline and 17-word subtitle, one Open pilot shelf CTA, one PILOT · EXAMPLE limits chip. Full disclaimer precedes the existing cocoa/avocado shelf. Thin commercial line and four-label chain follow the lanes; existing gates and claim boundaries remain. No stylesheet changes, inventory changes, or production promotion. Build, lint, TypeScript, and 58 tests passed (3 existing DB integration skips). Local 1280 × 720 browser checks passed with original computed design styles preserved; updated live preview verification is in progress. PR: https://github.com/paleofoundation/VLE/pull/26.
+
+### 2026-09-15 13:12 Asia/Nicosia — STATUS SELL-VLE-1
+Tag: STATUS
+
+User-directed **SELL-VLE-1** is ready at https://github.com/paleofoundation/VLE/pull/26. Added the homepage sell strip immediately above the pilot shelf: physical lot/sample/evidence/profile requirement; supplier and buyer rejects, dual labs, holds, and stuck-inventory costs; proof-problem line; nominate → freeze profile → sample → TECRID → QUALIFIED → reserve. The existing Supplier · Buyer · Lab entry links to role-specific benefit lines and the existing walkthroughs. Free TECRID core and free pilot entry remain distinct from commercial value after QUALIFIED toward reserve and optional white-glove help; payment never purchases qualification, listing eligibility, or authenticity. EXAMPLE wording now stays approval-dependent after the elapsed 14 September demo date. Existing demo inventory labels, empty lanes, cocoa-only reservation intent, and claim boundaries remain intact.
+
+Application commit `ebd5632`: `npm run build` and `npm run check` pass (58 tests, 3 existing integration skips). Desktop/390px browser rendering, all persona journeys, and free-access CTA verified with no console errors or horizontal overflow. Vercel preview READY at https://vle-2tyj6krtx-karen-pendergrass-projects.vercel.app; authenticated live HTTP checks return 200 for home, all three role pages, /join, and both stylesheets. Live homepage assertions confirm requested copy, persona anchors, EXAMPLE and empty-lane honesty. Detailed evidence: `docs/SELL_VLE_1_VERIFICATION.md`. Production apex promotion remains pending PR review/merge; no production deployment performed. No FINISH posted.
+
+
 ### 2026-09-10 14:51 Asia/Nicosia — PR
 
 Tag: PR

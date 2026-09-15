@@ -1,15 +1,10 @@
-import Link from "next/link";
-import { Fragment } from "react";
-import { homePersonas } from "./home-personas";
-import styles from "./home.module.css";
-
 type PilotAudience = "exchange" | "supplier" | "buyer" | "laboratory" | "access";
 
 const statusByAudience = {
   exchange: [
     ["Live pilot", "Managed onboarding"],
     ["Entry", "Supplier · Buyer · Lab"],
-    ["Profile mode", "EXAMPLE · approval pending"],
+    ["Profile mode", "EXAMPLE through 14 Sep"],
     ["Claim", "Lot-specific only"],
   ],
   supplier: [
@@ -44,16 +39,7 @@ export function PilotStatusRail({ audience }: { audience: PilotAudience }) {
       {statusByAudience[audience].map(([label, value], index) => (
         <div key={label}>
           <span className="mono">{String(index + 1).padStart(2, "0")} / {label}</span>
-          {audience === "exchange" && label === "Entry" ? (
-            <strong className={styles.personaEntry}>
-              {homePersonas.map((persona, personaIndex) => (
-                <Fragment key={persona.id}>
-                  {personaIndex > 0 ? " · " : ""}
-                  <Link href={`#${persona.id}`}>{persona.label}</Link>
-                </Fragment>
-              ))}
-            </strong>
-          ) : <strong>{value}</strong>}
+          <strong>{value}</strong>
         </div>
       ))}
     </section>

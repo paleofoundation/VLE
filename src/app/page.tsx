@@ -1,21 +1,16 @@
 import Link from "next/link";
 import { ExampleProfileNotice } from "./example-profile-notice";
-import { PilotStatusRail } from "./pilot-status-rail";
-import { homePersonas } from "./home-personas";
-import styles from "./home.module.css";
 import { formatQuantity } from "@/lib/presentation";
 import { listPilotLanes, listPublicListings } from "@/services/vle";
 
 export const dynamic = "force-dynamic";
 
 const gateSteps = [
-  ["01", "Lot identity", "A named physical lot—not a generic product."],
+  ["01", "Lot identity", "A named physical lot, not a generic product."],
   ["02", "Inventory authority", "Quantity, location, and authority to sell verified."],
   ["03", "Controlled sample", "A sampling and custody record bound to the lot."],
   ["04", "TECRID + decision", "Current authenticated evidence and a deterministic QUALIFIED decision."],
 ] as const;
-
-const buyingSteps = ["Nominate", "Freeze profile", "Sample", "TECRID", "QUALIFIED", "Reserve"] as const;
 
 function formatDate(value: Date) {
   return new Intl.DateTimeFormat("en", { day: "2-digit", month: "short", year: "numeric" }).format(value);
@@ -57,7 +52,7 @@ function LaneShelf({ lane, listings }: { lane: PilotLane; listings: PublicListin
           <div className="emptyCopy">
             <span className="emptyIndex mono">LANE / READY</span>
             <h3>{lane.product} lane open.</h3>
-            <p>Lots appear here only after they pass {lane.profileName} v{lane.profileVersion}. An empty lane means the gate is working—not that qualification has been skipped.</p>
+            <p>Lots appear here only after they pass {lane.profileName} v{lane.profileVersion}. An empty lane means the gate is working. Qualification has not been skipped.</p>
             {isCocoa ? <Link className="textLink" href="/access">Need a passing cocoa lot? Start reviewed buyer access</Link> : <p className="laneBoundary">Avocado fruit matching is not enabled; this is qualification and publication readiness only.</p>}
           </div>
           <ol className="gateChecklist" aria-label={`Requirements before a ${lane.product} lot can list`}>
@@ -76,94 +71,17 @@ export default async function HomePage() {
   return (
     <main id="main-content">
       <section className="hero heroHome">
-        <div className="heroCopy">
-          <p className="eyebrow eyebrowLight">Verified Lot Exchange · Two pilot lanes</p>
-          <h1>Buy the lot that already passed.</h1>
-          <p className="heroLead">VLE turns a compliance requirement into a sourcing condition—before the ingredient lot is bought.</p>
+        <div className="heroCopy" style={{ gridColumn: "1 / -1" }}>
+          <p className="eyebrow eyebrowLight"><span className="signal"><i aria-hidden="true" />PILOT · EXAMPLE limits</span></p>
+          <h1>Source QUALIFIED lots before the floor.</h1>
+          <p className="heroLead">You’re already paying for metals failure. Move that spend upstream to a bounded lot with TECRID-linked evidence.</p>
           <div className="actions">
-            <Link className="button" href="/join">Join free</Link>
-            <Link className="textLink textLinkLight" href="/for-suppliers">For Suppliers</Link>
-            <Link className="textLink textLinkLight" href="/for-buyers">For Buyers</Link>
-            <Link className="textLink textLinkLight" href="/for-laboratories">For Laboratories</Link>
-            <Link className="textLink textLinkLight" href="/access">Access</Link>
-            <Link className="textLink textLinkLight" href="/faq">FAQ</Link>
+            <Link className="button" href="#passed-lots">Open pilot shelf</Link>
           </div>
         </div>
-        <aside className="pilotCard" aria-label="Cocoa powder and avocado fruit pilot status">
-          <div className="pilotCardTop">
-            <span className="signal"><i /> Pilot lane open</span>
-            <span className="mono">PILOT / 02</span>
-          </div>
-          <div className="pilotProduct">
-            <span>Ingredient</span>
-            <strong>Cocoa powder + avocado fruit</strong>
-          </div>
-          <dl>
-            <div><dt>Pilot shelf</dt><dd>{listings.length ? `${listings.length} demo ${listings.length === 1 ? "record" : "records"}` : "Awaiting real lot facts"}</dd></div>
-            <div><dt>Profile mode</dt><dd>EXAMPLE · approval pending</dd></div>
-            <div><dt>Evidence</dt><dd>TECRID-linked</dd></div>
-          </dl>
-          <p>Expanding by proof, not by catalog.</p>
-        </aside>
       </section>
 
       <ExampleProfileNotice />
-
-      <PilotStatusRail audience="exchange" />
-
-      <section className="networkBand" aria-labelledby="network-heading">
-        <div className="networkIntro">
-          <p className="eyebrow" id="network-heading">One evidence network. Separate responsibilities.</p>
-          <p>VLE is the sourcing layer. It does not replace scientific knowledge, authenticated evidence, or finished-product certification.</p>
-        </div>
-        <ol className="networkRail">
-          <li><span>01</span><strong>HMI</strong><small>Know</small></li>
-          <li><span>02</span><strong>TECRID</strong><small>Prove evidence</small></li>
-          <li className="active"><span>03</span><strong>VLE</strong><small>Source passed lots</small></li>
-          <li><span>04</span><strong>HMTc</strong><small>Certify finished product</small></li>
-        </ol>
-      </section>
-
-      <section className={styles.sellStrip} aria-labelledby="sell-heading">
-        <div className={styles.sellIntro}>
-          <div>
-            <p className="eyebrow">Why buy through VLE</p>
-            <h2 id="sell-heading">Put the qualification decision before the buying decision.</h2>
-            <p className={styles.physics}>A real lot must be independently sampled, its evidence authenticated through TECRID, and its results assessed against a frozen profile before it can qualify for the shelf.</p>
-          </div>
-          <div>
-            <p>Rejects, dual labs testing the same lot, holds, and stuck inventory put supplier margin and buyer time and cash at risk. VLE makes lot-specific proof a sourcing condition, so both sides can check the qualification basis before committing.</p>
-            <p className={styles.proofProblem}><strong>The proof problem</strong>Does this evidence belong to this lot, and does this lot meet the buyer&apos;s requirement?</p>
-          </div>
-        </div>
-
-        <div className={styles.buyPath}>
-          <h3>How to buy through VLE</h3>
-          <ol className={styles.buySteps} aria-label="VLE buying path">
-            {buyingSteps.map((step) => <li key={step}>{step}</li>)}
-          </ol>
-          <p className={styles.pathBoundary}>Each step must clear its gate. Reserve means reservation intent after an accepted quote for a currently eligible cocoa lot; it does not allocate stock or create an Order. Avocado fruit remains qualification and publication readiness only.</p>
-        </div>
-
-        <div className={styles.personas}>
-          {homePersonas.map((persona) => (
-            <article className={styles.persona} id={persona.id} key={persona.id} tabIndex={-1} aria-labelledby={`${persona.id}-heading`}>
-              <h3 id={`${persona.id}-heading`}>{persona.label}</h3>
-              <p>{persona.benefit}</p>
-              <Link className="textLink" href={persona.href}>{persona.action}<span aria-hidden="true">↗</span></Link>
-            </article>
-          ))}
-        </div>
-
-        <div className={styles.commercial}>
-          <div>
-            <h3>Free TECRID trust. Commercial value in QUALIFIED certainty.</h3>
-            <p>TECRID core is free forever. Join, nominate, and browse VLE free through the pilot. VLE&apos;s commercial value is lot-specific certainty after QUALIFIED toward reserve, plus optional white-glove help. Any future VLE transaction charges would come only after QUALIFIED; white-glove scope and terms are agreed separately.</p>
-            <p className={styles.paymentBoundary}><strong>Payment never buys QUALIFIED status, listing eligibility, or evidence authenticity.</strong> A passed-profile claim applies only to the identified lot and frozen profile version; HMTc certifies finished products.</p>
-          </div>
-          <Link className="button buttonDark" href="/join">Start with free access</Link>
-        </div>
-      </section>
 
       <section className="shelfSection" id="passed-lots">
         <div className="sectionHeading shelfHeading">
@@ -175,7 +93,13 @@ export default async function HomePage() {
           <span className="liveMark"><i /> {listings.length} demo</span>
         </div>
 
-        <div className="pilotLanes">{lanes.map((lane) => <LaneShelf key={lane.productTypeId} lane={lane} listings={listings.filter(({ productCode }) => productCode === lane.productCode)} />)}</div>
+        <div className="pilotLanes">
+          {lanes.map((lane) => <LaneShelf key={lane.productTypeId} lane={lane} listings={listings.filter(({ productCode }) => productCode === lane.productCode)} />)}
+          <section className="laneShelf sectionHeading" aria-label="Commercial model and evidence network">
+            <p className="sectionLead">Free TECRID trust · money on QUALIFIED / white-glove</p>
+            <p className="sectionLead" aria-label="Evidence network">HMI → TECRID → VLE → HMTc</p>
+          </section>
+        </div>
       </section>
 
       <section className="truthSection" aria-labelledby="truth-heading">
@@ -184,8 +108,8 @@ export default async function HomePage() {
           <h2 id="truth-heading">“Passed Compliance Profile X.”</h2>
         </div>
         <div className="truthDetail">
-          <p>That claim belongs to one identified physical lot, one frozen profile version, and current TECRID-linked evidence.</p>
-          <p>TECRID authenticates evidence. VLE separately records lot identity, inventory facts, sampling, qualification, and listing eligibility. HMTc—not VLE—certifies finished products.</p>
+          <p>That claim belongs to one identified physical lot, one frozen profile version, and current TECRID-linked evidence. Payment never buys qualification, listing eligibility, or authenticity.</p>
+          <p>TECRID authenticates evidence. VLE separately records lot identity, inventory facts, sampling, qualification, and listing eligibility. HMTc certifies finished products.</p>
         </div>
       </section>
     </main>

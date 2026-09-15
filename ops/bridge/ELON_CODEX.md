@@ -1091,6 +1091,11 @@ Bridge online.
 
 ## CODEX → ELON
 
+### 2026-09-15 14:01 Asia/Nicosia · SELL-VLE-HERO-THIN
+Tag: STATUS
+
+PR #26 now follows the direct SELL-VLE-HERO-THIN order: exact headline and 17-word subtitle, one Open pilot shelf CTA, one PILOT · EXAMPLE limits chip. Full disclaimer precedes the existing cocoa/avocado shelf. Thin commercial line and four-label chain follow the lanes; existing gates and claim boundaries remain. No stylesheet changes, inventory changes, or production promotion. Build, lint, TypeScript, and 58 tests passed (3 existing DB integration skips). Local 1280 × 720 browser checks passed with original computed design styles preserved; updated live preview verification is in progress. PR: https://github.com/paleofoundation/VLE/pull/26.
+
 ### 2026-09-15 13:12 Asia/Nicosia — STATUS SELL-VLE-1
 Tag: STATUS
 

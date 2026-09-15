@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { ExampleProfileNotice } from "./example-profile-notice";
 import { PilotStatusRail } from "./pilot-status-rail";
+import { homePersonas } from "./home-personas";
+import styles from "./home.module.css";
 import { formatQuantity } from "@/lib/presentation";
 import { listPilotLanes, listPublicListings } from "@/services/vle";
 
@@ -12,6 +14,8 @@ const gateSteps = [
   ["03", "Controlled sample", "A sampling and custody record bound to the lot."],
   ["04", "TECRID + decision", "Current authenticated evidence and a deterministic QUALIFIED decision."],
 ] as const;
+
+const buyingSteps = ["Nominate", "Freeze profile", "Sample", "TECRID", "QUALIFIED", "Reserve"] as const;
 
 function formatDate(value: Date) {
   return new Intl.DateTimeFormat("en", { day: "2-digit", month: "short", year: "numeric" }).format(value);
@@ -96,7 +100,7 @@ export default async function HomePage() {
           </div>
           <dl>
             <div><dt>Pilot shelf</dt><dd>{listings.length ? `${listings.length} demo ${listings.length === 1 ? "record" : "records"}` : "Awaiting real lot facts"}</dd></div>
-            <div><dt>Profile mode</dt><dd>EXAMPLE · to 14 Sep</dd></div>
+            <div><dt>Profile mode</dt><dd>EXAMPLE · approval pending</dd></div>
             <div><dt>Evidence</dt><dd>TECRID-linked</dd></div>
           </dl>
           <p>Expanding by proof, not by catalog.</p>
@@ -118,6 +122,47 @@ export default async function HomePage() {
           <li className="active"><span>03</span><strong>VLE</strong><small>Source passed lots</small></li>
           <li><span>04</span><strong>HMTc</strong><small>Certify finished product</small></li>
         </ol>
+      </section>
+
+      <section className={styles.sellStrip} aria-labelledby="sell-heading">
+        <div className={styles.sellIntro}>
+          <div>
+            <p className="eyebrow">Why buy through VLE</p>
+            <h2 id="sell-heading">Put the qualification decision before the buying decision.</h2>
+            <p className={styles.physics}>A real lot must be independently sampled, its evidence authenticated through TECRID, and its results assessed against a frozen profile before it can qualify for the shelf.</p>
+          </div>
+          <div>
+            <p>Rejects, dual labs testing the same lot, holds, and stuck inventory put supplier margin and buyer time and cash at risk. VLE makes lot-specific proof a sourcing condition, so both sides can check the qualification basis before committing.</p>
+            <p className={styles.proofProblem}><strong>The proof problem</strong>Does this evidence belong to this lot, and does this lot meet the buyer&apos;s requirement?</p>
+          </div>
+        </div>
+
+        <div className={styles.buyPath}>
+          <h3>How to buy through VLE</h3>
+          <ol className={styles.buySteps} aria-label="VLE buying path">
+            {buyingSteps.map((step) => <li key={step}>{step}</li>)}
+          </ol>
+          <p className={styles.pathBoundary}>Each step must clear its gate. Reserve means reservation intent after an accepted quote for a currently eligible cocoa lot; it does not allocate stock or create an Order. Avocado fruit remains qualification and publication readiness only.</p>
+        </div>
+
+        <div className={styles.personas}>
+          {homePersonas.map((persona) => (
+            <article className={styles.persona} id={persona.id} key={persona.id} tabIndex={-1} aria-labelledby={`${persona.id}-heading`}>
+              <h3 id={`${persona.id}-heading`}>{persona.label}</h3>
+              <p>{persona.benefit}</p>
+              <Link className="textLink" href={persona.href}>{persona.action}<span aria-hidden="true">↗</span></Link>
+            </article>
+          ))}
+        </div>
+
+        <div className={styles.commercial}>
+          <div>
+            <h3>Free TECRID trust. Commercial value in QUALIFIED certainty.</h3>
+            <p>TECRID core is free forever. Join, nominate, and browse VLE free through the pilot. VLE&apos;s commercial value is lot-specific certainty after QUALIFIED toward reserve, plus optional white-glove help. Any future VLE transaction charges would come only after QUALIFIED; white-glove scope and terms are agreed separately.</p>
+            <p className={styles.paymentBoundary}><strong>Payment never buys QUALIFIED status, listing eligibility, or evidence authenticity.</strong> A passed-profile claim applies only to the identified lot and frozen profile version; HMTc certifies finished products.</p>
+          </div>
+          <Link className="button buttonDark" href="/join">Start with free access</Link>
+        </div>
       </section>
 
       <section className="shelfSection" id="passed-lots">

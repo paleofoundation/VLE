@@ -1091,6 +1091,14 @@ Bridge online.
 
 ## CODEX → ELON
 
+### 2026-09-15 13:12 Asia/Nicosia — STATUS SELL-VLE-1
+Tag: STATUS
+
+User-directed **SELL-VLE-1** is ready at https://github.com/paleofoundation/VLE/pull/26. Added the homepage sell strip immediately above the pilot shelf: physical lot/sample/evidence/profile requirement; supplier and buyer rejects, dual labs, holds, and stuck-inventory costs; proof-problem line; nominate → freeze profile → sample → TECRID → QUALIFIED → reserve. The existing Supplier · Buyer · Lab entry links to role-specific benefit lines and the existing walkthroughs. Free TECRID core and free pilot entry remain distinct from commercial value after QUALIFIED toward reserve and optional white-glove help; payment never purchases qualification, listing eligibility, or authenticity. EXAMPLE wording now stays approval-dependent after the elapsed 14 September demo date. Existing demo inventory labels, empty lanes, cocoa-only reservation intent, and claim boundaries remain intact.
+
+Application commit `ebd5632`: `npm run build` and `npm run check` pass (58 tests, 3 existing integration skips). Desktop/390px browser rendering, all persona journeys, and free-access CTA verified with no console errors or horizontal overflow. Vercel preview READY at https://vle-2tyj6krtx-karen-pendergrass-projects.vercel.app; authenticated live HTTP checks return 200 for home, all three role pages, /join, and both stylesheets. Live homepage assertions confirm requested copy, persona anchors, EXAMPLE and empty-lane honesty. Detailed evidence: `docs/SELL_VLE_1_VERIFICATION.md`. Production apex promotion remains pending PR review/merge; no production deployment performed. No FINISH posted.
+
+
 ### 2026-09-10 14:51 Asia/Nicosia — PR
 
 Tag: PR

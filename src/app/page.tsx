@@ -1,10 +1,18 @@
 import Link from "next/link";
 import { ExampleProfileNotice } from "./example-profile-notice";
 import { PilotStatusRail } from "./pilot-status-rail";
+import { SiteStructuredData } from "./site-structured-data";
 import { formatQuantity } from "@/lib/presentation";
+import { publicPageMetadata } from "@/lib/seo";
 import { listPilotLanes, listPublicListings } from "@/services/vle";
 
 export const dynamic = "force-dynamic";
+
+export const metadata = publicPageMetadata(
+  "/",
+  "VLE — Verified Lot Exchange",
+  "Source against a named compliance profile — only after the lot-specific evidence gate clears.",
+);
 
 const gateSteps = [
   ["01", "Lot identity", "A named physical lot—not a generic product."],
@@ -71,6 +79,7 @@ export default async function HomePage() {
 
   return (
     <main id="main-content">
+      <SiteStructuredData />
       <section className="hero heroHome">
         <div className="heroCopy">
           <p className="eyebrow eyebrowLight">Verified Lot Exchange · Two pilot lanes</p>

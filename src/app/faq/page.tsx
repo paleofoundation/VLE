@@ -1,10 +1,12 @@
-import type { Metadata } from "next";
 import Link from "next/link";
+import { publicPageMetadata } from "@/lib/seo";
+import { SiteStructuredData } from "../site-structured-data";
 
-export const metadata: Metadata = {
-  title: "VLE FAQ — TECRID, Lab Verification, and Pilot Diligence",
-  description: "Upfront answers about the VLE and TECRID evidence path, laboratory verification, anti-fake-issuer controls, independent sampling, and the EU-first pilot.",
-};
+export const metadata = publicPageMetadata(
+  "/faq",
+  "VLE FAQ — TECRID, Lab Verification, and Pilot Diligence",
+  "Upfront answers about the VLE and TECRID evidence path, laboratory verification, anti-fake-issuer controls, independent sampling, and the EU-first pilot.",
+);
 
 const workflow = [
   ["01", "Nominate", "A supplier identifies a physical lot, available quantity, warehouse location, and authority."],
@@ -52,6 +54,7 @@ const questions = [
 export default function FaqPage() {
   return (
     <main id="main-content" className="faqPage">
+      <SiteStructuredData />
       <section className="faqHero" aria-labelledby="faq-heading">
         <div>
           <p className="eyebrow eyebrowLight">Public diligence FAQ</p>

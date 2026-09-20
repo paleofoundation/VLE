@@ -1,11 +1,12 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { ExampleProfileNotice } from "../example-profile-notice";
+import { publicPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Join VLE — Free Core Access",
-  description: "Join the Verified Lot Exchange pilot. Core access is free forever; optional white-glove help never buys qualification, listing eligibility, or evidence authenticity.",
-};
+export const metadata = publicPageMetadata(
+  "/join",
+  "Join VLE — Free Core Access",
+  "Join the Verified Lot Exchange pilot. Core access is free forever; optional white-glove help never buys qualification, listing eligibility, or evidence authenticity.",
+);
 
 const coreFeatures = [
   "Browse the public eligibility shelf",

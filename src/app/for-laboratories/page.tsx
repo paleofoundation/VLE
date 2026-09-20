@@ -1,12 +1,13 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { ExampleProfileNotice } from "../example-profile-notice";
 import { PilotStatusRail } from "../pilot-status-rail";
+import { publicPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "For laboratories — from controlled sample to authenticated evidence | VLE",
-  description: "See how laboratories support VLE with controlled sample receipt and TECRID-authenticated evidence without turning a supplier PDF into a qualification decision.",
-};
+export const metadata = publicPageMetadata(
+  "/for-laboratories",
+  "For laboratories — from controlled sample to authenticated evidence | VLE",
+  "See how laboratories support VLE with controlled sample receipt and TECRID-authenticated evidence without turning a supplier PDF into a qualification decision.",
+);
 
 const steps = [
   {

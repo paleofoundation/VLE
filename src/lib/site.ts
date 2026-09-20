@@ -1,5 +1,7 @@
 /** Canonical production origin. Apex is the indexed host; www permanently redirects here. */
-export const SITE_URL = "https://vle.exchange";
+export const SITE_HOST = "vle.exchange";
+export const SITE_WWW_HOST = "www.vle.exchange";
+export const SITE_URL = `https://${SITE_HOST}`;
 
 /**
  * Public marketing pages confirmed HTTP 200 on production.
@@ -15,6 +17,8 @@ export const PUBLIC_SITEMAP_PATHS = [
   "/join",
 ] as const;
 
+export type PublicSitemapPath = (typeof PUBLIC_SITEMAP_PATHS)[number];
+
 /** Prefixes crawlers should skip. These are not access-control; authorization stays on the server. */
 export const ROBOTS_DISALLOW_PATHS = [
   "/api/",
@@ -25,10 +29,72 @@ export const ROBOTS_DISALLOW_PATHS = [
   "/sign-in",
 ] as const;
 
-export function absolutePublicUrl(path: (typeof PUBLIC_SITEMAP_PATHS)[number]) {
-  return path === "/" ? SITE_URL : `${SITE_URL}${path}`;
+/** Public pages that must stay indexable and off the Clerk handshake path. `/access` still needs Clerk for signed-in mapping. */
+export const PUBLIC_PATHS_WITHOUT_CLERK = PUBLIC_SITEMAP_PATHS.filter((path) => path !== "/access");
+
+export const INDEX_FOLLOW_HEADER = { key: "X-Robots-Tag", value: "index, follow" } as const;
+
+export function isPublicSitemapPath(path: string): path is PublicSitemapPath {
+  return (PUBLIC_SITEMAP_PATHS as readonly string[]).includes(path);
+}
+
+export function skipsClerkHandshake(path: string) {
+  return (PUBLIC_PATHS_WITHOUT_CLERK as readonly string[]).includes(path);
+}
+
+export function absolutePublicUrl(path: PublicSitemapPath) {
+  return path === "/" ? `${SITE_URL}/` : `${SITE_URL}${path}`;
 }
 
 export function publicSitemapUrls() {
   return PUBLIC_SITEMAP_PATHS.map(absolutePublicUrl);
+}
+
+export function publicRobotsHeaders() {
+  return PUBLIC_SITEMAP_PATHS.map((path) => ({
+    source: path,
+    headers: [INDEX_FOLLOW_HEADER],
+  }));
+}
+
+export function wwwToApexRedirects() {
+  return [
+    {
+      source: "/",
+      has: [{ type: "host" as const, value: SITE_WWW_HOST }],
+      destination: `${SITE_URL}/`,
+      statusCode: 301 as const,
+    },
+    {
+      source: "/:path*",
+      has: [{ type: "host" as const, value: SITE_WWW_HOST }],
+      destination: `${SITE_URL}/:path*`,
+      statusCode: 301 as const,
+    },
+  ];
+}
+
+/** Collapse www to the live apex URL. Returns null when the host is already canonical. */
+export function apexUrlFromRequest(host: string | null | undefined, href: string) {
+  const hostname = host?.split(":")[0]?.toLowerCase();
+  if (hostname !== SITE_WWW_HOST) return null;
+  const url = new URL(href);
+  url.protocol = "https:";
+  url.hostname = SITE_HOST;
+  url.port = "";
+  return url.toString();
+}
+
+/** Drop Clerk handshake query params so crawlers never land on a 500 handshake URL. */
+export function publicUrlWithoutClerkHandshake(href: string) {
+  const url = new URL(href);
+  if (!isPublicSitemapPath(url.pathname)) return null;
+  let changed = false;
+  for (const key of [...url.searchParams.keys()]) {
+    if (key.startsWith("__clerk_")) {
+      url.searchParams.delete(key);
+      changed = true;
+    }
+  }
+  return changed ? url.toString() : null;
 }

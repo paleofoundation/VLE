@@ -1,13 +1,14 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { ExampleProfileNotice } from "../example-profile-notice";
 import { PilotStatusRail } from "../pilot-status-rail";
+import { publicPageMetadata } from "@/lib/seo";
 import { PrintButton } from "./print-button";
 
-export const metadata: Metadata = {
-  title: "For suppliers — from stocked lot to passed-lot listing | VLE",
-  description: "See how VLE moves an identified ingredient lot through sampling, TECRID-linked evidence, deterministic qualification, and gated commercial intent.",
-};
+export const metadata = publicPageMetadata(
+  "/for-suppliers",
+  "For suppliers — from stocked lot to passed-lot listing | VLE",
+  "See how VLE moves an identified ingredient lot through sampling, TECRID-linked evidence, deterministic qualification, and gated commercial intent.",
+);
 
 const steps = [
   {

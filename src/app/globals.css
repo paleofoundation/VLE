@@ -90,6 +90,15 @@ main { min-height: calc(100vh - 160px); }
 .siteHeader nav { display: flex; align-items: center; gap: clamp(16px, 2.4vw, 32px); font-size: 13px; font-weight: 650; }
 .siteHeader nav > a:not(.button) { padding: 27px 0 25px; border-bottom: 2px solid transparent; }
 .siteHeader nav > a:not(.button):hover { border-color: var(--green); }
+.workspaceAccount {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  min-height: 40px;
+  padding: 0 clamp(22px, 5vw, 72px);
+  border-bottom: 1px solid var(--line);
+  background: var(--white);
+}
 
 .exampleProfileNotice {
   display: grid;

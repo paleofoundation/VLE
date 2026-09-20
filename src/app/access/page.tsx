@@ -1,8 +1,15 @@
 import Link from "next/link";
 import { resolveCurrentAccess } from "@/lib/current-actor";
+import { publicPageMetadata } from "@/lib/seo";
 import { PilotStatusRail } from "../pilot-status-rail";
 
 export const dynamic = "force-dynamic";
+
+export const metadata = publicPageMetadata(
+  "/access",
+  "Access VLE — reviewed pilot entry",
+  "Clerk authenticates your identity. VLE operations then maps that identity to one verified organization and role; signing in alone reveals no private workspace data.",
+);
 
 export default async function AccessPage() {
   const access = await resolveCurrentAccess();

@@ -1,12 +1,13 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { ExampleProfileNotice } from "../example-profile-notice";
 import { PilotStatusRail } from "../pilot-status-rail";
+import { publicPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "For buyers — from requirement to reservation intent | VLE",
-  description: "See how VLE connects a cocoa requirement to an eligible listing, a time-limited supplier quote, and a reservation intent.",
-};
+export const metadata = publicPageMetadata(
+  "/for-buyers",
+  "For buyers — from requirement to reservation intent | VLE",
+  "See how VLE connects a cocoa requirement to an eligible listing, a time-limited supplier quote, and a reservation intent.",
+);
 
 const steps = [
   {

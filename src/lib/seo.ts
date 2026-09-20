@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import { SITE_URL, absolutePublicUrl } from "@/lib/site";
+import { SITE_URL, absolutePublicUrl, type PublicSitemapPath } from "./site";
 
 export const SITE_NAME = "Verified Lot Exchange";
 
-export function publicPageMetadata(path: "/" | "/faq", title: string, description: string): Metadata {
+export function publicPageMetadata(path: PublicSitemapPath, title: string, description: string): Metadata {
   const url = absolutePublicUrl(path);
   const image = {
     url: `${SITE_URL}/opengraph-image`,

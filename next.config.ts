@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import { publicRobotsHeaders, wwwToApexRedirects } from "./src/lib/site";
 
 const nextConfig: NextConfig = {
   async redirects() {
@@ -6,15 +7,13 @@ const nextConfig: NextConfig = {
       {
         source: "/pricing",
         destination: "/join",
-        permanent: true,
+        statusCode: 301,
       },
-      {
-        source: "/:path*",
-        has: [{ type: "host", value: "www.vle.exchange" }],
-        destination: "https://vle.exchange/:path*",
-        permanent: true,
-      },
+      ...wwwToApexRedirects(),
     ];
+  },
+  async headers() {
+    return publicRobotsHeaders();
   },
 };
 

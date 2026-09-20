@@ -84,3 +84,17 @@ export function apexUrlFromRequest(host: string | null | undefined, href: string
   url.port = "";
   return url.toString();
 }
+
+/** Drop Clerk handshake query params so crawlers never land on a 500 handshake URL. */
+export function publicUrlWithoutClerkHandshake(href: string) {
+  const url = new URL(href);
+  if (!isPublicSitemapPath(url.pathname)) return null;
+  let changed = false;
+  for (const key of [...url.searchParams.keys()]) {
+    if (key.startsWith("__clerk_")) {
+      url.searchParams.delete(key);
+      changed = true;
+    }
+  }
+  return changed ? url.toString() : null;
+}

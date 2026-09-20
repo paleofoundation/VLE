@@ -1,7 +1,7 @@
 import { clerkMiddleware } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 import type { NextFetchEvent, NextRequest } from "next/server";
-import { apexUrlFromRequest, skipsClerkHandshake } from "@/lib/site";
+import { apexUrlFromRequest, publicUrlWithoutClerkHandshake, skipsClerkHandshake } from "@/lib/site";
 
 const clerk = clerkMiddleware();
 
@@ -9,6 +9,11 @@ export default function proxy(request: NextRequest, event: NextFetchEvent) {
   const apexUrl = apexUrlFromRequest(request.headers.get("host"), request.url);
   if (apexUrl) {
     return NextResponse.redirect(apexUrl, 301);
+  }
+
+  const cleanPublicUrl = publicUrlWithoutClerkHandshake(request.url);
+  if (cleanPublicUrl) {
+    return NextResponse.redirect(cleanPublicUrl, 301);
   }
 
   const { pathname } = request.nextUrl;

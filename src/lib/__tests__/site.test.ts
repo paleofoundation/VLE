@@ -10,6 +10,7 @@ import {
   isPublicSitemapPath,
   publicRobotsHeaders,
   publicSitemapUrls,
+  publicUrlWithoutClerkHandshake,
   skipsClerkHandshake,
   wwwToApexRedirects,
 } from "../site";
@@ -99,5 +100,12 @@ describe("public search catalog", () => {
     ]);
     expect(apexUrlFromRequest("www.vle.exchange", "https://www.vle.exchange/faq?q=1")).toBe("https://vle.exchange/faq?q=1");
     expect(apexUrlFromRequest("vle.exchange", "https://vle.exchange/faq")).toBeNull();
+  });
+
+  it("strips Clerk handshake params from public URLs only", () => {
+    expect(publicUrlWithoutClerkHandshake("https://vle.exchange/access?__clerk_handshake=1")).toBe("https://vle.exchange/access");
+    expect(publicUrlWithoutClerkHandshake("https://vle.exchange/?__clerk_handshake=1&keep=1")).toBe("https://vle.exchange/?keep=1");
+    expect(publicUrlWithoutClerkHandshake("https://vle.exchange/ops?__clerk_handshake=1")).toBeNull();
+    expect(publicUrlWithoutClerkHandshake("https://vle.exchange/join")).toBeNull();
   });
 });

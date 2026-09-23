@@ -1,6 +1,8 @@
 import Link from "next/link";
+import { headers } from "next/headers";
 import { resolveCurrentAccess } from "@/lib/current-actor";
 import { publicPageMetadata } from "@/lib/seo";
+import { accessRequestNeedsClerk } from "@/lib/site";
 import { PilotStatusRail } from "../pilot-status-rail";
 
 export const dynamic = "force-dynamic";
@@ -11,8 +13,16 @@ export const metadata = publicPageMetadata(
   "Clerk authenticates your identity. VLE operations then maps that identity to one verified organization and role; signing in alone reveals no private workspace data.",
 );
 
-export default async function AccessPage() {
-  const access = await resolveCurrentAccess();
+export default async function AccessPage({
+  searchParams,
+}: {
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
+}) {
+  const [params, headerStore] = await Promise.all([searchParams, headers()]);
+  // Same predicate as proxy: do not call Clerk auth() on the anonymous public page.
+  const access = accessRequestNeedsClerk(Object.keys(params), headerStore.get("cookie"))
+    ? await resolveCurrentAccess()
+    : { status: "SIGNED_OUT" as const };
   if (access.status === "SIGNED_OUT") {
     return <main id="main-content" className="accessPage"><PilotStatusRail audience="access" /><div className="accessCard"><div className="accessStatusHead"><span className="mono">ACCESS / SIGN IN</span><span className="status accessStatus"><i /> Reviewed pilot</span></div><h1>Sign in to enter the review lane.</h1><p>Clerk authenticates your identity. VLE operations then maps that identity to one verified organization and role; signing in alone reveals no private workspace data.</p><div className="accessPromise"><span className="mono">WHAT HAPPENS NEXT</span><strong>Identity → organization review → workspace</strong><p>No buyer, supplier, or operations data appears before the server-side membership exists.</p></div><div className="accessActions"><Link className="button buttonDark" href="/sign-in">Sign in securely</Link><Link className="textLink" href="/#passed-lots">Preview the pilot shelf</Link></div></div></main>;
   }

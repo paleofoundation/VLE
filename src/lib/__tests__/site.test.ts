@@ -10,7 +10,10 @@ import {
   isPublicSitemapPath,
   publicRobotsHeaders,
   publicSitemapUrls,
+  accessRequestNeedsClerk,
+  clerkBypassRedirect,
   publicUrlWithoutClerkHandshake,
+  requestSkipsClerk,
   skipsClerkHandshake,
   wwwToApexRedirects,
 } from "../site";
@@ -72,6 +75,26 @@ describe("public search catalog", () => {
       "/join",
     ]);
     expect(skipsClerkHandshake("/access")).toBe(false);
+    expect(requestSkipsClerk("/access", [], null)).toBe(true);
+  });
+
+  it("keeps anonymous /access off the Clerk handshake and still admits a session", () => {
+    expect(accessRequestNeedsClerk([], null)).toBe(false);
+    expect(accessRequestNeedsClerk([], "__clerk_db_jwt=dev; __client_uat=0")).toBe(false);
+    expect(accessRequestNeedsClerk([], "__clerk_redirect_count=3")).toBe(false);
+    expect(accessRequestNeedsClerk([], "__session=")).toBe(false);
+    expect(accessRequestNeedsClerk(["__clerk_handshake"], null)).toBe(true);
+    expect(accessRequestNeedsClerk([], "__session=eyJ.test")).toBe(true);
+    expect(accessRequestNeedsClerk([], "theme=dark; __session_abc12345=eyJ.test")).toBe(true);
+    expect(requestSkipsClerk("/access", [], null)).toBe(true);
+    expect(requestSkipsClerk("/access", ["__clerk_handshake"], null)).toBe(false);
+    expect(requestSkipsClerk("/for-buyers", ["__clerk_handshake"], "__session=eyJ.test")).toBe(true);
+    expect(requestSkipsClerk("/ops", [], null)).toBe(false);
+    expect(requestSkipsClerk("/buyer", [], null)).toBe(false);
+    expect(requestSkipsClerk("/sign-in", [], null)).toBe(false);
+    expect(clerkBypassRedirect("https://vle.exchange/access?__clerk_handshake=1", null)).toBeNull();
+    expect(clerkBypassRedirect("https://vle.exchange/access", null)).toBeNull();
+    expect(clerkBypassRedirect("https://vle.exchange/for-buyers?__clerk_handshake=1", null)).toBe("https://vle.exchange/for-buyers");
   });
 
   it("emits index,follow headers for every public sitemap path", () => {

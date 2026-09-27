@@ -142,8 +142,11 @@ function hasHeavyMetalPanel(analytes: readonly KasandrinosAnalyte[]) {
 }
 
 function nominationBlockers(lot: NamedLot): string[] {
+  const pilotLane = (pilotProductCodes as readonly string[]).includes(lot.productCode ?? "");
   const reasons = [
-    `${lot.productName} has no VLE product code. Nomination accepts only cocoa powder and avocado fruit (${pilotProductCodes.join(", ")}). Olive oil is outside those lanes, so this certificate cannot become a physical lot.`,
+    pilotLane
+      ? `${lot.productName} is on an active pilot lane.`
+      : `${lot.productName} has no VLE product code. Nomination accepts only cocoa powder and avocado fruit. Olive oil is outside those lanes, so this certificate cannot become a physical lot.`,
   ];
   if (!lot.supplierOrganizationId) reasons.push("No supplier organization is recorded.");
   if (lot.quantity == null || lot.quantityUnit == null) reasons.push("Quantity and quantity unit are not on the certificate. The nomination form requires a positive quantity and records the unit as kilograms.");
@@ -280,7 +283,8 @@ export function formatKasandrinosIntakeReport(packet: KasandrinosPacket, assessm
     if ("methodStatement" in source && source.methodStatement) lines.push(source.methodStatement);
     if (source.resultColumnNote) lines.push(source.resultColumnNote);
     for (const analyte of source.analytes) lines.push(analyteLine(analyte));
-    for (const reason of record.blockersBeforeNomination) lines.push(`Before nomination: ${reason}`);
+    const reasonLabel = record.disposition === "withheld_before_nomination" ? "Before nomination" : "Not stored";
+    for (const reason of record.blockersBeforeNomination) lines.push(`${reasonLabel}: ${reason}`);
     lines.push("");
   }
   lines.push("What a human must do before any of this is live");

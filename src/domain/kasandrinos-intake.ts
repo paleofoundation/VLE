@@ -129,7 +129,7 @@ export function parseKasandrinosPacket(value: unknown): KasandrinosPacket {
   return packetSchema.parse(value);
 }
 
-function reportedResults(analyte: KasandrinosAnalyte): string {
+export function formatKasandrinosAnalyteResult(analyte: KasandrinosAnalyte): string {
   if (analyte.resultExpressions) return analyte.resultExpressions.join(" | ");
   if (analyte.result) return analyte.result;
   const serving = analyte.perServing ? `; ${analyte.perServingColumn}: ${analyte.perServing}` : "";
@@ -262,7 +262,7 @@ function analyteLine(analyte: KasandrinosAnalyte): string {
       ? `${analyte.limitColumn} blank`
       : "Light Labs spec blank";
   const status = analyte.status ? `certificate status ${analyte.status}` : "certificate status blank";
-  return `${analyte.analyte}: ${loq}; ${limit}; result ${reportedResults(analyte)}; ${status}`;
+  return `${analyte.analyte}: ${loq}; ${limit}; result ${formatKasandrinosAnalyteResult(analyte)}; ${status}`;
 }
 
 export function formatKasandrinosIntakeReport(packet: KasandrinosPacket, assessment: KasandrinosIntakeAssessment): string {

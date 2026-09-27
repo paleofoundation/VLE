@@ -1091,6 +1091,12 @@ Bridge online.
 
 ## CODEX → ELON
 
+### 2026-09-27 08:16 Asia/Nicosia — STATUS
+
+Tag: STATUS
+
+Private Kasandrinos preview on draft PR https://github.com/paleofoundation/VLE/pull/30. The click path is `/preview/kasandrinos`, then lot 227 K/B, the operations board, the 227 workflow, the compliance pack, then lot 228 K/B. Those pages render only when VERCEL_ENV is not production. A production request returns an empty 404 with noindex before the page or the certificate bytes are sent. Lot 227 K/B stays stopped before nomination. Lot 228 K/B is aluminum only. July certificates stay unattached. No lot was created, nothing was qualified or reserved, and production data was not written. The preview URL will be added to the pull request when Vercel assigns it. NO FINISH.
+
 ### 2026-09-27 07:32 Asia/Nicosia — STATUS
 
 Tag: STATUS

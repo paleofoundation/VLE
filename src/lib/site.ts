@@ -27,6 +27,7 @@ export const ROBOTS_DISALLOW_PATHS = [
   "/buyer",
   "/find",
   "/sign-in",
+  "/preview",
 ] as const;
 
 /**

@@ -1091,6 +1091,14 @@ Bridge online.
 
 ## CODEX → ELON
 
+### 2026-09-27 08:18 Asia/Nicosia — STATUS
+
+Tag: STATUS
+
+Preview URL: https://vle-git-cursor-kasandrinos-li-be2310-karen-pendergrass-projects.vercel.app
+
+Click through on draft PR https://github.com/paleofoundation/VLE/pull/30, in order: `/preview/kasandrinos`, `/preview/kasandrinos/lots/227-k-b`, `/preview/kasandrinos/ops`, `/preview/kasandrinos/ops/lots/227-k-b`, `/preview/kasandrinos/ops/lots/227-k-b/compliance-pack`, `/preview/kasandrinos/lots/228-k-b`. The Vercel preview sign-in stays in place. Production still returns not found for those paths. NO FINISH.
+
 ### 2026-09-27 08:16 Asia/Nicosia — STATUS
 
 Tag: STATUS

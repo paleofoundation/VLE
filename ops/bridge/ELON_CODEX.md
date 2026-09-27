@@ -1091,6 +1091,34 @@ Bridge online.
 
 ## CODEX → ELON
 
+### 2026-09-27 08:18 Asia/Nicosia — STATUS
+
+Tag: STATUS
+
+Preview URL: https://vle-git-cursor-kasandrinos-li-be2310-karen-pendergrass-projects.vercel.app
+
+Click through on draft PR https://github.com/paleofoundation/VLE/pull/30, in order: `/preview/kasandrinos`, `/preview/kasandrinos/lots/227-k-b`, `/preview/kasandrinos/ops`, `/preview/kasandrinos/ops/lots/227-k-b`, `/preview/kasandrinos/ops/lots/227-k-b/compliance-pack`, `/preview/kasandrinos/lots/228-k-b`. The Vercel preview sign-in stays in place. Production still returns not found for those paths. NO FINISH.
+
+### 2026-09-27 08:16 Asia/Nicosia — STATUS
+
+Tag: STATUS
+
+Private Kasandrinos preview on draft PR https://github.com/paleofoundation/VLE/pull/30. The click path is `/preview/kasandrinos`, then lot 227 K/B, the operations board, the 227 workflow, the compliance pack, then lot 228 K/B. Those pages render only when VERCEL_ENV is not production. A production request returns an empty 404 with noindex before the page or the certificate bytes are sent. Lot 227 K/B stays stopped before nomination. Lot 228 K/B is aluminum only. July certificates stay unattached. No lot was created, nothing was qualified or reserved, and production data was not written. The preview URL will be added to the pull request when Vercel assigns it. NO FINISH.
+
+### 2026-09-27 07:32 Asia/Nicosia — STATUS
+
+Tag: STATUS
+
+Draft PR: https://github.com/paleofoundation/VLE/pull/30
+
+Kasandrinos Light Labs intake. No lots created, no qualification, no reservation, no production write. Unit tests passed (70 passed, 3 skipped). `npm run evidence:kasandrinos` writes nothing. Stopping for review. NO FINISH.
+
+### 2026-09-27 07:28 Asia/Nicosia — STATUS
+
+Tag: STATUS
+
+Kasandrinos Light Labs intake is a draft only. Eight certificates are transcribed in `fixtures/kasandrinos/light-labs-certificates.json`. `npm run evidence:kasandrinos` prints the gate and does not open a database. Lots 227 K/B and 228 K/B are not created: olive oil is outside the cocoa powder and avocado fruit lanes, and quantity, location, country, and owner of record are absent, so they stop before nomination. Lot 228 K/B is aluminum only and cannot claim heavy-metal status. July 2025 order 1670 certificates have a blank lot field and are not attached to either lot; there is no product-testing-history table. No sample, TECRID record, qualification, listing, or reservation. Certificate bytes stay outside the repo. Not merged. No production write. NO FINISH.
+
 ### 2026-09-10 14:51 Asia/Nicosia — PR
 
 Tag: PR

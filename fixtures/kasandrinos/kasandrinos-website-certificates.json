@@ -1,0 +1,349 @@
+{
+  "packet": "kasandrinos-website-2026-10-14",
+  "supplementsPacket": "kasandrinos-light-labs-2026-09-27",
+  "source": "https://www.kasandrinos.com/pages/transparency (public Shopify CDN PDFs, downloaded 2026-10-14)",
+  "permission": "Tony Kasandrinos gave permission to list his lots (per Elon/Karen instruction, 2026-10-14). Permission does not fill owner-of-record, quantity, location or country.",
+  "note": "Data only. Not loaded by any script. No seed or migration change. Values transcribed from PDF text; nothing inferred.",
+  "newNamedLotCertificates": [
+    {
+      "supplierOrganizationId": null,
+      "quantity": null,
+      "quantityUnit": null,
+      "locationName": null,
+      "countryCode": null,
+      "ownerOfRecord": null,
+      "harvestDate": null,
+      "order": "2485",
+      "testingLocation": "In-house",
+      "servingSize": "13.5 grams",
+      "dateReceived": "2026-01-26",
+      "approvedByLine": "Lab Director",
+      "referenceUrl": null,
+      "sampleCode": null,
+      "tecridId": null,
+      "fileName": "Heavy_Metals_-_3L_Can.pdf",
+      "sha256": "186b06972f3b5b79bdcf1cd78e057f2d4f271e3644d6d33695f6e4fd9842bbe9",
+      "productName": "Olive Oil 3L Can",
+      "productCode": null,
+      "supplierLotCode": "228 K/B",
+      "test": "43298",
+      "assay": "Heavy Metals",
+      "method": "LLMTDA",
+      "dateTested": "2026-01-27",
+      "dateReleasedAsPrinted": "01/27/2026",
+      "analytes": [
+        {
+          "analyte": "Arsenic",
+          "loq": "1.51 ppb",
+          "lightLabsSpecLimit": "740.74 ppb",
+          "result": "ND",
+          "status": "In-spec"
+        },
+        {
+          "analyte": "Cadmium",
+          "loq": "0.27 ppb",
+          "lightLabsSpecLimit": "303.7 ppb",
+          "result": "ND",
+          "status": "In-spec"
+        },
+        {
+          "analyte": "Lead",
+          "loq": "4.28 ppb",
+          "lightLabsSpecLimit": "37.04 ppb",
+          "result": "ND",
+          "status": "In-spec"
+        },
+        {
+          "analyte": "Mercury",
+          "loq": "1.65 ppb",
+          "lightLabsSpecLimit": "22.22 ppb",
+          "result": "ND",
+          "status": "In-spec"
+        }
+      ]
+    },
+    {
+      "supplierOrganizationId": null,
+      "quantity": null,
+      "quantityUnit": null,
+      "locationName": null,
+      "countryCode": null,
+      "ownerOfRecord": null,
+      "harvestDate": null,
+      "order": "2485",
+      "testingLocation": "In-house",
+      "servingSize": "13.5 grams",
+      "dateReceived": "2026-01-26",
+      "approvedByLine": "Lab Director",
+      "referenceUrl": null,
+      "sampleCode": null,
+      "tecridId": null,
+      "fileName": "Heavy_Metals_-_3L_Bag_in_a_Box.pdf",
+      "sha256": "e32fea364b0b7161922d43c98cde73431733096cc08495c4e5019dd2fd055e49",
+      "productName": "Olive Oil 3L Bag in a Box",
+      "productCode": null,
+      "supplierLotCode": "195 K/B",
+      "test": "43300",
+      "assay": "Heavy Metals",
+      "method": "LLMTDA",
+      "dateTested": "2026-01-27",
+      "dateReleasedAsPrinted": "01/27/2026",
+      "analytes": [
+        {
+          "analyte": "Arsenic",
+          "loq": "1.54 ppb",
+          "lightLabsSpecLimit": "740.74 ppb",
+          "result": "ND",
+          "status": "In-spec"
+        },
+        {
+          "analyte": "Cadmium",
+          "loq": "0.27 ppb",
+          "lightLabsSpecLimit": "303.7 ppb",
+          "result": "ND",
+          "status": "In-spec"
+        },
+        {
+          "analyte": "Lead",
+          "loq": "4.35 ppb",
+          "lightLabsSpecLimit": "37.04 ppb",
+          "result": "ND",
+          "status": "In-spec"
+        },
+        {
+          "analyte": "Mercury",
+          "loq": "1.67 ppb",
+          "lightLabsSpecLimit": "22.22 ppb",
+          "result": "ND",
+          "status": "In-spec"
+        }
+      ]
+    },
+    {
+      "supplierOrganizationId": null,
+      "quantity": null,
+      "quantityUnit": null,
+      "locationName": null,
+      "countryCode": null,
+      "ownerOfRecord": null,
+      "harvestDate": null,
+      "order": "2485",
+      "testingLocation": "In-house",
+      "servingSize": "13.5 grams",
+      "dateReceived": "2026-01-26",
+      "approvedByLine": "Lab Director",
+      "referenceUrl": null,
+      "sampleCode": null,
+      "tecridId": null,
+      "fileName": "BPA_-_3_L_Can.pdf",
+      "sha256": "c70f43dab461300136a4483deeb18670c6c2f15f994f4505df96641cf7f07e43",
+      "productName": "Olive Oil 3L Can",
+      "productCode": null,
+      "supplierLotCode": "228 K/B",
+      "test": "43302",
+      "assay": "Bisphenol A (BPA) / Bisphenol S (BPS)",
+      "method": "LC-MS/MS / LLMTDB",
+      "dateTested": "2026-01-28",
+      "dateReleasedAsPrinted": "01/28/2026",
+      "analytes": [
+        {
+          "analyte": "Bisphenol A (BPA)",
+          "loq": "0.5 ppb",
+          "lightLabsSpecLimit": null,
+          "result": "ND",
+          "status": null
+        },
+        {
+          "analyte": "Bisphenol S (BPS)",
+          "loq": "0.5 ppb",
+          "lightLabsSpecLimit": null,
+          "result": "ND",
+          "status": null
+        },
+        {
+          "analyte": "Bisphenol F (BPF)",
+          "loq": "0.5 ppb",
+          "lightLabsSpecLimit": null,
+          "result": "ND",
+          "status": null
+        }
+      ]
+    },
+    {
+      "supplierOrganizationId": null,
+      "quantity": null,
+      "quantityUnit": null,
+      "locationName": null,
+      "countryCode": null,
+      "ownerOfRecord": null,
+      "harvestDate": null,
+      "order": "2485",
+      "testingLocation": "In-house",
+      "servingSize": "13.5 grams",
+      "dateReceived": "2026-01-26",
+      "approvedByLine": "Lab Director",
+      "referenceUrl": null,
+      "sampleCode": null,
+      "tecridId": null,
+      "fileName": "BPA_1_3L_Bag_in_a_Box.pdf",
+      "sha256": "211bafbde330bc1d40ef5c98c09627145e4189260e80427c953969c52cffc10b",
+      "productName": "Olive Oil 3L Bag in a Box",
+      "productCode": null,
+      "supplierLotCode": "195 K/B",
+      "test": "43299",
+      "assay": "Bisphenol A (BPA) / Bisphenol S (BPS)",
+      "method": "LC-MS/MS / LLMTDB",
+      "dateTested": "2026-01-29",
+      "dateReleasedAsPrinted": "01/29/2026",
+      "analytes": [
+        {
+          "analyte": "Bisphenol A (BPA)",
+          "loq": "9.22 ppb",
+          "lightLabsSpecLimit": null,
+          "result": "ND",
+          "status": null
+        },
+        {
+          "analyte": "Bisphenol S (BPS)",
+          "loq": "9.22 ppb",
+          "lightLabsSpecLimit": null,
+          "result": "ND",
+          "status": null
+        },
+        {
+          "analyte": "Bisphenol F (BPF)",
+          "loq": "9.22 ppb",
+          "lightLabsSpecLimit": null,
+          "result": "ND",
+          "status": null
+        }
+      ]
+    },
+    {
+      "supplierOrganizationId": null,
+      "quantity": null,
+      "quantityUnit": null,
+      "locationName": null,
+      "countryCode": null,
+      "ownerOfRecord": null,
+      "harvestDate": null,
+      "order": "2485",
+      "testingLocation": "In-house",
+      "servingSize": "13.5 grams",
+      "dateReceived": "2026-01-26",
+      "approvedByLine": "Lab Director",
+      "referenceUrl": null,
+      "sampleCode": null,
+      "tecridId": null,
+      "fileName": "Glyphosate_AMPA_EVOO.pdf",
+      "sha256": "8f703f25f845c0ac5dc5a1667ab07ed3d6df1eccf3272bcb7bfa4a62f7660bfa",
+      "productName": "Olive Oil 250ml Bottle",
+      "productCode": null,
+      "supplierLotCode": "227 K/B",
+      "test": "43295",
+      "assay": "Glyphosate / AMPA",
+      "method": "LC-MS/MS / LLMTDC",
+      "dateTested": "2026-01-28",
+      "dateReleasedAsPrinted": "01/28/2026",
+      "analytes": [
+        {
+          "analyte": "Glyphosate",
+          "loq": "9.9 ppb",
+          "lightLabsSpecLimit": null,
+          "result": "ND",
+          "status": null
+        },
+        {
+          "analyte": "AMPA",
+          "loq": "9.9 ppb",
+          "lightLabsSpecLimit": null,
+          "result": "ND",
+          "status": null
+        }
+      ]
+    },
+    {
+      "supplierOrganizationId": null,
+      "quantity": null,
+      "quantityUnit": null,
+      "locationName": null,
+      "countryCode": null,
+      "ownerOfRecord": null,
+      "harvestDate": null,
+      "order": "2485",
+      "testingLocation": "In-house",
+      "servingSize": "13.5 grams",
+      "dateReceived": "2026-01-26",
+      "approvedByLine": "Lab Director",
+      "referenceUrl": null,
+      "sampleCode": null,
+      "tecridId": null,
+      "fileName": "Phathalates_Testing_EVOO.pdf",
+      "sha256": "d0e6c1ae12e57a8f03d1ab7bae9f9a189711caf60d274af549d5365981793f89",
+      "productName": "Olive Oil 250ml Bottle",
+      "productCode": null,
+      "supplierLotCode": "227 K/B",
+      "test": "43296",
+      "assay": "Phthalates",
+      "method": "GC-MS/MS",
+      "dateTested": "2026-01-29",
+      "dateReleasedAsPrinted": "01/29/2026",
+      "resultColumnNote": "All rows ND except Diisodecyl Adipate and Diisononyl 1,2-cyclohexanedicarboxylic acid, printed LOQ 0 ppb and result NR. Full rows in the PDF."
+    }
+  ],
+  "otherReports": [
+    {
+      "fileName": "Acidity_Level_Chemical_Analysis_Testing_2_fca6fa26-35fa-4d28-b1a6-fd4f014e1328.pdf",
+      "sha256": "03325e568850325f3f2a6a67cbba0e7a2d6df1ea1d3a006dad5a46ebb39f9bdd",
+      "issuer": "Fats & Oils Lab, Athens (company name not in text layer)",
+      "report": "12-4338/21.11.2025/EN",
+      "sampleCode": "2025-121742",
+      "clientDeclaredLots": [
+        "219 K/B",
+        "225 K/B",
+        "226 K/B",
+        "227 K/B",
+        "228 K/B"
+      ],
+      "dateReceived": "2025-11-20",
+      "results": {
+        "acidity_pct_oleic": "0,27",
+        "K270": "0,162",
+        "K232": "2,239",
+        "deltaK": "-0,003",
+        "peroxide_mEqO2_per_kg": "11,43"
+      },
+      "contaminantsTested": false
+    },
+    {
+      "fileName": "CofA-testing-anresco-Phthalates-2026.pdf",
+      "sha256": "784dd71b9ce70ba458ad669b805632023f6b882e85ab82559ce93a8539437fae",
+      "issuer": "Anresco Laboratories",
+      "order": "589126",
+      "sample": "1401190",
+      "product": "Organic EVOO 250 ml bottle",
+      "supplierLotCode": null,
+      "dateReceived": "2026-04-15",
+      "reportDate": "2026-05-18",
+      "analytes": {
+        "BBP": "None Detected",
+        "DBP": "Below Limit of Quantitation",
+        "DEHP": "Below Limit of Quantitation",
+        "DNOP": "None Detected",
+        "DINP": "None Detected",
+        "DIDP": "None Detected"
+      },
+      "lodLoqPpb": "20/100"
+    },
+    {
+      "fileName": "Kasandrinos_International_EN_67d7c9fa-3fc0-4f6f-94a5-fb7ebae481cf.pdf",
+      "sha256": "801452e69721f1cfc03aafac42b561bf5cff3e74d8645d41091be2e194e2c401",
+      "issuer": "World Olive Center for Health",
+      "cert": "C2526-00228",
+      "harvestingPeriod": "2025-2026",
+      "supplierLotCode": null,
+      "totalPolyphenols": "917 mg/Kg",
+      "contaminantsTested": false
+    }
+  ]
+}

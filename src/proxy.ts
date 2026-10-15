@@ -1,6 +1,7 @@
 import { clerkMiddleware } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 import type { NextFetchEvent, NextRequest } from "next/server";
+import { isKasandrinosPreviewPath, kasandrinosPreviewEnabled } from "@/domain/kasandrinos-preview-path";
 import { apexUrlFromRequest, clerkBypassRedirect, requestSkipsClerk } from "@/lib/site";
 
 const clerk = clerkMiddleware();
@@ -18,6 +19,21 @@ export default function proxy(request: NextRequest, event: NextFetchEvent) {
   }
 
   const { pathname, searchParams } = request.nextUrl;
+  if (isKasandrinosPreviewPath(pathname)) {
+    if (!kasandrinosPreviewEnabled()) {
+      return new NextResponse(null, {
+        status: 404,
+        headers: {
+          "X-Robots-Tag": "noindex, nofollow",
+          "Cache-Control": "no-store",
+        },
+      });
+    }
+    const response = NextResponse.next();
+    response.headers.set("X-Robots-Tag", "noindex, nofollow");
+    return response;
+  }
+
   // Anonymous `/access` is on the public allowlist. clerkMiddleware 307s document GETs
   // to the dev-instance handshake, and stripping that return URL loops until GSC reports Redirect error.
   if (requestSkipsClerk(pathname, searchParams.keys(), cookieHeader)) {

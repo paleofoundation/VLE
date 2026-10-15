@@ -56,7 +56,7 @@ describe("public search catalog", () => {
 
   it("blocks private prefixes in robots.txt and keeps the canonical host", () => {
     expect(SITE_URL).toBe("https://vle.exchange");
-    expect([...ROBOTS_DISALLOW_PATHS]).toEqual(["/api/", "/ops", "/supplier", "/buyer", "/find", "/sign-in"]);
+    expect([...ROBOTS_DISALLOW_PATHS]).toEqual(["/api/", "/ops", "/supplier", "/buyer", "/find", "/sign-in", "/preview"]);
   });
 
   it("keeps commercial money pages indexable and off the Clerk handshake", () => {
@@ -92,6 +92,7 @@ describe("public search catalog", () => {
     expect(requestSkipsClerk("/ops", [], null)).toBe(false);
     expect(requestSkipsClerk("/buyer", [], null)).toBe(false);
     expect(requestSkipsClerk("/sign-in", [], null)).toBe(false);
+    expect(requestSkipsClerk("/preview/kasandrinos", [], null)).toBe(false);
     expect(clerkBypassRedirect("https://vle.exchange/access?__clerk_handshake=1", null)).toBeNull();
     expect(clerkBypassRedirect("https://vle.exchange/access", null)).toBeNull();
     expect(clerkBypassRedirect("https://vle.exchange/for-buyers?__clerk_handshake=1", null)).toBe("https://vle.exchange/for-buyers");

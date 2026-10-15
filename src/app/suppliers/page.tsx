@@ -25,7 +25,7 @@ export default function SupplierProfilesPage() {
         <ul>
           <li>The supplier organization name.</li>
           <li>Contaminant documents attached to that organization&apos;s lots or to a compliance profile, if any exist.</li>
-          <li>The TECRID verification recommendation. Verified suppliers rank higher in brand matching.</li>
+          <li>The TECRID verification recommendation. TECRID verification can break ties between offers with the same contamination grade.</li>
         </ul>
         <p>This index does not print a directory of organizations. An empty document list on a profile means no file has been recorded. VLE does not fill that list.</p>
         <div className="actions">

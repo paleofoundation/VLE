@@ -115,7 +115,7 @@ export const seoJsonLdPages: Record<SeoJsonLdPath, SeoPageCopy> = {
   "/suppliers": {
     name: "Supplier profiles | VLE",
     description:
-      "Supplier profiles recommend TECRID verification. Verified suppliers rank higher in brand matching. VLE does not run that match on this page.",
+      "Supplier profiles recommend TECRID verification. TECRID verification can break ties between offers with the same contamination grade. VLE does not run that match on this page.",
   },
 };
 

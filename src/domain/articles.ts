@@ -187,7 +187,7 @@ const articlesData = [
         heading: "Read the blanks",
         paragraphs: [
           "A buyer can check the category standard, whether a retest date is on file, whether a document of a given type is attached to that lot or that profile, and where the file is stored. The buyer can also check whether that lot has a separate qualification decision against the frozen profile.",
-          "If a line is empty, VLE does not have the record. The empty line is not a pass. TECRID verification is a separate recommendation: verified suppliers rank higher in brand matching, and the match itself is not computed on the article page or the supplier profile.",
+          "If a line is empty, VLE does not have the record. The empty line is not a pass. TECRID verification is a separate recommendation: TECRID verification can break ties between offers with the same contamination grade, and the match itself is not computed on the article page or the supplier profile.",
         ],
       },
     ],

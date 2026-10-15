@@ -1,3 +1,5 @@
+import { MATCH_METHODOLOGY_PATH } from "../matching/copy";
+
 /** Canonical production origin. Apex is the indexed host; www permanently redirects here. */
 export const SITE_HOST = "vle.exchange";
 export const SITE_WWW_HOST = "www.vle.exchange";
@@ -31,6 +33,7 @@ export const PUBLIC_SITEMAP_PATHS = [
   "/contaminants",
   "/suppliers",
   "/articles",
+  MATCH_METHODOLOGY_PATH,
   ...ARTICLE_PATHS,
 ] as const;
 

@@ -18,7 +18,7 @@ export async function generateMetadata({ params }: PageProps<"/suppliers/[slug]"
   const profile = await getPublicSupplierProfile(slug);
   if (!profile) return { title: "Supplier profile unavailable | VLE" };
   const title = `${profile.organization.name} supplier profile | VLE`;
-  const description = `Supplier profile for ${profile.organization.name}. TECRID verification is recommended. Verified suppliers rank higher in brand matching. Contaminant documents appear only when a reference is on file.`;
+  const description = `Supplier profile for ${profile.organization.name}. TECRID verification is recommended. TECRID verification can break ties between offers with the same contamination grade. Contaminant documents appear only when a reference is on file.`;
   const url = `${SITE_URL}/suppliers/${profile.organization.slug}`;
   return {
     title,

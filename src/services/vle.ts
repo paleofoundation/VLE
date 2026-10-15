@@ -26,6 +26,7 @@ import { assertNominationDraftEditable } from "@/domain/nomination";
 import type { LimitRule, QualificationOutcome, ResultValue, SamplingStatus } from "@/domain/types";
 import type { TecridAdapter } from "@/adapters/tecrid";
 import { appendAuditEvent } from "./audit";
+import { listLotContaminantDocuments } from "./contaminants";
 
 const ENGINE_VERSION = "vle-deterministic-1";
 
@@ -459,12 +460,13 @@ export async function getOpsLotWorkflow(lotId: string) {
   const [decision] = await db.select().from(qualificationDecisions).where(eq(qualificationDecisions.physicalLotId, lotId)).orderBy(desc(qualificationDecisions.decidedAt)).limit(1);
   const [listing] = await db.select().from(marketplaceListings).where(eq(marketplaceListings.physicalLotId, lotId)).orderBy(desc(marketplaceListings.publishedAt)).limit(1);
   const artifacts = await db.select().from(lotArtifacts).where(eq(lotArtifacts.physicalLotId, lotId)).orderBy(desc(lotArtifacts.receivedAt));
+  const contaminantDocuments = await listLotContaminantDocuments(lotId);
   const [profile] = await db.select({ id: complianceProfileVersions.id, version: complianceProfileVersions.version, status: complianceProfileVersions.status, profileName: complianceProfiles.name })
     .from(complianceProfileVersions)
     .innerJoin(complianceProfiles, eq(complianceProfiles.id, complianceProfileVersions.profileId))
     .where(and(eq(complianceProfileVersions.status, "FROZEN"), eq(complianceProfiles.productTypeId, lot.lot.productTypeId)))
     .limit(1);
-  return { ...lot, order, sample, evidence, decision, listing, profile, artifacts };
+  return { ...lot, order, sample, evidence, decision, listing, profile, artifacts, contaminantDocuments };
 }
 
 export async function getPublicListing(slug: string) {

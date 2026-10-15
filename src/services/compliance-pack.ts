@@ -4,6 +4,7 @@ import {
   auditEvents,
   complianceProfiles,
   complianceProfileVersions,
+  contaminantDocuments,
   lotArtifacts,
   marketplaceListings,
   organizations,
@@ -35,7 +36,7 @@ export async function exportLotCompliancePack(actor: Actor, lotId: string, gener
   if (!header) throw new DomainError("Physical lot not found", "NOT_FOUND");
   assertTenant(actor, header.lot.supplierOrganizationId);
 
-  const [orders, lotSamples, decisions, listings, artifacts] = await Promise.all([
+  const [orders, lotSamples, decisions, listings, contaminantDocs, artifacts] = await Promise.all([
     db.select().from(samplingOrders).where(eq(samplingOrders.physicalLotId, lotId)).orderBy(asc(samplingOrders.createdAt)),
     db.select().from(samples).where(eq(samples.physicalLotId, lotId)).orderBy(asc(samples.createdAt)),
     db.select({
@@ -57,6 +58,17 @@ export async function exportLotCompliancePack(actor: Actor, lotId: string, gener
       .innerJoin(complianceProfiles, eq(complianceProfiles.id, complianceProfileVersions.profileId))
       .where(eq(qualificationDecisions.physicalLotId, lotId)).orderBy(asc(qualificationDecisions.decidedAt)),
     db.select().from(marketplaceListings).where(eq(marketplaceListings.physicalLotId, lotId)).orderBy(asc(marketplaceListings.publishedAt)),
+    db.select({
+      id: contaminantDocuments.id,
+      documentationType: contaminantDocuments.documentationType,
+      fileName: contaminantDocuments.fileName,
+      referenceUrl: contaminantDocuments.referenceUrl,
+      documentDate: contaminantDocuments.documentDate,
+      retestOn: contaminantDocuments.retestOn,
+      notes: contaminantDocuments.notes,
+      attachedAt: contaminantDocuments.attachedAt,
+      createdAt: contaminantDocuments.createdAt,
+    }).from(contaminantDocuments).where(eq(contaminantDocuments.physicalLotId, lotId)).orderBy(asc(contaminantDocuments.attachedAt)),
     db.select({
       id: lotArtifacts.id,
       artifactType: lotArtifacts.artifactType,
@@ -80,6 +92,7 @@ export async function exportLotCompliancePack(actor: Actor, lotId: string, gener
     ...decisions.flatMap(({ decision, profileVersion }) => [decision.id, profileVersion.id]),
     ...listings.map(({ id }) => id),
     ...artifacts.map(({ id }) => id),
+    ...contaminantDocs.map(({ id }) => id),
   ];
   const auditTrail = await db.select().from(auditEvents)
     .where(inArray(auditEvents.entityId, relatedEntityIds)).orderBy(asc(auditEvents.createdAt));
@@ -143,6 +156,11 @@ export async function exportLotCompliancePack(actor: Actor, lotId: string, gener
     backgroundArtifacts: {
       classification: "SUPPLIER_CONTEXT_ONLY_NOT_TECRID_EVIDENCE",
       records: artifacts,
+    },
+    contaminantDocuments: {
+      classification: "SUPPLIER_FILE_REFERENCE_NOT_A_MEASURED_RESULT",
+      claim: "A category standard with scheduled retesting. File references only.",
+      records: contaminantDocs,
     },
     auditTrail: {
       scope: "Related-entity excerpt from VLE's global append-only hash chain; previousHash may point to an event outside this single-lot pack.",

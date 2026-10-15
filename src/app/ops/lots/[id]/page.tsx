@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getCurrentPageActor } from "@/lib/page-actor";
 import { formatQuantity } from "@/lib/presentation";
+import { contaminantDocumentationTypes } from "@/domain/contaminants";
 import { getOpsLotWorkflow } from "@/services/vle";
 import { advanceSamplingAction, holdLotAction, issueMockEvidenceAction, logLotArtifactAction, publishAction, qualifyAction, revokeEvidenceAction, startSamplingAction, verifyInventoryAction } from "../../actions";
 
@@ -27,7 +28,7 @@ export default async function OpsLotPage({ params }: PageProps<"/ops/lots/[id]">
   const workflow = await getOpsLotWorkflow(id);
   if (!workflow) notFound();
 
-  const { lot, order, sample, evidence, decision, listing, profile, artifacts } = workflow;
+  const { lot, order, sample, evidence, decision, listing, profile, artifacts, contaminantDocuments } = workflow;
   const inventoryVerified = Boolean(lot.identityConfirmedAt && lot.quantityVerifiedAt && lot.locationVerifiedAt && lot.authorityToSellVerifiedAt);
   const samplingComplete = order?.status === "COMPLETED";
   const next = order && order.status in nextSampling ? nextSampling[order.status as keyof typeof nextSampling] : null;
@@ -105,7 +106,7 @@ export default async function OpsLotPage({ params }: PageProps<"/ops/lots/[id]">
         <div className="compliancePackCopy">
           <p className="eyebrow">Ops evidence handoff · single physical lot</p>
           <h2 id="compliance-pack-heading">Lot compliance pack</h2>
-          <p>Download the lot identity, verification timestamps, SamplingOrders, Samples, TECRID-linked evidence, frozen profile versions, immutable decisions, listing history, background artifact references, and related audit-chain excerpt as one JSON snapshot.</p>
+          <p>Download the lot identity, verification timestamps, SamplingOrders, Samples, TECRID-linked evidence, frozen profile versions, immutable decisions, listing history, background artifact references, contaminant file references, and related audit-chain excerpt as one JSON snapshot.</p>
           <div className="compliancePackBoundary"><strong>Snapshot ≠ live eligibility.</strong><span>The pack records state at export time. It cannot keep a dead listing alive, turn a supplier PDF into proof, create an Order, or certify a finished product.</span></div>
         </div>
         <aside className="compliancePackAction">
@@ -139,6 +140,19 @@ export default async function OpsLotPage({ params }: PageProps<"/ops/lots/[id]">
             <div className="artifactLogHead"><span>Logged artifacts</span><strong>{artifacts.length.toString().padStart(2, "0")}</strong></div>
             {artifacts.length ? <ol>{artifacts.map((artifact) => <li key={artifact.id}><div><span className="stateChip">{artifact.artifactType === "SUPPLIER_COA" ? "Supplier COA" : "Supplier PDF"}</span><time>{artifact.receivedAt.toLocaleDateString("en", { day: "2-digit", month: "short", year: "numeric" })}</time></div><strong>{artifact.fileName}</strong><p>{artifact.documentDate ? `Document dated ${artifact.documentDate.toLocaleDateString("en", { day: "2-digit", month: "short", year: "numeric" })}. ` : ""}{artifact.notes || "No operations note."}</p><a className="textLink" href={artifact.referenceUrl} target="_blank" rel="noopener noreferrer nofollow">Open stored reference <span aria-hidden="true">↗</span></a></li>)}</ol> : <div className="artifactEmpty"><strong>No supplier artifacts logged.</strong><p>The lot workflow is unchanged. Add an inbound reference only when a PDF or COA arrives.</p></div>}
           </div>
+        </div>
+      </section>
+
+      <section className="artifactPanel" aria-labelledby="contaminant-doc-heading">
+        <div className="artifactPanelHead">
+          <div><p className="eyebrow">Contaminant documents · outside the gate</p><h2 id="contaminant-doc-heading">Lot contaminant references</h2><p>Suppliers attach these from the supplier desk. A reference is not a measured result and does not move this workflow.</p></div>
+        </div>
+        <div className="artifactLog">
+          <div className="artifactLogHead"><span>Attached to this lot</span><strong>{contaminantDocuments.length.toString().padStart(2, "0")}</strong></div>
+          {contaminantDocuments.length ? <ol>{contaminantDocuments.map((document) => {
+            const type = contaminantDocumentationTypes.find((item) => item.code === document.documentationType);
+            return <li key={document.id}><div><span className="stateChip">{type?.name ?? document.documentationType}</span><time>{document.attachedAt.toLocaleDateString("en", { day: "2-digit", month: "short", year: "numeric" })}</time></div><strong>{document.fileName}</strong><p>{document.retestOn ? `Retest ${document.retestOn.toLocaleDateString("en", { day: "2-digit", month: "short", year: "numeric" })}. ` : "No retest date recorded. "}{document.notes || "No note."}</p><a className="textLink" href={document.referenceUrl} target="_blank" rel="noopener noreferrer nofollow">Open stored reference <span aria-hidden="true">↗</span></a></li>;
+          })}</ol> : <div className="artifactEmpty"><strong>No contaminant document is attached to this lot.</strong><p>The lot workflow is unchanged. VLE has not invented a result for heavy metals, PFAS, or microplastics.</p></div>}
         </div>
       </section>
     </main>

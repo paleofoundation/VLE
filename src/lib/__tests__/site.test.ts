@@ -18,33 +18,35 @@ import {
   wwwToApexRedirects,
 } from "../site";
 
+const publicCatalog = [
+  "/",
+  "/for-suppliers",
+  "/for-buyers",
+  "/for-laboratories",
+  "/access",
+  "/faq",
+  "/join",
+  "/contaminants",
+  "/suppliers",
+  "/articles",
+  "/articles/not-a-supplier-directory",
+  "/articles/tested-without-a-public-result",
+  "/articles/contamination-crisis-needs-a-lot",
+  "/articles/category-standard-and-retesting",
+  "/articles/what-a-buyer-can-check",
+] as const;
+
 const privatePrefixes = ["/api", "/ops", "/supplier", "/buyer", "/find", "/sign-in"];
 
 describe("public search catalog", () => {
   it("lists only the live public marketing pages", () => {
-    expect([...PUBLIC_SITEMAP_PATHS]).toEqual([
-      "/",
-      "/for-suppliers",
-      "/for-buyers",
-      "/for-laboratories",
-      "/access",
-      "/faq",
-      "/join",
-    ]);
+    expect([...PUBLIC_SITEMAP_PATHS]).toEqual([...publicCatalog]);
   });
 
   it("uses trailing-slash homepage canonicals that match the live 200 URL", () => {
     expect(absolutePublicUrl("/")).toBe("https://vle.exchange/");
     expect(absolutePublicUrl("/for-suppliers")).toBe("https://vle.exchange/for-suppliers");
-    expect(publicSitemapUrls()).toEqual([
-      "https://vle.exchange/",
-      "https://vle.exchange/for-suppliers",
-      "https://vle.exchange/for-buyers",
-      "https://vle.exchange/for-laboratories",
-      "https://vle.exchange/access",
-      "https://vle.exchange/faq",
-      "https://vle.exchange/join",
-    ]);
+    expect(publicSitemapUrls()).toEqual(publicCatalog.map((path) => (path === "/" ? "https://vle.exchange/" : `https://vle.exchange${path}`)));
   });
 
   it("does not advertise auth or workspace paths in the sitemap", () => {
@@ -56,7 +58,7 @@ describe("public search catalog", () => {
 
   it("blocks private prefixes in robots.txt and keeps the canonical host", () => {
     expect(SITE_URL).toBe("https://vle.exchange");
-    expect([...ROBOTS_DISALLOW_PATHS]).toEqual(["/api/", "/ops", "/supplier", "/buyer", "/find", "/sign-in"]);
+    expect([...ROBOTS_DISALLOW_PATHS]).toEqual(["/api/", "/ops", "/supplier$", "/supplier/", "/buyer", "/find", "/sign-in"]);
   });
 
   it("keeps commercial money pages indexable and off the Clerk handshake", () => {
@@ -66,14 +68,10 @@ describe("public search catalog", () => {
       expect(publicPageMetadata(path, "Title", "Description").robots).toEqual({ index: true, follow: true });
       expect(publicPageMetadata(path, "Title", "Description").alternates).toEqual({ canonical: `${SITE_URL}${path}` });
     }
-    expect([...PUBLIC_PATHS_WITHOUT_CLERK]).toEqual([
-      "/",
-      "/for-suppliers",
-      "/for-buyers",
-      "/for-laboratories",
-      "/faq",
-      "/join",
-    ]);
+    expect([...PUBLIC_PATHS_WITHOUT_CLERK]).toEqual(publicCatalog.filter((path) => path !== "/access"));
+    expect(skipsClerkHandshake("/supplier")).toBe(false);
+    expect(skipsClerkHandshake("/suppliers/demo-cocoa-coop")).toBe(true);
+    expect(requestSkipsClerk("/supplier", [], null)).toBe(false);
     expect(skipsClerkHandshake("/access")).toBe(false);
     expect(requestSkipsClerk("/access", [], null)).toBe(true);
   });
@@ -130,5 +128,7 @@ describe("public search catalog", () => {
     expect(publicUrlWithoutClerkHandshake("https://vle.exchange/?__clerk_handshake=1&keep=1")).toBe("https://vle.exchange/?keep=1");
     expect(publicUrlWithoutClerkHandshake("https://vle.exchange/ops?__clerk_handshake=1")).toBeNull();
     expect(publicUrlWithoutClerkHandshake("https://vle.exchange/join")).toBeNull();
+    expect(publicUrlWithoutClerkHandshake("https://vle.exchange/suppliers/demo-cocoa-coop?__clerk_handshake=1")).toBe("https://vle.exchange/suppliers/demo-cocoa-coop");
+    expect(publicUrlWithoutClerkHandshake("https://vle.exchange/supplier?__clerk_handshake=1")).toBeNull();
   });
 });

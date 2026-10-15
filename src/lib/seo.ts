@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { SITE_URL, absolutePublicUrl, type PublicSitemapPath } from "./site";
+import type { VleArticle } from "@/domain/articles";
 
 export const SITE_NAME = "Verified Lot Exchange";
 
@@ -30,6 +31,20 @@ export function publicPageMetadata(path: PublicSitemapPath, title: string, descr
       title,
       description,
       images: [image],
+    },
+  };
+}
+
+export function articlePageMetadata(article: VleArticle): Metadata {
+  const title = `${article.title} | VLE`;
+  const metadata = publicPageMetadata(article.path, title, article.description);
+  return {
+    ...metadata,
+    openGraph: {
+      ...metadata.openGraph,
+      type: "article",
+      publishedTime: article.datePublished,
+      modifiedTime: article.datePublished,
     },
   };
 }

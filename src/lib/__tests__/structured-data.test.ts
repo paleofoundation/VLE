@@ -16,6 +16,9 @@ const pageFiles: Record<SeoJsonLdPath, string> = {
   "/join": "src/app/join/page.tsx",
   "/for-laboratories": "src/app/for-laboratories/page.tsx",
   "/for-suppliers": "src/app/for-suppliers/page.tsx",
+  "/contaminants": "src/app/contaminants/page.tsx",
+  "/articles": "src/app/articles/page.tsx",
+  "/suppliers": "src/app/suppliers/page.tsx",
 };
 
 describe("page JSON-LD", () => {

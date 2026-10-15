@@ -8,6 +8,11 @@ describe("server authorization", () => {
   });
   it("blocks cross-tenant supplier access", () => expect(() => assertTenant(supplier, "supplier-b")).toThrowError(/Cross-organization/));
   it("blocks buyers from compliance operations", () => expect(() => assertPermission({ userId: "u2", organizationId: "buyer", roles: ["BUYER"] }, "QUALIFY_LOT")).toThrowError(/not permitted/));
+  it("lets a supplier attach contaminant documents and keeps that off buyers and ops", () => {
+    expect(() => assertPermission(supplier, "ATTACH_CONTAMINANT_DOCUMENT")).not.toThrow();
+    expect(() => assertPermission({ userId: "u2", organizationId: "buyer", roles: ["BUYER"] }, "ATTACH_CONTAMINANT_DOCUMENT")).toThrowError(/not permitted/);
+    expect(() => assertPermission({ userId: "u3", organizationId: "platform", roles: ["OPS"] }, "ATTACH_CONTAMINANT_DOCUMENT")).toThrowError(/not permitted/);
+  });
   it("keeps supplier artifacts under managed operations", () => {
     expect(() => assertPermission({ userId: "u3", organizationId: "platform", roles: ["OPS"] }, "MANAGE_LOT_ARTIFACTS")).not.toThrow();
     expect(() => assertPermission(supplier, "MANAGE_LOT_ARTIFACTS")).toThrowError(/not permitted/);

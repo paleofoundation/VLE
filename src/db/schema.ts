@@ -1,5 +1,7 @@
+import { sql } from "drizzle-orm";
 import {
   boolean,
+  check,
   index,
   jsonb,
   numeric,
@@ -30,6 +32,11 @@ export const qualificationOutcomeEnum = pgEnum("qualification_outcome", [
 ]);
 export const listingStatusEnum = pgEnum("listing_status", ["LISTED", "UNLISTED"]);
 export const lotArtifactTypeEnum = pgEnum("lot_artifact_type", ["SUPPLIER_COA", "SUPPLIER_PDF"]);
+export const contaminantDocumentationTypeEnum = pgEnum("contaminant_documentation_type", [
+  "HEAVY_METALS",
+  "PFAS",
+  "MICROPLASTICS",
+]);
 export const requirementMatchStatusEnum = pgEnum("requirement_match_status", ["ACTIVE", "INVALIDATED"]);
 export const supplierQuoteStatusEnum = pgEnum("supplier_quote_status", ["DRAFT", "SENT", "ACCEPTED", "EXPIRED", "WITHDRAWN"]);
 export const reservationIntentStatusEnum = pgEnum("reservation_intent_status", ["ACTIVE", "CANCELLED", "EXPIRED", "INVALIDATED"]);
@@ -76,6 +83,35 @@ export const lotArtifacts = pgTable("lot_artifacts", {
   notes: text("notes"), loggedByUserId: uuid("logged_by_user_id").references(() => users.id),
   receivedAt: timestamp("received_at", { withTimezone: true }).notNull().defaultNow(), createdAt: createdAt(),
 }, (table) => [index("lot_artifact_lot_received_idx").on(table.physicalLotId, table.receivedAt)]);
+
+/**
+ * Supplier file reference for one documentation type, attached to one physical lot
+ * or one compliance profile. No measured result is stored. Attaching a row does not
+ * change lot status, create a sample, or qualify a listing.
+ */
+export const contaminantDocuments = pgTable("contaminant_documents", {
+  id: id(),
+  documentationType: contaminantDocumentationTypeEnum("documentation_type").notNull(),
+  supplierOrganizationId: uuid("supplier_organization_id").notNull().references(() => organizations.id),
+  physicalLotId: uuid("physical_lot_id").references(() => physicalLots.id),
+  complianceProfileId: uuid("compliance_profile_id").references(() => complianceProfiles.id),
+  fileName: text("file_name").notNull(),
+  referenceUrl: text("reference_url").notNull(),
+  documentDate: timestamp("document_date", { withTimezone: true }),
+  retestOn: timestamp("retest_on", { withTimezone: true }),
+  notes: text("notes"),
+  attachedByUserId: uuid("attached_by_user_id").references(() => users.id),
+  attachedAt: timestamp("attached_at", { withTimezone: true }).notNull().defaultNow(),
+  createdAt: createdAt(),
+}, (table) => [
+  index("contaminant_document_supplier_idx").on(table.supplierOrganizationId, table.attachedAt),
+  index("contaminant_document_lot_idx").on(table.physicalLotId),
+  index("contaminant_document_profile_idx").on(table.complianceProfileId),
+  check(
+    "contaminant_document_one_subject_chk",
+    sql`(physical_lot_id IS NOT NULL AND compliance_profile_id IS NULL) OR (physical_lot_id IS NULL AND compliance_profile_id IS NOT NULL)`,
+  ),
+]);
 
 export const complianceProfiles = pgTable("compliance_profiles", {
   id: id(), productTypeId: uuid("product_type_id").notNull().references(() => productTypes.id),

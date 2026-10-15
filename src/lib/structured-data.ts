@@ -1,3 +1,4 @@
+import type { VleArticle } from "@/domain/articles";
 import { SITE_NAME } from "./seo";
 import { absolutePublicUrl, SITE_URL, type PublicSitemapPath } from "./site";
 
@@ -34,8 +35,17 @@ export const siteStructuredData = {
   "@graph": [siteWebsiteNode, siteOrganizationNode],
 };
 
-/** Routes in the 2026-10-14 indexing audit that had zero ld+json blocks. */
-export const SEO_JSONLD_PATHS = ["/access", "/for-buyers", "/join", "/for-laboratories", "/for-suppliers"] as const;
+/** Public routes that publish a WebPage (and, where noted, Service) JSON-LD graph. */
+export const SEO_JSONLD_PATHS = [
+  "/access",
+  "/for-buyers",
+  "/join",
+  "/for-laboratories",
+  "/for-suppliers",
+  "/contaminants",
+  "/articles",
+  "/suppliers",
+] as const;
 
 export type SeoJsonLdPath = (typeof SEO_JSONLD_PATHS)[number];
 
@@ -92,6 +102,21 @@ export const seoJsonLdPages: Record<SeoJsonLdPath, SeoPageCopy> = {
       serviceType: "From stocked lot to passed-lot listing",
     },
   },
+  "/contaminants": {
+    name: "Contaminant documentation | VLE",
+    description:
+      "Heavy metals, PFAS, and microplastics are separate documentation types. Each links to an Institute of Contaminant Standards index. VLE stores supplier file references and does not invent results.",
+  },
+  "/articles": {
+    name: "Articles | VLE",
+    description:
+      "Why a category standard with scheduled retesting is a different record from an ingredient directory, and why a tested claim with no public result fails in a contamination crisis.",
+  },
+  "/suppliers": {
+    name: "Supplier profiles | VLE",
+    description:
+      "Supplier profiles recommend TECRID verification. Verified suppliers rank higher in brand matching. VLE does not run that match on this page.",
+  },
 };
 
 export type PageJsonLd = {
@@ -132,6 +157,40 @@ export function buildPageJsonLd(path: SeoJsonLdPath): PageJsonLd {
   return {
     "@context": "https://schema.org",
     "@graph": graph,
+  };
+}
+
+export function buildArticleJsonLd(article: VleArticle): PageJsonLd {
+  const url = absolutePublicUrl(article.path);
+  const webPage: JsonLdNode = {
+    "@type": "WebPage",
+    "@id": `${url}#webpage`,
+    url,
+    name: article.title,
+    description: article.description,
+    inLanguage: "en",
+    isPartOf: { "@id": siteWebsiteNode["@id"] },
+    publisher: { "@id": siteOrganizationNode["@id"] },
+    mainEntity: { "@id": `${url}#article` },
+  };
+  const articleNode: JsonLdNode = {
+    "@type": "Article",
+    "@id": `${url}#article`,
+    headline: article.title,
+    description: article.description,
+    datePublished: article.datePublished,
+    dateModified: article.datePublished,
+    inLanguage: "en",
+    url,
+    image: `${SITE_URL}/opengraph-image`,
+    mainEntityOfPage: { "@id": `${url}#webpage` },
+    author: { "@id": siteOrganizationNode["@id"] },
+    publisher: { "@id": siteOrganizationNode["@id"] },
+    citation: article.sources.map((source) => source.href),
+  };
+  return {
+    "@context": "https://schema.org",
+    "@graph": [siteWebsiteNode, siteOrganizationNode, webPage, articleNode],
   };
 }
 

@@ -4,8 +4,21 @@ export const SITE_WWW_HOST = "www.vle.exchange";
 export const SITE_URL = `https://${SITE_HOST}`;
 
 /**
- * Public marketing pages confirmed HTTP 200 on production.
+ * Article routes. Kept beside the sitemap list so JSON-LD canonicals and the
+ * sitemap cannot drift apart.
+ */
+export const ARTICLE_PATHS = [
+  "/articles/not-a-supplier-directory",
+  "/articles/tested-without-a-public-result",
+  "/articles/contamination-crisis-needs-a-lot",
+  "/articles/category-standard-and-retesting",
+  "/articles/what-a-buyer-can-check",
+] as const;
+
+/**
+ * Public marketing pages.
  * Workspace, API, and sign-in routes are intentionally omitted.
+ * `/supplier` (the private desk) is not the same path as `/suppliers`.
  */
 export const PUBLIC_SITEMAP_PATHS = [
   "/",
@@ -15,15 +28,24 @@ export const PUBLIC_SITEMAP_PATHS = [
   "/access",
   "/faq",
   "/join",
+  "/contaminants",
+  "/suppliers",
+  "/articles",
+  ...ARTICLE_PATHS,
 ] as const;
 
 export type PublicSitemapPath = (typeof PUBLIC_SITEMAP_PATHS)[number];
 
-/** Prefixes crawlers should skip. These are not access-control; authorization stays on the server. */
+/**
+ * Prefixes crawlers should skip. These are not access-control; authorization stays on the server.
+ * `/supplier` uses an end anchor so the public `/suppliers` profiles stay crawlable.
+ * Google honors `$`. A bare `Disallow: /supplier` would also hide `/suppliers`.
+ */
 export const ROBOTS_DISALLOW_PATHS = [
   "/api/",
   "/ops",
-  "/supplier",
+  "/supplier$",
+  "/supplier/",
   "/buyer",
   "/find",
   "/sign-in",
@@ -43,7 +65,13 @@ export function isPublicSitemapPath(path: string): path is PublicSitemapPath {
   return (PUBLIC_SITEMAP_PATHS as readonly string[]).includes(path);
 }
 
+/** Indexable public paths, including supplier profile slugs that are not known at build time. */
+export function isIndexedPublicPath(path: string) {
+  return isPublicSitemapPath(path) || path.startsWith("/suppliers/");
+}
+
 export function skipsClerkHandshake(path: string) {
+  if (path.startsWith("/suppliers/")) return true;
   return (PUBLIC_PATHS_WITHOUT_CLERK as readonly string[]).includes(path);
 }
 
@@ -137,7 +165,7 @@ export function apexUrlFromRequest(host: string | null | undefined, href: string
 /** Drop Clerk handshake query params so crawlers never land on a 500 handshake URL. */
 export function publicUrlWithoutClerkHandshake(href: string) {
   const url = new URL(href);
-  if (!isPublicSitemapPath(url.pathname)) return null;
+  if (!isIndexedPublicPath(url.pathname)) return null;
   let changed = false;
   for (const key of [...url.searchParams.keys()]) {
     if (key.startsWith("__clerk_")) {

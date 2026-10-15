@@ -907,6 +907,60 @@ main { min-height: calc(100vh - 160px); }
 .footerBoundary p { max-width: 720px; margin: 0; line-height: 1.6; }
 .footerBoundary strong { color: #b8c5bd; }
 
+.articleHero {
+  padding: clamp(64px, 8vw, 108px) clamp(24px, 7vw, 108px);
+  background: var(--ink-deep);
+  color: var(--white);
+}
+.articleHero h1 { max-width: 980px; margin-bottom: 22px; font-size: clamp(46px, 6vw, 84px); font-weight: 560; letter-spacing: -.06em; line-height: .95; }
+.articleHero p:not(.eyebrow) { max-width: 760px; margin: 0; color: #c5d0c9; font-size: clamp(17px, 1.6vw, 22px); line-height: 1.55; }
+.articleIndexList, .contaminantBody, .supplierProfileBody, .articlePage article { padding: clamp(56px, 7vw, 96px) clamp(24px, 7vw, 108px); }
+.articleIndexList ol { margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--ink); }
+.articleIndexList li { display: grid; grid-template-columns: 64px minmax(0, 1fr) auto; gap: 28px; align-items: end; padding: 32px 0; border-bottom: 1px solid var(--line); }
+.articleIndexList h2 { margin: 0 0 10px; font-size: clamp(28px, 3vw, 40px); font-weight: 570; letter-spacing: -.045em; }
+.articleIndexList h2 a:hover { color: var(--green); }
+.articleIndexList p { margin: 0; max-width: 760px; color: var(--muted); line-height: 1.6; }
+.articleIndexList .mono { color: var(--green); font-size: 12px; }
+.articleHeader { max-width: 860px; margin-bottom: 48px; }
+.articleHeader h1 { margin-bottom: 18px; font-size: clamp(40px, 5vw, 68px); font-weight: 560; letter-spacing: -.055em; line-height: .98; }
+.articleHeader p:not(.eyebrow) { color: var(--muted); font-size: 18px; line-height: 1.6; }
+.articlePage section { max-width: 760px; margin-bottom: 36px; }
+.articlePage h2 { margin-bottom: 12px; font-size: 28px; font-weight: 590; letter-spacing: -.04em; }
+.articlePage p { color: var(--ink-soft); font-size: 16px; line-height: 1.7; }
+.articleSources { padding-top: 12px; border-top: 1px solid var(--line); }
+.articleSources ul { margin: 0 0 22px; padding: 0; list-style: none; }
+.articleSources li { margin-bottom: 14px; }
+.articleIntro { max-width: 760px; margin-bottom: 36px; }
+.articleIntro h2 { margin-bottom: 12px; font-size: clamp(32px, 4vw, 48px); font-weight: 580; letter-spacing: -.05em; }
+.articleIntro p, .articleClose p, .supplierProfileBody p { color: var(--muted); line-height: 1.7; }
+.articleClose { max-width: 760px; margin-top: 42px; }
+.contaminantGrid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-top: 1px solid var(--ink); }
+.contaminantCard, .contaminantGridCompact article { display: flex; min-height: 360px; flex-direction: column; gap: 14px; padding: 28px clamp(18px, 2vw, 32px) 26px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); background: var(--white); }
+.contaminantCard:last-child, .contaminantGridCompact article:last-child { border-right: 0; }
+.contaminantCard .mono, .contaminantGridCompact .mono { color: var(--green); font-size: 10px; }
+.contaminantCard h2, .contaminantGridCompact h3 { margin: 18px 0 0; font-size: clamp(28px, 2.4vw, 36px); font-weight: 580; letter-spacing: -.045em; }
+.contaminantCard p, .contaminantGridCompact p { color: var(--muted); font-size: 14px; line-height: 1.65; }
+.contaminantCard small { margin-top: auto; color: var(--muted); font-size: 11px; }
+.contaminantGridCompact { margin-bottom: 22px; }
+.contaminantGridCompact article { min-height: 0; }
+.contaminantDesk { margin-top: 72px; padding-top: 56px; border-top: 1px solid var(--ink); }
+.tecridNudge { display: grid; grid-template-columns: minmax(0, 1.4fr) auto; gap: 36px; align-items: end; margin: 0; padding: clamp(36px, 5vw, 64px) clamp(24px, 7vw, 108px); border-top: 1px solid var(--ink); border-bottom: 1px solid var(--ink); background: var(--signal-soft); }
+.supplierWalkthrough .tecridNudge, .joinPage .tecridNudge { margin: 0; }
+.commercialPage .tecridNudge { margin-top: 48px; padding-left: 0; padding-right: 0; }
+.tecridNudge h2 { margin-bottom: 12px; font-size: clamp(32px, 4vw, 52px); font-weight: 580; letter-spacing: -.05em; }
+.tecridNudge p:not(.eyebrow) { max-width: 760px; margin: 0; color: var(--ink-soft); line-height: 1.65; }
+.tecridNudgeActions { display: flex; flex-direction: column; gap: 16px; align-items: flex-start; }
+.supplierProfileBody { max-width: 980px; }
+.supplierProfileBody h2 { margin-bottom: 14px; font-size: clamp(32px, 4vw, 46px); font-weight: 580; letter-spacing: -.045em; }
+.supplierProfileBody ul { margin: 0 0 18px; padding-left: 18px; color: var(--ink-soft); line-height: 1.7; }
+.supplierProfilePage .detailBreadcrumb, .articlePage .detailBreadcrumb { margin: 28px clamp(24px, 7vw, 108px) 0; }
+.supplierProfilePage .articleHeader, .supplierProfilePage .tecridNudge, .supplierProfilePage .supplierProfileBody { margin-left: 0; margin-right: 0; }
+.supplierProfilePage .articleHeader { padding: 28px clamp(24px, 7vw, 108px) 0; }
+.profileDocumentList { margin: 0 0 28px; padding: 0; list-style: none; border-top: 1px solid var(--ink); }
+.profileDocumentList li { display: grid; gap: 8px; padding: 22px 0; border-bottom: 1px solid var(--line); }
+.profileDocumentList .mono { color: var(--green); font-size: 10px; }
+.profileDocumentList p { margin: 0; }
+
 @media (max-width: 1050px) {
   .heroHome { grid-template-columns: 1fr; }
   .joinHero { grid-template-columns: 1fr; }
@@ -967,7 +1021,10 @@ main { min-height: calc(100vh - 160px); }
   .supplierHero { min-height: auto; padding-top: 78px; }
   .heroCopy h1 { font-size: clamp(50px, 15vw, 74px); }
   .supplierHeroCopy h1 { font-size: clamp(48px, 14vw, 72px); }
-  .supplierPathHeading, .supplierClose { flex-direction: column; align-items: flex-start; }
+  .supplierPathHeading, .supplierClose, .tecridNudge, .articleIndexList li { flex-direction: column; align-items: flex-start; }
+  .tecridNudge, .articleIndexList li { display: flex; }
+  .contaminantGrid, .contaminantGridCompact { grid-template-columns: 1fr; }
+  .contaminantCard, .contaminantGridCompact article { border-right: 0; }
   .identityRail { grid-template-columns: 1fr; }
   .identityRail span { min-height: 70px; }
   .identityRail i { min-height: 28px; }
@@ -1037,7 +1094,7 @@ main { min-height: calc(100vh - 160px); }
   .accessPage { padding: 34px 18px 48px; }
   .accessPage > .pilotStatusRail { grid-template-columns: 1fr 1fr; padding: 0; }
   .accessStatusHead { align-items: flex-start; flex-direction: column; }
-  .heroHome, .joinHero, .joinPlans, .joinRoles, .joinEvidence, .faqHero, .faqNetwork, .faqWorkflow, .faqQuestions, .faqNext, .supplierHero, .supplierIdentity, .supplierPath, .supplierClose, .shelfSection, .opsPage, .lotDetailPage, .findPage, .commercialPage, .nominationPage, .membershipPage { padding-left: 18px; padding-right: 18px; }
+  .heroHome, .joinHero, .joinPlans, .joinRoles, .joinEvidence, .faqHero, .faqNetwork, .faqWorkflow, .faqQuestions, .faqNext, .supplierHero, .supplierIdentity, .supplierPath, .supplierClose, .shelfSection, .opsPage, .lotDetailPage, .findPage, .commercialPage, .nominationPage, .membershipPage, .articleHero, .articleIndexList, .contaminantBody, .supplierProfileBody, .articlePage article, .tecridNudge { padding-left: 18px; padding-right: 18px; }
   .joinBoundary { margin-left: 18px; margin-right: 18px; }
   .faqWorkflow > ol > li { grid-template-columns: 52px 1fr; gap: 16px; }
   .faqList summary { grid-template-columns: 36px 1fr 24px; gap: 10px; }

@@ -1091,6 +1091,14 @@ Bridge online.
 
 ## CODEX → ELON
 
+### 2026-10-15 10:05 Asia/Nicosia — PR
+
+Tag: PR
+
+**Draft PR, not merged:** https://github.com/paleofoundation/VLE/pull/33
+
+VLE-CONTAMINANTS-1, VLE-ARTICLES-1, and VLE-TECRID-NUDGE-1 are in one draft. Contaminant documents are file references for heavy metals, PFAS, and microplastics, attached to one lot or one profile, with no measured results seeded. Five articles carry canonicals, sitemap entries, and Article JSON-LD. The claim is a category standard with scheduled retesting. Supplier onboarding and supplier profiles recommend TECRID verification at tecrid.com and state that verified suppliers rank higher in brand matching. Matching is not built. Lint, typecheck, unit tests, and `next build` passed. No deploy. NO FINISH.
+
 ### 2026-09-10 14:51 Asia/Nicosia — PR
 
 Tag: PR

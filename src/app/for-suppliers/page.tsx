@@ -4,6 +4,7 @@ import { PilotStatusRail } from "../pilot-status-rail";
 import { publicPageMetadata } from "@/lib/seo";
 import { seoJsonLdPages } from "@/lib/structured-data";
 import { PageStructuredData } from "../page-structured-data";
+import { TecridVerificationNudge } from "../tecrid-nudge";
 import { PrintButton } from "./print-button";
 
 const suppliersPage = seoJsonLdPages["/for-suppliers"];
@@ -131,9 +132,11 @@ export default function ForSuppliersPage() {
           </ol>
         </section>
 
+        <TecridVerificationNudge surface="onboarding" />
+
         <section className="supplierClose">
-          <div><p className="eyebrow">Pilot intake</p><h2>Bring the lot. VLE runs the lane.</h2><p>Managed operations can take a nominated cocoa powder or avocado fruit lot through inventory verification, sampling, evidence, qualification, and gated publication. Buyer matching remains cocoa-only.</p></div>
-          <div className="supplierCloseActions"><Link className="button" href="/access">Start reviewed supplier access</Link><Link className="textLink" href="/#passed-lots">Inspect the public shelf</Link></div>
+          <div><p className="eyebrow">Pilot intake</p><h2>Bring the lot. VLE runs the lane.</h2><p>Managed operations can take a nominated cocoa powder or avocado fruit lot through inventory verification, sampling, evidence, qualification, and gated publication. Buyer matching remains cocoa-only. Contaminant file references, when you have them, attach to a lot or a profile from the supplier desk.</p></div>
+          <div className="supplierCloseActions"><Link className="button" href="/access">Start reviewed supplier access</Link><Link className="textLink" href="/contaminants">Contaminant documentation</Link><Link className="textLink" href="/articles">Read the articles</Link></div>
         </section>
       </div>
 

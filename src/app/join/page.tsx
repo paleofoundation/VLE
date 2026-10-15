@@ -3,6 +3,7 @@ import { ExampleProfileNotice } from "../example-profile-notice";
 import { publicPageMetadata } from "@/lib/seo";
 import { seoJsonLdPages } from "@/lib/structured-data";
 import { PageStructuredData } from "../page-structured-data";
+import { TecridVerificationNudge } from "../tecrid-nudge";
 
 const joinPage = seoJsonLdPages["/join"];
 
@@ -122,6 +123,8 @@ export default function JoinPage() {
           ))}
         </div>
       </section>
+
+      <TecridVerificationNudge surface="onboarding" />
 
       <section className="joinEvidence" aria-labelledby="evidence-heading">
         <div>

@@ -1,8 +1,11 @@
 import Link from "next/link";
 import { cancelReservationAction, createQuoteAction, transitionQuoteAction } from "@/app/commercial-actions";
+import { TecridVerificationNudge } from "../tecrid-nudge";
+import { SupplierContaminantDesk } from "./contaminant-desk";
 import { getCurrentPageActor } from "@/lib/page-actor";
 import { formatQuantity } from "@/lib/presentation";
 import { listCommercialWorkspace } from "@/services/commercial";
+import { listSupplierContaminantDesk } from "@/services/contaminants";
 
 export const dynamic = "force-dynamic";
 
@@ -13,7 +16,10 @@ export default async function SupplierDeskPage() {
   if (!actor.roles.some((role) => role === "SUPPLIER" || role === "OPS" || role === "ADMIN")) {
     return <main id="main-content" className="accessPage"><div className="accessCard"><span className="mono">AUTHZ / SUPPLIER</span><h1>Supplier access required.</h1><Link className="textLink" href="/">Return to the public shelf</Link></div></main>;
   }
-  const workspace = await listCommercialWorkspace(actor, "SUPPLIER");
+  const [workspace, contaminantDesk] = await Promise.all([
+    listCommercialWorkspace(actor, "SUPPLIER"),
+    actor.roles.includes("SUPPLIER") ? listSupplierContaminantDesk(actor) : Promise.resolve(null),
+  ]);
   const requirements = new Map(workspace.requirements.map((item) => [item.id, item]));
   return (
     <main id="main-content" className="commercialPage">
@@ -38,6 +44,8 @@ export default async function SupplierDeskPage() {
           {!workspace.matches.length ? <div className="opsEmpty"><span className="mono">PILOT GATE / ELIGIBLE MATCH</span><h3>Quote queue ready; eligibility handoff pending.</h3><p>Supplier quoting opens only after operations binds a reviewed cocoa requirement to one of your currently eligible public listings. An empty queue means that gate has not been bypassed.</p></div> : null}
         </div>
       </section>
+      <TecridVerificationNudge surface="profile" />
+      {contaminantDesk ? <SupplierContaminantDesk desk={contaminantDesk} /> : <p className="sectionLead">Contaminant documents are attached by the supplier organization from this desk. Operations can read them on the lot workflow.</p>}
     </main>
   );
 }

@@ -2,6 +2,8 @@ import { sql } from "drizzle-orm";
 import {
   boolean,
   check,
+  customType,
+  integer,
   index,
   jsonb,
   numeric,
@@ -12,6 +14,8 @@ import {
   uniqueIndex,
   uuid,
 } from "drizzle-orm/pg-core";
+
+const bytea = customType<{ data: Buffer }>({ dataType: () => "bytea" });
 
 const id = () => uuid("id").primaryKey().defaultRandom();
 const createdAt = () => timestamp("created_at", { withTimezone: true }).notNull().defaultNow();
@@ -85,8 +89,8 @@ export const lotArtifacts = pgTable("lot_artifacts", {
 }, (table) => [index("lot_artifact_lot_received_idx").on(table.physicalLotId, table.receivedAt)]);
 
 /**
- * Supplier file reference for one documentation type, attached to one physical lot
- * or one compliance profile. No measured result is stored. Attaching a row does not
+ * Supplier reference or PDF for one documentation type and one lot or profile.
+ * File contents are not extracted as measured results. Attaching a row does not
  * change lot status, create a sample, or qualify a listing.
  */
 export const contaminantDocuments = pgTable("contaminant_documents", {
@@ -96,7 +100,10 @@ export const contaminantDocuments = pgTable("contaminant_documents", {
   physicalLotId: uuid("physical_lot_id").references(() => physicalLots.id),
   complianceProfileId: uuid("compliance_profile_id").references(() => complianceProfiles.id),
   fileName: text("file_name").notNull(),
-  referenceUrl: text("reference_url").notNull(),
+  referenceUrl: text("reference_url"),
+  fileContent: bytea("file_content"),
+  fileSize: integer("file_size"),
+  contentType: text("content_type"),
   documentDate: timestamp("document_date", { withTimezone: true }),
   retestOn: timestamp("retest_on", { withTimezone: true }),
   notes: text("notes"),
@@ -107,6 +114,13 @@ export const contaminantDocuments = pgTable("contaminant_documents", {
   index("contaminant_document_supplier_idx").on(table.supplierOrganizationId, table.attachedAt),
   index("contaminant_document_lot_idx").on(table.physicalLotId),
   index("contaminant_document_profile_idx").on(table.complianceProfileId),
+  check(
+    "contaminant_document_source_chk",
+    sql`(reference_url IS NOT NULL AND file_content IS NULL AND file_size IS NULL AND content_type IS NULL)
+      OR (reference_url IS NULL AND file_content IS NOT NULL AND file_size IS NOT NULL
+        AND content_type IS NOT NULL AND content_type = 'application/pdf'
+        AND file_size BETWEEN 1 AND 524288 AND octet_length(file_content) = file_size)`,
+  ),
   check(
     "contaminant_document_one_subject_chk",
     sql`(physical_lot_id IS NOT NULL AND compliance_profile_id IS NULL) OR (physical_lot_id IS NULL AND compliance_profile_id IS NOT NULL)`,

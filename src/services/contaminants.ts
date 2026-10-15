@@ -1,4 +1,4 @@
-import { and, asc, desc, eq } from "drizzle-orm";
+import { and, asc, desc, eq, sql } from "drizzle-orm";
 import { getDb } from "@/db";
 import {
   complianceProfiles,
@@ -10,6 +10,7 @@ import {
 import { assertPermission, assertTenant, type Actor } from "@/domain/authz";
 import {
   assertContaminantAttachment,
+  assertContaminantDownload,
   contaminantDocumentationType,
   type ContaminantAttachmentInput,
 } from "@/domain/contaminants";
@@ -22,6 +23,8 @@ function documentSelection() {
     documentationType: contaminantDocuments.documentationType,
     fileName: contaminantDocuments.fileName,
     referenceUrl: contaminantDocuments.referenceUrl,
+    hasUpload: sql<boolean>`${contaminantDocuments.fileContent} IS NOT NULL`,
+    fileSize: contaminantDocuments.fileSize,
     documentDate: contaminantDocuments.documentDate,
     retestOn: contaminantDocuments.retestOn,
     notes: contaminantDocuments.notes,
@@ -83,13 +86,16 @@ export async function attachContaminantDocument(actor: Actor, input: Contaminant
       physicalLotId: input.subject === "LOT" ? input.physicalLotId : null,
       complianceProfileId: input.subject === "PROFILE" ? input.complianceProfileId : null,
       fileName: input.fileName.trim(),
-      referenceUrl: input.referenceUrl.trim(),
+      referenceUrl: input.referenceUrl?.trim() ?? null,
+      fileContent: input.file ? Buffer.from(input.file.bytes) : null,
+      fileSize: input.file?.bytes.byteLength ?? null,
+      contentType: input.file?.contentType ?? null,
       documentDate: input.documentDate,
       retestOn: input.retestOn,
       notes: input.notes?.trim() || null,
       attachedByUserId: actor.userId,
       attachedAt: now,
-    }).returning();
+    }).returning({ id: contaminantDocuments.id });
 
     await appendAuditEvent(tx, actor, {
       eventType: "CONTAMINANT_DOCUMENT_ATTACHED",
@@ -100,7 +106,9 @@ export async function attachContaminantDocument(actor: Actor, input: Contaminant
         subject: input.subject,
         lotId: input.subject === "LOT" ? input.physicalLotId : null,
         profileId: input.subject === "PROFILE" ? input.complianceProfileId : null,
-        referenceRecorded: true,
+        referenceRecorded: Boolean(input.referenceUrl),
+        fileUploaded: Boolean(input.file),
+        fileSize: input.file?.bytes.byteLength ?? null,
         resultStored: false,
         lotStatusUnchanged: true,
       },
@@ -139,4 +147,24 @@ export async function getPublicSupplierProfile(slug: string) {
       type: contaminantDocumentationType(document.documentationType),
     })),
   };
+}
+
+/** Private bytes are selected only after role and supplier ownership checks. */
+export async function downloadContaminantDocument(actor: Actor, documentId: string) {
+  assertContaminantDownload(actor);
+  const db = getDb();
+  const [metadata] = await db.select({
+    supplierOrganizationId: contaminantDocuments.supplierOrganizationId,
+  }).from(contaminantDocuments).where(eq(contaminantDocuments.id, documentId)).limit(1);
+  if (!metadata) throw new DomainError("Document not found", "NOT_FOUND");
+  assertTenant(actor, metadata.supplierOrganizationId);
+  const [document] = await db.select({
+    fileName: contaminantDocuments.fileName,
+    fileContent: contaminantDocuments.fileContent,
+  }).from(contaminantDocuments).where(and(
+    eq(contaminantDocuments.id, documentId),
+    eq(contaminantDocuments.supplierOrganizationId, metadata.supplierOrganizationId),
+  )).limit(1);
+  if (!document?.fileContent) throw new DomainError("Uploaded PDF not found", "NOT_FOUND");
+  return document;
 }

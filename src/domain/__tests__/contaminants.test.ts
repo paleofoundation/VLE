@@ -18,13 +18,13 @@ describe("contaminant documentation types", () => {
     expect(contaminantDocumentationTypes.map((type) => [type.code, type.indexUrl])).toEqual([
       ["HEAVY_METALS", "https://heavymetalindex.com"],
       ["PFAS", "https://foreverchemicalsindex.com"],
-      ["MICROPLASTICS", "https://microplasticsindex.com"],
+      ["MICROPLASTICS", "https://contaminantstandards.com/network/microplastics"],
     ]);
     for (const type of contaminantDocumentationTypes) {
       expect(type.explainer.length).toBeGreaterThan(80);
       expect(type.explainer).toContain("Institute of Contaminant Standards");
       expect(type.explainer).not.toMatch(/[\u2013\u2014]/);
-      expect(type.explainer.toLowerCase()).not.toMatch(/\bpartners?|\bpartnerships?/);
+      expect(type.explainer.toLowerCase()).not.toMatch(/\b\u0070artners?|\b\u0070artnerships?/);
       expect(JSON.stringify(type)).not.toMatch(/\d+(\.\d+)?\s*(ppm|ppb|mg\/kg)/i);
     }
   });

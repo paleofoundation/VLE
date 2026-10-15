@@ -3,6 +3,7 @@ import { createReservationAction, transitionQuoteAction, cancelReservationAction
 import { getCurrentPageActor } from "@/lib/page-actor";
 import { formatQuantity } from "@/lib/presentation";
 import { listCommercialWorkspace } from "@/services/commercial";
+import { MATCH_METHODOLOGY_PATH } from "@/matching/copy";
 
 export const dynamic = "force-dynamic";
 
@@ -18,6 +19,11 @@ export default async function BuyerDeskPage({ searchParams }: PageProps<"/buyer"
   return (
     <main id="main-content" className="commercialPage">
       <section className="commercialHero"><div><p className="eyebrow">Buyer desk · Cocoa powder</p><h1>Requirements and commercial intent</h1><p className="sectionLead">Review matches to currently eligible lots, accept a time-limited quote, and record a reservation intent. Nothing here creates an Order.</p></div><Link className="button" href="/find">New requirement</Link></section>
+      <aside className="inlineEmpty" aria-label="Contamination ranking availability">
+        <strong>No approved grade mapping</strong>
+        <span>Contamination ranking awaits an approved policy and current verified evidence. Existing eligibility matching continues.</span>
+        <Link className="textLink" href={MATCH_METHODOLOGY_PATH}>Read the matching methodology</Link>
+      </aside>
       {created === "1" ? <div className="success" role="status" aria-live="polite"><strong>Requirement recorded.</strong><span>VLE operations can now run eligibility-bound matching.</span></div> : null}
       <section className="commercialBoard">
         <div className="boardHeading"><div><p className="eyebrow">Your pipeline</p><h2>Passing-lot requirements</h2></div><p>A match or reservation automatically becomes invalid when its listing unlists.</p></div>

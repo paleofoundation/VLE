@@ -29,6 +29,7 @@ const publicCatalog = [
   "/contaminants",
   "/suppliers",
   "/articles",
+  "/matching/methodology",
   "/articles/not-a-supplier-directory",
   "/articles/tested-without-a-public-result",
   "/articles/contamination-crisis-needs-a-lot",

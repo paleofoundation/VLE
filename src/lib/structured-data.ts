@@ -62,12 +62,12 @@ type SeoPageCopy = {
 
 export const seoJsonLdPages: Record<SeoJsonLdPath, SeoPageCopy> = {
   "/access": {
-    name: "Access VLE — reviewed pilot entry",
+    name: "Access VLE : reviewed pilot entry",
     description:
       "Clerk authenticates your identity. VLE operations then maps that identity to one verified organization and role; signing in alone reveals no private workspace data.",
   },
   "/for-buyers": {
-    name: "For buyers — from requirement to reservation intent | VLE",
+    name: "For buyers : from requirement to reservation intent | VLE",
     description:
       "See how VLE connects a cocoa requirement to an eligible listing, a time-limited supplier quote, and a reservation intent.",
     service: {
@@ -76,7 +76,7 @@ export const seoJsonLdPages: Record<SeoJsonLdPath, SeoPageCopy> = {
     },
   },
   "/join": {
-    name: "Join VLE — Free Core Access",
+    name: "Join VLE : Free Core Access",
     description:
       "Join the Verified Lot Exchange pilot. Core access is free forever; optional white-glove help never buys qualification, listing eligibility, or evidence authenticity.",
     service: {
@@ -85,7 +85,7 @@ export const seoJsonLdPages: Record<SeoJsonLdPath, SeoPageCopy> = {
     },
   },
   "/for-laboratories": {
-    name: "For laboratories — from controlled sample to authenticated evidence | VLE",
+    name: "For laboratories : from controlled sample to authenticated evidence | VLE",
     description:
       "See how laboratories support VLE with controlled sample receipt and TECRID-authenticated evidence without turning a supplier PDF into a qualification decision.",
     service: {
@@ -94,7 +94,7 @@ export const seoJsonLdPages: Record<SeoJsonLdPath, SeoPageCopy> = {
     },
   },
   "/for-suppliers": {
-    name: "For suppliers — from stocked lot to passed-lot listing | VLE",
+    name: "For suppliers : from stocked lot to passed-lot listing | VLE",
     description:
       "See how VLE moves an identified ingredient lot through sampling, TECRID-linked evidence, deterministic qualification, and gated commercial intent.",
     service: {
@@ -105,7 +105,7 @@ export const seoJsonLdPages: Record<SeoJsonLdPath, SeoPageCopy> = {
   "/contaminants": {
     name: "Contaminant documentation | VLE",
     description:
-      "Heavy metals, PFAS, and microplastics are separate documentation types. Each links to an Institute of Contaminant Standards index. VLE stores supplier file references and does not invent results.",
+      "Heavy metals, PFAS, and microplastics are separate documentation types. Heavy metals and PFAS link to their evidence indexes; microplastics links to its ICS vertical page while its index is in development. Suppliers attach PDFs or file references without creating qualification results.",
   },
   "/articles": {
     name: "Articles | VLE",

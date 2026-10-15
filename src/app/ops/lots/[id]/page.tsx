@@ -145,13 +145,13 @@ export default async function OpsLotPage({ params }: PageProps<"/ops/lots/[id]">
 
       <section className="artifactPanel" aria-labelledby="contaminant-doc-heading">
         <div className="artifactPanelHead">
-          <div><p className="eyebrow">Contaminant documents · outside the gate</p><h2 id="contaminant-doc-heading">Lot contaminant references</h2><p>Suppliers attach these from the supplier desk. A reference is not a measured result and does not move this workflow.</p></div>
+          <div><p className="eyebrow">Contaminant documents · outside the gate</p><h2 id="contaminant-doc-heading">Lot contaminant documents</h2><p>Suppliers attach these from the supplier desk. An attachment is not a qualification result and does not move this workflow.</p></div>
         </div>
         <div className="artifactLog">
           <div className="artifactLogHead"><span>Attached to this lot</span><strong>{contaminantDocuments.length.toString().padStart(2, "0")}</strong></div>
           {contaminantDocuments.length ? <ol>{contaminantDocuments.map((document) => {
             const type = contaminantDocumentationTypes.find((item) => item.code === document.documentationType);
-            return <li key={document.id}><div><span className="stateChip">{type?.name ?? document.documentationType}</span><time>{document.attachedAt.toLocaleDateString("en", { day: "2-digit", month: "short", year: "numeric" })}</time></div><strong>{document.fileName}</strong><p>{document.retestOn ? `Retest ${document.retestOn.toLocaleDateString("en", { day: "2-digit", month: "short", year: "numeric" })}. ` : "No retest date recorded. "}{document.notes || "No note."}</p><a className="textLink" href={document.referenceUrl} target="_blank" rel="noopener noreferrer nofollow">Open stored reference <span aria-hidden="true">↗</span></a></li>;
+            return <li key={document.id}><div><span className="stateChip">{type?.name ?? document.documentationType}</span><time>{document.attachedAt.toLocaleDateString("en", { day: "2-digit", month: "short", year: "numeric" })}</time></div><strong>{document.fileName}</strong><p>{document.retestOn ? `Retest ${document.retestOn.toLocaleDateString("en", { day: "2-digit", month: "short", year: "numeric" })}. ` : "No retest date recorded. "}{document.notes || "No note."}</p><a className="textLink" href={document.hasUpload ? `/api/contaminant-documents/${document.id}` : document.referenceUrl ?? "#"} target="_blank" rel="noopener noreferrer nofollow">{document.hasUpload ? "Download uploaded PDF" : "Open stored reference"} <span aria-hidden="true">↗</span></a></li>;
           })}</ol> : <div className="artifactEmpty"><strong>No contaminant document is attached to this lot.</strong><p>The lot workflow is unchanged. VLE has not invented a result for heavy metals, PFAS, or microplastics.</p></div>}
         </div>
       </section>

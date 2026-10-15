@@ -44,6 +44,7 @@ export default async function SupplierDeskPage() {
           {!workspace.matches.length ? <div className="opsEmpty"><span className="mono">PILOT GATE / ELIGIBLE MATCH</span><h3>Quote queue ready; eligibility handoff pending.</h3><p>Supplier quoting opens only after operations binds a reviewed cocoa requirement to one of your currently eligible public listings. An empty queue means that gate has not been bypassed.</p></div> : null}
         </div>
       </section>
+      <p><Link href="/supplier/gated">Private document access and supplier history</Link></p>
       <TecridVerificationNudge surface="profile" />
       {contaminantDesk ? <SupplierContaminantDesk desk={contaminantDesk} /> : <p className="sectionLead">Contaminant documents are attached by the supplier organization from this desk. Operations can read them on the lot workflow.</p>}
     </main>

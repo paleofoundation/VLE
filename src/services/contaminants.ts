@@ -53,7 +53,7 @@ export async function listSupplierContaminantDesk(actor: Actor) {
     db.select(documentSelection()).from(contaminantDocuments)
       .leftJoin(physicalLots, eq(physicalLots.id, contaminantDocuments.physicalLotId))
       .leftJoin(complianceProfiles, eq(complianceProfiles.id, contaminantDocuments.complianceProfileId))
-      .where(eq(contaminantDocuments.supplierOrganizationId, actor.organizationId))
+      .where(and(eq(contaminantDocuments.supplierOrganizationId, actor.organizationId), eq(contaminantDocuments.visibility, "PUBLIC")))
       .orderBy(desc(contaminantDocuments.attachedAt)),
   ]);
   return { lots, profiles, documents };
@@ -113,7 +113,7 @@ export async function listLotContaminantDocuments(lotId: string) {
   return getDb().select(documentSelection()).from(contaminantDocuments)
     .leftJoin(physicalLots, eq(physicalLots.id, contaminantDocuments.physicalLotId))
     .leftJoin(complianceProfiles, eq(complianceProfiles.id, contaminantDocuments.complianceProfileId))
-    .where(eq(contaminantDocuments.physicalLotId, lotId))
+    .where(and(eq(contaminantDocuments.physicalLotId, lotId), eq(contaminantDocuments.visibility, "PUBLIC")))
     .orderBy(desc(contaminantDocuments.attachedAt));
 }
 
@@ -130,7 +130,7 @@ export async function getPublicSupplierProfile(slug: string) {
   const documents = await db.select(documentSelection()).from(contaminantDocuments)
     .leftJoin(physicalLots, eq(physicalLots.id, contaminantDocuments.physicalLotId))
     .leftJoin(complianceProfiles, eq(complianceProfiles.id, contaminantDocuments.complianceProfileId))
-    .where(eq(contaminantDocuments.supplierOrganizationId, organization.id))
+    .where(and(eq(contaminantDocuments.supplierOrganizationId, organization.id), eq(contaminantDocuments.visibility, "PUBLIC")))
     .orderBy(desc(contaminantDocuments.attachedAt));
   return {
     organization,

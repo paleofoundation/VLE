@@ -1,12 +1,12 @@
 import Link from "next/link";
 import { ExampleProfileNotice } from "../example-profile-notice";
 import { publicPageMetadata } from "@/lib/seo";
+import { seoJsonLdPages } from "@/lib/structured-data";
+import { PageStructuredData } from "../page-structured-data";
 
-export const metadata = publicPageMetadata(
-  "/join",
-  "Join VLE — Free Core Access",
-  "Join the Verified Lot Exchange pilot. Core access is free forever; optional white-glove help never buys qualification, listing eligibility, or evidence authenticity.",
-);
+const joinPage = seoJsonLdPages["/join"];
+
+export const metadata = publicPageMetadata("/join", joinPage.name, joinPage.description);
 
 const coreFeatures = [
   "Browse the public eligibility shelf",
@@ -49,6 +49,7 @@ const roleDoors = [
 export default function JoinPage() {
   return (
     <main id="main-content" className="joinPage">
+      <PageStructuredData path="/join" />
       <section className="joinHero" aria-labelledby="join-heading">
         <div className="joinHeroCopy">
           <p className="eyebrow eyebrowLight">Join VLE · Public pilot</p>

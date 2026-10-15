@@ -2,13 +2,13 @@ import Link from "next/link";
 import { ExampleProfileNotice } from "../example-profile-notice";
 import { PilotStatusRail } from "../pilot-status-rail";
 import { publicPageMetadata } from "@/lib/seo";
+import { seoJsonLdPages } from "@/lib/structured-data";
+import { PageStructuredData } from "../page-structured-data";
 import { PrintButton } from "./print-button";
 
-export const metadata = publicPageMetadata(
-  "/for-suppliers",
-  "For suppliers — from stocked lot to passed-lot listing | VLE",
-  "See how VLE moves an identified ingredient lot through sampling, TECRID-linked evidence, deterministic qualification, and gated commercial intent.",
-);
+const suppliersPage = seoJsonLdPages["/for-suppliers"];
+
+export const metadata = publicPageMetadata("/for-suppliers", suppliersPage.name, suppliersPage.description);
 
 const steps = [
   {
@@ -64,6 +64,7 @@ const gateFacts = [
 export default function ForSuppliersPage() {
   return (
     <main id="main-content" className="supplierWalkthrough">
+      <PageStructuredData path="/for-suppliers" />
       <div className="supplierScreen">
         <section className="supplierHero">
           <div className="supplierHeroCopy">

@@ -2,12 +2,12 @@ import Link from "next/link";
 import { ExampleProfileNotice } from "../example-profile-notice";
 import { PilotStatusRail } from "../pilot-status-rail";
 import { publicPageMetadata } from "@/lib/seo";
+import { seoJsonLdPages } from "@/lib/structured-data";
+import { PageStructuredData } from "../page-structured-data";
 
-export const metadata = publicPageMetadata(
-  "/for-buyers",
-  "For buyers — from requirement to reservation intent | VLE",
-  "See how VLE connects a cocoa requirement to an eligible listing, a time-limited supplier quote, and a reservation intent.",
-);
+const buyersPage = seoJsonLdPages["/for-buyers"];
+
+export const metadata = publicPageMetadata("/for-buyers", buyersPage.name, buyersPage.description);
 
 const steps = [
   {
@@ -63,6 +63,7 @@ const buyerChecks = [
 export default function ForBuyersPage() {
   return (
     <main id="main-content" className="supplierWalkthrough buyerWalkthrough">
+      <PageStructuredData path="/for-buyers" />
       <div className="supplierScreen">
         <section className="supplierHero">
           <div className="supplierHeroCopy">

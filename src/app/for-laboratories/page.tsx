@@ -2,12 +2,12 @@ import Link from "next/link";
 import { ExampleProfileNotice } from "../example-profile-notice";
 import { PilotStatusRail } from "../pilot-status-rail";
 import { publicPageMetadata } from "@/lib/seo";
+import { seoJsonLdPages } from "@/lib/structured-data";
+import { PageStructuredData } from "../page-structured-data";
 
-export const metadata = publicPageMetadata(
-  "/for-laboratories",
-  "For laboratories — from controlled sample to authenticated evidence | VLE",
-  "See how laboratories support VLE with controlled sample receipt and TECRID-authenticated evidence without turning a supplier PDF into a qualification decision.",
-);
+const laboratoriesPage = seoJsonLdPages["/for-laboratories"];
+
+export const metadata = publicPageMetadata("/for-laboratories", laboratoriesPage.name, laboratoriesPage.description);
 
 const steps = [
   {
@@ -63,6 +63,7 @@ const evidenceChecks = [
 export default function ForLaboratoriesPage() {
   return (
     <main id="main-content" className="supplierWalkthrough laboratoryWalkthrough">
+      <PageStructuredData path="/for-laboratories" />
       <div className="supplierScreen">
         <section className="supplierHero">
           <div className="supplierHeroCopy">

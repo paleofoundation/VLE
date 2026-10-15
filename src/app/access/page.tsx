@@ -3,15 +3,15 @@ import { headers } from "next/headers";
 import { resolveCurrentAccess } from "@/lib/current-actor";
 import { publicPageMetadata } from "@/lib/seo";
 import { accessRequestNeedsClerk } from "@/lib/site";
+import { seoJsonLdPages } from "@/lib/structured-data";
+import { PageStructuredData } from "../page-structured-data";
 import { PilotStatusRail } from "../pilot-status-rail";
 
 export const dynamic = "force-dynamic";
 
-export const metadata = publicPageMetadata(
-  "/access",
-  "Access VLE — reviewed pilot entry",
-  "Clerk authenticates your identity. VLE operations then maps that identity to one verified organization and role; signing in alone reveals no private workspace data.",
-);
+const accessPage = seoJsonLdPages["/access"];
+
+export const metadata = publicPageMetadata("/access", accessPage.name, accessPage.description);
 
 export default async function AccessPage({
   searchParams,
@@ -24,16 +24,17 @@ export default async function AccessPage({
     ? await resolveCurrentAccess()
     : { status: "SIGNED_OUT" as const };
   if (access.status === "SIGNED_OUT") {
-    return <main id="main-content" className="accessPage"><PilotStatusRail audience="access" /><div className="accessCard"><div className="accessStatusHead"><span className="mono">ACCESS / SIGN IN</span><span className="status accessStatus"><i /> Reviewed pilot</span></div><h1>Sign in to enter the review lane.</h1><p>Clerk authenticates your identity. VLE operations then maps that identity to one verified organization and role; signing in alone reveals no private workspace data.</p><div className="accessPromise"><span className="mono">WHAT HAPPENS NEXT</span><strong>Identity → organization review → workspace</strong><p>No buyer, supplier, or operations data appears before the server-side membership exists.</p></div><div className="accessActions"><Link className="button buttonDark" href="/sign-in">Sign in securely</Link><Link className="textLink" href="/#passed-lots">Preview the pilot shelf</Link></div></div></main>;
+    return <main id="main-content" className="accessPage"><PageStructuredData path="/access" /><PilotStatusRail audience="access" /><div className="accessCard"><div className="accessStatusHead"><span className="mono">ACCESS / SIGN IN</span><span className="status accessStatus"><i /> Reviewed pilot</span></div><h1>Sign in to enter the review lane.</h1><p>Clerk authenticates your identity. VLE operations then maps that identity to one verified organization and role; signing in alone reveals no private workspace data.</p><div className="accessPromise"><span className="mono">WHAT HAPPENS NEXT</span><strong>Identity → organization review → workspace</strong><p>No buyer, supplier, or operations data appears before the server-side membership exists.</p></div><div className="accessActions"><Link className="button buttonDark" href="/sign-in">Sign in securely</Link><Link className="textLink" href="/#passed-lots">Preview the pilot shelf</Link></div></div></main>;
   }
   if (access.status === "ACTIVE") {
     const roles = access.actor.roles;
     const destination = roles.some((role) => role === "OPS" || role === "ADMIN") ? "/ops" : roles.includes("SUPPLIER") ? "/supplier" : "/buyer";
-    return <main id="main-content" className="accessPage"><PilotStatusRail audience="access" /><div className="accessCard"><div className="accessStatusHead"><span className="mono">ACCESS / ACTIVE</span><span className="status statusPassed"><i /> Membership active</span></div><h1>Your reviewed workspace is ready.</h1><p>Organization <code>{access.actor.organizationId}</code> · role {roles.join(" · ")}</p><div className="accessPromise"><span className="mono">AUTHORITY CHECK</span><strong>Identity and membership resolved server-side</strong><p>Your workspace opens only with the organization and role recorded for this Clerk identity.</p></div><Link className="button buttonDark" href={destination}>Open workspace</Link></div></main>;
+    return <main id="main-content" className="accessPage"><PageStructuredData path="/access" /><PilotStatusRail audience="access" /><div className="accessCard"><div className="accessStatusHead"><span className="mono">ACCESS / ACTIVE</span><span className="status statusPassed"><i /> Membership active</span></div><h1>Your reviewed workspace is ready.</h1><p>Organization <code>{access.actor.organizationId}</code> · role {roles.join(" · ")}</p><div className="accessPromise"><span className="mono">AUTHORITY CHECK</span><strong>Identity and membership resolved server-side</strong><p>Your workspace opens only with the organization and role recorded for this Clerk identity.</p></div><Link className="button buttonDark" href={destination}>Open workspace</Link></div></main>;
   }
 
   return (
     <main id="main-content" className="accessPage">
+      <PageStructuredData path="/access" />
       <PilotStatusRail audience="access" />
       <div className="accessCard accessPendingCard">
         <div className="accessStatusHead"><span className="mono">ACCESS / PENDING MAPPING</span><span className="status accessStatusPending"><i /> Review in progress</span></div>

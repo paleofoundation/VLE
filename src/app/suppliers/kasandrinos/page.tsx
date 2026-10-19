@@ -1,4 +1,9 @@
 import Link from "next/link";
+import { SupplierRequestLinks } from "@/components/listing/request-links";
+import GenericSupplierPage from "../[slug]/page";
+import { notFound } from "next/navigation";
+import { PublicCertifications } from "@/components/listing/certifications";
+import { getSupplier } from "@/lib/public-listings";
 import { publicPageMetadata } from "@/lib/seo";
 import {
   supplierDocumentNotice,
@@ -25,7 +30,11 @@ const lotSteps = [
   { title: "Reserved", detail: "Awaiting qualification and a recorded reservation." },
 ] as const;
 
-export default function KasandrinosSupplierPage() {
+export const dynamic = "force-dynamic";
+export default async function KasandrinosSupplierPage() {
+  const profile = await getSupplier("kasandrinos");
+  if (!profile) notFound();
+  if (profile.listingSource === "MEMBER") return GenericSupplierPage({ params: Promise.resolve({ slug: "kasandrinos" }), searchParams: Promise.resolve({}) });
   return (
     <main id="main-content" className={styles.profile}>
       <aside className={styles.profileBanner} aria-label="Profile listing status">
@@ -104,6 +113,7 @@ export default function KasandrinosSupplierPage() {
         </ul>
       </section>
 
+      <PublicCertifications profileId={profile.id} />
       <section className={styles.lotSection} id="vle-lot" aria-labelledby="lot-heading">
         <div className={styles.lotIntro}>
           <p className="eyebrow eyebrowLight">Lot-specific evidence</p>
@@ -120,6 +130,7 @@ export default function KasandrinosSupplierPage() {
           ))}
         </ol>
       </section>
+      <SupplierRequestLinks slug="kasandrinos" member={false} />
       <section className={styles.claimSection} aria-label="Claim or takedown requests">
         <p>To claim this profile or request a takedown, email <a href="mailto:marcus@vle.exchange">marcus@vle.exchange</a>. Takedown requests are honoured within 5 business days.</p>
       </section>

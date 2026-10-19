@@ -1,8 +1,7 @@
-import Image from "next/image";
 import Link from "next/link";
 import { publicPageMetadata } from "@/lib/seo";
 import {
-  brandReportNotice,
+  supplierDocumentNotice,
   kasandrinosCertifications,
   kasandrinosProducts,
   kasandrinosReports,
@@ -13,22 +12,25 @@ import styles from "./profile.module.css";
 export const metadata = publicPageMetadata(
   "/suppliers/kasandrinos",
   "Kasandrinos supplier profile | VLE",
-  "Kasandrinos International LLC: family-grown organic extra virgin olive oil from Greece. Explore products, brand-published documents, and the pending VLE lot.",
+  "Kasandrinos International LLC: family-grown organic extra virgin olive oil from Greece. Listed from public documents. Not a VLE member. Explore supplier-published documents and pending VLE steps.",
 );
 
 // Advance a step only when a real, lot-specific record supports it.
-// Brand-published reports below do not satisfy any of these steps.
+// Supplier-published reports below do not satisfy any of these steps.
 const lotSteps = [
-  { title: "Purchase in progress", detail: "500ml glass, 4 sealed bottles. Purchase confirmation and lot identity are pending." },
-  { title: "Sample received at Light Labs", detail: "Awaiting the laboratory receipt and sample custody record." },
-  { title: "Heavy-metals panel", detail: "Awaiting testing and the report for this VLE sample." },
-  { title: "TECRID issued", detail: "Awaiting authenticated evidence bound to this lot." },
-  { title: "QUALIFIED against the olive oil standard", detail: "Awaiting a qualification decision against the olive oil standard. This lot is not qualified or available for sourcing." },
+  { title: "Lot", detail: "Awaiting a confirmed purchase and lot identity." },
+  { title: "Sample", detail: "Awaiting laboratory receipt and the sample custody record." },
+  { title: "TECRID", detail: "Awaiting authenticated evidence bound to the lot." },
+  { title: "QUALIFIED", detail: "Awaiting a qualification decision against the olive oil standard." },
+  { title: "Reserved", detail: "Awaiting qualification and a recorded reservation." },
 ] as const;
 
 export default function KasandrinosSupplierPage() {
   return (
     <main id="main-content" className={styles.profile}>
+      <aside className={styles.profileBanner} aria-label="Profile listing status">
+        Listed from public documents. Not a VLE member. <a href="mailto:marcus@vle.exchange">Claim this profile</a>.
+      </aside>
       <div className={styles.breadcrumb}>
         <Link className="back" href="/suppliers">Supplier profiles</Link>
         <span aria-hidden="true">/</span><span>Kasandrinos</span>
@@ -46,13 +48,6 @@ export default function KasandrinosSupplierPage() {
             <a className="textLink textLinkLight" href="#vle-lot">Follow the VLE lot</a>
           </div>
         </div>
-        <div className={styles.heroImage}>
-          <Image className={styles.logo} src="/suppliers/kasandrinos/logo.png" width={120} height={129} alt="Kasandrinos logo" preload />
-          <div className={styles.bottle}>
-            <Image src="/suppliers/kasandrinos/500ml.png" fill sizes="(max-width: 700px) 80vw, 360px" alt="Kasandrinos organic extra virgin olive oil in a 500ml glass bottle" preload />
-          </div>
-          <span className={styles.imageCaption}>Organic extra virgin olive oil</span>
-        </div>
       </section>
 
       <nav className={styles.sectionNav} aria-label="Supplier profile sections">
@@ -65,12 +60,11 @@ export default function KasandrinosSupplierPage() {
       <section className={styles.section} id="products" aria-labelledby="products-heading">
         <div className={styles.sectionHeading}>
           <div><p className="eyebrow">The product range</p><h2 id="products-heading">Greek olive oil, in every format.</h2></div>
-          <p>Product details and photography from Kasandrinos. Each product links to the supplier&apos;s product page.</p>
+          <p>Each product links to the supplier&apos;s original product page on kasandrinos.com.</p>
         </div>
         <div className={styles.products}>
           {kasandrinosProducts.map((product) => (
             <a className={styles.product} key={product.url} href={product.url} rel="noopener noreferrer">
-              <div className={styles.productImage}><Image src={product.image} fill sizes="(max-width: 700px) 44vw, (max-width: 1000px) 28vw, 23vw" alt={`Kasandrinos ${product.name}`} /></div>
               <div className={styles.productCopy}><h3>{product.name}</h3><p>{product.format}</p><span>View product <span aria-hidden="true">↗</span></span></div>
             </a>
           ))}
@@ -86,6 +80,8 @@ export default function KasandrinosSupplierPage() {
           {kasandrinosCertifications.map((certificate) => (
             <article className={styles.certificate} key={certificate.url}>
               <h3>{certificate.name}</h3><p>{certificate.description}</p>
+              <small className={styles.documentLabel}>{supplierDocumentNotice(certificate.date)}</small>
+              {"statusNote" in certificate ? <p className={styles.statusNote}>{certificate.statusNote}</p> : null}
               <a href={certificate.url} className="textLink" rel="noopener noreferrer">Open certificate PDF <span aria-hidden="true">↗</span></a>
             </article>
           ))}
@@ -97,11 +93,11 @@ export default function KasandrinosSupplierPage() {
           <div><p className="eyebrow">Source documents</p><h2 id="reports-heading">Brand-published test reports</h2></div>
           <p>Read the original PDFs on the supplier&apos;s <a href={kasandrinosTransparencyUrl} className={styles.inlineLink}>Transparency page</a>. Each report applies to the sample it describes.</p>
         </div>
-        <div className={styles.reportBoundary}><strong>{brandReportNotice}</strong><p>These documents are background evidence. They do not report results for the pending VLE lot below.</p></div>
+        <div className={styles.reportBoundary}><strong>Supplier-published documents</strong><p>These documents are background evidence. They do not report results for a VLE lot.</p></div>
         <ul className={styles.reports}>
           {kasandrinosReports.map((report) => (
             <li key={report.url}>
-              <div><h3>{report.category}</h3><p>{report.subject}</p><small>{brandReportNotice}</small></div>
+              <div><h3>{report.category}</h3><p>{report.subject}</p><small className={styles.documentLabel}>{supplierDocumentNotice(report.date)}</small></div>
               <a href={report.url} className="textLink" aria-label={`Open ${report.category}: ${report.subject} PDF`} rel="noopener noreferrer">Open PDF <span aria-hidden="true">↗</span></a>
             </li>
           ))}
@@ -112,9 +108,8 @@ export default function KasandrinosSupplierPage() {
         <div className={styles.lotIntro}>
           <p className="eyebrow eyebrowLight">Lot-specific evidence</p>
           <h2 id="lot-heading">VLE lot</h2>
-          <p className={styles.lotProduct}>500ml glass<br />4 sealed bottles</p>
-          <p>Purchase in progress. Each step stays Pending until its real record exists.</p>
-          <p>Brand-published reports do not advance this pipeline. No VLE test result, TECRID, or qualification decision has been recorded for this lot.</p>
+          <p>Each step stays Pending until its real record exists.</p>
+          <p>Supplier-published reports do not advance this pipeline. No confirmed purchase, VLE test result, TECRID, qualification decision, or reservation has been recorded.</p>
         </div>
         <ol className={styles.steps}>
           {lotSteps.map((step, index) => (
@@ -125,7 +120,13 @@ export default function KasandrinosSupplierPage() {
           ))}
         </ol>
       </section>
-      <div className={styles.sourceNote}>Sources: <a href="https://www.kasandrinos.com/">Kasandrinos</a> product pages and <a href={kasandrinosTransparencyUrl}>Transparency page</a>. Documents checked 19 October 2026.</div>
+      <section className={styles.claimSection} aria-label="Claim or takedown requests">
+        <p>To claim this profile or request a takedown, email <a href="mailto:marcus@vle.exchange">marcus@vle.exchange</a>. Takedown requests are honoured within 5 business days.</p>
+      </section>
+      <div className={styles.sourceNote}>
+        <p>Sources: <a href="https://www.kasandrinos.com/">Kasandrinos</a> product pages and <a href={kasandrinosTransparencyUrl}>Transparency page</a>. Documents checked 19 October 2026. Document labels use dates stated in the documents.</p>
+        <p>Disclosure: Paleo Foundation also operates VLE.</p>
+      </div>
     </main>
   );
 }

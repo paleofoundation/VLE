@@ -3,7 +3,6 @@ import { PageStructuredData } from "../page-structured-data";
 import { TecridVerificationNudge } from "../tecrid-nudge";
 import { publicPageMetadata } from "@/lib/seo";
 import { seoJsonLdPages } from "@/lib/structured-data";
-import Image from "next/image";
 import styles from "./suppliers.module.css";
 
 const page = seoJsonLdPages["/suppliers"];
@@ -23,13 +22,12 @@ export default function SupplierProfilesPage() {
       </section>
       <section className={styles.directory} aria-label="Supplier directory">
         <Link className={styles.card} href="/suppliers/kasandrinos">
-          <div className={styles.image}><Image src="/suppliers/kasandrinos/500ml.png" fill sizes="(max-width: 700px) 80vw, 260px" alt="Kasandrinos organic extra virgin olive oil, 500ml glass bottle" /></div>
           <div className={styles.copy}>
             <p className="eyebrow">Greece · Organic extra virgin olive oil</p>
             <h2>Kasandrinos</h2>
             <p className={styles.legalName}>Kasandrinos International LLC</p>
             <p>Family-grown olive oil from Greece. Products, brand-published certifications and test reports, and a pending VLE lot.</p>
-            <span className={styles.status}>VLE lot: purchase in progress</span>
+            <span className={styles.status}>VLE lot: Pending</span>
             <span className="textLink">View supplier profile <span aria-hidden="true">↗</span></span>
           </div>
         </Link>
@@ -40,7 +38,7 @@ export default function SupplierProfilesPage() {
         <ul>
           <li>The supplier organization name.</li>
           <li>Contaminant documents attached to that organization&apos;s lots or to a compliance profile, if any exist.</li>
-          <li>The TECRID verification recommendation. Verified suppliers rank higher in brand matching.</li>
+          <li>The TECRID verification recommendation and any recorded lot-specific evidence.</li>
         </ul>
         <p>Brand-published documents are labeled separately from VLE lot evidence. An empty document list on a profile means no file has been recorded.</p>
         <div className="actions">

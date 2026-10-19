@@ -16,7 +16,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: "VLE — Verified Lot Exchange",
+  title: "VLE | Verified Lot Exchange",
   description: "Buy the ingredient lot that already passed a defined compliance profile.",
   robots: { index: true, follow: true },
   verification: {

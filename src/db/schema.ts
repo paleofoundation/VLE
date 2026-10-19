@@ -281,3 +281,16 @@ export const supplierSamplingRequests = pgTable("supplier_sampling_requests", {
   supplierProfileId: uuid("supplier_profile_id").notNull().references(() => supplierProfiles.id),
   samplingOrderId: uuid("sampling_order_id").references(() => samplingOrders.id), requestedAt: createdAt(),
 });
+
+export const supplierRequestTypeEnum = pgEnum("supplier_request_type", ["DOCUMENT", "SAMPLE", "QUOTE", "INVITE_SUPPLIER"]);
+export const supplierRequestStatusEnum = pgEnum("supplier_request_status", ["OPEN", "RESPONDED", "CLOSED"]);
+export const supplierRequests = pgTable("requests", {
+  id: id(), type: supplierRequestTypeEnum("type").notNull(), buyerOrganizationId: uuid("buyer_org_id").notNull().references(() => organizations.id),
+  supplierProfileId: uuid("supplier_profile_id").notNull().references(() => supplierProfiles.id),
+  lotId: uuid("lot_id").references(() => physicalLots.id), message: text("message").notNull(), quantityText: text("quantity_text"),
+  status: supplierRequestStatusEnum("status").notNull().default("OPEN"), createdAt: createdAt(), updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
+}, (t) => [index("request_buyer_idx").on(t.buyerOrganizationId), index("request_supplier_idx").on(t.supplierProfileId)]);
+export const supplierRequestReplies = pgTable("request_replies", {
+  id: id(), requestId: uuid("request_id").notNull().references(() => supplierRequests.id),
+  authorOrganizationId: uuid("author_org_id").notNull().references(() => organizations.id), authorUserId: uuid("author_user_id").notNull().references(() => users.id), message: text("message").notNull(), createdAt: createdAt(),
+});

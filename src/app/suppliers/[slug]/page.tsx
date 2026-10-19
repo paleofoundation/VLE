@@ -6,6 +6,7 @@ import { getSupplier } from "@/lib/public-listings";
 import { NonMemberBanner, DocumentSourceLabel, LotStatusSteps } from "@/components/listing";
 import { SITE_URL } from "@/lib/site";
 import { PublicCertifications } from "@/components/listing/certifications";
+import { SupplierRequestLinks } from "@/components/listing/request-links";
 import styles from "@/components/listing/directory.module.css";
 export const dynamic = "force-dynamic";
 export async function generateMetadata({ params }: PageProps<"/suppliers/[slug]">): Promise<Metadata> {
@@ -31,7 +32,7 @@ export default async function SupplierPage({ params }: PageProps<"/suppliers/[sl
     <section className={styles.section}><h2>Certifications shown by supplier</h2><p>Supplier-reported. {s.certificationsShown ?? "No certifications stated."}</p></section>
     <PublicCertifications profileId={s.id} />
     <section className={styles.section}><h2>VLE lot status</h2><p>Each step needs a real lot-specific record. Supplier-published documents do not advance these steps.</p>{!lots.length ? <LotStatusSteps /> : null}{lots.map((lot) => <article key={lot.id} className={styles.card}><h3>{lot.supplierLotCode}</h3><p>{lot.status ?? "Physical lot not created"}</p><LotStatusSteps records={lot.records} /></article>)}</section>
-    <div className={styles.actions}>{s.listingSource === "PUBLIC_DOCUMENTS" ? <span aria-disabled="true">Ask VLE to invite this supplier (requests opening soon)</span> : ["document", "sample", "quote"].map((t) => <span key={t} aria-disabled="true">Request a {t} (requests opening soon)</span>)}</div>
+    <SupplierRequestLinks slug={s.slug} member={s.listingSource === "MEMBER"} />
     <section className={styles.section}><h2>Is this your company?</h2><p>To claim this profile or request a takedown, use the <Link className={styles.plainLink} href={`/claim/${s.slug}`}>claim form</Link> or email <a className={styles.plainLink} href="mailto:marcus@vle.exchange">marcus@vle.exchange</a>. Takedown requests are honoured within 5 business days.</p><Link className="textLink" href={`/takedown?profile=${s.slug}`}>Request a takedown</Link></section>
     <p>Disclosure: Paleo Foundation also operates VLE.</p>
   </main>;

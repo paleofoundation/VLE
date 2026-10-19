@@ -16,7 +16,8 @@
     "db:seed": "dotenv -e .env.local -- tsx scripts/seed.ts",
     "db:setup": "npm run db:migrate && npm run db:seed",
     "access:bootstrap": "dotenv -e .env.local -- tsx scripts/bootstrap-clerk-ops.ts",
-    "db:seed:public": "dotenv -e .env.local -- tsx scripts/seed-public-suppliers.ts"
+    "db:seed:public": "dotenv -e .env.local -- tsx scripts/seed-public-suppliers.ts",
+    "db:seed:certifications": "dotenv -e .env.local -- tsx scripts/seed-kasandrinos-certifications.ts"
   },
   "dependencies": {
     "@clerk/nextjs": "^7.9.1",

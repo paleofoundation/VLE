@@ -1,5 +1,5 @@
-import { SignIn } from "@clerk/nextjs";
+import { ClerkProvider, SignIn } from "@clerk/nextjs";
 
 export default function SignInPage() {
-  return <main className="authPage"><SignIn /></main>;
+  return <ClerkProvider><main id="main-content" className="authPage"><SignIn signUpUrl="/sign-up" fallbackRedirectUrl="/onboarding" /></main></ClerkProvider>;
 }

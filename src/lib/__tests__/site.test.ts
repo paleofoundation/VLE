@@ -38,7 +38,7 @@ const publicCatalog = [
   "/articles/what-a-buyer-can-check",
 ] as const;
 
-const privatePrefixes = ["/api", "/ops", "/supplier", "/buyer", "/find", "/sign-in"];
+const privatePrefixes = ["/api", "/ops", "/supplier", "/buyer", "/find", "/sign-in", "/sign-up", "/onboarding"];
 
 describe("public search catalog", () => {
   it("lists only the live public marketing pages", () => {
@@ -60,7 +60,7 @@ describe("public search catalog", () => {
 
   it("blocks private prefixes in robots.txt and keeps the canonical host", () => {
     expect(SITE_URL).toBe("https://vle.exchange");
-    expect([...ROBOTS_DISALLOW_PATHS]).toEqual(["/api/", "/ops", "/supplier$", "/supplier/", "/buyer", "/find", "/sign-in"]);
+    expect([...ROBOTS_DISALLOW_PATHS]).toEqual(["/api/", "/ops", "/supplier$", "/supplier/", "/buyer", "/find", "/sign-in", "/sign-up", "/onboarding"]);
   });
 
   it("keeps commercial money pages indexable and off the Clerk handshake", () => {

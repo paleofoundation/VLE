@@ -1,7 +1,7 @@
 import "server-only";
 import { and, eq, getTableColumns } from "drizzle-orm";
 import { getDb } from "@/db";
-import { publicDocuments, supplierProfiles } from "@/db/schema";
+import { publicDocuments, supplierProfiles, supplierProducts } from "@/db/schema";
 import { matchesDocument } from "@/domain/listing-filters";
 import type { ListingFilters } from "@/domain/public-listings";
 
@@ -15,12 +15,12 @@ export async function listDocuments(filters: ListingFilters = {}) {
   return rows.filter(({ document, supplier }) => matchesDocument(document, supplier, filters)).sort((a, b) => (b.document.reportDate ?? "").localeCompare(a.document.reportDate ?? "") || a.supplier.displayName.localeCompare(b.supplier.displayName));
 }
 export async function listSuppliers(filters: ListingFilters = {}) {
-  const [profiles, documents] = await Promise.all([
-    getDb().select().from(supplierProfiles).where(eq(supplierProfiles.hidden, false)), listDocuments(filters),
+  const [profiles, documents, products] = await Promise.all([
+    getDb().select().from(supplierProfiles).where(eq(supplierProfiles.hidden, false)), listDocuments(filters), getDb().select().from(supplierProducts),
   ]);
   return profiles.filter((s) => (!filters.category || s.categories.includes(filters.category)) && (!filters.country || s.country === filters.country) && (!filters.listingSource || s.listingSource === filters.listingSource) && (!filters.q || s.displayName.toLowerCase().includes(filters.q.toLowerCase())) &&
     (!(filters.analyte || filters.months || filters.docType) || documents.some((d) => d.supplier.id === s.id)))
-    .map((s) => { const docs = documents.filter((d) => d.supplier.id === s.id).map((d) => d.document); return { ...s, documents: docs, productCount: new Set(docs.map((d) => d.productName).filter(Boolean)).size, documentCount: docs.length, latestReportDate: docs.map((d) => d.reportDate).filter((d): d is string => !!d).sort().at(-1) ?? null }; })
+    .map((s) => { const docs = documents.filter((d) => d.supplier.id === s.id).map((d) => d.document); return { ...s, documents: docs, productCount: new Set([...docs.map((d) => d.productName).filter(Boolean), ...products.filter((p) => p.supplierProfileId === s.id).map((p) => p.name)]).size, documentCount: docs.length, latestReportDate: docs.map((d) => d.reportDate).filter((d): d is string => !!d).sort().at(-1) ?? null }; })
     .sort((a, b) => a.displayName.localeCompare(b.displayName));
 }
 export async function getSupplier(slug: string) {

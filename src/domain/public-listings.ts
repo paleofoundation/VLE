@@ -1,7 +1,7 @@
 export const DOCUMENT_TYPES = ["Heavy metals report", "Pesticide residue report", "Phthalates report", "Glyphosate report", "Arsenic report", "COA", "Certificate", "Other"] as const;
 export const CATEGORIES = ["Spices", "Tea/matcha", "Cocoa/cacao", "Protein/supplement", "Olive oil", "Rice"] as const;
 export const ANALYTES = ["lead", "arsenic", "cadmium", "mercury", "pesticides", "glyphosate", "phthalates", "aflatoxins"] as const;
-export type ListingFilters = { category?: string; country?: string; analyte?: string; months?: number; listingSource?: string; docType?: string; supplier?: string; q?: string };
+export type ListingFilters = { category?: string; country?: string; analyte?: string; months?: number; listingSource?: string; docType?: string; supplier?: string; q?: string; lab?: string; from?: string; to?: string; includeUnavailable?: boolean };
 
 export function supplierSlug(name: string) {
   if (name === "Kasandrinos International") return "kasandrinos";

@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { notFound } from "next/navigation";
+import { getSupplier } from "@/lib/public-listings";
 import { publicPageMetadata } from "@/lib/seo";
 import {
   supplierDocumentNotice,
@@ -25,7 +27,9 @@ const lotSteps = [
   { title: "Reserved", detail: "Awaiting qualification and a recorded reservation." },
 ] as const;
 
-export default function KasandrinosSupplierPage() {
+export const dynamic = "force-dynamic";
+export default async function KasandrinosSupplierPage() {
+  if (!await getSupplier("kasandrinos")) notFound();
   return (
     <main id="main-content" className={styles.profile}>
       <aside className={styles.profileBanner} aria-label="Profile listing status">

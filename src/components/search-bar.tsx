@@ -1,0 +1,4 @@
+import { Button } from "./ui";
+export function SearchBar({ defaultValue = "", compact = false }: { defaultValue?: string; compact?: boolean }) {
+  return <form action="/suppliers" role="search" className={`search-bar ${compact ? "search-compact" : ""}`}><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6"><circle cx="10.5" cy="10.5" r="6.5" /><path d="m16 16 5 5" /></svg><label className="sr-only" htmlFor={compact ? "nav-search" : "market-search"}>Search suppliers, ingredients or contaminants</label><input id={compact ? "nav-search" : "market-search"} name="q" defaultValue={defaultValue} placeholder="Search suppliers, ingredients or contaminants" /><Button type="submit">Search<span aria-hidden="true"> →</span></Button></form>;
+}

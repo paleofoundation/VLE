@@ -7,19 +7,7 @@ import {
   jsonLdHtml,
   seoJsonLdPages,
   siteStructuredData,
-  type SeoJsonLdPath,
 } from "../structured-data";
-
-const pageFiles: Record<SeoJsonLdPath, string> = {
-  "/access": "src/app/access/page.tsx",
-  "/for-buyers": "src/app/for-buyers/page.tsx",
-  "/join": "src/app/join/page.tsx",
-  "/for-laboratories": "src/app/for-laboratories/page.tsx",
-  "/for-suppliers": "src/app/for-suppliers/page.tsx",
-  "/contaminants": "src/app/contaminants/page.tsx",
-  "/articles": "src/app/articles/page.tsx",
-  "/suppliers": "src/app/suppliers/page.tsx",
-};
 
 describe("page JSON-LD", () => {
   it("keeps the existing homepage graph to the public website and organization", () => {
@@ -93,14 +81,12 @@ describe("page JSON-LD", () => {
     expect(jsonLdHtml({ note: "</script><script>" })).toBe('{"note":"\\u003c/script>\\u003cscript>"}');
   });
 
-  it("mounts the helper on each audited page without a noindex directive", () => {
-    for (const path of SEO_JSONLD_PATHS) {
-      const source = readFileSync(pageFiles[path], "utf8");
-      const helper = readFileSync("src/app/page-structured-data.tsx", "utf8");
-      expect(source).toContain(`<PageStructuredData path="${path}" />`);
-      expect(source).toContain("publicPageMetadata");
-      expect(source.toLowerCase()).not.toContain("noindex");
-      expect(helper).toContain('type="application/ld+json"');
-    }
+  it("mounts the organization graph in the rebuilt root layout", () => {
+    const source = readFileSync("src/app/layout.tsx", "utf8");
+    const helper = readFileSync("src/components/structured-data.tsx", "utf8");
+    expect(source).toContain("<StructuredData />");
+    expect(source.toLowerCase()).not.toContain("noindex");
+    expect(helper).toContain('type="application/ld+json"');
+    expect(helper).toContain("jsonLdHtml(value)");
   });
 });

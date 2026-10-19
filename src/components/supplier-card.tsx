@@ -1,0 +1,7 @@
+import Link from "next/link";
+import { categoryName, dateLabel, isStale, type Supplier } from "@/lib/catalog";
+import { Arrow, Badge, Card } from "./ui";
+export function SupplierCard({ supplier: s }: { supplier: Supplier }) {
+  const results = s.documents.flatMap(d => d.results); const analytes = [...new Set(s.documents.flatMap(d => d.analytes))];
+  return <Card className="supplier-card"><div className="card-top"><span className="eyebrow">{categoryName(s.category)}</span><span className="country">{s.country}</span></div><h3><Link href={`/suppliers/${s.slug}`} className="card-title-link">{s.name}<Arrow /></Link></h3><p className="supplier-summary">{s.summary}</p><div className="card-evidence">{results.length ? <><span className="micro-label">From published results</span><div className="mini-results">{results.slice(0, 3).map((r, i) => <div key={`${r.analyte}-${i}`}><span>{r.analyte}</span><strong>{r.value}<small>{r.unit ? ` ${r.unit}` : ""}</small></strong></div>)}</div></> : <><span className="micro-label">Published testing</span><p>{analytes.slice(0, 4).map(a => a.charAt(0).toUpperCase() + a.slice(1).replaceAll("-", " ")).join(" · ")}</p></>}</div><div className="card-meta"><span>{s.documents.length} documents</span>{s.latestReportDate && <span>Latest report {dateLabel(s.latestReportDate)}</span>}</div><div className="card-bottom"><Badge>Public documents</Badge><span>Last updated {dateLabel(s.updatedAt)}</span></div>{isStale(s.updatedAt) && <p className="small muted">Not recently updated</p>}</Card>;
+}

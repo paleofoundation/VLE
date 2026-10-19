@@ -1,0 +1,10 @@
+import Link from "next/link";
+import { filterSuppliers, parseSearch, type Filters } from "@/lib/catalog";
+import { SearchBar } from "./search-bar";
+import { SupplierCard } from "./supplier-card";
+import { DirectoryFilters } from "./directory-filters";
+import { Badge, ButtonLink, EmptyState } from "./ui";
+export function Directory({ filters }: { filters: Filters }) {
+  const applied = { ...parseSearch(filters.q ?? ""), ...Object.fromEntries(Object.entries(filters).filter(([,v]) => v)) }; const found = filterSuppliers(filters);
+  return <main id="main-content" className="container directory-page"><div className="page-heading"><p className="eyebrow">SUPPLIER DIRECTORY</p><h1>Find your next ingredient source.</h1><p>Public reports. Visible results. A direct path to the supplier.</p></div><div className="sticky-search"><SearchBar defaultValue={filters.q} /></div><div className="directory-layout"><aside className="filter-sidebar"><div className="filter-title"><h2>Refine your search</h2><Link href="/suppliers">Reset</Link></div><details open><summary>Filters</summary><DirectoryFilters filters={applied} /></details><p className="small muted">Certifications are supplier-reported unless the issuer has confirmed them.</p></aside><section aria-label="Supplier results"><div className="results-toolbar"><p><strong>{found.length}</strong> suppliers{filters.q ? ` for “${filters.q}”` : " with public documents"}</p><span className="small muted">Evidence first</span></div>{Object.entries(applied).some(([k])=>k!=="q") && <div className="applied-filters" aria-label="Filters applied">{Object.entries(applied).filter(([key])=>key!=="q").map(([key,value])=><Badge key={key}>{key}: {value.replaceAll("-"," ")}</Badge>)}</div>}<div className="supplier-grid directory-grid">{found.map(s=><SupplierCard key={s.slug} supplier={s}/>)}</div>{!found.length && <EmptyState title="No suppliers match this search." action={<ButtonLink href="/suppliers" variant="secondary">Clear filters</ButtonLink>}>Try a broader category or remove a filter. Only documented results appear here.</EmptyState>}</section></div></main>;
+}

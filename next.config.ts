@@ -9,7 +9,7 @@ const nextConfig: NextConfig = {
         destination: "/for-suppliers",
         statusCode: 301,
       },
-      ...[["/access", "/sign-in"], ["/find", "/suppliers"], ["/join", "/for-suppliers"], ["/buyer", "/dashboard/brand"], ["/supplier", "/dashboard/supplier"], ["/for-buyers", "/suppliers"]].map(([source, destination]) => ({source, destination, statusCode: 301 as const})),
+      ...[["/sign-up", "/sign-in"], ["/access", "/sign-in"], ["/find", "/suppliers"], ["/join", "/for-suppliers"], ["/buyer", "/dashboard/brand"], ["/supplier", "/dashboard/supplier"], ["/for-buyers", "/suppliers"]].map(([source, destination]) => ({source, destination, statusCode: 301 as const})),
       ...wwwToApexRedirects(),
     ];
   },

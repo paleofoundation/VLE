@@ -1,0 +1,4 @@
+CREATE TABLE product_prices (id uuid PRIMARY KEY DEFAULT gen_random_uuid(), product_id uuid NOT NULL REFERENCES supplier_products(id), amount numeric(14,4) NOT NULL CHECK(amount > 0), currency text NOT NULL, unit text NOT NULL, pack_size text, minimum_quantity numeric(14,3) CHECK(minimum_quantity > 0), lead_time text, incoterms text, regions text[], price_on_request boolean NOT NULL DEFAULT false, updated_at timestamptz NOT NULL DEFAULT now());
+CREATE INDEX product_prices_product_idx ON product_prices(product_id);
+CREATE TABLE document_results (id uuid PRIMARY KEY DEFAULT gen_random_uuid(), document_id uuid NOT NULL REFERENCES public_documents(id), organization_id uuid NOT NULL REFERENCES organizations(id), results jsonb NOT NULL, confirmed_at timestamptz NOT NULL, created_at timestamptz NOT NULL DEFAULT now());
+CREATE UNIQUE INDEX document_results_document_uq ON document_results(document_id);

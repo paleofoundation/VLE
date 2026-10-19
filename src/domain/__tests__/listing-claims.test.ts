@@ -1,0 +1,5 @@
+import { expect, it } from "vitest";
+import { claimNeedsProof, businessDayDeadline, takedownSchema } from "../listing-claims";
+it("unmatched claims need a substantive proof note", () => { expect(claimNeedsProof(false, "")).toBe(true); expect(claimNeedsProof(true, "")).toBe(false); expect(claimNeedsProof(false, "Company owner with documented authority")).toBe(false); });
+it("counts five business days across weekends", () => { expect(businessDayDeadline(new Date("2026-10-16T12:00:00Z")).toISOString()).toBe("2026-10-23T12:00:00.000Z"); expect(businessDayDeadline(new Date("2026-10-19T12:00:00Z")).toISOString()).toBe("2026-10-26T12:00:00.000Z"); });
+it("requires a local supplier URL and an empty honeypot", () => { const data = { company: "Company", name: "Owner", email: "owner@example.test", profileUrl: "https://vle.exchange/suppliers/company", whatToRemove: "Profile", reason: "Ownership correction", website: "" }; expect(takedownSchema.safeParse(data).success).toBe(true); expect(takedownSchema.safeParse({ ...data, website: "spam" }).success).toBe(false); expect(takedownSchema.safeParse({ ...data, profileUrl: "https://evil.test" }).success).toBe(false); });

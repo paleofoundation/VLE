@@ -1,0 +1,1 @@
+export default function Loading(){return <main id="main-content" className="fw-container fw-page" aria-busy="true" aria-label="Loading marketplace"><div className="fw-skeleton-line"/><div className="fw-supplier-grid">{[1,2,3].map(i=><div className="fw-skeleton" key={i}/>)}</div></main>}

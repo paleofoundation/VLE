@@ -31,6 +31,8 @@ export const PUBLIC_SITEMAP_PATHS = [
   "/contaminants",
   "/suppliers",
   "/documents",
+  "/claim",
+  "/takedown",
   "/suppliers/kasandrinos",
   "/articles",
   ...ARTICLE_PATHS,

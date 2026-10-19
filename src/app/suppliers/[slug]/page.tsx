@@ -16,7 +16,7 @@ export async function generateMetadata({ params }: PageProps<"/suppliers/[slug]"
 }
 export default async function SupplierPage({ params }: PageProps<"/suppliers/[slug]">) {
   const s = await getSupplier((await params).slug); if (!s) notFound();
-  const [memberProducts, lots] = await Promise.all([publicSupplierProducts(s.id), publicSupplierLots(s.id)]);
+  const [memberProducts, lots] = await Promise.all([s.listingSource === "MEMBER" ? publicSupplierProducts(s.id) : Promise.resolve([]), s.listingSource === "MEMBER" ? publicSupplierLots(s.id) : Promise.resolve([])]);
   const products = [...new Set([...memberProducts.map((p) => p.name), ...s.documents.map((d) => d.productName).filter((p): p is string => !!p)])];
   return <main id="main-content" className={styles.page}>
     <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({ "@context": "https://schema.org", "@type": "Organization", name: s.displayName, ...(s.website ? { url: s.website } : {}) }).replace(/</g, "\\u003c") }} />
@@ -30,7 +30,7 @@ export default async function SupplierPage({ params }: PageProps<"/suppliers/[sl
       </tr>)}</tbody></table></div> : <p className={styles.empty}>No public documents listed yet.</p>}
     </section>
     <section className={styles.section}><h2>Certifications shown by supplier</h2><p>Supplier-reported. {s.certificationsShown ?? "No certifications stated."}</p></section>
-    <PublicCertifications profileId={s.id} />
+    <PublicCertifications profileId={s.id} member={s.listingSource === "MEMBER"} />
     <section className={styles.section}><h2>VLE lot status</h2><p>Each step needs a real lot-specific record. Supplier-published documents do not advance these steps.</p>{!lots.length ? <LotStatusSteps /> : null}{lots.map((lot) => <article key={lot.id} className={styles.card}><h3>{lot.supplierLotCode}</h3><p>{lot.status ?? "Physical lot not created"}</p><LotStatusSteps records={lot.records} /></article>)}</section>
     <SupplierRequestLinks slug={s.slug} member={s.listingSource === "MEMBER"} />
     <section className={styles.section}><h2>Is this your company?</h2><p>To claim this profile or request a takedown, use the <Link className={styles.plainLink} href={`/claim/${s.slug}`}>claim form</Link> or email <a className={styles.plainLink} href="mailto:marcus@vle.exchange">marcus@vle.exchange</a>. Takedown requests are honoured within 5 business days.</p><Link className="textLink" href={`/takedown?profile=${s.slug}`}>Request a takedown</Link></section>

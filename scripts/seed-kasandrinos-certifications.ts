@@ -11,7 +11,7 @@ async function seed() {
     { certificationKey: "Kosher", sourceUrl: source("OU Kosher"), certifyingBody: "Orthodox Union" },
     { certificationKey: "Paleo", sourceUrl: source("Paleo Foundation"), certifyingBody: "Paleo Foundation", confirmedAt: "2026-10-19", confirmedIssuer: "Paleo Foundation" },
     { certificationKey: "Keto", sourceUrl: source("Paleo Foundation"), certifyingBody: "Paleo Foundation", confirmedAt: "2026-10-19", confirmedIssuer: "Paleo Foundation" },
-  ]) await db.insert(supplierCertifications).values({ ...c, supplierProfileId: profile.id }).onConflictDoNothing();
+  ]) await db.insert(supplierCertifications).values({ ...c, supplierProfileId: profile.id, supplierReported: false }).onConflictDoNothing();
   console.log("Kasandrinos certifications imported without overwriting existing records.");
 }
 seed().then(() => process.exit(0)).catch(() => { console.error("Certification import failed"); process.exit(1); });

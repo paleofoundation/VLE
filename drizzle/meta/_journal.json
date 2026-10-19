@@ -71,6 +71,20 @@
       "when": 1792399652342,
       "tag": "0009_brand_supplier_requests",
       "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "7",
+      "when": 1792400149069,
+      "tag": "0010_claims_takedowns",
+      "breakpoints": true
+    },
+    {
+      "idx": 11,
+      "version": "7",
+      "when": 1792400272490,
+      "tag": "0011_claim_draft_privacy",
+      "breakpoints": true
     }
   ]
 }

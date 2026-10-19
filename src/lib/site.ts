@@ -53,6 +53,7 @@ export const ROBOTS_DISALLOW_PATHS = [
   "/sign-in",
   "/sign-up",
   "/onboarding",
+  "/requests",
 ] as const;
 
 /**

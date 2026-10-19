@@ -377,7 +377,7 @@ export async function createBuyerRequirement(actor: Actor, input: {
 export async function listPublicListings() {
   await reconcileExpiredListings();
   return getDb().select({
-    id: marketplaceListings.id, slug: marketplaceListings.publicSlug, lotCode: physicalLots.supplierLotCode,
+    id: marketplaceListings.id, physicalLotId: physicalLots.id, supplierOrganizationId: physicalLots.supplierOrganizationId, slug: marketplaceListings.publicSlug, lotCode: physicalLots.supplierLotCode,
     quantity: physicalLots.quantity, quantityUnit: physicalLots.quantityUnit, location: physicalLots.locationName,
     countryCode: physicalLots.countryCode,
     supplier: organizations.name, product: productTypes.name, productCode: productTypes.code, decision: qualificationDecisions.outcome,
@@ -472,7 +472,7 @@ export async function getOpsLotWorkflow(lotId: string) {
 export async function getPublicListing(slug: string) {
   await reconcileExpiredListings();
   const [listing] = await getDb().select({
-    id: marketplaceListings.id, slug: marketplaceListings.publicSlug, lotCode: physicalLots.supplierLotCode,
+    id: marketplaceListings.id, physicalLotId: physicalLots.id, supplierOrganizationId: physicalLots.supplierOrganizationId, slug: marketplaceListings.publicSlug, lotCode: physicalLots.supplierLotCode,
     quantity: physicalLots.quantity, quantityUnit: physicalLots.quantityUnit, location: physicalLots.locationName,
     countryCode: physicalLots.countryCode, supplier: organizations.name, product: productTypes.name,
     decision: qualificationDecisions.outcome, profileVersion: complianceProfileVersions.version,

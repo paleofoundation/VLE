@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { SupplierRequestLinks } from "@/components/listing/request-links";
 import GenericSupplierPage from "../[slug]/page";
 import { notFound } from "next/navigation";
 import { PublicCertifications } from "@/components/listing/certifications";
@@ -129,6 +130,7 @@ export default async function KasandrinosSupplierPage() {
           ))}
         </ol>
       </section>
+      <SupplierRequestLinks slug="kasandrinos" member={false} />
       <section className={styles.claimSection} aria-label="Claim or takedown requests">
         <p>To claim this profile or request a takedown, email <a href="mailto:marcus@vle.exchange">marcus@vle.exchange</a>. Takedown requests are honoured within 5 business days.</p>
       </section>

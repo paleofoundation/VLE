@@ -43,6 +43,13 @@
       "when": 1792397718842,
       "tag": "0005_public_listings",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1792398505860,
+      "tag": "0006_self_serve_onboarding",
+      "breakpoints": true
     }
   ]
 }

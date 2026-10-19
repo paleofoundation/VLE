@@ -14,7 +14,7 @@ const steps = [
     number: "01",
     phase: "Receive",
     title: "Receive the identified sample",
-    summary: "Work from the sample and custody record—not from a generic product or loose document.",
+    summary: "Work from the sample and custody record; not from a generic product or loose document.",
     detail: "The laboratory receives a sealed Sample with its own identity, collection context, and custody events. VLE keeps the Sample distinct from the supplier's PhysicalLot and inventory assertions.",
     signal: "Sample identity + custody",
   },

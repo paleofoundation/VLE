@@ -18,7 +18,7 @@ export default async function MembershipMappingPage({ searchParams }: { searchPa
     <main id="main-content" className="membershipPage">
       <div className="detailBreadcrumb"><Link className="back" href="/ops">Operations board</Link><span aria-hidden="true">/</span><span>Access mapping</span></div>
       <section className="membershipHero">
-        <div><p className="eyebrow">Clerk identity → VLE tenancy</p><h1>Map a real person to one operating lane.</h1><p className="sectionLead">Use the handoff reference shown after their first sign-in. VLE—not browser copy and not Clerk metadata—remains the server-side source of organization and role authorization.</p></div>
+        <div><p className="eyebrow">Clerk identity → VLE tenancy</p><h1>Map a real person to one operating lane.</h1><p className="sectionLead">Use the handoff reference shown after their first sign-in. VLE; not browser copy and not Clerk metadata; remains the server-side source of organization and role authorization.</p></div>
         <div className="membershipBoundary"><span className="mono">AUTHZ / MANAGED</span><strong>Identity ≠ membership</strong><p>Signing in proves a Clerk identity. An ops-reviewed mapping separately assigns exactly one existing VLE organization and its modeled role.</p></div>
       </section>
 

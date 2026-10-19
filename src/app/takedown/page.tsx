@@ -1,2 +1,6 @@
-export const metadata={title:"Request a removal.",alternates:{canonical:"https://vle.exchange/takedown"}};
-export default function Page(){return <main id="main-content" className="fw-container fw-page"><p className="fw-eyebrow">LISTING SUPPORT</p><h1>Request a removal.</h1><p className="fw-page-lead">Tell us which profile or document should be removed and why.</p><a className="fw-button fw-primary" href="mailto:marcus@vle.exchange?subject=VLE%20takedown%20request">Contact marcus@vle.exchange</a><p className="fw-fineprint">Requests are honoured within 5 business days.</p></main>}
+import { TakedownForm } from "./form";
+export const metadata = { title: "Request a listing takedown", alternates: { canonical: "https://vle.exchange/takedown" } };
+export default async function Takedown({searchParams}:{searchParams:Promise<{profile?:string}>}) {
+ const profile=(await searchParams).profile??"";
+ return <main id="main-content" className="fw-container fw-page fw-narrow"><p className="fw-eyebrow">LISTING SUPPORT</p><h1>Request a removal.</h1><p className="fw-page-lead">Takedown requests are honoured within 5 business days. No account is required.</p><p>Contact <a href="mailto:marcus@vle.exchange">marcus@vle.exchange</a> for help with a listing.</p><TakedownForm profileUrl={/^[a-z0-9-]+$/.test(profile)?`https://vle.exchange/suppliers/${profile}`:""}/></main>;
+}

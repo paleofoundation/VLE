@@ -1,11 +1,12 @@
 import "server-only";
+import {cache} from "react";
 import {randomUUID} from "node:crypto";
 import {and,eq} from "drizzle-orm";
 import {z} from "zod";
 import {getDb} from "@/db";
 import {organizations,supplierProfiles,supplierProducts,supplierLots,publicDocuments} from "@/db/schema";
 import {productPrices,documentResults} from "@/db/market-schema";
-import {suppliers,slugify,type Supplier,type SourceDocument} from "@/content/fieldwork/catalog";
+import {suppliers,slugify,profileDocuments,type Supplier,type SourceDocument} from "@/content/fieldwork/catalog";
 import {certificationLabel,certificationExpiry} from "@/domain/certifications";
 import {listProfileCertifications} from "./certifications";
 import {publicSupplierLots} from "./supplier-self-listing";
@@ -14,7 +15,18 @@ import {appendAuditEvent} from "./audit";
 import type {Actor} from "@/domain/authz";
 export async function quickList(actor:Actor,input:unknown){if(!actor.roles.includes("SUPPLIER"))throw new Error("Supplier access required");const d=z.object({name:z.string().trim().min(2).max(160),website:z.url().refine(x=>new URL(x).protocol==="https:"),category:z.string().min(2),document:z.url().refine(x=>new URL(x).protocol==="https:")}).parse(input);const existing=await getDb().select().from(supplierProfiles).where(eq(supplierProfiles.organizationId,actor.organizationId));if(existing.length)return existing[0].slug;const slug=`${slugify(d.name)}-${randomUUID().slice(0,6)}`;return getDb().transaction(async tx=>{const [p]=await tx.insert(supplierProfiles).values({organizationId:actor.organizationId,slug,displayName:d.name,website:d.website,categories:[d.category],listingSource:"MEMBER",claimStatus:"CLAIMED",hidden:false,publishedAt:new Date()}).returning();await tx.update(organizations).set({name:d.name}).where(eq(organizations.id,actor.organizationId));await tx.insert(publicDocuments).values({supplierProfileId:p.id,supplierReported:true,docType:"Other",sourceUrl:d.document,sourceDomain:new URL(d.document).hostname,foundAt:new Date().toISOString().slice(0,10)});await appendAuditEvent(tx,actor,{eventType:"SUPPLIER_QUICK_LIST_PUBLISHED",entityType:"supplier_profile",entityId:p.id,data:{slug}});return slug;});}
 export async function getMemberSuppliers():Promise<Supplier[]>{if(!process.env.DATABASE_URL)return [];try{const profiles=await getDb().select().from(supplierProfiles).where(and(eq(supplierProfiles.hidden,false),eq(supplierProfiles.listingSource,"MEMBER")));return Promise.all(profiles.map(async p=>{const [docs,products,certs,lots]=await Promise.all([getDb().select().from(publicDocuments).where(eq(publicDocuments.supplierProfileId,p.id)),getDb().select().from(supplierProducts).where(eq(supplierProducts.supplierProfileId,p.id)),listProfileCertifications(p.id),publicSupplierLots(p.id)]);const prices=products.length?await getDb().select({id:productPrices.id}).from(productPrices).where(eq(productPrices.productId,products[0].id)):[];return {hasPrice:prices.length>0,member:true,productSpecs:products.map(x=>({id:x.id,name:x.name,slug:slugify(x.name),ingredient:x.ingredient,form:x.form??"",origin:x.origin??"",source:p.website??""})),certificateSpecs:certs.map(c=>({name:c.otherName??c.certificationKey,note:`${certificationLabel(c)} ${certificationExpiry(c.expiresOn)}`,url:c.sourceUrl??p.website??"",date:c.confirmedAt??""})),memberLots:lots.map(l=>({id:l.id,code:l.supplierLotCode,product:products.find(x=>x.id===l.productId)?.name??"",records:l.records})),slug:p.slug,name:p.displayName,legalName:p.displayName,country:p.country??"",category:p.categories[0]??"",website:p.website??"",documents:docs.filter(d=>d.linkState==="LIVE").map(d=>({id:d.id,supplierReported:true,foundAt:d.foundAt,title:d.testsText??d.docType,product:d.productName??"Supplier document",url:d.sourceUrl,lab:d.labName??"",date:d.reportDate??d.reportDateText??"",domain:d.sourceDomain,source:d.sourcePageUrl??p.website??d.sourceUrl})),products:products.map(p=>p.name),latest:docs.map(d=>d.reportDate).filter((d):d is string=>!!d).sort().at(-1)??null,certifications:p.certificationsShown??""};}));}catch(error){if((error as {cause?:{code?:string};code?:string}).cause?.code==="42P01"||(error as {code?:string}).code==="42P01")return [];throw error;}}
-export async function publicCatalog(){const members=await getMemberSuppliers();return [...suppliers.filter(s=>!members.some(m=>m.slug===s.slug)),...members];}
+async function loadPublicCatalog():Promise<Supplier[]>{
+ const members=await getMemberSuppliers();
+ if(!process.env.DATABASE_URL)return suppliers;
+ const [profiles,documents]=await Promise.all([getDb().select().from(supplierProfiles),getDb().select({id:publicDocuments.id,profileId:publicDocuments.supplierProfileId,url:publicDocuments.sourceUrl,state:publicDocuments.linkState,checked:publicDocuments.lastCheckedAt}).from(publicDocuments)]);
+ const sources=suppliers.filter(s=>!members.some(m=>m.slug===s.slug)).flatMap(s=>{
+  const p=profiles.find(p=>p.slug===s.slug);if(p?.hidden||p?.moderationHidden||p?.listingSource==="MEMBER")return [];
+  const project=(d:SourceDocument)=>{const stored=documents.find(x=>x.profileId===p?.id&&x.url===d.url);return {...d,id:stored?.id??d.id,linkState:stored?.state??"LIVE",lastChecked:stored?.checked?.toISOString()??null};};
+  return [{...s,documents:s.documents.map(project),profileDocumentSpecs:profileDocuments(s).map(project)}];
+ });
+ return [...sources,...members];
+}
+export const publicCatalog=cache(loadPublicCatalog);
 export async function findPublicSupplier(slug:string){return (await publicCatalog()).find(s=>s.slug===slug);}
 export async function isMemberSlug(slug:string){if(!process.env.DATABASE_URL)return false;const [p]=await getDb().select().from(supplierProfiles).where(and(eq(supplierProfiles.slug,slug),eq(supplierProfiles.listingSource,"MEMBER"),eq(supplierProfiles.hidden,false)));return Boolean(p);}
 export const priceSchema=z.object({productId:z.uuid(),amount:z.string().regex(/^\d{1,10}(?:\.\d{1,4})?$/).refine(x=>Number(x)>0),currency:z.enum(["USD","EUR","GBP","JPY","AUD","CAD","INR","PLN"]),unit:z.enum(["kg","g","L","unit"]),packSize:z.string().max(120),minimumQuantity:z.string().regex(/^$|^\d{1,10}(?:\.\d{1,3})?$/).refine(x=>!x||Number(x)>0),leadTime:z.string().max(120),incoterms:z.string().max(30),regions:z.string().max(500)});

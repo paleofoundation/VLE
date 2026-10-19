@@ -85,6 +85,13 @@
       "when": 1792401000000,
       "tag": "0011_astra_brand_requirements",
       "breakpoints": true
+    },
+    {
+      "idx": 12,
+      "version": "7",
+      "when": 1792401300000,
+      "tag": "0012_astra_claims_takedowns",
+      "breakpoints": true
     }
   ]
 }

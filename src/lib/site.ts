@@ -105,6 +105,7 @@ export function accessRequestNeedsClerk(searchKeys: Iterable<string>, cookieHead
 
 /** Public indexable requests that must not enter `clerkMiddleware` (and therefore cannot be handshake-redirected). */
 export function requestSkipsClerk(pathname: string, searchKeys: Iterable<string>, cookieHeader: string | null | undefined) {
+  if (pathname.startsWith("/claim/")) return false;
   if ((pathname.startsWith("/suppliers") || pathname==="/compare") && accessRequestNeedsClerk(searchKeys, cookieHeader)) return false;
   if (skipsClerkHandshake(pathname)) return true;
   if (pathname === "/access") return !accessRequestNeedsClerk(searchKeys, cookieHeader);

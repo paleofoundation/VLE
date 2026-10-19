@@ -294,3 +294,18 @@ export const supplierRequestReplies = pgTable("request_replies", {
   id: id(), requestId: uuid("request_id").notNull().references(() => supplierRequests.id),
   authorOrganizationId: uuid("author_org_id").notNull().references(() => organizations.id), authorUserId: uuid("author_user_id").notNull().references(() => users.id), message: text("message").notNull(), createdAt: createdAt(),
 });
+
+export const claimRequestStatusEnum = pgEnum("claim_request_status", ["PENDING", "APPROVED", "REJECTED"]);
+export const profileClaims = pgTable("profile_claims", {
+  id: id(), supplierProfileId: uuid("supplier_profile_id").notNull().references(() => supplierProfiles.id),
+  claimantOrganizationId: uuid("claimant_org_id").notNull().references(() => organizations.id), claimantUserId: uuid("claimant_user_id").notNull().references(() => users.id),
+  primaryEmail: text("primary_email").notNull(), domainMatched: boolean("domain_matched").notNull(), proofNote: text("proof_note"),
+  status: claimRequestStatusEnum("status").notNull().default("PENDING"), reviewNote: text("review_note"), reviewedByUserId: uuid("reviewed_by_user_id").references(() => users.id),
+  reviewedAt: timestamp("reviewed_at", { withTimezone: true }), createdAt: createdAt(),
+}, (t) => [uniqueIndex("claim_profile_user_uq").on(t.supplierProfileId, t.claimantUserId)]);
+export const takedownRequests = pgTable("takedown_requests", {
+  id: id(), company: text("company").notNull(), name: text("name").notNull(), email: text("email").notNull(),
+  profileUrl: text("profile_url").notNull(), whatToRemove: text("what_to_remove").notNull(), reason: text("reason").notNull(),
+  resolvedAt: timestamp("resolved_at", { withTimezone: true }), resolvedByUserId: uuid("resolved_by_user_id").references(() => users.id), createdAt: createdAt(),
+});
+export const publicFormQuotas = pgTable("public_form_quotas", { key: text("key").primaryKey(), attempts: numeric("attempts", { precision: 5, scale: 0 }).notNull(), resetsAt: timestamp("resets_at", { withTimezone: true }).notNull() });

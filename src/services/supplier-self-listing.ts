@@ -18,6 +18,7 @@ export async function saveSupplierProfile(actor: Actor, input: unknown) {
 export async function publishSupplierProfile(actor: Actor, publish: boolean) {
   const p = await ownSupplierProfile(actor);
   if (publish && p.moderationHidden) throw new Error("Operations has hidden this listing. Contact marcus@vle.exchange before republishing.");
+  if (publish && p.moderationHidden) throw new Error("This listing is hidden by operations. Contact marcus@vle.exchange.");
   if (publish) supplierProfileSchema.parse({ ...p, about: p.about ?? "" });
   await getDb().transaction(async (tx) => {
     await tx.update(supplierProfiles).set({ hidden: !publish, ...(publish ? { listingSource: "MEMBER" as const, publishedAt: p.publishedAt ?? new Date() } : {}) }).where(eq(supplierProfiles.id, p.id));

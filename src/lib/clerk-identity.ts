@@ -10,6 +10,7 @@ export async function getClerkIdentity(clerkUserId: string) {
     ?? user.emailAddresses[0]?.emailAddress;
   if (!primaryEmail) throw new DomainError("Clerk user has no email address", "IDENTITY_INCOMPLETE");
   return {
+    emailVerified: user.emailAddresses.find(({ id }) => id === user.primaryEmailAddressId)?.verification?.status === "verified",
     clerkUserId: user.id,
     email: primaryEmail.toLowerCase(),
     displayName: user.fullName?.trim() || user.username || primaryEmail,

@@ -88,7 +88,7 @@ export default async function OpsPage() {
           <h1>Operations board</h1>
           <p className="sectionLead">Move real physical lots through inventory verification, controlled sampling, authenticated evidence, qualification, and gated publication.</p>
         </div>
-        <div className="opsAccessTools"><span className="roleBadge">{actor.roles.join(" · ")}</span><Link className="textLink" href="/ops/memberships">Map Clerk access →</Link></div>
+        <div className="opsAccessTools"><span className="roleBadge">{actor.roles.join(" · ")}</span><Link className="textLink" href="/ops/listing-requests">Claims, takedowns and certifications →</Link><Link className="textLink" href="/ops/memberships">Map Clerk access →</Link></div>
       </section>
 
       <section className="opsMetrics" aria-label="Pilot pipeline summary">

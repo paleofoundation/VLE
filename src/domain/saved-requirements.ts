@@ -1,0 +1,5 @@
+import {z} from "zod";
+export const savedLimit=z.object({analyte:z.enum(["lead","cadmium","arsenic","mercury"]),maximumPpm:z.number().finite().nonnegative(),operator:z.enum(["LT","LTE"])});
+export const savedRequirementSchema=z.object({name:z.string().trim().min(2).max(120),category:z.enum(["Olive oil","Cocoa","Protein","Spices","Tea & matcha","Rice"]),limits:z.array(savedLimit).min(1).max(4),alertsEnabled:z.boolean().default(true)}).refine(r=>new Set(r.limits.map(l=>l.analyte)).size===r.limits.length,"Use one limit per analyte");
+const measurements=z.array(z.object({analyte:z.string(),valuePpm:z.number().finite().nonnegative(),unit:z.literal("ppm")}));
+export function resultsMeetLimits(results:unknown,limits:z.infer<typeof savedLimit>[]){const parsed=measurements.safeParse(results);if(!parsed.success||!limits.length)return false;return limits.every(limit=>{const matches=parsed.data.filter(r=>r.analyte===limit.analyte);return matches.length===1&&(limit.operator==="LT"?matches[0].valuePpm<limit.maximumPpm:matches[0].valuePpm<=limit.maximumPpm);});}

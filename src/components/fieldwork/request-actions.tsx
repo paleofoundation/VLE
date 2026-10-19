@@ -1,0 +1,7 @@
+import {saveSupplierAction} from "@/app/dashboard/brand/actions";
+import Link from "next/link";
+import {cookies} from "next/headers";
+import {auth} from "@clerk/nextjs/server";
+import {quickRequest} from "@/app/requests/actions";
+import {Button,Arrow} from "./ui";
+export async function RequestActions({slug,member}:{slug:string;member:boolean}){const jar=await cookies();const signedIn=jar.getAll().some(c=>/^__session(?:_|$)/.test(c.name)&&c.value)?Boolean((await auth()).userId):false;const type=member?"DOCUMENT":"INVITE_SUPPLIER";return <div className="fw-request-actions">{signedIn?<form action={saveSupplierAction}><input type="hidden" name="supplier" value={slug}/><Button variant="quiet" type="submit">Save / unsave supplier</Button></form>:null}{signedIn?<form action={quickRequest}><input type="hidden" name="supplier" value={slug}/><input type="hidden" name="type" value={type}/><Button type="submit">{member?"Request current documents":"Ask VLE to invite this supplier"}<Arrow/></Button></form>:<Link className="fw-button fw-primary" href={`/requests/new?supplier=${slug}&type=${type}`}>{member?"Request current documents":"Ask VLE to invite this supplier"}<Arrow/></Link>}{member?<div className="fw-inline-actions"><Link className="fw-text-link" href={`/requests/new?supplier=${slug}&type=SAMPLE`}>Request sample</Link><Link className="fw-text-link" href={`/requests/new?supplier=${slug}&type=QUOTE`}>Request quote</Link></div>:null}</div>}

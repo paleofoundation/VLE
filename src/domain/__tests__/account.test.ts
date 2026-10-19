@@ -1,0 +1,5 @@
+import {it,expect} from "vitest";
+import {safeReturn,priceVisibility,roleChoice} from "../account";
+it("accepts only supplier and brand self-selection",()=>{expect(roleChoice.safeParse("ADMIN").success).toBe(false);expect(roleChoice.parse("BUYER")).toBe("BUYER")});
+it("rejects external and recursive return destinations",()=>{for(const v of ["//evil.test","https://evil.test","/sign-in","/onboarding?next=/sign-in","/\\evil.test"])expect(safeReturn(v)).toBeNull();expect(safeReturn("/suppliers/kasandrinos?tab=products")).toBe("/suppliers/kasandrinos?tab=products")});
+it("redacts member prices on the server and requires sourced public prices",()=>{const p={amount:"1",currency:"TEST",unit:"kg"};expect(priceVisibility(p,"MEMBER",false)).toBeNull();expect(priceVisibility(p,"MEMBER",true)).toEqual(p);expect(priceVisibility(p,"PUBLIC_DOCUMENTS",true)).toBeNull();const published={...p,sourceUrl:"https://example.test/price",sourceDate:"2026-10-19"};expect(priceVisibility(published,"PUBLIC_DOCUMENTS",false)).toBeNull();expect(priceVisibility(published,"PUBLIC_DOCUMENTS",true)).toEqual(published)});

@@ -16,7 +16,7 @@ const steps = [
     number: "01",
     phase: "Rescue",
     title: "Nominate the physical lot",
-    summary: "Start with inventory that exists—not a generic product page.",
+    summary: "Start with inventory that exists, not a generic product page.",
     detail: "VLE records the supplier lot code, quantity, location, owner, and authority to sell. Those facts belong to one PhysicalLot and must be verified before sampling begins.",
     signal: "Identity + inventory authority",
   },
@@ -32,7 +32,7 @@ const steps = [
     number: "03",
     phase: "Spot",
     title: "Authenticate evidence, then decide",
-    summary: "TECRID-linked evidence enters a deterministic qualification—not a marketing review.",
+    summary: "TECRID-linked evidence enters a deterministic qualification, not a marketing review.",
     detail: "TECRID authenticates the evidence envelope and sample binding. VLE separately evaluates current results against one frozen Compliance Profile version and records an immutable decision.",
     signal: "TECRID + frozen profile",
   },
@@ -73,7 +73,7 @@ export default function ForSuppliersPage() {
             <h1>From stocked lot to visible proof.</h1>
             <p className="heroLead">Rescue the value in a real ingredient lot, make its qualification visible, and reach commercial intent without asking a buyer to trust a PDF.</p>
             <div className="actions">
-              <Link className="button" href="#supplier-path">Walk the five steps</Link>
+              <Link className="button" href="/sign-up?as=supplier">List your ingredients</Link>
               <PrintButton />
             </div>
           </div>
@@ -136,7 +136,7 @@ export default function ForSuppliersPage() {
 
         <section className="supplierClose">
           <div><p className="eyebrow">Pilot intake</p><h2>Bring the lot. VLE runs the lane.</h2><p>Managed operations can take a nominated cocoa powder or avocado fruit lot through inventory verification, sampling, evidence, qualification, and gated publication. Buyer matching remains cocoa-only. Contaminant file references, when you have them, attach to a lot or a profile from the supplier desk.</p></div>
-          <div className="supplierCloseActions"><Link className="button" href="/access">Start reviewed supplier access</Link><Link className="textLink" href="/contaminants">Contaminant documentation</Link><Link className="textLink" href="/articles">Read the articles</Link></div>
+          <div className="supplierCloseActions"><Link className="button" href="/sign-up?as=supplier">Create supplier account</Link><Link className="textLink" href="/contaminants">Contaminant documentation</Link><Link className="textLink" href="/articles">Read the articles</Link></div>
         </section>
       </div>
 

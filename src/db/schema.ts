@@ -2,6 +2,7 @@ import { sql } from "drizzle-orm";
 import {
   boolean,
   check,
+  date,
   index,
   jsonb,
   numeric,
@@ -54,7 +55,7 @@ export const users = pgTable("users", {
 export const memberships = pgTable("memberships", {
   id: id(), userId: uuid("user_id").notNull().references(() => users.id),
   organizationId: uuid("organization_id").notNull().references(() => organizations.id),
-  role: roleEnum("role").notNull(), createdAt: createdAt(),
+  role: roleEnum("role").notNull(), companyRole: text("company_role"), createdAt: createdAt(),
 }, (table) => [uniqueIndex("membership_user_org_role_uq").on(table.userId, table.organizationId, table.role)]);
 
 export const productTypes = pgTable("product_types", {
@@ -218,3 +219,33 @@ export const auditEvents = pgTable("audit_events", {
   eventType: text("event_type").notNull(), entityType: text("entity_type").notNull(), entityId: uuid("entity_id").notNull(),
   data: jsonb("data").notNull(), previousHash: text("previous_hash"), eventHash: text("event_hash").notNull().unique(), createdAt: createdAt(),
 }, (table) => [index("audit_entity_idx").on(table.entityType, table.entityId, table.createdAt)]);
+
+
+export const listingSourceEnum = pgEnum("listing_source", ["PUBLIC_DOCUMENTS", "MEMBER"]);
+export const claimStatusEnum = pgEnum("claim_status", ["UNCLAIMED", "CLAIM_PENDING", "CLAIMED"]);
+export const publicDocumentTypeEnum = pgEnum("public_document_type", ["Heavy metals report", "Pesticide residue report", "Phthalates report", "Glyphosate report", "Arsenic report", "COA", "Certificate", "Other"]);
+export const publicLinkStateEnum = pgEnum("public_link_state", ["LIVE", "NO_LONGER_PUBLISHED"]);
+
+// An unclaimed public listing has no account organization. Claim approval supplies that link.
+export const supplierProfiles = pgTable("supplier_profiles", {
+  id: id(), organizationId: uuid("organization_id").unique().references(() => organizations.id),
+  slug: text("slug").notNull().unique(), displayName: text("display_name").notNull(),
+  country: text("country"), website: text("website"), categories: text("categories").array().notNull().default(sql`'{}'::text[]`),
+  certificationsShown: text("certifications_shown"),
+  listingSource: listingSourceEnum("listing_source").notNull().default("PUBLIC_DOCUMENTS"),
+  claimStatus: claimStatusEnum("claim_status").notNull().default("UNCLAIMED"),
+  hidden: boolean("hidden").notNull().default(false), createdAt: createdAt(),
+});
+
+export const publicDocuments = pgTable("public_documents", {
+  id: id(), supplierProfileId: uuid("supplier_profile_id").notNull().references(() => supplierProfiles.id),
+  productName: text("product_name"), lotOrBatch: text("lot_or_batch"),
+  docType: publicDocumentTypeEnum("doc_type").notNull(), testsText: text("tests_text"),
+  analytes: text("analytes").array().notNull().default(sql`'{}'::text[]`), labName: text("lab_name"),
+  labAccreditationAsStated: text("lab_accreditation_as_stated"), reportDate: date("report_date"),
+  reportDateText: text("report_date_text"), sourceUrl: text("source_url").notNull(), sourceDomain: text("source_domain").notNull(),
+  sourcePageUrl: text("source_page_url"), foundAt: date("found_at").notNull(),
+  lastCheckedAt: timestamp("last_checked_at", { withTimezone: true }), httpStatus: numeric("http_status", { precision: 3, scale: 0 }),
+  sha256: text("sha256"), linkState: publicLinkStateEnum("link_state").notNull().default("LIVE"),
+  verificationNote: text("verification_note"), createdAt: createdAt(),
+}, (t) => [uniqueIndex("public_document_supplier_source_uq").on(t.supplierProfileId, t.sourceUrl), index("public_document_supplier_idx").on(t.supplierProfileId)]);

@@ -55,7 +55,7 @@ export const users = pgTable("users", {
 export const memberships = pgTable("memberships", {
   id: id(), userId: uuid("user_id").notNull().references(() => users.id),
   organizationId: uuid("organization_id").notNull().references(() => organizations.id),
-  role: roleEnum("role").notNull(), createdAt: createdAt(),
+  role: roleEnum("role").notNull(), companyRole: text("company_role"), createdAt: createdAt(),
 }, (table) => [uniqueIndex("membership_user_org_role_uq").on(table.userId, table.organizationId, table.role)]);
 
 export const productTypes = pgTable("product_types", {

@@ -14,7 +14,7 @@ const steps = [
     number: "01",
     phase: "Rescue",
     title: "Name what the lot must pass",
-    summary: "Start with a compliance condition—not a catalog search.",
+    summary: "Start with a compliance condition, not a catalog search.",
     detail: "Record the cocoa powder quantity, destination, and frozen Compliance Profile version. The BuyerRequirement preserves that standard before VLE considers a listing.",
     signal: "Requirement + frozen profile",
   },
@@ -71,8 +71,8 @@ export default function ForBuyersPage() {
             <h1>From requirement to eligible lot.</h1>
             <p className="heroLead">Rescue the requirement, spot the eligible physical lot, and record reservation intent while eligibility is still live.</p>
             <div className="actions">
-              <Link className="button" href="#buyer-path">Walk the five steps</Link>
-              <Link className="textLink textLinkLight" href="/access">Start buyer access</Link>
+              <Link className="button" href="/sign-up?as=brand">Create brand account</Link>
+              <Link className="textLink textLinkLight" href="/sign-up?as=brand">Create brand account</Link>
             </div>
           </div>
           <aside className="supplierRouteCard" aria-label="Buyer route summary">
@@ -93,7 +93,7 @@ export default function ForBuyersPage() {
           <div>
             <p className="eyebrow">Keep the records distinct</p>
             <h2 id="buyer-identity-heading">A match is not a purchase.</h2>
-            <p>The requirement says what must pass. The match points to an eligible listing. The quote states expiring commercial terms. The reservation records intent—and is still not an Order.</p>
+            <p>The requirement says what must pass. The match points to an eligible listing. The quote states expiring commercial terms. The reservation records intent, and is still not an Order.</p>
           </div>
           <div className="identityRail" aria-label="Distinct buyer and commercial records">
             <span>Requirement</span><i aria-hidden="true">≠</i><span>Match</span><i aria-hidden="true">≠</i><span>Quote</span><i aria-hidden="true">≠</i><span>ReservationIntent</span>
@@ -132,7 +132,7 @@ export default function ForBuyersPage() {
 
         <section className="supplierClose">
           <div><p className="eyebrow">Buyer intake</p><h2>Bring the requirement. VLE checks the live shelf.</h2><p>Record the cocoa quantity, destination, and frozen profile that must be met. Managed operations can run matching; suppliers can quote; buyers can record reservation intent. No Order, payment, or freight booking is created.</p></div>
-          <div className="supplierCloseActions"><Link className="button" href="/access">Start reviewed buyer access</Link><Link className="textLink" href="/#passed-lots">Inspect the live shelf</Link></div>
+          <div className="supplierCloseActions"><Link className="button" href="/sign-up?as=brand">Create brand account</Link><Link className="textLink" href="/#passed-lots">Inspect the live shelf</Link></div>
         </section>
       </div>
     </main>

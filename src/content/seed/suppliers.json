@@ -1,0 +1,1082 @@
+[
+  {
+    "slug": "kasandrinos",
+    "name": "Kasandrinos",
+    "legalName": "Kasandrinos International",
+    "country": "Greece / United States",
+    "category": "olive-oil",
+    "website": "https://www.kasandrinos.com",
+    "domain": "kasandrinos.com",
+    "summary": "Family-grown organic extra virgin olive oil from Laconia, Greece.",
+    "status": "PUBLIC_DOCUMENTS",
+    "updatedAt": "2026-10-19",
+    "products": [
+      {
+        "slug": "100ml-glass-bottle",
+        "name": "100ml glass bottle",
+        "ingredient": "Extra virgin olive oil",
+        "form": "Glass bottle",
+        "origin": "Greece",
+        "url": "https://www.kasandrinos.com/products/1-100ml-glass-bottle"
+      },
+      {
+        "slug": "250ml-glass-bottle",
+        "name": "250ml glass bottle",
+        "ingredient": "Extra virgin olive oil",
+        "form": "Glass bottle",
+        "origin": "Greece",
+        "url": "https://www.kasandrinos.com/products/1-250ml-glass-bottle"
+      },
+      {
+        "slug": "500ml-glass-bottle",
+        "name": "500ml glass bottle",
+        "ingredient": "Extra virgin olive oil",
+        "form": "Glass bottle",
+        "origin": "Greece",
+        "url": "https://www.kasandrinos.com/products/1-500-ml-glass-bottle"
+      },
+      {
+        "slug": "1l-glass-bottle",
+        "name": "1L glass bottle",
+        "ingredient": "Extra virgin olive oil",
+        "form": "Glass bottle",
+        "origin": "Greece",
+        "url": "https://www.kasandrinos.com/products/1-1-liter-glass-bottle"
+      },
+      {
+        "slug": "3l-can",
+        "name": "3L can",
+        "ingredient": "Extra virgin olive oil",
+        "form": "Can",
+        "origin": "Greece",
+        "url": "https://www.kasandrinos.com/products/1-3-liter-can"
+      },
+      {
+        "slug": "3l-bag-in-box",
+        "name": "3L bag-in-box",
+        "ingredient": "Extra virgin olive oil",
+        "form": "Bag-in-box",
+        "origin": "Greece",
+        "url": "https://www.kasandrinos.com/products/1-3-liter-bag-in-a-box"
+      },
+      {
+        "slug": "travel-packets",
+        "name": "Travel packets",
+        "ingredient": "Extra virgin olive oil",
+        "form": "12ml packets, pack of 20",
+        "origin": "Greece",
+        "url": "https://www.kasandrinos.com/products/box-of-20-travel-packets"
+      }
+    ],
+    "documents": [
+      {
+        "id": "kasandrinos-report-1",
+        "title": "Heavy metals report",
+        "product": "Olive oil, 250ml bottle",
+        "productSlug": "organic-evoo-250ml-lot-227-k-b",
+        "url": "https://cdn.shopify.com/s/files/1/0128/0914/2330/files/Heavy_Metal_Testing_EVOO_23bd64ad-9907-463f-acbb-3b89af8ad43b.pdf?v=1781074362",
+        "publisherDomain": "kasandrinos.com",
+        "sourcePage": "https://www.kasandrinos.com/pages/transparency-1",
+        "reportDate": "2026-01-27",
+        "dateIso": "2026-01-27",
+        "foundAt": "2026-10-19",
+        "lab": "Light Labs (ISO 17025)",
+        "analytes": [
+          "lead",
+          "arsenic",
+          "cadmium",
+          "mercury"
+        ],
+        "results": [
+          {
+            "analyte": "Lead",
+            "value": "ND",
+            "meaning": "Not detected"
+          },
+          {
+            "analyte": "Arsenic",
+            "value": "ND",
+            "meaning": "Not detected"
+          },
+          {
+            "analyte": "Cadmium",
+            "value": "ND",
+            "meaning": "Not detected"
+          },
+          {
+            "analyte": "Mercury",
+            "value": "ND",
+            "meaning": "Not detected"
+          }
+        ],
+        "lotCode": "227 K/B"
+      },
+      {
+        "id": "kasandrinos-report-2",
+        "title": "Heavy metals report",
+        "product": "3L can",
+        "url": "https://cdn.shopify.com/s/files/1/0128/0914/2330/files/Heavy_Metals_-_3L_Can.pdf?v=1769811932",
+        "publisherDomain": "kasandrinos.com",
+        "sourcePage": "https://www.kasandrinos.com/pages/transparency-1",
+        "reportDate": "2026-01-27",
+        "dateIso": "2026-01-27",
+        "foundAt": "2026-10-19",
+        "analytes": [
+          "heavy metals"
+        ],
+        "results": []
+      },
+      {
+        "id": "kasandrinos-report-3",
+        "title": "Heavy metals report",
+        "product": "3L bag-in-box",
+        "url": "https://cdn.shopify.com/s/files/1/0128/0914/2330/files/Heavy_Metals_-_3L_Bag_in_a_Box_14ac2218-1800-4e7e-825d-84686af893df.pdf?v=1782196726",
+        "publisherDomain": "kasandrinos.com",
+        "sourcePage": "https://www.kasandrinos.com/pages/transparency-1",
+        "reportDate": "2026-01-27",
+        "dateIso": "2026-01-27",
+        "foundAt": "2026-10-19",
+        "analytes": [
+          "heavy metals"
+        ],
+        "results": []
+      },
+      {
+        "id": "kasandrinos-report-4",
+        "title": "Phthalates report",
+        "product": "Olive oil, 250ml bottle",
+        "url": "https://cdn.shopify.com/s/files/1/0128/0914/2330/files/Phathalates_Testing_EVOO_bc21f6b9-9dd8-4ee2-b775-2503c5a6cc47.pdf?v=1781074784",
+        "publisherDomain": "kasandrinos.com",
+        "sourcePage": "https://www.kasandrinos.com/pages/transparency-1",
+        "reportDate": "2026-01-29",
+        "dateIso": "2026-01-29",
+        "foundAt": "2026-10-19",
+        "analytes": [
+          "phthalates"
+        ],
+        "results": []
+      },
+      {
+        "id": "kasandrinos-report-5",
+        "title": "Phthalates report",
+        "product": "Anresco 2026 certificate of analysis, 250ml bottle",
+        "productSlug": "organic-evoo",
+        "url": "https://cdn.shopify.com/s/files/1/0128/0914/2330/files/CofA-testing-anresco-Phthalates-2026.pdf?v=1786721577",
+        "publisherDomain": "kasandrinos.com",
+        "sourcePage": "https://www.kasandrinos.com/pages/transparency-1",
+        "reportDate": "May 18, 2026",
+        "dateIso": "2026-05-18",
+        "foundAt": "2026-10-19",
+        "lab": "Anresco Laboratories (ISO 17025)",
+        "analytes": [
+          "phthalates"
+        ],
+        "results": []
+      },
+      {
+        "id": "kasandrinos-report-6",
+        "title": "BPA report",
+        "product": "3L can",
+        "url": "https://cdn.shopify.com/s/files/1/0128/0914/2330/files/BPA_-_3_L_Can_49b0f9b6-51bb-4f92-b963-63e0ce9d9fee.pdf?v=1781074871",
+        "publisherDomain": "kasandrinos.com",
+        "sourcePage": "https://www.kasandrinos.com/pages/transparency-1",
+        "reportDate": "2026-01-28",
+        "dateIso": "2026-01-28",
+        "foundAt": "2026-10-19",
+        "analytes": [
+          "bpa"
+        ],
+        "results": []
+      },
+      {
+        "id": "kasandrinos-report-7",
+        "title": "BPA report",
+        "product": "3L bag-in-box",
+        "url": "https://cdn.shopify.com/s/files/1/0128/0914/2330/files/BPA_1_3L_Bag_in_a_Box_b6d549de-12ca-4235-ac60-a755380b30ca.pdf?v=1781074992",
+        "publisherDomain": "kasandrinos.com",
+        "sourcePage": "https://www.kasandrinos.com/pages/transparency-1",
+        "reportDate": "2026-01-29",
+        "dateIso": "2026-01-29",
+        "foundAt": "2026-10-19",
+        "analytes": [
+          "bpa"
+        ],
+        "results": []
+      },
+      {
+        "id": "kasandrinos-report-8",
+        "title": "Aluminum report",
+        "product": "3L can",
+        "url": "https://cdn.shopify.com/s/files/1/0128/0914/2330/files/Aluminum_-_3L_Can.pdf?v=1769811932",
+        "publisherDomain": "kasandrinos.com",
+        "sourcePage": "https://www.kasandrinos.com/pages/transparency-1",
+        "reportDate": "2026-01-29",
+        "dateIso": "2026-01-29",
+        "foundAt": "2026-10-19",
+        "analytes": [
+          "aluminum"
+        ],
+        "results": []
+      },
+      {
+        "id": "kasandrinos-report-9",
+        "title": "Glyphosate and AMPA report",
+        "product": "Olive oil, 250ml bottle",
+        "productSlug": "organic-evoo-lot-227-k-b",
+        "url": "https://cdn.shopify.com/s/files/1/0128/0914/2330/files/Glyphosate_AMPA_EVOO_a71c2ea5-ce48-412c-b191-3159507c8ed4.pdf?v=1781074305",
+        "publisherDomain": "kasandrinos.com",
+        "sourcePage": "https://www.kasandrinos.com/pages/transparency-1",
+        "reportDate": "2026-01-28",
+        "dateIso": "2026-01-28",
+        "foundAt": "2026-10-19",
+        "lab": "Light Labs",
+        "analytes": [
+          "glyphosate"
+        ],
+        "results": [],
+        "lotCode": "227 K/B"
+      },
+      {
+        "id": "kasandrinos-report-10",
+        "title": "Acidity report",
+        "product": "Chemical analysis",
+        "url": "https://cdn.shopify.com/s/files/1/0128/0914/2330/files/Acidity_Level_Chemical_Analysis_Testing_2_fca6fa26-35fa-4d28-b1a6-fd4f014e1328.pdf?v=1781074030",
+        "publisherDomain": "kasandrinos.com",
+        "sourcePage": "https://www.kasandrinos.com/pages/transparency-1",
+        "reportDate": "21.11.2025",
+        "dateIso": "2025-11-21",
+        "foundAt": "2026-10-19",
+        "analytes": [
+          "acidity"
+        ],
+        "results": []
+      },
+      {
+        "id": "kasandrinos-report-11",
+        "title": "Full chemical report report",
+        "product": "Extra virgin olive oil",
+        "url": "https://cdn.shopify.com/s/files/1/0128/0914/2330/files/Chemical_Report_EVOO_4ce880bd-3236-489c-9761-c9fb2357c071.pdf?v=1781074189",
+        "publisherDomain": "kasandrinos.com",
+        "sourcePage": "https://www.kasandrinos.com/pages/transparency-1",
+        "reportDate": "10/1/2024",
+        "dateIso": null,
+        "foundAt": "2026-10-19",
+        "analytes": [
+          "full chemical report"
+        ],
+        "results": []
+      }
+    ],
+    "certifications": [
+      {
+        "name": "OU Kosher",
+        "description": "Orthodox Union certification for extra virgin olive oil.",
+        "url": "https://cdn.shopify.com/s/files/1/0128/0914/2330/files/OU_KOSHER_Kasandrinos_International_LLC_107050b5-1729-4446-8900-12f0b6f9a3ee.pdf?v=1781073628",
+        "date": "2026-02-04",
+        "status": "Supplier-reported"
+      },
+      {
+        "name": "Paleo Foundation",
+        "description": "Certified Paleo and KETO Certified.",
+        "url": "https://cdn.shopify.com/s/files/1/0128/0914/2330/files/Keto_Paleo_Certifications_10aa915e-655c-4e65-b607-6cbe6d2e0bee.pdf?v=1781073554",
+        "date": "date not stated",
+        "statusNote": "Status confirmed current by the issuing body, Paleo Foundation, 19 Oct 2026.",
+        "status": "Issuer-confirmed current"
+      },
+      {
+        "name": "USDA Organic",
+        "description": "Organic certification document for extra virgin olive oil.",
+        "url": "https://cdn.shopify.com/s/files/1/0128/0914/2330/files/organic-cert-2026_3f6f9c5a-ae94-4d5b-817c-cb1e680311d4.pdf?v=1781071520",
+        "date": "2025-11-14",
+        "status": "Supplier-reported"
+      },
+      {
+        "name": "Non-GMO",
+        "description": "Non-GMO Project Verified certificate for Kasandrinos organic extra virgin olive oil.",
+        "url": "https://cdn.shopify.com/s/files/1/0128/0914/2330/files/NON_GMO_KASANDRINOS_ded194bf-f534-4811-8bd9-c1f738bfec0e.pdf?v=1781073445",
+        "date": "2026-03-02",
+        "status": "Supplier-reported"
+      }
+    ],
+    "latestReportDate": "2026-05-18"
+  },
+  {
+    "slug": "blue-moon-acres",
+    "name": "Blue Moon Acres",
+    "legalName": "Blue Moon Acres",
+    "country": "USA",
+    "category": "rice",
+    "website": "https://bluemoonacres.com",
+    "domain": "bluemoonacres.com",
+    "summary": "2024 rice varieties (brown, black, sushi, white, Maratelli).",
+    "status": "PUBLIC_DOCUMENTS",
+    "updatedAt": "2026-10-19",
+    "products": [
+      {
+        "slug": "2024-rice-varieties-brown-black-sushi-white-maratelli",
+        "name": "2024 rice varieties (brown, black, sushi, white, Maratelli)"
+      }
+    ],
+    "documents": [
+      {
+        "id": "blue-moon-acres-1",
+        "title": "Arsenic report",
+        "product": "2024 rice varieties (brown, black, sushi, white, Maratelli)",
+        "productSlug": "2024-rice-varieties-brown-black-sushi-white-maratelli",
+        "url": "https://bluemoonacres.com/wp-content/uploads/2025/01/2024-Rice-Test-Results.pdf",
+        "publisherDomain": "bluemoonacres.com",
+        "sourcePage": null,
+        "reportDate": "2024-10-31",
+        "dateIso": "2024-10-31",
+        "foundAt": "2026-10-19",
+        "lab": "OMIC USA Inc., Portland OR",
+        "analytes": [
+          "arsenic"
+        ],
+        "results": []
+      }
+    ],
+    "certifications": [],
+    "latestReportDate": "2024-10-31"
+  },
+  {
+    "slug": "blueprint",
+    "name": "Blueprint",
+    "legalName": "Blueprint (Bryan Johnson)",
+    "country": "USA",
+    "category": "cocoa",
+    "website": "https://blueprint.bryanjohnson.com",
+    "domain": "blueprint.bryanjohnson.com",
+    "summary": "Cocoa powder lot HI25-245-01.",
+    "status": "PUBLIC_DOCUMENTS",
+    "updatedAt": "2026-10-19",
+    "products": [
+      {
+        "slug": "cocoa-powder-lot-hi25-245-01",
+        "name": "Cocoa powder lot HI25-245-01"
+      }
+    ],
+    "documents": [
+      {
+        "id": "blueprint-1",
+        "title": "Heavy metals report",
+        "product": "Cocoa powder lot HI25-245-01",
+        "productSlug": "cocoa-powder-lot-hi25-245-01",
+        "url": "https://blueprint.bryanjohnson.com/cdn/shop/files/CoA_25-510880_Cocoa_Powder_Posted_Feb_2026.pdf?v=286107257732132115",
+        "publisherDomain": "blueprint.bryanjohnson.com",
+        "sourcePage": null,
+        "reportDate": "2025-09-24",
+        "dateIso": "2025-09-24",
+        "foundAt": "2026-10-19",
+        "lab": "Certified Group, Tustin CA (ISO 17025)",
+        "analytes": [
+          "lead",
+          "arsenic",
+          "cadmium",
+          "mercury",
+          "aflatoxins"
+        ],
+        "results": [
+          {
+            "analyte": "Cadmium",
+            "value": "0.814",
+            "unit": "ppm",
+            "meaning": "Reported concentration"
+          },
+          {
+            "analyte": "Lead",
+            "value": "0.068",
+            "unit": "ppm",
+            "meaning": "Reported concentration"
+          }
+        ],
+        "lotCode": "HI25-245-01"
+      }
+    ],
+    "certifications": [],
+    "latestReportDate": "2025-09-24"
+  },
+  {
+    "slug": "dr-murray-superfoods",
+    "name": "Dr. Murray SuperFoods",
+    "legalName": "Dr. Murray SuperFoods",
+    "country": "USA",
+    "category": "protein",
+    "website": "https://doctormurray.com",
+    "domain": "doctormurray.com",
+    "summary": "Plant Based Pea Protein Chocolate, lot 252741.",
+    "status": "PUBLIC_DOCUMENTS",
+    "updatedAt": "2026-10-19",
+    "products": [
+      {
+        "slug": "plant-based-pea-protein-chocolate-lot-252741",
+        "name": "Plant Based Pea Protein Chocolate, lot 252741"
+      },
+      {
+        "slug": "vegan-protein-powder-vanilla-lot-ac281252-2",
+        "name": "Vegan Protein Powder Vanilla, lot AC281252-2"
+      }
+    ],
+    "documents": [
+      {
+        "id": "dr-murray-superfoods-1",
+        "title": "Heavy metals report",
+        "product": "Plant Based Pea Protein Chocolate, lot 252741",
+        "productSlug": "plant-based-pea-protein-chocolate-lot-252741",
+        "url": "https://doctormurray.com/cdn/shop/files/DM005_Plant_Based_Pea_Protein_Chocolate_Powder_252741_CoA.pdf?v=2248778843305700837",
+        "publisherDomain": "doctormurray.com",
+        "sourcePage": null,
+        "reportDate": "2026-02-06",
+        "dateIso": "2026-02-06",
+        "foundAt": "2026-10-19",
+        "lab": null,
+        "analytes": [
+          "lead",
+          "arsenic",
+          "cadmium"
+        ],
+        "results": [],
+        "lotCode": "252741"
+      },
+      {
+        "id": "dr-murray-superfoods-2",
+        "title": "Heavy metals report",
+        "product": "Vegan Protein Powder Vanilla, lot AC281252-2",
+        "productSlug": "vegan-protein-powder-vanilla-lot-ac281252-2",
+        "url": "https://doctormurray.com/cdn/shop/files/AC281252-2_Vegan_Protein_Powder_Vanilla_2lb_Rec10.20.2025.pdf?v=5487731487160322107",
+        "publisherDomain": "doctormurray.com",
+        "sourcePage": null,
+        "reportDate": "2025-10-17",
+        "dateIso": "2025-10-17",
+        "foundAt": "2026-10-19",
+        "lab": "CTLA, Spanish Fork UT",
+        "analytes": [
+          "lead",
+          "arsenic",
+          "cadmium",
+          "mercury"
+        ],
+        "results": [],
+        "lotCode": "AC281252-2"
+      }
+    ],
+    "certifications": [],
+    "latestReportDate": "2026-02-06"
+  },
+  {
+    "slug": "from-byadgi",
+    "name": "From Byadgi",
+    "legalName": "From Byadgi (lab reports name From Wonders)",
+    "country": "India",
+    "category": "spices",
+    "website": "https://frombyadgi.co",
+    "domain": "frombyadgi.co",
+    "summary": "Turmeric powder (batch TP004).",
+    "status": "PUBLIC_DOCUMENTS",
+    "updatedAt": "2026-10-19",
+    "products": [
+      {
+        "slug": "turmeric-powder-batch-tp004",
+        "name": "Turmeric powder (batch TP004)"
+      },
+      {
+        "slug": "cinnamon-powder-batch-ci004",
+        "name": "Cinnamon powder (batch CI004)"
+      }
+    ],
+    "documents": [
+      {
+        "id": "from-byadgi-1",
+        "title": "Heavy metals report",
+        "product": "Turmeric powder (batch TP004)",
+        "productSlug": "turmeric-powder-batch-tp004",
+        "url": "https://cdn.shopify.com/s/files/1/0571/0515/4119/files/BARC-26-09-11066-From_Byadgi-Turmeric_Powder.pdf?v=1789487454",
+        "publisherDomain": "frombyadgi.co",
+        "sourcePage": "https://frombyadgi.co/pages/lab-results-third-party-testing",
+        "reportDate": "2026-09-11",
+        "dateIso": "2026-09-11",
+        "foundAt": "2026-10-19",
+        "lab": "Bangalore Analytical Research Center Pvt Ltd",
+        "analytes": [
+          "lead",
+          "arsenic",
+          "cadmium",
+          "mercury",
+          "pesticides",
+          "aflatoxins"
+        ],
+        "results": [],
+        "lotCode": "TP004"
+      },
+      {
+        "id": "from-byadgi-2",
+        "title": "Heavy metals report",
+        "product": "Cinnamon powder (batch CI004)",
+        "productSlug": "cinnamon-powder-batch-ci004",
+        "url": "https://cdn.shopify.com/s/files/1/0571/0515/4119/files/BARC-26-09-11069-From_Byadgi-Cinnamon_Powder.pdf?v=1789487488",
+        "publisherDomain": "frombyadgi.co",
+        "sourcePage": "https://frombyadgi.co/pages/lab-results-third-party-testing",
+        "reportDate": "2026-09-15",
+        "dateIso": "2026-09-15",
+        "foundAt": "2026-10-19",
+        "lab": "Bangalore Analytical Research Center Pvt Ltd",
+        "analytes": [
+          "pesticides",
+          "aflatoxins"
+        ],
+        "results": [
+          {
+            "analyte": "Lead",
+            "value": "0.26",
+            "unit": "mg/kg",
+            "meaning": "Reported concentration"
+          },
+          {
+            "analyte": "Cadmium",
+            "value": "0.28",
+            "unit": "mg/kg",
+            "meaning": "Reported concentration"
+          }
+        ],
+        "lotCode": "CI004"
+      }
+    ],
+    "certifications": [],
+    "latestReportDate": "2026-09-15"
+  },
+  {
+    "slug": "matchaland",
+    "name": "MatchaLand",
+    "legalName": "MatchaLand",
+    "country": "Germany",
+    "category": "tea-and-matcha",
+    "website": "https://matchaland.de",
+    "domain": "matchaland.de",
+    "summary": "Pure Matcha 2026 harvest.",
+    "status": "PUBLIC_DOCUMENTS",
+    "updatedAt": "2026-10-19",
+    "products": [
+      {
+        "slug": "pure-matcha-2026-harvest",
+        "name": "Pure Matcha 2026 harvest",
+        "origin": "Japan"
+      }
+    ],
+    "documents": [
+      {
+        "id": "matchaland-1",
+        "title": "Heavy metals report",
+        "product": "Pure Matcha 2026 harvest",
+        "productSlug": "pure-matcha-2026-harvest",
+        "url": "https://cdn.shopify.com/s/files/1/0564/6263/9291/files/matcha-vergleich-2026-eurofins-2026-original.pdf?v=1791898791",
+        "publisherDomain": "matchaland.de",
+        "sourcePage": "https://matchaland.de/en/pages/schwermetall-test",
+        "reportDate": "2026-07-18",
+        "dateIso": "2026-07-18",
+        "foundAt": "2026-10-19",
+        "lab": "Eurofins Technology Service (Qingdao)",
+        "analytes": [
+          "lead",
+          "arsenic",
+          "cadmium",
+          "mercury",
+          "nickel",
+          "aluminum",
+          "pesticides"
+        ],
+        "results": []
+      }
+    ],
+    "certifications": [],
+    "latestReportDate": "2026-07-18"
+  },
+  {
+    "slug": "matchoya",
+    "name": "Matchoya",
+    "legalName": "Matchoya",
+    "country": "Germany",
+    "category": "tea-and-matcha",
+    "website": "https://matchoya.de",
+    "domain": "matchoya.de",
+    "summary": "Uji Ceremonial Matcha.",
+    "status": "PUBLIC_DOCUMENTS",
+    "updatedAt": "2026-10-19",
+    "products": [
+      {
+        "slug": "uji-ceremonial-matcha",
+        "name": "Uji Ceremonial Matcha",
+        "origin": "Japan"
+      }
+    ],
+    "documents": [
+      {
+        "id": "matchoya-1",
+        "title": "Heavy metals report",
+        "product": "Uji Ceremonial Matcha",
+        "productSlug": "uji-ceremonial-matcha",
+        "url": "https://cdn.shopify.com/s/files/1/0948/2846/2424/files/matchoya-ceremonial-schwermetalle-04-0714-001.pdf?v=1790965093",
+        "publisherDomain": "matchoya.de",
+        "sourcePage": "https://matchoya.de/pages/laborberichte",
+        "reportDate": "2026-07-30",
+        "dateIso": "2026-07-30",
+        "foundAt": "2026-10-19",
+        "lab": "Toho Microbial Research Institute, Osaka",
+        "analytes": [
+          "lead",
+          "arsenic",
+          "cadmium",
+          "mercury"
+        ],
+        "results": []
+      },
+      {
+        "id": "matchoya-2",
+        "title": "Pesticides report",
+        "product": "Uji Ceremonial Matcha",
+        "productSlug": "uji-ceremonial-matcha",
+        "url": "https://matchoya.de/cdn/shop/t/10/assets/labor_uji_ceremonial_eurofins.pdf?v=94242011030253459691790623115",
+        "publisherDomain": "matchoya.de",
+        "sourcePage": "https://matchoya.de/pages/laborberichte",
+        "reportDate": "2026-07-09 (per supplier page)",
+        "dateIso": null,
+        "foundAt": "2026-10-19",
+        "lab": "Eurofins Dr. Specht International, Hamburg",
+        "analytes": [
+          "pesticides"
+        ],
+        "results": []
+      }
+    ],
+    "certifications": [
+      {
+        "name": "Manufacturer ISO 22000 cert posted",
+        "status": "Supplier-reported"
+      }
+    ],
+    "latestReportDate": "2026-07-30"
+  },
+  {
+    "slug": "muscle-power",
+    "name": "Muscle Power",
+    "legalName": "Muscle Power",
+    "country": "Poland",
+    "category": "protein",
+    "website": "https://musclepower.pl",
+    "domain": "musclepower.pl",
+    "summary": "Whey isolate.",
+    "status": "PUBLIC_DOCUMENTS",
+    "updatedAt": "2026-10-19",
+    "products": [
+      {
+        "slug": "whey-isolate",
+        "name": "Whey isolate"
+      }
+    ],
+    "documents": [
+      {
+        "id": "muscle-power-1",
+        "title": "Heavy metals report",
+        "product": "Whey isolate",
+        "productSlug": "whey-isolate",
+        "url": "https://musclepower.pl/data/include/cms/Badania/BADANIA-2026/badania_isolate_01_2026.pdf",
+        "publisherDomain": "musclepower.pl",
+        "sourcePage": null,
+        "reportDate": "2026-01-28",
+        "dateIso": "2026-01-28",
+        "foundAt": "2026-10-19",
+        "lab": "J.S. Hamilton Poland, Gdynia",
+        "analytes": [
+          "lead",
+          "arsenic",
+          "cadmium"
+        ],
+        "results": []
+      }
+    ],
+    "certifications": [],
+    "latestReportDate": "2026-01-28"
+  },
+  {
+    "slug": "oel",
+    "name": "O.E.L.",
+    "legalName": "O.E.L. (Stavropoulos Ilias & Co per report)",
+    "country": "Germany/Greece",
+    "category": "olive-oil",
+    "website": "https://oel-berlin.de",
+    "domain": "oel-berlin.de",
+    "summary": "Organic EVOO, sample No 15.",
+    "status": "PUBLIC_DOCUMENTS",
+    "updatedAt": "2026-10-19",
+    "products": [
+      {
+        "slug": "organic-evoo-sample-no-15",
+        "name": "Organic EVOO, sample No 15"
+      }
+    ],
+    "documents": [
+      {
+        "id": "oel-1",
+        "title": "Pesticides GC/MS-MS report",
+        "product": "Organic EVOO, sample No 15",
+        "productSlug": "organic-evoo-sample-no-15",
+        "url": "https://cdn.shopify.com/s/files/1/0674/1517/9563/files/Analysis_Pesticide.pdf?v=1790839919",
+        "publisherDomain": "oel-berlin.de",
+        "sourcePage": "https://oel-berlin.de/en/pages/zertifikate",
+        "reportDate": "2026-01-16",
+        "dateIso": "2026-01-16",
+        "foundAt": "2026-10-19",
+        "lab": "Multichrom Lab, Athens (ESYD accredited)",
+        "analytes": [
+          "pesticides"
+        ],
+        "results": []
+      }
+    ],
+    "certifications": [
+      {
+        "name": "Organic certs on page",
+        "status": "Supplier-reported"
+      }
+    ],
+    "latestReportDate": "2026-01-16"
+  },
+  {
+    "slug": "olivea",
+    "name": "Olivea",
+    "legalName": "Olivea (Konstantopoulos S.A. per report)",
+    "country": "Greece",
+    "category": "olive-oil",
+    "website": "https://www.myolivea.com",
+    "domain": "myolivea.com",
+    "summary": "Ultra high phenolic EVOO 2025-26.",
+    "status": "PUBLIC_DOCUMENTS",
+    "updatedAt": "2026-10-19",
+    "products": [
+      {
+        "slug": "ultra-high-phenolic-evoo-2025-26",
+        "name": "Ultra high phenolic EVOO 2025-26"
+      }
+    ],
+    "documents": [
+      {
+        "id": "olivea-1",
+        "title": "Pesticides GC/MS-MS, polyphenols report",
+        "product": "Ultra high phenolic EVOO 2025-26",
+        "productSlug": "ultra-high-phenolic-evoo-2025-26",
+        "url": "https://www.myolivea.com/cdn/shop/files/olivea-uhp-2025-26-residue-certificate-127805.pdf?v=4945504568708085667",
+        "publisherDomain": "myolivea.com",
+        "sourcePage": "https://www.myolivea.com/pages/labs",
+        "reportDate": "2025-11-04",
+        "dateIso": "2025-11-04",
+        "foundAt": "2026-10-19",
+        "lab": "Multichrom Lab, Athens",
+        "analytes": [
+          "pesticides",
+          "polyphenols"
+        ],
+        "results": []
+      }
+    ],
+    "certifications": [],
+    "latestReportDate": "2025-11-04"
+  },
+  {
+    "slug": "organic-mandya",
+    "name": "Organic Mandya",
+    "legalName": "Mandya Organic Food Pvt Ltd (Organic Mandya)",
+    "country": "India",
+    "category": "rice",
+    "website": "https://organicmandya.com",
+    "domain": "organicmandya.com",
+    "summary": "Sona Masoori rice, 2025 Q2.",
+    "status": "PUBLIC_DOCUMENTS",
+    "updatedAt": "2026-10-19",
+    "products": [
+      {
+        "slug": "sona-masoori-rice-2025-q2",
+        "name": "Sona Masoori rice, 2025 Q2"
+      }
+    ],
+    "documents": [
+      {
+        "id": "organic-mandya-1",
+        "title": "Heavy metals report",
+        "product": "Sona Masoori rice, 2025 Q2",
+        "productSlug": "sona-masoori-rice-2025-q2",
+        "url": "https://trust.organicmandya.com/reports/2025-Q2/sona-massouri.pdf",
+        "publisherDomain": "organicmandya.com",
+        "sourcePage": "https://trust.organicmandya.com",
+        "reportDate": "2025 (May-June, per report no)",
+        "dateIso": null,
+        "foundAt": "2026-10-19",
+        "lab": "IFSH lab (report IFSH-250528072-S1)",
+        "analytes": [
+          "lead",
+          "arsenic",
+          "cadmium",
+          "mercury"
+        ],
+        "results": []
+      }
+    ],
+    "certifications": [
+      {
+        "name": "Organic claimed",
+        "status": "Supplier-reported"
+      }
+    ],
+    "latestReportDate": null
+  },
+  {
+    "slug": "ostrovit",
+    "name": "OstroVit",
+    "legalName": "OstroVit",
+    "country": "Poland",
+    "category": "protein",
+    "website": "https://ostrovit.com",
+    "domain": "ostrovit.com",
+    "summary": "100% Whey Protein Isolate 700g vanilla.",
+    "status": "PUBLIC_DOCUMENTS",
+    "updatedAt": "2026-10-19",
+    "products": [
+      {
+        "slug": "100-whey-protein-isolate-700g-vanilla",
+        "name": "100% Whey Protein Isolate 700g vanilla"
+      }
+    ],
+    "documents": [
+      {
+        "id": "ostrovit-1",
+        "title": "Heavy metals report",
+        "product": "100% Whey Protein Isolate 700g vanilla",
+        "productSlug": "100-whey-protein-isolate-700g-vanilla",
+        "url": "https://ostrovit.com/data/include/cms/lab-test/19-11-2025_OstroVit_100_Whey_Protein_Isolate_700g_vanilla__heavy_metals_893667_25_GDY_EN.pdf",
+        "publisherDomain": "ostrovit.com",
+        "sourcePage": null,
+        "reportDate": "2025-11-19",
+        "dateIso": "2025-11-19",
+        "foundAt": "2026-10-19",
+        "lab": "J.S. Hamilton Poland, Gdynia",
+        "analytes": [
+          "lead",
+          "cadmium"
+        ],
+        "results": []
+      }
+    ],
+    "certifications": [],
+    "latestReportDate": "2025-11-19"
+  },
+  {
+    "slug": "spice-profile",
+    "name": "Spice Profile",
+    "legalName": "Spice Profile LLC",
+    "country": "USA",
+    "category": "spices",
+    "website": "https://spiceprofile.com",
+    "domain": "spiceprofile.com",
+    "summary": "Organic cinnamon lot 04251006.",
+    "status": "PUBLIC_DOCUMENTS",
+    "updatedAt": "2026-10-19",
+    "products": [
+      {
+        "slug": "organic-cinnamon-lot-04251006",
+        "name": "Organic cinnamon lot 04251006"
+      }
+    ],
+    "documents": [
+      {
+        "id": "spice-profile-1",
+        "title": "Heavy metals report",
+        "product": "Organic cinnamon lot 04251006",
+        "productSlug": "organic-cinnamon-lot-04251006",
+        "url": "https://cdn.shopify.com/s/files/1/0880/4158/6993/files/Cinnamon_powder_lot_no._04251006.pdf?v=1759311282",
+        "publisherDomain": "spiceprofile.com",
+        "sourcePage": "https://spiceprofile.com/pages/04251006-organic-cinnamon-heavy-metal",
+        "reportDate": "2025-05-07",
+        "dateIso": "2025-05-07",
+        "foundAt": "2026-10-19",
+        "lab": "Accurate Universal Laboratories Pvt Ltd, Ahmedabad",
+        "analytes": [
+          "lead",
+          "arsenic",
+          "cadmium",
+          "mercury"
+        ],
+        "results": [],
+        "lotCode": "04251006"
+      }
+    ],
+    "certifications": [
+      {
+        "name": "Organic claimed",
+        "status": "Supplier-reported"
+      }
+    ],
+    "latestReportDate": "2025-05-07"
+  },
+  {
+    "slug": "teafy",
+    "name": "Teafy",
+    "legalName": "Teafy Pty Ltd",
+    "country": "Australia",
+    "category": "tea-and-matcha",
+    "website": "https://www.teafy.com.au",
+    "domain": "teafy.com.au",
+    "summary": "8 matcha, hojicha, sencha, genmaicha SKUs.",
+    "status": "PUBLIC_DOCUMENTS",
+    "updatedAt": "2026-10-19",
+    "products": [
+      {
+        "slug": "8-matcha-hojicha-sencha-genmaicha-skus",
+        "name": "8 matcha, hojicha, sencha, genmaicha SKUs",
+        "origin": "Japan"
+      }
+    ],
+    "documents": [
+      {
+        "id": "teafy-1",
+        "title": "Heavy metals report",
+        "product": "8 matcha, hojicha, sencha, genmaicha SKUs",
+        "productSlug": "8-matcha-hojicha-sencha-genmaicha-skus",
+        "url": "https://cdn.prod.website-files.com/62eae692079d7c5833d4706e/6a03ddd5e3f7fe4a990f4b78_Teafy%20Pty%20Ltd%20Heavy%20metal%20testing%20Results-%20J2603-2961-00485468-C%20(1).pdf",
+        "publisherDomain": "teafy.com.au",
+        "sourcePage": "https://www.teafy.com.au/blog-posts/heavy-metal-testing-japanese-matcha-tea",
+        "reportDate": "2026-04-07",
+        "dateIso": "2026-04-07",
+        "foundAt": "2026-10-19",
+        "lab": "Agrifood Technology Pty Ltd (NATA 2726, ISO 17025)",
+        "analytes": [
+          "lead",
+          "arsenic",
+          "cadmium",
+          "mercury"
+        ],
+        "results": []
+      }
+    ],
+    "certifications": [
+      {
+        "name": "Organic claimed",
+        "status": "Supplier-reported"
+      }
+    ],
+    "latestReportDate": "2026-04-07"
+  },
+  {
+    "slug": "transparent-labs",
+    "name": "Transparent Labs",
+    "legalName": "Transparent Labs",
+    "country": "USA",
+    "category": "protein",
+    "website": "https://www.transparentlabs.com",
+    "domain": "transparentlabs.com",
+    "summary": "100% Grass-Fed Whey, lot 23040467.",
+    "status": "PUBLIC_DOCUMENTS",
+    "updatedAt": "2026-10-19",
+    "products": [
+      {
+        "slug": "100-grass-fed-whey-lot-23040467",
+        "name": "100% Grass-Fed Whey, lot 23040467"
+      }
+    ],
+    "documents": [
+      {
+        "id": "transparent-labs-1",
+        "title": "Heavy metals report",
+        "product": "100% Grass-Fed Whey, lot 23040467",
+        "productSlug": "100-grass-fed-whey-lot-23040467",
+        "url": "https://cdn.labdoor.io/certification/images/pei7c7pm3sad0vk4nlo5pv.pdf",
+        "publisherDomain": "transparentlabs.com",
+        "sourcePage": "https://www.transparentlabs.com/pages/third-party-tests",
+        "reportDate": "2023-07 (per file title)",
+        "dateIso": null,
+        "foundAt": "2026-10-19",
+        "lab": "Labdoor certification COA",
+        "analytes": [
+          "lead",
+          "arsenic",
+          "cadmium",
+          "mercury"
+        ],
+        "results": [],
+        "lotCode": "23040467"
+      }
+    ],
+    "certifications": [],
+    "latestReportDate": null
+  },
+  {
+    "slug": "dmatcha-kyoto",
+    "name": "d:matcha Kyoto",
+    "legalName": "d:matcha Kyoto (D-matcha Co., Ltd.)",
+    "country": "Japan",
+    "category": "tea-and-matcha",
+    "website": "https://dmatcha.com",
+    "domain": "dmatcha.com",
+    "summary": "Y2026 Gokou.",
+    "status": "PUBLIC_DOCUMENTS",
+    "updatedAt": "2026-10-19",
+    "products": [
+      {
+        "slug": "y2026-gokou",
+        "name": "Y2026 Gokou",
+        "origin": "Japan"
+      }
+    ],
+    "documents": [
+      {
+        "id": "dmatcha-kyoto-1",
+        "title": "Heavy metals report",
+        "product": "Y2026 Gokou",
+        "productSlug": "y2026-gokou",
+        "url": "https://cdn.shopify.com/s/files/1/0590/0458/4101/files/712-2026-08000465_2.pdf?v=1790926455",
+        "publisherDomain": "dmatcha.com",
+        "sourcePage": "https://dmatcha.com/pages/organic-matcha-farming",
+        "reportDate": "2026-09-17",
+        "dateIso": "2026-09-17",
+        "foundAt": "2026-10-19",
+        "lab": "Eurofins Food Testing Japan / Eurofins WEJ Contaminants",
+        "analytes": [
+          "lead",
+          "arsenic",
+          "cadmium"
+        ],
+        "results": [
+          {
+            "analyte": "Lead",
+            "value": "0.089",
+            "unit": "mg/kg",
+            "meaning": "Reported concentration"
+          }
+        ]
+      },
+      {
+        "id": "dmatcha-kyoto-2",
+        "title": "Pesticide residues report",
+        "product": "Y2026 Gokou",
+        "productSlug": "y2026-gokou",
+        "url": "https://cdn.shopify.com/s/files/1/0590/0458/4101/files/712-2026-08000464-1_2.pdf?v=1790925552",
+        "publisherDomain": "dmatcha.com",
+        "sourcePage": "https://dmatcha.com/pages/organic-matcha-farming",
+        "reportDate": "2026-09-17",
+        "dateIso": "2026-09-17",
+        "foundAt": "2026-10-19",
+        "lab": "Eurofins Food Testing Japan",
+        "analytes": [],
+        "results": []
+      }
+    ],
+    "certifications": [
+      {
+        "name": "Organic JAS (certs posted)",
+        "status": "Supplier-reported"
+      },
+      {
+        "name": "Organic JAS",
+        "status": "Supplier-reported"
+      }
+    ],
+    "latestReportDate": "2026-09-17"
+  }
+]

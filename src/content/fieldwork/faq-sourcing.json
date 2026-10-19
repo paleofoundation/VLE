@@ -1,0 +1,1081 @@
+{
+ "groups": [
+  {
+   "id": "rice",
+   "questions": [
+    {
+     "id": "which-rice-origins-tend-to-run-lower-in-inorganic-arsenic-and-why",
+     "question": "Which rice origins tend to run lower in inorganic arsenic, and why?",
+     "answer": "Origin matters. A compilation of 901 market samples of polished white rice from 10 countries found median total arsenic varied about 7-fold, from 0.04 mg/kg (Egypt) and 0.07 mg/kg (India) to 0.25 mg/kg (U.S.) and 0.28 mg/kg (France), and the inorganic share also differed by country [1]. Consumer Reports' 2014 testing found basmati from California, India and Pakistan, and U.S. sushi rice, had the least inorganic arsenic, while rice from the south-central U.S. ran higher; a soil scientist quoted by CR links this partly to sandier soils that release arsenic more readily [2]. Use origin as a first filter, then confirm with lot data.",
+     "sources": [
+      {
+       "number": 1,
+       "title": "Meharg AA, Williams PN, Adomako E, et al. Geographical variation in total and inorganic arsenic content of polished (white) rice. Environmental Science & Technology. 2009;43(5):1612-1617. doi:10.1021/es802612a",
+       "url": "https://doi.org/10.1021/es802612a"
+      },
+      {
+       "number": 2,
+       "title": "Consumer Reports (Loria K). Reducing the Risk From Arsenic in Rice. Published 8 July 2026, updated 14 August 2026.",
+       "url": "https://www.consumerreports.org/health/food-contaminants/arsenic-in-rice-reducing-risk-a8972350937/"
+      }
+     ],
+     "onVle": {
+      "label": "filter rice suppliers by published inorganic arsenic results",
+      "href": "/suppliers?category=rice&analyte=arsenic"
+     }
+    },
+    {
+     "id": "basmati-or-other-types-white-or-brown-which-tends-to-be-lower-in-inorganic-arsen",
+     "question": "Basmati or other types, white or brown: which tends to be lower in inorganic arsenic?",
+     "answer": "In Consumer Reports' 2026 tests of 52 rice products, basmati and sushi rice averaged the lowest inorganic arsenic (55 and 57 ppb), compared with jasmine (87 ppb) and long-grain, short-grain and parboiled rice (101 ppb). Brown rice averaged 113 ppb and white rice 72 ppb [1]. FDA's risk assessment reported mean inorganic arsenic of 154 ppb in brown rice and 92 ppb in white rice [2]. Arsenic concentrates in the outer bran layer, so polishing to white rice tends to lower it [1]. EU limits reflect this: 0.15 mg/kg for non-parboiled milled rice and 0.25 mg/kg for husked and parboiled rice [3].",
+     "sources": [
+      {
+       "number": 1,
+       "title": "Consumer Reports (Loria K). Reducing the Risk From Arsenic in Rice. Published 8 July 2026, updated 14 August 2026.",
+       "url": "https://www.consumerreports.org/health/food-contaminants/arsenic-in-rice-reducing-risk-a8972350937/"
+      },
+      {
+       "number": 2,
+       "title": "U.S. Food and Drug Administration. Arsenic in Rice and Rice Products Risk Assessment Report. Revised March 2016.",
+       "url": "https://www.fda.gov/files/food/published/Arsenic-in-Rice-and-Rice-Products-Risk-Assessment-Report-PDF.pdf"
+      },
+      {
+       "number": 3,
+       "title": "European Commission. Commission Regulation (EU) 2023/915 of 25 April 2023 on maximum levels for certain contaminants in food and repealing Regulation (EC) No 1881/2006. OJ L 119, 5.5.2023, p. 103 (CELEX 32023R0915; values cross-checked against the EUR-Lex consolidated text of 1 January 2025). Copy hosted by FAO FAOLEX.",
+       "url": "https://faolex.fao.org/docs/pdf/eur217510.pdf"
+      }
+     ],
+     "onVle": {
+      "label": "filter rice suppliers by published inorganic arsenic results",
+      "href": "/suppliers?category=rice&analyte=arsenic"
+     }
+    },
+    {
+     "id": "does-parboiling-or-the-cooking-method-change-arsenic-levels",
+     "question": "Does parboiling or the cooking method change arsenic levels?",
+     "answer": "It depends on the step. Market data suggest parboiled rice tends to run higher: Consumer Reports found parboiled rice averaged 101 ppb inorganic arsenic and notes parboiled types tend to contain more [1], and the EU allows 0.25 mg/kg for parboiled rice versus 0.15 mg/kg for non-parboiled milled rice [2]. Cooking in excess water and draining works differently: FDA researchers found it reduced inorganic arsenic by about 40% in polished long-grain, 60% in parboiled and 50% in brown rice, but also removed 50 to 70% of added enrichment nutrients; rinsing alone had minimal effect [3]. A parboil-then-absorb method removed 54% (brown) and 73% (white) of inorganic arsenic in a UK study [4].",
+     "sources": [
+      {
+       "number": 1,
+       "title": "Consumer Reports (Loria K). Reducing the Risk From Arsenic in Rice. Published 8 July 2026, updated 14 August 2026.",
+       "url": "https://www.consumerreports.org/health/food-contaminants/arsenic-in-rice-reducing-risk-a8972350937/"
+      },
+      {
+       "number": 2,
+       "title": "European Commission. Commission Regulation (EU) 2023/915 of 25 April 2023 on maximum levels for certain contaminants in food and repealing Regulation (EC) No 1881/2006. OJ L 119, 5.5.2023, p. 103 (CELEX 32023R0915; values cross-checked against the EUR-Lex consolidated text of 1 January 2025). Copy hosted by FAO FAOLEX.",
+       "url": "https://faolex.fao.org/docs/pdf/eur217510.pdf"
+      },
+      {
+       "number": 3,
+       "title": "Gray PJ, Conklin SD, Todorov TI, Kasko SM. Cooking rice in excess water reduces both arsenic and enriched vitamins in the cooked grain. Food Additives & Contaminants: Part A. 2016;33(1):78-85. doi:10.1080/19440049.2015.1103906",
+       "url": "https://doi.org/10.1080/19440049.2015.1103906"
+      },
+      {
+       "number": 4,
+       "title": "Menon M, Dong W, Chen X, Hufton J, Rhodes EJ. Improved rice cooking approach to maximise arsenic removal while preserving nutrient elements. Science of the Total Environment. 2021;755(Pt 2):143341. doi:10.1016/j.scitotenv.2020.143341",
+       "url": "https://doi.org/10.1016/j.scitotenv.2020.143341"
+      }
+     ],
+     "onVle": {
+      "label": "filter rice suppliers by published inorganic arsenic results",
+      "href": "/suppliers?category=rice&analyte=arsenic"
+     }
+    },
+    {
+     "id": "how-does-paddy-water-management-affect-arsenic-versus-cadmium",
+     "question": "How does paddy water management affect arsenic versus cadmium?",
+     "answer": "There is a trade-off. In Japanese field trials, flooding increased grain arsenic while aerobic (drained) conditions increased cadmium; flooding for three weeks around heading cut cadmium most but raised arsenic considerably [1]. Consumer Reports reports that some U.S. growers now use furrow irrigation, where only part of the field is flooded, which reduces the share of the crop exposed to arsenic released from flooded soil [2]. FDA notes that measures to reduce one element should not increase another [3]. So a supplier who changed irrigation to cut arsenic should also show cadmium results. The EU cadmium limit for rice is 0.15 mg/kg and Codex sets 0.4 mg/kg for polished rice [4][5].",
+     "sources": [
+      {
+       "number": 1,
+       "title": "Arao T, Kawasaki A, Baba K, Mori S, Matsumoto S. Effects of water management on cadmium and arsenic accumulation and dimethylarsinic acid concentrations in Japanese rice. Environmental Science & Technology. 2009;43(24):9361-9367. doi:10.1021/es9022738",
+       "url": "https://doi.org/10.1021/es9022738"
+      },
+      {
+       "number": 2,
+       "title": "Consumer Reports (Loria K). Reducing the Risk From Arsenic in Rice. Published 8 July 2026, updated 14 August 2026.",
+       "url": "https://www.consumerreports.org/health/food-contaminants/arsenic-in-rice-reducing-risk-a8972350937/"
+      },
+      {
+       "number": 3,
+       "title": "U.S. Food and Drug Administration. Closer to Zero: Reducing Childhood Exposure to Contaminants from Foods.",
+       "url": "https://www.fda.gov/food/environmental-contaminants-food/closer-zero-reducing-childhood-exposure-contaminants-foods"
+      },
+      {
+       "number": 4,
+       "title": "European Commission. Commission Regulation (EU) 2023/915 of 25 April 2023 on maximum levels for certain contaminants in food and repealing Regulation (EC) No 1881/2006. OJ L 119, 5.5.2023, p. 103 (CELEX 32023R0915; values cross-checked against the EUR-Lex consolidated text of 1 January 2025). Copy hosted by FAO FAOLEX.",
+       "url": "https://faolex.fao.org/docs/pdf/eur217510.pdf"
+      },
+      {
+       "number": 5,
+       "title": "Codex Alimentarius Commission (FAO/WHO). General Standard for Contaminants and Toxins in Food and Feed (CXS 193-1995), adopted 1995, last amended 2025.",
+       "url": "https://openknowledge.fao.org/server/api/core/bitstreams/4d0e7245-8166-49ca-b822-ca80a1ff5cfe/content"
+      }
+     ],
+     "onVle": {
+      "label": "filter rice suppliers by published cadmium results",
+      "href": "/suppliers?category=rice&analyte=cadmium"
+     }
+    },
+    {
+     "id": "what-should-we-ask-a-rice-rice-flour-rice-protein-or-infant-cereal-supplier-for",
+     "question": "What should we ask a rice, rice flour, rice protein or infant cereal supplier for?",
+     "answer": "Ask for a lot-level COA reporting inorganic arsenic by speciation (for example HPLC-ICP-MS as in FDA EAM 4.11), not only total arsenic, plus lead, cadmium and mercury [1]. Codex allows total arsenic as a screen: at or below the inorganic limit the sample complies, above it speciation is needed [2]. For infant rice cereal, FDA's action level is 100 ppb inorganic arsenic, and FDA names selective sourcing and testing of incoming rice and rice-derived ingredients as the key practices [3]. The EU limit for rice used in infant food is 0.10 mg/kg [4]. Rice protein isolates can concentrate cadmium: one study measured 2.6 to 4.9 mg/kg in isolates from rice at 0.28 to 0.52 mg/kg [5].",
+     "sources": [
+      {
+       "number": 1,
+       "title": "Kubachka KM, Shockey NV, Hanley TA, Conklin SD, Heitkemper DT. Elemental Analysis Manual for Food and Related Products, Section 4.11: Arsenic Speciation in Rice and Rice Products Using HPLC-ICP-MS. U.S. Food and Drug Administration. Version 1.1, November 2012.",
+       "url": "https://www.fda.gov/media/95197/download"
+      },
+      {
+       "number": 2,
+       "title": "Codex Alimentarius Commission (FAO/WHO). General Standard for Contaminants and Toxins in Food and Feed (CXS 193-1995), adopted 1995, last amended 2025.",
+       "url": "https://openknowledge.fao.org/server/api/core/bitstreams/4d0e7245-8166-49ca-b822-ca80a1ff5cfe/content"
+      },
+      {
+       "number": 3,
+       "title": "U.S. Food and Drug Administration. Guidance for Industry: Action Level for Inorganic Arsenic in Rice Cereals for Infants. August 2020.",
+       "url": "https://www.fda.gov/regulatory-information/search-fda-guidance-documents/guidance-industry-action-level-inorganic-arsenic-rice-cereals-infants"
+      },
+      {
+       "number": 4,
+       "title": "European Commission. Commission Regulation (EU) 2023/915 of 25 April 2023 on maximum levels for certain contaminants in food and repealing Regulation (EC) No 1881/2006. OJ L 119, 5.5.2023, p. 103 (CELEX 32023R0915; values cross-checked against the EUR-Lex consolidated text of 1 January 2025). Copy hosted by FAO FAOLEX.",
+       "url": "https://faolex.fao.org/docs/pdf/eur217510.pdf"
+      },
+      {
+       "number": 5,
+       "title": "Huo Y, Du H, Xue B, Niu M, Zhao S. Cadmium removal from rice by separating and washing protein isolate. Journal of Food Science. 2016;81(6):T1576-T1584. doi:10.1111/1750-3841.13323",
+       "url": "https://doi.org/10.1111/1750-3841.13323"
+      }
+     ],
+     "onVle": {
+      "label": "filter rice suppliers by published inorganic arsenic results",
+      "href": "/suppliers?category=rice&analyte=arsenic"
+     }
+    }
+   ]
+  },
+  {
+   "id": "cocoa",
+   "questions": [
+    {
+     "id": "which-cacao-origins-tend-to-run-lower-in-cadmium-and-why",
+     "question": "Which cacao origins tend to run lower in cadmium, and why?",
+     "answer": "Cadmium in cacao comes mainly from the soil. A 2021 review found mean bean cadmium ranging from 0.02 to 12 mg/kg, markedly higher in Latin America, where more than half of bean samples exceeded the 0.60 mg/kg threshold commonly applied for export to the EU. The authors link this to relatively cadmium-rich young soils, with soil cadmium, pH and organic carbon explaining much of the variation [1]. An FDA survey of U.S. retail products likewise found higher cadmium in products reported as Latin American origin than African origin [2]. Origin is a useful first filter, but soil cadmium varies widely within regions, so lot data should decide.",
+     "sources": [
+      {
+       "number": 1,
+       "title": "Vanderschueren R, Arguello D, Blommaert H, et al. Mitigating the level of cadmium in cacao products: Reviewing the transfer of cadmium from soil to chocolate bar. Science of the Total Environment. 2021;781:146779. doi:10.1016/j.scitotenv.2021.146779",
+       "url": "https://doi.org/10.1016/j.scitotenv.2021.146779"
+      },
+      {
+       "number": 2,
+       "title": "Abt E, Fong Sam J, Gray P, Robin LP. Cadmium and lead in cocoa powder and chocolate products in the US market. Food Additives & Contaminants: Part B. 2018;11(2):92-102. doi:10.1080/19393210.2017.1420700",
+       "url": "https://doi.org/10.1080/19393210.2017.1420700"
+      }
+     ],
+     "onVle": {
+      "label": "filter cocoa suppliers by published cadmium results",
+      "href": "/suppliers?category=cocoa&analyte=cadmium"
+     }
+    },
+    {
+     "id": "where-does-lead-in-cocoa-come-from-and-which-post-harvest-steps-matter",
+     "question": "Where does lead in cocoa come from, and which post-harvest steps matter?",
+     "answer": "Lead appears to enter mostly after harvest. A study of Nigerian farms found cocoa beans at or below 0.5 ng/g lead, among the lowest reported for a natural food, while manufactured cocoa products reached up to 230 ng/g; isotope data pointed to contamination during drying, shipping and processing [1]. Research summarized by Consumer Reports found lead was low when beans were picked and rose as beans dried in the sun and dust stuck to them. Suggested controls include drying on tables or tarps away from roads, covering beans and better cleaning at the factory; the industry body that funded the work said reductions can be expected within a year of new handling practices [2].",
+     "sources": [
+      {
+       "number": 1,
+       "title": "Rankin CW, Nriagu JO, Aggarwal JK, Arowolo TA, Adebayo K, Flegal AR. Lead contamination in cocoa and cocoa products: isotopic evidence of global contamination. Environmental Health Perspectives. 2005;113(10):1344-1348. doi:10.1289/ehp.8009",
+       "url": "https://doi.org/10.1289/ehp.8009"
+      },
+      {
+       "number": 2,
+       "title": "Consumer Reports (Loria K). How Lead and Cadmium Get Into Dark Chocolate. Published 31 January 2023, updated 30 October 2023.",
+       "url": "https://www.consumerreports.org/health/food-safety/how-lead-and-cadmium-get-into-dark-chocolate-a3299517114/"
+      }
+     ],
+     "onVle": {
+      "label": "filter cocoa suppliers by published lead results",
+      "href": "/suppliers?category=cocoa&analyte=lead"
+     }
+    },
+    {
+     "id": "do-cocoa-percentage-and-bean-blending-affect-results",
+     "question": "Do cocoa percentage and bean blending affect results?",
+     "answer": "Yes. An FDA survey found cadmium and lead both correlated significantly with percent cocoa solids [1]. EU limits step up with cocoa content: 0.10 mg/kg cadmium for milk chocolate under 30% dry cocoa solids, 0.30 for chocolate under 50%, 0.80 for chocolate at 50% or more, and 0.60 for cocoa powder sold to consumers [2]. Codex sets 0.3 to 0.9 mg/kg for chocolate depending on cocoa content and 2.0 mg/kg for cocoa powder [3]. A 2021 review concluded that blending cacao from different origins may be the most feasible short-term way to meet EU cadmium limits, while fermentation lowers cadmium only slightly [4]. Consumer Reports notes some manufacturers already blend [5].",
+     "sources": [
+      {
+       "number": 1,
+       "title": "Abt E, Fong Sam J, Gray P, Robin LP. Cadmium and lead in cocoa powder and chocolate products in the US market. Food Additives & Contaminants: Part B. 2018;11(2):92-102. doi:10.1080/19393210.2017.1420700",
+       "url": "https://doi.org/10.1080/19393210.2017.1420700"
+      },
+      {
+       "number": 2,
+       "title": "European Commission. Commission Regulation (EU) 2023/915 of 25 April 2023 on maximum levels for certain contaminants in food and repealing Regulation (EC) No 1881/2006. OJ L 119, 5.5.2023, p. 103 (CELEX 32023R0915; values cross-checked against the EUR-Lex consolidated text of 1 January 2025). Copy hosted by FAO FAOLEX.",
+       "url": "https://faolex.fao.org/docs/pdf/eur217510.pdf"
+      },
+      {
+       "number": 3,
+       "title": "Codex Alimentarius Commission (FAO/WHO). General Standard for Contaminants and Toxins in Food and Feed (CXS 193-1995), adopted 1995, last amended 2025.",
+       "url": "https://openknowledge.fao.org/server/api/core/bitstreams/4d0e7245-8166-49ca-b822-ca80a1ff5cfe/content"
+      },
+      {
+       "number": 4,
+       "title": "Vanderschueren R, Arguello D, Blommaert H, et al. Mitigating the level of cadmium in cacao products: Reviewing the transfer of cadmium from soil to chocolate bar. Science of the Total Environment. 2021;781:146779. doi:10.1016/j.scitotenv.2021.146779",
+       "url": "https://doi.org/10.1016/j.scitotenv.2021.146779"
+      },
+      {
+       "number": 5,
+       "title": "Consumer Reports (Loria K). How Lead and Cadmium Get Into Dark Chocolate. Published 31 January 2023, updated 30 October 2023.",
+       "url": "https://www.consumerreports.org/health/food-safety/how-lead-and-cadmium-get-into-dark-chocolate-a3299517114/"
+      }
+     ],
+     "onVle": {
+      "label": "filter cocoa suppliers by published cadmium results",
+      "href": "/suppliers?category=cocoa&analyte=cadmium"
+     }
+    },
+    {
+     "id": "what-should-we-ask-a-cocoa-supplier-for",
+     "question": "What should we ask a cocoa supplier for?",
+     "answer": "Ask for lot-level cadmium and lead results on the exact material you buy (beans, nibs, liquor or powder), with the declared origin or blend ratio for that lot, since cadmium tends to track origin and soil [1] while lead tends to track post-harvest handling [2]. Ask how beans are dried (raised tables or tarps, distance from roads) and cleaned [3]. Ask whether the supplier applies the Codex Code of Practice for the prevention and reduction of cadmium in cocoa beans (CXC 81-2022) [4]. Confirm the lab's limit of quantification suits your limit: EU rules require an LOQ at or below one fifth of the maximum level where that level is 0.1 mg/kg or more [5].",
+     "sources": [
+      {
+       "number": 1,
+       "title": "Vanderschueren R, Arguello D, Blommaert H, et al. Mitigating the level of cadmium in cacao products: Reviewing the transfer of cadmium from soil to chocolate bar. Science of the Total Environment. 2021;781:146779. doi:10.1016/j.scitotenv.2021.146779",
+       "url": "https://doi.org/10.1016/j.scitotenv.2021.146779"
+      },
+      {
+       "number": 2,
+       "title": "Rankin CW, Nriagu JO, Aggarwal JK, Arowolo TA, Adebayo K, Flegal AR. Lead contamination in cocoa and cocoa products: isotopic evidence of global contamination. Environmental Health Perspectives. 2005;113(10):1344-1348. doi:10.1289/ehp.8009",
+       "url": "https://doi.org/10.1289/ehp.8009"
+      },
+      {
+       "number": 3,
+       "title": "Consumer Reports (Loria K). How Lead and Cadmium Get Into Dark Chocolate. Published 31 January 2023, updated 30 October 2023.",
+       "url": "https://www.consumerreports.org/health/food-safety/how-lead-and-cadmium-get-into-dark-chocolate-a3299517114/"
+      },
+      {
+       "number": 4,
+       "title": "Codex Alimentarius Commission (FAO/WHO). General Standard for Contaminants and Toxins in Food and Feed (CXS 193-1995), adopted 1995, last amended 2025.",
+       "url": "https://openknowledge.fao.org/server/api/core/bitstreams/4d0e7245-8166-49ca-b822-ca80a1ff5cfe/content"
+      },
+      {
+       "number": 5,
+       "title": "European Commission. Commission Regulation (EC) No 333/2007 laying down the methods of sampling and analysis for the control of the levels of trace elements and processing contaminants in foodstuffs, consolidated version 30.04.2024 (Annex, Table 5 performance criteria; sampling Tables 4a and 4b). Copy hosted by FAO FAOLEX.",
+       "url": "https://faolex.fao.org/docs/pdf/eur70658.pdf"
+      }
+     ],
+     "onVle": {
+      "label": "filter cocoa suppliers by published lead and cadmium results",
+      "href": "/suppliers?category=cocoa&analyte=lead"
+     }
+    }
+   ]
+  },
+  {
+   "id": "protein",
+   "questions": [
+    {
+     "id": "whey-or-plant-protein-which-tends-to-carry-less-lead",
+     "question": "Whey or plant protein: which tends to carry less lead?",
+     "answer": "In Consumer Reports' 2025 tests of 23 protein powders and shakes, plant-based products averaged about nine times the lead of dairy-based products and twice that of beef-based products, and dairy-based products generally had the lowest lead [1]. A 2020 risk assessment using two earlier datasets similarly found plant-based powders tended to carry a higher heavy metal burden than animal-based ones, with the lowest hazard index in whey products [2]. CR could not determine whether pea protein itself or general plant uptake explained the gap [1]. Whey is not automatically low: half of the dairy-based products CR tested still had lead levels at which it advised against daily use [1].",
+     "sources": [
+      {
+       "number": 1,
+       "title": "Consumer Reports (Martineau P). Protein Powders and Shakes Contain High Levels of Lead. Published 14 October 2025, updated 8 January 2026.",
+       "url": "https://www.consumerreports.org/lead/protein-powders-and-shakes-contain-high-levels-of-lead-a4206364640/"
+      },
+      {
+       "number": 2,
+       "title": "Bandara SB, Towle KM, Monnot AD. A human health risk assessment of heavy metal ingestion among consumers of protein powder supplements. Toxicology Reports. 2020;7:1255-1262. doi:10.1016/j.toxrep.2020.08.001",
+       "url": "https://doi.org/10.1016/j.toxrep.2020.08.001"
+      }
+     ],
+     "onVle": {
+      "label": "filter protein suppliers by published lead results",
+      "href": "/suppliers?category=protein&analyte=lead"
+     }
+    },
+    {
+     "id": "for-pea-protein-do-growing-region-and-processing-matter",
+     "question": "For pea protein, do growing region and processing matter?",
+     "answer": "Likely both, though direct evidence is limited. Consumer Reports' reporting notes that metals in crops can come from soil, wastewater irrigation, industrial pollution and road dust, and experts it quoted said each extraction step (dehulling, milling, wet separation with process water, acid precipitation and spray drying) could introduce lead depending on equipment and water quality. One manufacturer told CR it changed its pea protein sourcing region, citing soil-related variation [1]. A 2020 risk assessment also concluded that raw material sourcing location may affect metal content in the final product [2]. In the EU, cadmium in proteins from pulses is limited to 0.10 mg/kg [3]. Ask for growing region and process water data with lot results.",
+     "sources": [
+      {
+       "number": 1,
+       "title": "Consumer Reports (Martineau P). Protein Powders and Shakes Contain High Levels of Lead. Published 14 October 2025, updated 8 January 2026.",
+       "url": "https://www.consumerreports.org/lead/protein-powders-and-shakes-contain-high-levels-of-lead-a4206364640/"
+      },
+      {
+       "number": 2,
+       "title": "Bandara SB, Towle KM, Monnot AD. A human health risk assessment of heavy metal ingestion among consumers of protein powder supplements. Toxicology Reports. 2020;7:1255-1262. doi:10.1016/j.toxrep.2020.08.001",
+       "url": "https://doi.org/10.1016/j.toxrep.2020.08.001"
+      },
+      {
+       "number": 3,
+       "title": "European Commission. Commission Regulation (EU) 2023/915 of 25 April 2023 on maximum levels for certain contaminants in food and repealing Regulation (EC) No 1881/2006. OJ L 119, 5.5.2023, p. 103 (CELEX 32023R0915; values cross-checked against the EUR-Lex consolidated text of 1 January 2025). Copy hosted by FAO FAOLEX.",
+       "url": "https://faolex.fao.org/docs/pdf/eur217510.pdf"
+      }
+     ],
+     "onVle": {
+      "label": "filter protein suppliers by published cadmium results",
+      "href": "/suppliers?category=protein&analyte=cadmium"
+     }
+    },
+    {
+     "id": "what-should-we-watch-for-in-rice-hemp-and-soy-protein",
+     "question": "What should we watch for in rice, hemp and soy protein?",
+     "answer": "Rice protein deserves attention for arsenic and cadmium. FDA notes rice absorbs arsenic more readily than other crops [1], and in one study cadmium concentrated in rice protein isolates (2.6 to 4.9 mg/kg) made from milled rice at 0.28 to 0.52 mg/kg, while citric acid washing removed more than 95% [2]. For hemp, a Slovenian field study on contaminated soils reported seed values of 1.79 mg/kg lead and 0.27 mg/kg cadmium, found accumulation rose with soil contamination, and judged seed lead too high for food at the more polluted sites [3]. We did not find comparable published lot-level data for soy protein, so rely on supplier lot results.",
+     "sources": [
+      {
+       "number": 1,
+       "title": "U.S. Food and Drug Administration. What You Can Do to Limit Exposure to Arsenic. Content current as of 27 April 2022.",
+       "url": "https://www.fda.gov/food/environmental-contaminants-food/what-you-can-do-limit-exposure-arsenic"
+      },
+      {
+       "number": 2,
+       "title": "Huo Y, Du H, Xue B, Niu M, Zhao S. Cadmium removal from rice by separating and washing protein isolate. Journal of Food Science. 2016;81(6):T1576-T1584. doi:10.1111/1750-3841.13323",
+       "url": "https://doi.org/10.1111/1750-3841.13323"
+      },
+      {
+       "number": 3,
+       "title": "Flajsman M, Kosmelj K, Grcman H, Acko DK. Industrial hemp (Cannabis sativa L.): a valuable alternative crop for growing in agricultural soils contaminated with heavy metals. Environmental Science and Pollution Research. 2023;30(54):115414-115429. doi:10.1007/s11356-023-30474-z",
+       "url": "https://doi.org/10.1007/s11356-023-30474-z"
+      }
+     ],
+     "onVle": {
+      "label": "filter protein suppliers by published cadmium results",
+      "href": "/suppliers?category=protein&analyte=cadmium"
+     }
+    },
+    {
+     "id": "which-limits-and-analytes-apply-to-protein-powders",
+     "question": "Which limits and analytes apply to protein powders?",
+     "answer": "FDA has not set action levels for lead in protein powders or shakes [1]. In the EU, food supplements are limited to 3.0 mg/kg lead, 1.0 mg/kg cadmium and 0.10 mg/kg mercury [2]. Consumer Reports benchmarks lead at 0.5 micrograms per day, based on the California Prop 65 MADL, and cadmium at 4.1 micrograms per day [1][3]. These are daily-dose figures, so ask suppliers for lot results in µg/kg and calculate intake at your serving size. Request lead, cadmium, mercury and arsenic, with inorganic arsenic speciation for rice-based ingredients [4].",
+     "sources": [
+      {
+       "number": 1,
+       "title": "Consumer Reports (Martineau P). Protein Powders and Shakes Contain High Levels of Lead. Published 14 October 2025, updated 8 January 2026.",
+       "url": "https://www.consumerreports.org/lead/protein-powders-and-shakes-contain-high-levels-of-lead-a4206364640/"
+      },
+      {
+       "number": 2,
+       "title": "European Commission. Commission Regulation (EU) 2023/915 of 25 April 2023 on maximum levels for certain contaminants in food and repealing Regulation (EC) No 1881/2006. OJ L 119, 5.5.2023, p. 103 (CELEX 32023R0915; values cross-checked against the EUR-Lex consolidated text of 1 January 2025). Copy hosted by FAO FAOLEX.",
+       "url": "https://faolex.fao.org/docs/pdf/eur217510.pdf"
+      },
+      {
+       "number": 3,
+       "title": "California Office of Environmental Health Hazard Assessment. Current Proposition 65 No Significant Risk Levels (NSRLs) and Maximum Allowable Dose Levels (MADLs).",
+       "url": "https://oehha.ca.gov/proposition-65/general-info/current-proposition-65-no-significant-risk-levels-nsrls-maximum"
+      },
+      {
+       "number": 4,
+       "title": "Kubachka KM, Shockey NV, Hanley TA, Conklin SD, Heitkemper DT. Elemental Analysis Manual for Food and Related Products, Section 4.11: Arsenic Speciation in Rice and Rice Products Using HPLC-ICP-MS. U.S. Food and Drug Administration. Version 1.1, November 2012.",
+       "url": "https://www.fda.gov/media/95197/download"
+      }
+     ],
+     "onVle": {
+      "label": "filter protein suppliers by published lead results",
+      "href": "/suppliers?category=protein&analyte=lead"
+     }
+    }
+   ]
+  },
+  {
+   "id": "spices",
+   "questions": [
+    {
+     "id": "why-is-turmeric-a-lead-concern-and-what-has-changed",
+     "question": "Why is turmeric a lead concern, and what has changed?",
+     "answer": "The main documented risk is adulteration rather than soil. A study in Bangladesh found lead chromate pigment being added during polishing to brighten dried turmeric roots in 7 of 9 major producing districts, with turmeric powder up to 1,152 µg/g lead and pigments containing 2 to 10% lead by weight [1]. After a 2017 to 2021 intervention combining media coverage, education and enforcement backed by rapid lead detection, the share of market samples with detectable lead fell from 47% in 2019 to 0% in 2021, and mill workers' blood lead dropped by a median 30% [2]. Practices can change quickly, so recent lot data matter more than country reputation.",
+     "sources": [
+      {
+       "number": 1,
+       "title": "Forsyth JE, Nurunnahar S, Islam SS, et al. Turmeric means 'yellow' in Bengali: Lead chromate pigments added to turmeric threaten public health across Bangladesh. Environmental Research. 2019;179(Pt A):108722. doi:10.1016/j.envres.2019.108722",
+       "url": "https://doi.org/10.1016/j.envres.2019.108722"
+      },
+      {
+       "number": 2,
+       "title": "Forsyth JE, Baker M, Nurunnahar S, et al. Food safety policy enforcement and associated actions reduce lead chromate adulteration in turmeric across Bangladesh. Environmental Research. 2023;232:116328. doi:10.1016/j.envres.2023.116328",
+       "url": "https://doi.org/10.1016/j.envres.2023.116328"
+      }
+     ],
+     "onVle": {
+      "label": "filter turmeric suppliers by published lead results",
+      "href": "/suppliers?category=spices&analyte=lead"
+     }
+    },
+    {
+     "id": "what-happened-with-cinnamon-and-how-should-we-control-it",
+     "question": "What happened with cinnamon, and how should we control it?",
+     "answer": "In 2023, cinnamon apple puree pouches sold in the U.S. were linked to elevated blood lead levels in children. FDA's leading hypothesis is economically motivated adulteration of the cinnamon, and FDA determined lead chromate was present in sampled cinnamon intended for production. FDA retail sampling in 2024 led to public health alerts on several ground cinnamon products, FDA reminded processors that preventive controls must address chemical hazards, and importers received warning letters under the Foreign Supplier Verification Program [1]. Codex now sets a lead maximum level of 2.5 mg/kg for dried bark spices [2], and the EU sets 2.0 mg/kg for bark spices [3].",
+     "sources": [
+      {
+       "number": 1,
+       "title": "U.S. Food and Drug Administration. Post-Incident Response Activities: Elevated Lead and Chromium Levels in Cinnamon Applesauce Pouches.",
+       "url": "https://www.fda.gov/food/outbreaks-foodborne-illness/post-incident-response-activities-elevated-lead-and-chromium-levels-cinnamon-applesauce-pouches"
+      },
+      {
+       "number": 2,
+       "title": "Codex Alimentarius Commission (FAO/WHO). General Standard for Contaminants and Toxins in Food and Feed (CXS 193-1995), adopted 1995, last amended 2025.",
+       "url": "https://openknowledge.fao.org/server/api/core/bitstreams/4d0e7245-8166-49ca-b822-ca80a1ff5cfe/content"
+      },
+      {
+       "number": 3,
+       "title": "European Commission. Commission Regulation (EU) 2023/915 of 25 April 2023 on maximum levels for certain contaminants in food and repealing Regulation (EC) No 1881/2006. OJ L 119, 5.5.2023, p. 103 (CELEX 32023R0915; values cross-checked against the EUR-Lex consolidated text of 1 January 2025). Copy hosted by FAO FAOLEX.",
+       "url": "https://faolex.fao.org/docs/pdf/eur217510.pdf"
+      }
+     ],
+     "onVle": {
+      "label": "filter cinnamon suppliers by published lead results",
+      "href": "/suppliers?category=spices&analyte=lead"
+     }
+    },
+    {
+     "id": "are-chili-and-paprika-also-at-risk-of-colorant-adulteration",
+     "question": "Are chili and paprika also at risk of colorant adulteration?",
+     "answer": "There is documented precedent. A Hungarian case series reported 141 adults who ate ground paprika adulterated with lead tetroxide (red lead); 53 developed symptoms of lead poisoning and 26 more showed increased lead absorption [1]. FDA states that its ongoing testing of foods for these elements includes colored spices offered for sale in the U.S. [2]. Codex lead limits are 0.8 mg/kg for dried paprika and 0.6 mg/kg for other dried fruit and berry spices [3], and the EU sets 0.60 mg/kg for fruit spices [4]. Because adulterants are typically added for color, ask suppliers how they screen incoming lots for added colorants.",
+     "sources": [
+      {
+       "number": 1,
+       "title": "Kakosy T, Hudak A, Naray M. Lead intoxication epidemic caused by ingestion of contaminated ground paprika. Journal of Toxicology: Clinical Toxicology. 1996;34(5):507-511. doi:10.3109/15563659609028008",
+       "url": "https://doi.org/10.3109/15563659609028008"
+      },
+      {
+       "number": 2,
+       "title": "U.S. Food and Drug Administration. Post-Incident Response Activities: Elevated Lead and Chromium Levels in Cinnamon Applesauce Pouches.",
+       "url": "https://www.fda.gov/food/outbreaks-foodborne-illness/post-incident-response-activities-elevated-lead-and-chromium-levels-cinnamon-applesauce-pouches"
+      },
+      {
+       "number": 3,
+       "title": "Codex Alimentarius Commission (FAO/WHO). General Standard for Contaminants and Toxins in Food and Feed (CXS 193-1995), adopted 1995, last amended 2025.",
+       "url": "https://openknowledge.fao.org/server/api/core/bitstreams/4d0e7245-8166-49ca-b822-ca80a1ff5cfe/content"
+      },
+      {
+       "number": 4,
+       "title": "European Commission. Commission Regulation (EU) 2023/915 of 25 April 2023 on maximum levels for certain contaminants in food and repealing Regulation (EC) No 1881/2006. OJ L 119, 5.5.2023, p. 103 (CELEX 32023R0915; values cross-checked against the EUR-Lex consolidated text of 1 January 2025). Copy hosted by FAO FAOLEX.",
+       "url": "https://faolex.fao.org/docs/pdf/eur217510.pdf"
+      }
+     ],
+     "onVle": {
+      "label": "filter chili and paprika suppliers by published lead results",
+      "href": "/suppliers?category=spices&analyte=lead"
+     }
+    },
+    {
+     "id": "what-about-black-pepper-and-ginger",
+     "question": "What about black pepper and ginger?",
+     "answer": "For these, we found less published evidence of colorant adulteration than for turmeric, cinnamon and paprika, so control rests mainly on routine lot testing against the limit for the relevant spice group. Codex sets lead maximum levels by group, including 0.6 mg/kg for dried fruits and berries, 0.9 mg/kg for dried seeds and 2.0 mg/kg for dried rhizomes and roots [1]. The EU sets 0.60 mg/kg for fruit spices, 0.90 for seed spices and 1.50 for root and rhizome spices [2]. Confirm with your regulatory lead which group applies to each spice and market, and make sure the lab's quantification limit sits well below that limit [3].",
+     "sources": [
+      {
+       "number": 1,
+       "title": "Codex Alimentarius Commission (FAO/WHO). General Standard for Contaminants and Toxins in Food and Feed (CXS 193-1995), adopted 1995, last amended 2025.",
+       "url": "https://openknowledge.fao.org/server/api/core/bitstreams/4d0e7245-8166-49ca-b822-ca80a1ff5cfe/content"
+      },
+      {
+       "number": 2,
+       "title": "European Commission. Commission Regulation (EU) 2023/915 of 25 April 2023 on maximum levels for certain contaminants in food and repealing Regulation (EC) No 1881/2006. OJ L 119, 5.5.2023, p. 103 (CELEX 32023R0915; values cross-checked against the EUR-Lex consolidated text of 1 January 2025). Copy hosted by FAO FAOLEX.",
+       "url": "https://faolex.fao.org/docs/pdf/eur217510.pdf"
+      },
+      {
+       "number": 3,
+       "title": "European Commission. Commission Regulation (EC) No 333/2007 laying down the methods of sampling and analysis for the control of the levels of trace elements and processing contaminants in foodstuffs, consolidated version 30.04.2024 (Annex, Table 5 performance criteria; sampling Tables 4a and 4b). Copy hosted by FAO FAOLEX.",
+       "url": "https://faolex.fao.org/docs/pdf/eur70658.pdf"
+      }
+     ],
+     "onVle": {
+      "label": "filter black pepper and ginger suppliers by published lead results",
+      "href": "/suppliers?category=spices&analyte=lead"
+     }
+    },
+    {
+     "id": "what-should-we-ask-a-spice-supplier-for",
+     "question": "What should we ask a spice supplier for?",
+     "answer": "Ask for a lot-level COA with lead and cadmium by ICP-MS and, for colored spices, chromium as well: the lead chromate pigments sampled in Bangladesh contained both elements, with an average lead to chromium molar ratio of 1.3 [1]. Ask how incoming lots are screened for adulteration; rapid lead detection supported enforcement in Bangladesh [2]. U.S. importers should keep supplier verification records, since FDA cited importers under the Foreign Supplier Verification Program after the cinnamon incident [3]. Compare results with the Codex or EU limit for that spice group [4][5], and confirm the LOQ is at or below one fifth of the limit, as EU method criteria require for lead limits of 0.1 mg/kg or more [6].",
+     "sources": [
+      {
+       "number": 1,
+       "title": "Forsyth JE, Nurunnahar S, Islam SS, et al. Turmeric means 'yellow' in Bengali: Lead chromate pigments added to turmeric threaten public health across Bangladesh. Environmental Research. 2019;179(Pt A):108722. doi:10.1016/j.envres.2019.108722",
+       "url": "https://doi.org/10.1016/j.envres.2019.108722"
+      },
+      {
+       "number": 2,
+       "title": "Forsyth JE, Baker M, Nurunnahar S, et al. Food safety policy enforcement and associated actions reduce lead chromate adulteration in turmeric across Bangladesh. Environmental Research. 2023;232:116328. doi:10.1016/j.envres.2023.116328",
+       "url": "https://doi.org/10.1016/j.envres.2023.116328"
+      },
+      {
+       "number": 3,
+       "title": "U.S. Food and Drug Administration. Post-Incident Response Activities: Elevated Lead and Chromium Levels in Cinnamon Applesauce Pouches.",
+       "url": "https://www.fda.gov/food/outbreaks-foodborne-illness/post-incident-response-activities-elevated-lead-and-chromium-levels-cinnamon-applesauce-pouches"
+      },
+      {
+       "number": 4,
+       "title": "Codex Alimentarius Commission (FAO/WHO). General Standard for Contaminants and Toxins in Food and Feed (CXS 193-1995), adopted 1995, last amended 2025.",
+       "url": "https://openknowledge.fao.org/server/api/core/bitstreams/4d0e7245-8166-49ca-b822-ca80a1ff5cfe/content"
+      },
+      {
+       "number": 5,
+       "title": "European Commission. Commission Regulation (EU) 2023/915 of 25 April 2023 on maximum levels for certain contaminants in food and repealing Regulation (EC) No 1881/2006. OJ L 119, 5.5.2023, p. 103 (CELEX 32023R0915; values cross-checked against the EUR-Lex consolidated text of 1 January 2025). Copy hosted by FAO FAOLEX.",
+       "url": "https://faolex.fao.org/docs/pdf/eur217510.pdf"
+      },
+      {
+       "number": 6,
+       "title": "European Commission. Commission Regulation (EC) No 333/2007 laying down the methods of sampling and analysis for the control of the levels of trace elements and processing contaminants in foodstuffs, consolidated version 30.04.2024 (Annex, Table 5 performance criteria; sampling Tables 4a and 4b). Copy hosted by FAO FAOLEX.",
+       "url": "https://faolex.fao.org/docs/pdf/eur70658.pdf"
+      }
+     ],
+     "onVle": {
+      "label": "filter spice suppliers by published lead results",
+      "href": "/suppliers?category=spices&analyte=lead"
+     }
+    }
+   ]
+  },
+  {
+   "id": "tea-and-matcha",
+   "questions": [
+    {
+     "id": "which-growing-conditions-tend-to-raise-lead-in-tea",
+     "question": "Which growing conditions tend to raise lead in tea?",
+     "answer": "Much of the lead on tea leaves can come from the air rather than the soil. In Zhejiang, China, lead in tea leaves correlated with how industrialized a district was (R = 0.83), more lead washed off leaves in more industrial districts, and more washed off leaves from plants near roads than farther away [1]. A separate study found leaf lead and cadmium could not be predicted from total soil concentrations [2]. All samples in the Zhejiang study were below China's 5 mg/kg limit [1]. Ask suppliers where gardens sit relative to roads and industry, not only for soil tests.",
+     "sources": [
+      {
+       "number": 1,
+       "title": "Jin CW, He YF, Zhang K, Zhou GD, Shi JL, Zheng SJ. Lead contamination in tea leaves and non-edaphic factors affecting it. Chemosphere. 2005;61(5):726-732. doi:10.1016/j.chemosphere.2005.03.053",
+       "url": "https://doi.org/10.1016/j.chemosphere.2005.03.053"
+      },
+      {
+       "number": 2,
+       "title": "Peng CY, Zhu XH, Hou RY, et al. Aluminum and heavy metal accumulation in tea leaves: an interplay of environmental and plant factors and an assessment of exposure risks to consumers. Journal of Food Science. 2018;83(4):1165-1172. doi:10.1111/1750-3841.14093",
+       "url": "https://doi.org/10.1111/1750-3841.14093"
+      }
+     ],
+     "onVle": {
+      "label": "filter tea and matcha suppliers by published lead results",
+      "href": "/suppliers?category=tea-matcha&analyte=lead"
+     }
+    },
+    {
+     "id": "do-leaf-age-harvest-season-and-processing-matter",
+     "question": "Do leaf age, harvest season and processing matter?",
+     "answer": "Yes. A study of tea leaves found leaf maturity correlated positively with aluminum, manganese, lead and cadmium, and summer and autumn teas had far higher levels of these elements than spring tea [1]. Factory processing can add lead as well: in the Zhejiang study, the twisting (rolling) and water-removal stages increased lead content in green tea [2]. Grades made from younger leaves and spring harvests may therefore tend to run lower, and equipment condition at the factory is worth asking about, but confirm with lot results rather than grade alone.",
+     "sources": [
+      {
+       "number": 1,
+       "title": "Peng CY, Zhu XH, Hou RY, et al. Aluminum and heavy metal accumulation in tea leaves: an interplay of environmental and plant factors and an assessment of exposure risks to consumers. Journal of Food Science. 2018;83(4):1165-1172. doi:10.1111/1750-3841.14093",
+       "url": "https://doi.org/10.1111/1750-3841.14093"
+      },
+      {
+       "number": 2,
+       "title": "Jin CW, He YF, Zhang K, Zhou GD, Shi JL, Zheng SJ. Lead contamination in tea leaves and non-edaphic factors affecting it. Chemosphere. 2005;61(5):726-732. doi:10.1016/j.chemosphere.2005.03.053",
+       "url": "https://doi.org/10.1016/j.chemosphere.2005.03.053"
+      }
+     ],
+     "onVle": {
+      "label": "filter tea and matcha suppliers by published lead results",
+      "href": "/suppliers?category=tea-matcha&analyte=lead"
+     }
+    },
+    {
+     "id": "is-matcha-different-from-brewed-tea-for-exposure",
+     "question": "Is matcha different from brewed tea for exposure?",
+     "answer": "Yes, because matcha is consumed whole. It is ground from shaded tea leaves and drunk as a suspension rather than steeped and discarded [1]. With steeped tea, only part of the leaf's metal content reaches the cup: a study of green teas from China, India and Japan measured average lead and cadmium of 0.002 and 0.003 mg per 200 mL beverage, with cadmium leaching from 9.41% (Chinese) to 43.8% (Indian) [2]. For matcha, evaluate the powder result directly. Traditional matcha grades use first and second harvests and daily grades second and third [1], which is relevant given the seasonal trend in leaf metals [3].",
+     "sources": [
+      {
+       "number": 1,
+       "title": "Szymczykowska K, Kupnicka P, Skonieczna-Zydecka K, et al. Elemental composition of Japanese matcha powder and infusions: potential role as a functional food in metabolic health. Beverages. 2026;12(2):21. doi:10.3390/beverages12020021",
+       "url": "https://doi.org/10.3390/beverages12020021"
+      },
+      {
+       "number": 2,
+       "title": "Brzezicha-Cirocka J, Grembecka M, Szefer P. Monitoring of essential and heavy metals in green tea from different geographical origins. Environmental Monitoring and Assessment. 2016;188(3):183. doi:10.1007/s10661-016-5157-y",
+       "url": "https://doi.org/10.1007/s10661-016-5157-y"
+      },
+      {
+       "number": 3,
+       "title": "Peng CY, Zhu XH, Hou RY, et al. Aluminum and heavy metal accumulation in tea leaves: an interplay of environmental and plant factors and an assessment of exposure risks to consumers. Journal of Food Science. 2018;83(4):1165-1172. doi:10.1111/1750-3841.14093",
+       "url": "https://doi.org/10.1111/1750-3841.14093"
+      }
+     ],
+     "onVle": {
+      "label": "filter tea and matcha suppliers by published lead results",
+      "href": "/suppliers?category=tea-matcha&analyte=lead"
+     }
+    },
+    {
+     "id": "what-limits-apply-to-tea-and-matcha-and-what-should-we-ask-for",
+     "question": "What limits apply to tea and matcha, and what should we ask for?",
+     "answer": "In the versions reviewed for this pack, neither Codex CXS 193 nor EU Regulation 2023/915 sets a lead maximum level specifically for dried tea; the EU tea entries cover other contaminants such as pyrrolizidine alkaloids [1][2]. Buyers therefore usually set their own specifications. Ask for lot-level lead and cadmium results on the leaf or powder as sold, plus the harvest season and garden location, given the links to leaf maturity, season and nearby traffic or industry [3][4]. For products aimed at children, compare per-serving intake with FDA's interim reference level for lead of 2.2 micrograms per day for children [5].",
+     "sources": [
+      {
+       "number": 1,
+       "title": "Codex Alimentarius Commission (FAO/WHO). General Standard for Contaminants and Toxins in Food and Feed (CXS 193-1995), adopted 1995, last amended 2025.",
+       "url": "https://openknowledge.fao.org/server/api/core/bitstreams/4d0e7245-8166-49ca-b822-ca80a1ff5cfe/content"
+      },
+      {
+       "number": 2,
+       "title": "European Commission. Commission Regulation (EU) 2023/915 of 25 April 2023 on maximum levels for certain contaminants in food and repealing Regulation (EC) No 1881/2006. OJ L 119, 5.5.2023, p. 103 (CELEX 32023R0915; values cross-checked against the EUR-Lex consolidated text of 1 January 2025). Copy hosted by FAO FAOLEX.",
+       "url": "https://faolex.fao.org/docs/pdf/eur217510.pdf"
+      },
+      {
+       "number": 3,
+       "title": "Peng CY, Zhu XH, Hou RY, et al. Aluminum and heavy metal accumulation in tea leaves: an interplay of environmental and plant factors and an assessment of exposure risks to consumers. Journal of Food Science. 2018;83(4):1165-1172. doi:10.1111/1750-3841.14093",
+       "url": "https://doi.org/10.1111/1750-3841.14093"
+      },
+      {
+       "number": 4,
+       "title": "Jin CW, He YF, Zhang K, Zhou GD, Shi JL, Zheng SJ. Lead contamination in tea leaves and non-edaphic factors affecting it. Chemosphere. 2005;61(5):726-732. doi:10.1016/j.chemosphere.2005.03.053",
+       "url": "https://doi.org/10.1016/j.chemosphere.2005.03.053"
+      },
+      {
+       "number": 5,
+       "title": "Consumer Reports (Martineau P). Protein Powders and Shakes Contain High Levels of Lead. Published 14 October 2025, updated 8 January 2026.",
+       "url": "https://www.consumerreports.org/lead/protein-powders-and-shakes-contain-high-levels-of-lead-a4206364640/"
+      }
+     ],
+     "onVle": {
+      "label": "filter tea and matcha suppliers by published lead results",
+      "href": "/suppliers?category=tea-matcha&analyte=lead"
+     }
+    }
+   ]
+  },
+  {
+   "id": "olive-oil",
+   "questions": [
+    {
+     "id": "are-heavy-metals-a-significant-concern-in-olive-oil-and-does-origin-matter",
+     "question": "Are heavy metals a significant concern in olive oil, and does origin matter?",
+     "answer": "Studies have generally found very low levels. In 42 olive oils from Tunisia, Spain and southern France analyzed by ICP-MS, arsenic was around 0.1 µg/kg, lead did not exceed 1.35 µg/kg in the European oils, and the highest lead value (2.16 µg/kg) came from a Tunisian oil sampled near a lead-zinc mining deposit; cadmium was below detection in all samples [1]. For scale, the EU lead limit for fats and oils is 0.10 mg/kg, that is 100 µg/kg [2], and Codex sets 0.08 mg/kg [3]. Extraction helps: in one study at least 90% of the metals in olive fruit stayed in the pomace [4].",
+     "sources": [
+      {
+       "number": 1,
+       "title": "Nasr EG, Epova EN, de Diego A, et al. Trace elements analysis of Tunisian and European extra virgin olive oils by ICP-MS and chemometrics for geographical discrimination. Foods. 2021;11(1):82. doi:10.3390/foods11010082",
+       "url": "https://doi.org/10.3390/foods11010082"
+      },
+      {
+       "number": 2,
+       "title": "European Commission. Commission Regulation (EU) 2023/915 of 25 April 2023 on maximum levels for certain contaminants in food and repealing Regulation (EC) No 1881/2006. OJ L 119, 5.5.2023, p. 103 (CELEX 32023R0915; values cross-checked against the EUR-Lex consolidated text of 1 January 2025). Copy hosted by FAO FAOLEX.",
+       "url": "https://faolex.fao.org/docs/pdf/eur217510.pdf"
+      },
+      {
+       "number": 3,
+       "title": "Codex Alimentarius Commission (FAO/WHO). General Standard for Contaminants and Toxins in Food and Feed (CXS 193-1995), adopted 1995, last amended 2025.",
+       "url": "https://openknowledge.fao.org/server/api/core/bitstreams/4d0e7245-8166-49ca-b822-ca80a1ff5cfe/content"
+      },
+      {
+       "number": 4,
+       "title": "Llorent-Martinez EJ, Fernandez-de Cordova ML, Ortega-Barrales P, Ruiz-Medina A. Quantitation of metals during the extraction of virgin olive oil from olives using ICP-MS after microwave-assisted acid digestion. Journal of the American Oil Chemists' Society. 2014;91(10):1823-1830. doi:10.1007/s11746-014-2511-5",
+       "url": "https://doi.org/10.1007/s11746-014-2511-5"
+      }
+     ],
+     "onVle": {
+      "label": "filter olive oil suppliers by published lead results",
+      "href": "/suppliers?category=olive-oil&analyte=lead"
+     }
+    },
+    {
+     "id": "what-about-phthalates-in-olive-oil",
+     "question": "What about phthalates in olive oil?",
+     "answer": "Phthalates are a better-supported olive oil topic than heavy metals. A Portuguese study tracking 32 plasticizers through three production lines found concentrations rose progressively at each production stage, although unprocessed olives also contained some; all phthalates regulated by the EU for food contact materials were detected, and a few packaged oils exceeded EU specific migration limits for DINP [1]. Oils in plastic and glass bottles did not differ at six months, but plastic-packed oils were higher at 18 months [1]. A Turkish market study found lower phthalate levels in virgin olive oil than in sunflower or corn oil, and the highest levels in PET-packed oils [2].",
+     "sources": [
+      {
+       "number": 1,
+       "title": "Freitas F, Brinco J, Cabrita MJ, Gomes da Silva M. Analysis of plasticizer contamination throughout olive oil production. Molecules. 2024;29(24):6013. doi:10.3390/molecules29246013",
+       "url": "https://doi.org/10.3390/molecules29246013"
+      },
+      {
+       "number": 2,
+       "title": "Sungur S, Okur R, Turgut FH, Ustun I, Gokce C. Migrated phthalate levels into edible oils. Food Additives & Contaminants: Part B. 2015;8(3):190-194. doi:10.1080/19393210.2015.1041065",
+       "url": "https://doi.org/10.1080/19393210.2015.1041065"
+      }
+     ],
+     "onVle": {
+      "label": "filter olive oil suppliers by published lead and arsenic results",
+      "href": "/suppliers?category=olive-oil&analyte=lead"
+     }
+    },
+    {
+     "id": "what-should-we-ask-an-olive-oil-supplier-for",
+     "question": "What should we ask an olive oil supplier for?",
+     "answer": "Ask for lot-level lead and arsenic results, the two elements with Codex limits for edible fats and oils (0.08 mg/kg lead, 0.1 mg/kg arsenic) [1]; the EU lead limit is 0.10 mg/kg [2]. Because measured levels are often in the low µg/kg range [3], an ND only means something if the LOQ is stated; EU method criteria call for an LOQ at or below one fifth of a lead limit of 0.1 mg/kg or more [4]. Add a phthalate panel by GC-MS/MS that includes DINP and DEHP, and ask about plastic contact during harvesting, milling and storage and about bottle material, since long storage in plastic was associated with higher levels [5].",
+     "sources": [
+      {
+       "number": 1,
+       "title": "Codex Alimentarius Commission (FAO/WHO). General Standard for Contaminants and Toxins in Food and Feed (CXS 193-1995), adopted 1995, last amended 2025.",
+       "url": "https://openknowledge.fao.org/server/api/core/bitstreams/4d0e7245-8166-49ca-b822-ca80a1ff5cfe/content"
+      },
+      {
+       "number": 2,
+       "title": "European Commission. Commission Regulation (EU) 2023/915 of 25 April 2023 on maximum levels for certain contaminants in food and repealing Regulation (EC) No 1881/2006. OJ L 119, 5.5.2023, p. 103 (CELEX 32023R0915; values cross-checked against the EUR-Lex consolidated text of 1 January 2025). Copy hosted by FAO FAOLEX.",
+       "url": "https://faolex.fao.org/docs/pdf/eur217510.pdf"
+      },
+      {
+       "number": 3,
+       "title": "Nasr EG, Epova EN, de Diego A, et al. Trace elements analysis of Tunisian and European extra virgin olive oils by ICP-MS and chemometrics for geographical discrimination. Foods. 2021;11(1):82. doi:10.3390/foods11010082",
+       "url": "https://doi.org/10.3390/foods11010082"
+      },
+      {
+       "number": 4,
+       "title": "European Commission. Commission Regulation (EC) No 333/2007 laying down the methods of sampling and analysis for the control of the levels of trace elements and processing contaminants in foodstuffs, consolidated version 30.04.2024 (Annex, Table 5 performance criteria; sampling Tables 4a and 4b). Copy hosted by FAO FAOLEX.",
+       "url": "https://faolex.fao.org/docs/pdf/eur70658.pdf"
+      },
+      {
+       "number": 5,
+       "title": "Freitas F, Brinco J, Cabrita MJ, Gomes da Silva M. Analysis of plasticizer contamination throughout olive oil production. Molecules. 2024;29(24):6013. doi:10.3390/molecules29246013",
+       "url": "https://doi.org/10.3390/molecules29246013"
+      }
+     ],
+     "onVle": {
+      "label": "filter olive oil suppliers by published lead results",
+      "href": "/suppliers?category=olive-oil&analyte=lead"
+     }
+    }
+   ]
+  },
+  {
+   "id": "baby-food",
+   "questions": [
+    {
+     "id": "what-lead-limits-apply-to-fruit-purees-and-juices-for-babies",
+     "question": "What lead limits apply to fruit purees and juices for babies?",
+     "answer": "FDA's January 2025 final guidance sets lead action levels for packaged foods for children under two: 10 ppb for fruits, vegetables other than single-ingredient root vegetables, mixtures, yogurts, custards and single-ingredient meats, and 20 ppb for single-ingredient root vegetables and dry infant cereals [1]. Juices are addressed separately in April 2022 draft guidance proposing 10 ppb for apple juice and 20 ppb for other juices, still listed as draft [2][3]. The EU limits lead to 0.020 mg/kg in baby food and 0.03 mg/kg in most fruit juices (0.05 for berry juices) [4]. Codex sets 0.02 mg/kg for ready-to-eat infant meals and 0.03 mg/kg for fruit juices [5].",
+     "sources": [
+      {
+       "number": 1,
+       "title": "U.S. Food and Drug Administration. Guidance for Industry: Action Levels for Lead in Processed Food Intended for Babies and Young Children. January 2025.",
+       "url": "https://www.fda.gov/regulatory-information/search-fda-guidance-documents/guidance-industry-action-levels-lead-processed-food-intended-babies-and-young-children"
+      },
+      {
+       "number": 2,
+       "title": "U.S. Food and Drug Administration. FDA Issues Draft Guidance to Industry on Action Levels for Lead in Juice. Constituent Update, 27 April 2022.",
+       "url": "https://www.fda.gov/food/hfp-constituent-updates/fda-issues-draft-guidance-industry-action-levels-lead-juice"
+      },
+      {
+       "number": 3,
+       "title": "U.S. Food and Drug Administration. Juice Guidance Documents & Regulatory Information (lists the lead in juice action levels as draft, April 2022).",
+       "url": "https://www.fda.gov/food/guidance-documents-regulatory-information-topic-food-and-dietary-supplements/juice-guidance-documents-regulatory-information"
+      },
+      {
+       "number": 4,
+       "title": "European Commission. Commission Regulation (EU) 2023/915 of 25 April 2023 on maximum levels for certain contaminants in food and repealing Regulation (EC) No 1881/2006. OJ L 119, 5.5.2023, p. 103 (CELEX 32023R0915; values cross-checked against the EUR-Lex consolidated text of 1 January 2025). Copy hosted by FAO FAOLEX.",
+       "url": "https://faolex.fao.org/docs/pdf/eur217510.pdf"
+      },
+      {
+       "number": 5,
+       "title": "Codex Alimentarius Commission (FAO/WHO). General Standard for Contaminants and Toxins in Food and Feed (CXS 193-1995), adopted 1995, last amended 2025.",
+       "url": "https://openknowledge.fao.org/server/api/core/bitstreams/4d0e7245-8166-49ca-b822-ca80a1ff5cfe/content"
+      }
+     ],
+     "onVle": {
+      "label": "filter baby food suppliers by published lead results",
+      "href": "/suppliers?category=baby-food&analyte=lead"
+     }
+    },
+    {
+     "id": "which-fruit-and-vegetable-ingredients-tend-to-run-higher-in-lead",
+     "question": "Which fruit and vegetable ingredients tend to run higher in lead?",
+     "answer": "FDA's data show single-ingredient root vegetable products have higher lead than other processed vegetable foods, because root vegetables can absorb lead more readily from soil. At a 10 ppb level, FDA estimated achievability of 79% for single-ingredient root vegetables, versus 97% for fruits, other vegetables and mixtures, which is why root vegetables received 20 ppb [1]. In blended purees, a root vegetable or a small spice inclusion may drive the result, so ask for lead results on each incoming ingredient lot as well as on the finished blend [1][2].",
+     "sources": [
+      {
+       "number": 1,
+       "title": "U.S. Food and Drug Administration. Action Levels for Lead in Processed Food Intended for Babies and Young Children: Guidance for Industry (full text with rationale and achievability data). January 2025.",
+       "url": "https://www.fda.gov/media/164684/download"
+      },
+      {
+       "number": 2,
+       "title": "U.S. Food and Drug Administration. Post-Incident Response Activities: Elevated Lead and Chromium Levels in Cinnamon Applesauce Pouches.",
+       "url": "https://www.fda.gov/food/outbreaks-foodborne-illness/post-incident-response-activities-elevated-lead-and-chromium-levels-cinnamon-applesauce-pouches"
+      }
+     ],
+     "onVle": {
+      "label": "filter baby food suppliers by published lead results",
+      "href": "/suppliers?category=baby-food&analyte=lead"
+     }
+    },
+    {
+     "id": "how-should-we-handle-arsenic-in-apple-and-other-fruit-juices",
+     "question": "How should we handle arsenic in apple and other fruit juices?",
+     "answer": "FDA's final June 2023 guidance sets an action level of 10 ppb inorganic arsenic in apple juice. FDA reported an increasing share of samples below 3 and 5 ppb, but also some above 10 ppb [1]. The EU limits inorganic arsenic in fruit juices and nectars to 0.020 mg/kg and in baby food to 0.020 mg/kg [2]. Because these limits refer to inorganic arsenic, ask for speciated results, or use total arsenic as a screen and speciate when the total exceeds the limit, the approach Codex describes for rice [3]. Ask for lead on the same lot, since FDA has proposed draft lead levels for juice [4].",
+     "sources": [
+      {
+       "number": 1,
+       "title": "U.S. Food and Drug Administration. FDA Issues Final Guidance to Industry on Action Level for Inorganic Arsenic in Apple Juice. Constituent Update, June 2023.",
+       "url": "https://www.fda.gov/food/hfp-constituent-updates/fda-issues-final-guidance-industry-action-level-inorganic-arsenic-apple-juice"
+      },
+      {
+       "number": 2,
+       "title": "European Commission. Commission Regulation (EU) 2023/915 of 25 April 2023 on maximum levels for certain contaminants in food and repealing Regulation (EC) No 1881/2006. OJ L 119, 5.5.2023, p. 103 (CELEX 32023R0915; values cross-checked against the EUR-Lex consolidated text of 1 January 2025). Copy hosted by FAO FAOLEX.",
+       "url": "https://faolex.fao.org/docs/pdf/eur217510.pdf"
+      },
+      {
+       "number": 3,
+       "title": "Codex Alimentarius Commission (FAO/WHO). General Standard for Contaminants and Toxins in Food and Feed (CXS 193-1995), adopted 1995, last amended 2025.",
+       "url": "https://openknowledge.fao.org/server/api/core/bitstreams/4d0e7245-8166-49ca-b822-ca80a1ff5cfe/content"
+      },
+      {
+       "number": 4,
+       "title": "U.S. Food and Drug Administration. FDA Issues Draft Guidance to Industry on Action Levels for Lead in Juice. Constituent Update, 27 April 2022.",
+       "url": "https://www.fda.gov/food/hfp-constituent-updates/fda-issues-draft-guidance-industry-action-levels-lead-juice"
+      }
+     ],
+     "onVle": {
+      "label": "filter baby food suppliers by published inorganic arsenic results",
+      "href": "/suppliers?category=baby-food&analyte=arsenic"
+     }
+    },
+    {
+     "id": "what-do-spice-inclusions-mean-for-puree-and-juice-sourcing",
+     "question": "What do spice inclusions mean for puree and juice sourcing?",
+     "answer": "Small inclusions can dominate the result. The 2023 cinnamon apple puree recall traced elevated lead to cinnamon that FDA believes was adulterated for economic gain, and FDA later issued warning letters to the U.S. importers for Foreign Supplier Verification Program violations [1]. Consumer Reports' 2026 rice testing similarly found that lead in seasoned rice mixes was concentrated in the spice portion [2]. Require lot-level lead and chromium results for every spice or colorant used in baby food, and test the finished production aggregate as well; California requires baby food manufacturers to test final products for arsenic, cadmium, lead and mercury at least monthly [3].",
+     "sources": [
+      {
+       "number": 1,
+       "title": "U.S. Food and Drug Administration. Post-Incident Response Activities: Elevated Lead and Chromium Levels in Cinnamon Applesauce Pouches.",
+       "url": "https://www.fda.gov/food/outbreaks-foodborne-illness/post-incident-response-activities-elevated-lead-and-chromium-levels-cinnamon-applesauce-pouches"
+      },
+      {
+       "number": 2,
+       "title": "Consumer Reports (Loria K). Reducing the Risk From Arsenic in Rice. Published 8 July 2026, updated 14 August 2026.",
+       "url": "https://www.consumerreports.org/health/food-contaminants/arsenic-in-rice-reducing-risk-a8972350937/"
+      },
+      {
+       "number": 3,
+       "title": "California Department of Public Health, Food and Drug Branch. AB 899 Frequently Asked Questions (Health and Safety Code sections 110962 and 110963).",
+       "url": "https://www.cdph.ca.gov/Programs/CEH/DFDCS/Pages/FDBPrograms/FoodSafetyProgram/AB899FAQ.aspx"
+      }
+     ],
+     "onVle": {
+      "label": "filter baby food suppliers by published lead results",
+      "href": "/suppliers?category=baby-food&analyte=lead"
+     }
+    }
+   ]
+  },
+  {
+   "id": "general-qa",
+   "questions": [
+    {
+     "id": "how-should-a-qa-manager-read-a-contaminant-coa",
+     "question": "How should a QA manager read a contaminant COA?",
+     "answer": "Check that the COA names the specific lot or batch, the sample type (raw ingredient or finished product), each analyte, the method and the units. For elements, look for ICP-MS methods such as FDA EAM 4.7, and for inorganic arsenic a speciation method such as EAM 4.11 [1][2]. Confirm the reporting basis, since limits may apply to wet weight or to the product as placed on the market [3]. Each result should carry a numeric LOQ. Check lab accreditation: California's baby food law requires ISO/IEC 17025:2017 accreditation, a method at least as sensitive as EAM 4.7, and demonstrated proficiency down to 6 µg/kg [4].",
+     "sources": [
+      {
+       "number": 1,
+       "title": "U.S. Food and Drug Administration. Elemental Analysis Manual (EAM) for Food and Related Products (includes EAM 4.7, ICP-MS determination of arsenic, cadmium, lead and mercury).",
+       "url": "https://www.fda.gov/food/laboratory-methods-food/elemental-analysis-manual-eam-food-and-related-products"
+      },
+      {
+       "number": 2,
+       "title": "Kubachka KM, Shockey NV, Hanley TA, Conklin SD, Heitkemper DT. Elemental Analysis Manual for Food and Related Products, Section 4.11: Arsenic Speciation in Rice and Rice Products Using HPLC-ICP-MS. U.S. Food and Drug Administration. Version 1.1, November 2012.",
+       "url": "https://www.fda.gov/media/95197/download"
+      },
+      {
+       "number": 3,
+       "title": "European Commission. Commission Regulation (EU) 2023/915 of 25 April 2023 on maximum levels for certain contaminants in food and repealing Regulation (EC) No 1881/2006. OJ L 119, 5.5.2023, p. 103 (CELEX 32023R0915; values cross-checked against the EUR-Lex consolidated text of 1 January 2025). Copy hosted by FAO FAOLEX.",
+       "url": "https://faolex.fao.org/docs/pdf/eur217510.pdf"
+      },
+      {
+       "number": 4,
+       "title": "California Department of Public Health, Food and Drug Branch. AB 899 Frequently Asked Questions (Health and Safety Code sections 110962 and 110963).",
+       "url": "https://www.cdph.ca.gov/Programs/CEH/DFDCS/Pages/FDBPrograms/FoodSafetyProgram/AB899FAQ.aspx"
+      }
+     ],
+     "onVle": {
+      "label": "filter suppliers in any pilot category by published lead, arsenic, cadmium and mercury results",
+      "href": "/suppliers?analyte=lead"
+     }
+    },
+    {
+     "id": "what-is-the-difference-between-lot-level-and-product-level-testing",
+     "question": "What is the difference between lot-level and product-level testing?",
+     "answer": "A product-level or typical test shows what one sample contained at one point in time; a lot-level result describes the material you actually receive. Levels vary between lots and over time: Consumer Reports cautions that lots other than those it tested could differ in inorganic arsenic [1], and turmeric adulteration in Bangladesh fell from 47% of market samples to 0% within two years [2]. Regulators work at the lot level: EU official sampling combines incremental samples taken across each lot or sublot into an aggregate sample [3], and California's law defines testing by production aggregate, a quantity intended to have uniform composition and quality made under one master manufacturing order [4].",
+     "sources": [
+      {
+       "number": 1,
+       "title": "Consumer Reports (Loria K). Reducing the Risk From Arsenic in Rice. Published 8 July 2026, updated 14 August 2026.",
+       "url": "https://www.consumerreports.org/health/food-contaminants/arsenic-in-rice-reducing-risk-a8972350937/"
+      },
+      {
+       "number": 2,
+       "title": "Forsyth JE, Baker M, Nurunnahar S, et al. Food safety policy enforcement and associated actions reduce lead chromate adulteration in turmeric across Bangladesh. Environmental Research. 2023;232:116328. doi:10.1016/j.envres.2023.116328",
+       "url": "https://doi.org/10.1016/j.envres.2023.116328"
+      },
+      {
+       "number": 3,
+       "title": "European Commission. Commission Regulation (EC) No 333/2007 laying down the methods of sampling and analysis for the control of the levels of trace elements and processing contaminants in foodstuffs, consolidated version 30.04.2024 (Annex, Table 5 performance criteria; sampling Tables 4a and 4b). Copy hosted by FAO FAOLEX.",
+       "url": "https://faolex.fao.org/docs/pdf/eur70658.pdf"
+      },
+      {
+       "number": 4,
+       "title": "California Department of Public Health, Food and Drug Branch. AB 899 Frequently Asked Questions (Health and Safety Code sections 110962 and 110963).",
+       "url": "https://www.cdph.ca.gov/Programs/CEH/DFDCS/Pages/FDBPrograms/FoodSafetyProgram/AB899FAQ.aspx"
+      }
+     ],
+     "onVle": {
+      "label": "filter suppliers in any pilot category by published lead, arsenic, cadmium and mercury results",
+      "href": "/suppliers?analyte=lead"
+     }
+    },
+    {
+     "id": "what-does-nd-mean-and-why-do-detection-limits-matter",
+     "question": "What does ND mean, and why do detection limits matter?",
+     "answer": "ND (not detected) means only that the result was below the lab's limit of detection (LOD), the smallest content from which presence can be deduced with reasonable statistical certainty. The limit of quantification (LOQ) is the lowest content that can be measured with reasonable statistical certainty [1]. An ND from a lab whose LOD is 20 ppb cannot show that a puree meets FDA's 10 ppb lead action level [2]. EU rules tie the LOQ to the limit: for lead, at or below one fifth of the limit when it is 0.1 mg/kg or more, and at or below the limit when it is 0.02 mg/kg or less, with LOD set at three tenths of LOQ [1].",
+     "sources": [
+      {
+       "number": 1,
+       "title": "European Commission. Commission Regulation (EC) No 333/2007 laying down the methods of sampling and analysis for the control of the levels of trace elements and processing contaminants in foodstuffs, consolidated version 30.04.2024 (Annex, Table 5 performance criteria; sampling Tables 4a and 4b). Copy hosted by FAO FAOLEX.",
+       "url": "https://faolex.fao.org/docs/pdf/eur70658.pdf"
+      },
+      {
+       "number": 2,
+       "title": "U.S. Food and Drug Administration. Guidance for Industry: Action Levels for Lead in Processed Food Intended for Babies and Young Children. January 2025.",
+       "url": "https://www.fda.gov/regulatory-information/search-fda-guidance-documents/guidance-industry-action-levels-lead-processed-food-intended-babies-and-young-children"
+      }
+     ],
+     "onVle": {
+      "label": "filter suppliers in any pilot category by published lead results",
+      "href": "/suppliers?analyte=lead"
+     }
+    },
+    {
+     "id": "how-often-should-ingredients-and-products-be-retested",
+     "question": "How often should ingredients and products be retested?",
+     "answer": "No single rule covers every ingredient, but there are benchmarks. California's AB 899 requires baby food manufacturers to test a representative sample of each final product for arsenic, cadmium, lead and mercury at least once a month, and does not allow less frequent testing [1]. FDA states that manufacturers must implement preventive controls as needed to minimize chemical hazards, including these four elements [2], and its infant rice cereal guidance names testing of incoming rice ingredients as a core practice [3]. A practical approach is to test every incoming lot for higher-risk combinations, such as colored spices or high-cadmium cacao regions, and reduce frequency only after a run of consistent results.",
+     "sources": [
+      {
+       "number": 1,
+       "title": "California Department of Public Health, Food and Drug Branch. AB 899 Frequently Asked Questions (Health and Safety Code sections 110962 and 110963).",
+       "url": "https://www.cdph.ca.gov/Programs/CEH/DFDCS/Pages/FDBPrograms/FoodSafetyProgram/AB899FAQ.aspx"
+      },
+      {
+       "number": 2,
+       "title": "U.S. Food and Drug Administration. Closer to Zero: Reducing Childhood Exposure to Contaminants from Foods.",
+       "url": "https://www.fda.gov/food/environmental-contaminants-food/closer-zero-reducing-childhood-exposure-contaminants-foods"
+      },
+      {
+       "number": 3,
+       "title": "U.S. Food and Drug Administration. Guidance for Industry: Action Level for Inorganic Arsenic in Rice Cereals for Infants. August 2020.",
+       "url": "https://www.fda.gov/regulatory-information/search-fda-guidance-documents/guidance-industry-action-level-inorganic-arsenic-rice-cereals-infants"
+      }
+     ],
+     "onVle": {
+      "label": "filter suppliers in any pilot category by published lead, arsenic, cadmium and mercury results",
+      "href": "/suppliers?analyte=lead"
+     }
+    },
+    {
+     "id": "what-is-fda-s-closer-to-zero-and-which-action-levels-are-final",
+     "question": "What is FDA's Closer to Zero, and which action levels are final?",
+     "answer": "Closer to Zero is FDA's iterative plan to reduce arsenic, lead, cadmium and mercury in foods eaten by babies and young children [1]. Final action levels include lead in processed baby foods at 10 or 20 ppb (January 2025) [2], inorganic arsenic in infant rice cereal at 100 ppb (August 2020) [3] and inorganic arsenic in apple juice at 10 ppb (June 2023) [4]. Lead in juice remains draft guidance (April 2022) [5]. FDA's page lists arsenic and cadmium action levels for baby foods at the proposal stage and mercury under evaluation. FDA describes action levels as levels at which food may be regarded as adulterated, not permissible levels of contamination [1].",
+     "sources": [
+      {
+       "number": 1,
+       "title": "U.S. Food and Drug Administration. Closer to Zero: Reducing Childhood Exposure to Contaminants from Foods.",
+       "url": "https://www.fda.gov/food/environmental-contaminants-food/closer-zero-reducing-childhood-exposure-contaminants-foods"
+      },
+      {
+       "number": 2,
+       "title": "U.S. Food and Drug Administration. Guidance for Industry: Action Levels for Lead in Processed Food Intended for Babies and Young Children. January 2025.",
+       "url": "https://www.fda.gov/regulatory-information/search-fda-guidance-documents/guidance-industry-action-levels-lead-processed-food-intended-babies-and-young-children"
+      },
+      {
+       "number": 3,
+       "title": "U.S. Food and Drug Administration. Guidance for Industry: Action Level for Inorganic Arsenic in Rice Cereals for Infants. August 2020.",
+       "url": "https://www.fda.gov/regulatory-information/search-fda-guidance-documents/guidance-industry-action-level-inorganic-arsenic-rice-cereals-infants"
+      },
+      {
+       "number": 4,
+       "title": "U.S. Food and Drug Administration. FDA Issues Final Guidance to Industry on Action Level for Inorganic Arsenic in Apple Juice. Constituent Update, June 2023.",
+       "url": "https://www.fda.gov/food/hfp-constituent-updates/fda-issues-final-guidance-industry-action-level-inorganic-arsenic-apple-juice"
+      },
+      {
+       "number": 5,
+       "title": "U.S. Food and Drug Administration. Juice Guidance Documents & Regulatory Information (lists the lead in juice action levels as draft, April 2022).",
+       "url": "https://www.fda.gov/food/guidance-documents-regulatory-information-topic-food-and-dietary-supplements/juice-guidance-documents-regulatory-information"
+      }
+     ],
+     "onVle": {
+      "label": "filter suppliers in any pilot category by published lead and arsenic results",
+      "href": "/suppliers?analyte=lead"
+     }
+    },
+    {
+     "id": "which-eu-regulation-2023-915-maximum-levels-matter-most-for-the-pilot-categories",
+     "question": "Which EU Regulation 2023/915 maximum levels matter most for the pilot categories?",
+     "answer": "Regulation (EU) 2023/915 sets legally binding maximum levels. Examples for the pilot categories: lead 0.20 mg/kg in cereals, 0.10 in fats and oils, 0.020 in baby food, 3.0 in food supplements, and by spice group 0.60 (fruit), 0.90 (seed), 1.50 (root and rhizome) and 2.0 (bark). Cadmium: 0.15 in rice and 0.10 to 0.80 in chocolate depending on cocoa solids. Inorganic arsenic: 0.15 in non-parboiled milled rice, 0.25 in parboiled and husked rice and rice flour, 0.10 in rice for infant food, and 0.020 in baby food and fruit juices [1]. Official methods must meet the performance criteria in Regulation (EC) No 333/2007 [2].",
+     "sources": [
+      {
+       "number": 1,
+       "title": "European Commission. Commission Regulation (EU) 2023/915 of 25 April 2023 on maximum levels for certain contaminants in food and repealing Regulation (EC) No 1881/2006. OJ L 119, 5.5.2023, p. 103 (CELEX 32023R0915; values cross-checked against the EUR-Lex consolidated text of 1 January 2025). Copy hosted by FAO FAOLEX.",
+       "url": "https://faolex.fao.org/docs/pdf/eur217510.pdf"
+      },
+      {
+       "number": 2,
+       "title": "European Commission. Commission Regulation (EC) No 333/2007 laying down the methods of sampling and analysis for the control of the levels of trace elements and processing contaminants in foodstuffs, consolidated version 30.04.2024 (Annex, Table 5 performance criteria; sampling Tables 4a and 4b). Copy hosted by FAO FAOLEX.",
+       "url": "https://faolex.fao.org/docs/pdf/eur70658.pdf"
+      }
+     ],
+     "onVle": {
+      "label": "filter suppliers in any pilot category by published lead, cadmium and arsenic results",
+      "href": "/suppliers?analyte=lead"
+     }
+    },
+    {
+     "id": "how-do-california-prop-65-safe-harbor-levels-work-for-these-metals",
+     "question": "How do California Prop 65 safe harbor levels work for these metals?",
+     "answer": "Prop 65 safe harbor levels are daily intake amounts, not concentration limits. OEHHA lists a maximum allowable dose level (MADL) of 0.5 µg/day for lead and 4.1 µg/day for cadmium by the oral route, and a no significant risk level (NSRL) of 15 µg/day for lead and 10 µg/day for inorganic arsenic compounds by routes other than inhalation [1]. To compare a COA with these, multiply concentration by daily serving: 50 µg/kg lead in a 30 g serving gives 1.5 µg. Consumer Reports uses the 0.5 µg/day lead MADL as its level of concern in product testing [2].",
+     "sources": [
+      {
+       "number": 1,
+       "title": "California Office of Environmental Health Hazard Assessment. Current Proposition 65 No Significant Risk Levels (NSRLs) and Maximum Allowable Dose Levels (MADLs).",
+       "url": "https://oehha.ca.gov/proposition-65/general-info/current-proposition-65-no-significant-risk-levels-nsrls-maximum"
+      },
+      {
+       "number": 2,
+       "title": "Consumer Reports (Martineau P). Protein Powders and Shakes Contain High Levels of Lead. Published 14 October 2025, updated 8 January 2026.",
+       "url": "https://www.consumerreports.org/lead/protein-powders-and-shakes-contain-high-levels-of-lead-a4206364640/"
+      }
+     ],
+     "onVle": {
+      "label": "filter suppliers in any pilot category by published lead and cadmium results",
+      "href": "/suppliers?analyte=lead"
+     }
+    },
+    {
+     "id": "where-does-codex-fit-and-what-about-mercury-and-pfas",
+     "question": "Where does Codex fit, and what about mercury and PFAS?",
+     "answer": "Codex CXS 193 sets international maximum levels that many importing countries reference, for example inorganic arsenic at 0.2 mg/kg in polished rice and 0.35 mg/kg in husked rice, lead in dried spice groups from 0.6 to 3.0 mg/kg, and cadmium in chocolate from 0.3 to 0.9 mg/kg by cocoa content [1]. For mercury, FDA notes that seafood is the primary dietary source [2], so it is usually a lower risk in these plant categories, though California still requires it in baby food testing [3]. On packaging, FDA reported in February 2024 that PFAS-containing grease-proofing agents are no longer sold for food contact use in the U.S. [4].",
+     "sources": [
+      {
+       "number": 1,
+       "title": "Codex Alimentarius Commission (FAO/WHO). General Standard for Contaminants and Toxins in Food and Feed (CXS 193-1995), adopted 1995, last amended 2025.",
+       "url": "https://openknowledge.fao.org/server/api/core/bitstreams/4d0e7245-8166-49ca-b822-ca80a1ff5cfe/content"
+      },
+      {
+       "number": 2,
+       "title": "U.S. Food and Drug Administration. Closer to Zero: Reducing Childhood Exposure to Contaminants from Foods.",
+       "url": "https://www.fda.gov/food/environmental-contaminants-food/closer-zero-reducing-childhood-exposure-contaminants-foods"
+      },
+      {
+       "number": 3,
+       "title": "California Department of Public Health, Food and Drug Branch. AB 899 Frequently Asked Questions (Health and Safety Code sections 110962 and 110963).",
+       "url": "https://www.cdph.ca.gov/Programs/CEH/DFDCS/Pages/FDBPrograms/FoodSafetyProgram/AB899FAQ.aspx"
+      },
+      {
+       "number": 4,
+       "title": "U.S. Food and Drug Administration. FDA Announces PFAS Used in Grease-Proofing Agents for Food Packaging No Longer Being Sold in the U.S. Constituent Update, 28 February 2024.",
+       "url": "https://www.fda.gov/food/hfp-constituent-updates/fda-announces-pfas-used-grease-proofing-agents-food-packaging-no-longer-being-sold-us"
+      }
+     ],
+     "onVle": {
+      "label": "filter suppliers in any pilot category by published mercury results",
+      "href": "/suppliers?analyte=mercury"
+     }
+    }
+   ]
+  }
+ ]
+}

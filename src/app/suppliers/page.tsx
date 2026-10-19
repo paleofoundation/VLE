@@ -1,52 +1,8 @@
 import Link from "next/link";
-import { PageStructuredData } from "../page-structured-data";
-import { TecridVerificationNudge } from "../tecrid-nudge";
-import { publicPageMetadata } from "@/lib/seo";
-import { seoJsonLdPages } from "@/lib/structured-data";
-import styles from "./suppliers.module.css";
-
-const page = seoJsonLdPages["/suppliers"];
-
-export const metadata = publicPageMetadata("/suppliers", page.name, page.description);
-
-export default function SupplierProfilesPage() {
-  return (
-    <main id="main-content" className="supplierProfilePage">
-      <PageStructuredData path="/suppliers" />
-      <section className="articleHero" aria-labelledby="supplier-profiles-heading">
-        <div>
-          <p className="eyebrow eyebrowLight">Supplier profiles</p>
-          <h1 id="supplier-profiles-heading">Meet the supplier. Follow the evidence.</h1>
-          <p>Explore supplier products, published source documents, and the status of their VLE lots. A supplier profile does not establish lot qualification.</p>
-        </div>
-      </section>
-      <section className={styles.directory} aria-label="Supplier directory">
-        <Link className={styles.card} href="/suppliers/kasandrinos">
-          <div className={styles.copy}>
-            <p className="eyebrow">Greece · Organic extra virgin olive oil</p>
-            <h2>Kasandrinos</h2>
-            <p className={styles.legalName}>Kasandrinos International LLC</p>
-            <p>Family-grown olive oil from Greece. Products, brand-published certifications and test reports, and a pending VLE lot.</p>
-            <span className={styles.status}>VLE lot: Pending</span>
-            <span className="textLink">View supplier profile <span aria-hidden="true">↗</span></span>
-          </div>
-        </Link>
-      </section>
-      <TecridVerificationNudge surface="profile" />
-      <section className="supplierProfileBody">
-        <h2>What a profile shows</h2>
-        <ul>
-          <li>The supplier organization name.</li>
-          <li>Contaminant documents attached to that organization&apos;s lots or to a compliance profile, if any exist.</li>
-          <li>The TECRID verification recommendation and any recorded lot-specific evidence.</li>
-        </ul>
-        <p>Brand-published documents are labeled separately from VLE lot evidence. An empty document list on a profile means no file has been recorded.</p>
-        <div className="actions">
-          <Link className="button buttonDark" href="/for-suppliers">Supplier onboarding</Link>
-          <Link className="textLink" href="/contaminants">Documentation types</Link>
-          <Link className="textLink" href="/access">Request reviewed access</Link>
-        </div>
-      </section>
-    </main>
-  );
-}
+import {publicCatalog} from "@/services/marketplace";
+import {categories} from "@/content/fieldwork/catalog";
+import {Search} from "@/components/fieldwork/search";
+import {SupplierCard} from "@/components/fieldwork/supplier-card";
+import {EmptyState} from "@/components/fieldwork/ui";
+export const metadata={title:"Ingredient suppliers",alternates:{canonical:"https://vle.exchange/suppliers"}};
+export default async function Directory({searchParams}:{searchParams:Promise<Record<string,string|undefined>>}){const f=await searchParams;const found=(await publicCatalog()).filter(s=>(!f.category||s.category===f.category)&&(!f.q||`${s.name} ${s.category} ${s.country} ${s.products.join(" ")} ${s.documents.map(d=>d.title).join(" ")}`.toLowerCase().includes(f.q.toLowerCase())));return <main id="main-content" className="fw-container fw-page"><p className="fw-eyebrow">THE INGREDIENT DIRECTORY</p><h1>Find a source.<br/>Follow the evidence.</h1><p className="fw-page-lead">Original documents, clearly attributed. Browse freely, then take a closer look.</p><Search value={f.q} compact/><nav className="fw-category-chips" aria-label="Filter by ingredient"><Link href="/suppliers" aria-current={!f.category?"page":undefined}>All ingredients</Link>{categories.map(c=><Link href={`/suppliers?category=${encodeURIComponent(c)}`} key={c} aria-current={f.category===c?"page":undefined}>{c}</Link>)}</nav><div className="fw-section-heading" style={{marginTop:40}}><h2>{f.category??"All suppliers"}</h2><span className="fw-muted">{found.length} {found.length===1?"supplier":"suppliers"}</span></div>{found.length?<div className="fw-supplier-grid">{found.map(s=><SupplierCard supplier={s} key={s.slug}/>)}</div>:<EmptyState title="No suppliers match this search."><p>Try an ingredient name, a supplier, or a country.</p><Link className="fw-text-link" href="/suppliers">Clear search</Link></EmptyState>}</main>}

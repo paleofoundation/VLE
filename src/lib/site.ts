@@ -72,7 +72,7 @@ export function isIndexedPublicPath(path: string) {
 }
 
 export function skipsClerkHandshake(path: string) {
-  if (path.startsWith("/suppliers/")) return true;
+  if (path.startsWith("/suppliers/") || ["/about", "/contact", "/claim", "/takedown"].includes(path)) return true;
   return (PUBLIC_PATHS_WITHOUT_CLERK as readonly string[]).includes(path);
 }
 
@@ -105,6 +105,7 @@ export function accessRequestNeedsClerk(searchKeys: Iterable<string>, cookieHead
 
 /** Public indexable requests that must not enter `clerkMiddleware` (and therefore cannot be handshake-redirected). */
 export function requestSkipsClerk(pathname: string, searchKeys: Iterable<string>, cookieHeader: string | null | undefined) {
+  if (pathname.startsWith("/suppliers") && accessRequestNeedsClerk(searchKeys, cookieHeader)) return false;
   if (skipsClerkHandshake(pathname)) return true;
   if (pathname === "/access") return !accessRequestNeedsClerk(searchKeys, cookieHeader);
   return false;

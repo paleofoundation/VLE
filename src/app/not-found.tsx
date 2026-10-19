@@ -1,0 +1,2 @@
+import {ButtonLink} from "@/components/fieldwork/ui";
+export default function NotFound(){return <main id="main-content" className="fw-container fw-page"><p className="fw-eyebrow">PAGE NOT FOUND</p><h1>Let’s find a better starting point.</h1><p className="fw-page-lead">This page may have moved, or this listing may no longer be public.</p><ButtonLink href="/suppliers">Explore suppliers</ButtonLink></main>}

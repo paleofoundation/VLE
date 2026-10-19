@@ -2,6 +2,7 @@ import "server-only";
 import { and, eq, getTableColumns } from "drizzle-orm";
 import { getDb } from "@/db";
 import { publicDocuments, supplierProfiles } from "@/db/schema";
+import { matchesDocument } from "@/domain/listing-filters";
 import type { ListingFilters } from "@/domain/public-listings";
 
 // Exclude the internal provenance note at query time, not only at render time.
@@ -10,15 +11,8 @@ void internalNote;
 export async function listDocuments(filters: ListingFilters = {}) {
   const rows = await getDb().select({ document: documentColumns, supplier: getTableColumns(supplierProfiles) }).from(publicDocuments)
     .innerJoin(supplierProfiles, eq(publicDocuments.supplierProfileId, supplierProfiles.id))
-    .where(and(eq(supplierProfiles.hidden, false), eq(publicDocuments.linkState, "LIVE")));
-  const cutoff = new Date(); if (filters.months) cutoff.setUTCMonth(cutoff.getUTCMonth() - filters.months);
-  return rows.filter(({ document: d, supplier: s }) =>
-    (!filters.category || s.categories.includes(filters.category)) && (!filters.country || s.country === filters.country) &&
-    (!filters.analyte || d.analytes.includes(filters.analyte)) && (!filters.docType || d.docType === filters.docType) &&
-    (!filters.supplier || s.slug === filters.supplier) && (!filters.listingSource || s.listingSource === filters.listingSource) &&
-    (!filters.months || !!d.reportDate && new Date(d.reportDate) >= cutoff) &&
-    (!filters.q || `${s.displayName} ${d.productName ?? ""} ${d.testsText ?? ""}`.toLowerCase().includes(filters.q.toLowerCase()))
-  ).sort((a, b) => (b.document.reportDate ?? "").localeCompare(a.document.reportDate ?? "") || a.supplier.displayName.localeCompare(b.supplier.displayName));
+    .where(and(eq(supplierProfiles.hidden, false), filters.includeUnavailable ? undefined : eq(publicDocuments.linkState, "LIVE")));
+  return rows.filter(({ document, supplier }) => matchesDocument(document, supplier, filters)).sort((a, b) => (b.document.reportDate ?? "").localeCompare(a.document.reportDate ?? "") || a.supplier.displayName.localeCompare(b.supplier.displayName));
 }
 export async function listSuppliers(filters: ListingFilters = {}) {
   const [profiles, documents] = await Promise.all([

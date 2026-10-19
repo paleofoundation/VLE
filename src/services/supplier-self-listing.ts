@@ -17,9 +17,11 @@ export async function saveSupplierProfile(actor: Actor, input: unknown) {
 }
 export async function publishSupplierProfile(actor: Actor, publish: boolean) {
   const p = await ownSupplierProfile(actor);
+  if (publish && p.moderationHidden) throw new Error("Operations has hidden this listing. Contact marcus@vle.exchange before republishing.");
   if (publish) supplierProfileSchema.parse({ ...p, about: p.about ?? "" });
   await getDb().transaction(async (tx) => {
-    await tx.update(supplierProfiles).set({ hidden: !publish, ...(publish ? { listingSource: "MEMBER" as const, publishedAt: p.publishedAt ?? new Date() } : {}) }).where(eq(supplierProfiles.id, p.id));
+    const rows = await tx.update(supplierProfiles).set({ hidden: !publish, ...(publish ? { listingSource: "MEMBER" as const, publishedAt: p.publishedAt ?? new Date() } : {}) }).where(and(eq(supplierProfiles.id, p.id), eq(supplierProfiles.organizationId, actor.organizationId), publish ? eq(supplierProfiles.moderationHidden, false) : undefined)).returning();
+    if (!rows.length) throw new Error("Profile publication is unavailable. Contact marcus@vle.exchange.");
     await appendAuditEvent(tx, actor, { eventType: publish ? "SUPPLIER_PROFILE_PUBLISHED" : "SUPPLIER_PROFILE_UNPUBLISHED", entityType: "supplier_profile", entityId: p.id, data: { publish } });
   });
   return p.slug;

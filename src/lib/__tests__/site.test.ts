@@ -29,6 +29,8 @@ const publicCatalog = [
   "/contaminants",
   "/suppliers",
   "/documents",
+  "/claim",
+  "/takedown",
   "/suppliers/kasandrinos",
   "/articles",
   "/articles/not-a-supplier-directory",

@@ -1,0 +1,4 @@
+import { z } from "zod";
+export const takedownSchema = z.object({ company: z.string().trim().min(2).max(200), name: z.string().trim().min(2).max(160), email: z.string().trim().email().max(320), profileUrl: z.string().trim().url().max(2000).refine((s) => { const u = new URL(s); return u.protocol === "https:" && u.hostname === "vle.exchange" && u.pathname.startsWith("/suppliers/"); }, "Use the vle.exchange supplier profile URL"), whatToRemove: z.string().trim().min(3).max(2000), reason: z.string().trim().min(5).max(4000), website: z.string().max(0) });
+export function claimNeedsProof(domainMatched: boolean, note: string) { return !domainMatched && note.trim().length < 10; }
+export function businessDayDeadline(createdAt: Date, days = 5) { const date = new Date(createdAt); let count = 0; while (count < days) { date.setUTCDate(date.getUTCDate() + 1); if (![0,6].includes(date.getUTCDay())) count++; } return date; }

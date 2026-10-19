@@ -17,7 +17,7 @@ export async function listProfileCertifications(profileId: string) {
 export async function saveCertification(actor: Actor, input: unknown) {
   const profile = await ownSupplierProfile(actor); const data = certificationSchema.parse(input);
   await getDb().transaction(async (tx) => {
-    await tx.insert(supplierCertifications).values({ ...data, supplierProfileId: profile.id }).onConflictDoUpdate({ target: [supplierCertifications.supplierProfileId, supplierCertifications.certificationKey], set: { ...data, confirmedAt: null, confirmedIssuer: null, confirmedByUserId: null } });
+    await tx.insert(supplierCertifications).values({ ...data, supplierProfileId: profile.id }).onConflictDoUpdate({ target: [supplierCertifications.supplierProfileId, supplierCertifications.certificationKey], set: { ...data, supplierReported: true, confirmedAt: null, confirmedIssuer: null, confirmedByUserId: null } });
     await appendAuditEvent(tx, actor, { eventType: "SUPPLIER_CERTIFICATION_SAVED", entityType: "supplier_profile", entityId: profile.id, data });
   });
 }

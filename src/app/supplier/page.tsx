@@ -23,6 +23,7 @@ export default async function SupplierDeskPage() {
   const requirements = new Map(workspace.requirements.map((item) => [item.id, item]));
   return (
     <main id="main-content" className="commercialPage">
+      <Link className="button buttonDark" href="/supplier/certifications">Manage certifications</Link>
       <section className="commercialHero"><div><p className="eyebrow">Supplier desk · Cocoa powder</p><h1>Matched demand and quotes</h1><p className="sectionLead">Quote only against an eligible listing. Quote acceptance and reservation intent never override listing eligibility or create an Order.</p></div><Link className="textLink" href="/ops/commercial">Commercial operations →</Link></section>
       <section className="commercialBoard">
         <div className="boardHeading"><div><p className="eyebrow">Matched requirements</p><h2>Quote queue</h2></div><p>Draft and sent quotes expire automatically. Withdrawn, expired, and accepted states are terminal.</p></div>

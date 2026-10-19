@@ -10,7 +10,7 @@ import { DomainError } from "@/domain/errors";
 export type CurrentAccess =
   | { status: "ACTIVE"; actor: Actor }
   | { status: "SIGNED_OUT" }
-  | { status: "PENDING_MAPPING"; identity: { clerkUserId: string; email: string | null; displayName: string } };
+  | { status: "PENDING_MAPPING"; identity: { clerkUserId: string; email: string | null; displayName: string; emailVerified: boolean } };
 
 async function actorForIdentity(identity: SQL): Promise<Actor | null> {
   const db = getDb();
@@ -39,7 +39,11 @@ export async function resolveCurrentAccess(): Promise<CurrentAccess> {
   const devEmail = process.env.NODE_ENV !== "production" ? process.env.VLE_DEV_ACTOR : undefined;
   if (devEmail) {
     const actor = await actorForIdentity(eq(users.email, devEmail));
-    if (!actor) throw new DomainError("VLE_DEV_ACTOR has no VLE organization membership", "NO_MEMBERSHIP");
+    if (!actor) {
+      const identity = await getDb().query.users.findFirst({ where: eq(users.email, devEmail) });
+      if (!identity) throw new DomainError("VLE_DEV_ACTOR has no local identity", "NO_MEMBERSHIP");
+      return { status: "PENDING_MAPPING", identity: { clerkUserId: identity.clerkUserId, email: identity.email, displayName: identity.displayName, emailVerified: true } };
+    }
     return { status: "ACTIVE", actor };
   }
 
@@ -53,7 +57,7 @@ export async function resolveCurrentAccess(): Promise<CurrentAccess> {
     ?? clerkUser?.emailAddresses[0]?.emailAddress
     ?? null;
   const displayName = clerkUser?.fullName?.trim() || clerkUser?.username || primaryEmail || "Signed-in Clerk user";
-  return { status: "PENDING_MAPPING", identity: { clerkUserId, email: primaryEmail?.toLowerCase() ?? null, displayName } };
+  return { status: "PENDING_MAPPING", identity: { clerkUserId, email: primaryEmail?.toLowerCase() ?? null, displayName, emailVerified: clerkUser?.emailAddresses.find(({ id }) => id === clerkUser?.primaryEmailAddressId)?.verification?.status === "verified" } };
 }
 
 export async function getCurrentActor(): Promise<Actor> {

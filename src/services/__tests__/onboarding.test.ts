@@ -12,7 +12,7 @@ it("creates only the requested supplier role and a hidden profile in one transac
  const written = new Map();
  const tx = { execute: vi.fn(), select: () => ({ from: () => ({ innerJoin: () => ({ where: async () => [] }) }) }), insert: (table: unknown) => ({ values: (value: unknown) => { written.set(table, value); return { onConflictDoUpdate: () => ({ returning: async () => [{ id: "user-id" }] }), returning: async () => [{ id: "org-id" }] }; } }) };
  mocks.transaction.mockImplementation((fn) => fn(tx));
- expect(await completeOnboarding(identity, input)).toBe("/supplier");
+ expect(await completeOnboarding(identity, input)).toBe("/supplier/certifications?onboarding=1");
  expect(written.get(users)).toMatchObject({ clerkUserId: identity.clerkUserId }); expect(written.get(organizations)).toMatchObject({ kind: "SUPPLIER" }); expect(written.get(memberships)).toMatchObject({ role: "SUPPLIER", companyRole: "Owner" }); expect(written.get(supplierProfiles)).toMatchObject({ hidden: true, organizationId: "org-id" }); expect(mocks.audit).toHaveBeenCalledOnce();
 });
 it("a repeat submission cannot add a new role", async () => {

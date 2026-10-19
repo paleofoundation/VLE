@@ -1,0 +1,11 @@
+.directory { padding: 48px clamp(24px, 7vw, 108px); }
+.card { display: block; max-width: 1000px; border: 1px solid var(--line); background: var(--white); }
+.card:hover { border-color: var(--green); }
+.copy { padding: 36px; }
+.copy h2 { margin-bottom: 8px; font-size: 34px; letter-spacing: -.04em; }
+.copy p:not(:first-child) { max-width: 560px; color: var(--muted); font-size: 14px; line-height: 1.7; }
+.legalName { margin-bottom: 20px; }
+.status { display: block; margin: 22px 0; color: var(--green); font-size: 12px; font-weight: 700; }
+@media (max-width: 700px) {
+  .copy { padding: 26px; }
+}

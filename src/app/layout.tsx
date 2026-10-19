@@ -16,7 +16,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: "VLE — Verified Lot Exchange",
+  title: "VLE | Verified Lot Exchange",
   description: "Buy the ingredient lot that already passed a defined compliance profile.",
   robots: { index: true, follow: true },
   verification: {
@@ -47,7 +47,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <div className="footerTop">
             <div>
               <Link href="/" className="footerBrand">VLE<span>.</span></Link>
-              <p>Source against a named compliance profile—only after the lot-specific evidence gate clears.</p>
+              <p>Source against a named compliance profile, only after the lot-specific evidence gate clears.</p>
             </div>
             <div className="footerNetwork" aria-label="Network roles">
               <span>HMI <small>know</small></span>

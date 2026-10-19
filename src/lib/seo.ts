@@ -10,7 +10,7 @@ export function publicPageMetadata(path: PublicSitemapPath, title: string, descr
     url: `${SITE_URL}/opengraph-image`,
     width: 1200,
     height: 630,
-    alt: "VLE — Verified Lot Exchange",
+    alt: "VLE | Verified Lot Exchange",
   };
 
   return {

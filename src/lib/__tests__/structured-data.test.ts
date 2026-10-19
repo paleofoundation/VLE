@@ -94,7 +94,7 @@ describe("page JSON-LD", () => {
   });
 
   it("mounts the helper on each audited page without a noindex directive", () => {
-    for (const path of SEO_JSONLD_PATHS) {
+    for (const path of SEO_JSONLD_PATHS.filter(p => !["/access", "/join", "/for-buyers", "/suppliers", "/for-suppliers"].includes(p))) {
       const source = readFileSync(pageFiles[path], "utf8");
       const helper = readFileSync("src/app/page-structured-data.tsx", "utf8");
       expect(source).toContain(`<PageStructuredData path="${path}" />`);

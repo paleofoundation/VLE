@@ -1,0 +1,4 @@
+import {it,expect} from "vitest";
+import {resultsMeetLimits,savedRequirementSchema} from "../saved-requirements";
+it("respects strict and inclusive limits and treats absent, duplicate and invalid values as no match",()=>{const limit={analyte:"lead" as const,maximumPpm:0.1,operator:"LT" as const};expect(resultsMeetLimits([{analyte:"lead",valuePpm:0.1,unit:"ppm"}],[limit])).toBe(false);expect(resultsMeetLimits([{analyte:"lead",valuePpm:0.1,unit:"ppm"}],[{...limit,operator:"LTE"}])).toBe(true);expect(resultsMeetLimits([],[limit])).toBe(false);expect(resultsMeetLimits([{analyte:"lead",valuePpm:0,unit:"ppb"}],[limit])).toBe(false);expect(resultsMeetLimits([{analyte:"lead",valuePpm:0,unit:"ppm"},{analyte:"lead",valuePpm:0,unit:"ppm"}],[limit])).toBe(false)});
+it("requires real nonnegative brand criteria",()=>{expect(savedRequirementSchema.safeParse({name:"test",category:"Cocoa",limits:[]}).success).toBe(false)});

@@ -2,6 +2,7 @@ import { sql } from "drizzle-orm";
 import {
   boolean,
   check,
+  date,
   index,
   jsonb,
   numeric,
@@ -54,7 +55,7 @@ export const users = pgTable("users", {
 export const memberships = pgTable("memberships", {
   id: id(), userId: uuid("user_id").notNull().references(() => users.id),
   organizationId: uuid("organization_id").notNull().references(() => organizations.id),
-  role: roleEnum("role").notNull(), createdAt: createdAt(),
+  role: roleEnum("role").notNull(), companyRole: text("company_role"), createdAt: createdAt(),
 }, (table) => [uniqueIndex("membership_user_org_role_uq").on(table.userId, table.organizationId, table.role)]);
 
 export const productTypes = pgTable("product_types", {
@@ -218,3 +219,93 @@ export const auditEvents = pgTable("audit_events", {
   eventType: text("event_type").notNull(), entityType: text("entity_type").notNull(), entityId: uuid("entity_id").notNull(),
   data: jsonb("data").notNull(), previousHash: text("previous_hash"), eventHash: text("event_hash").notNull().unique(), createdAt: createdAt(),
 }, (table) => [index("audit_entity_idx").on(table.entityType, table.entityId, table.createdAt)]);
+
+
+export const listingSourceEnum = pgEnum("listing_source", ["PUBLIC_DOCUMENTS", "MEMBER"]);
+export const claimStatusEnum = pgEnum("claim_status", ["UNCLAIMED", "CLAIM_PENDING", "CLAIMED"]);
+export const publicDocumentTypeEnum = pgEnum("public_document_type", ["Heavy metals report", "Pesticide residue report", "Phthalates report", "Glyphosate report", "Arsenic report", "COA", "Certificate", "Other"]);
+export const publicLinkStateEnum = pgEnum("public_link_state", ["LIVE", "NO_LONGER_PUBLISHED"]);
+
+// An unclaimed public listing has no account organization. Claim approval supplies that link.
+export const supplierProfiles = pgTable("supplier_profiles", {
+  id: id(), organizationId: uuid("organization_id").unique().references(() => organizations.id),
+  slug: text("slug").notNull().unique(), displayName: text("display_name").notNull(),
+  country: text("country"), website: text("website"), categories: text("categories").array().notNull().default(sql`'{}'::text[]`),
+  certificationsShown: text("certifications_shown"), about: text("about"), publishedAt: timestamp("published_at", { withTimezone: true }),
+  listingSource: listingSourceEnum("listing_source").notNull().default("PUBLIC_DOCUMENTS"),
+  claimStatus: claimStatusEnum("claim_status").notNull().default("UNCLAIMED"),
+  hidden: boolean("hidden").notNull().default(false), moderationHidden: boolean("moderation_hidden").notNull().default(false), createdAt: createdAt(),
+});
+
+export const publicDocuments = pgTable("public_documents", {
+  id: id(), supplierProfileId: uuid("supplier_profile_id").notNull().references(() => supplierProfiles.id),
+  supplierReported: boolean("supplier_reported").notNull().default(false),
+  productName: text("product_name"), lotOrBatch: text("lot_or_batch"),
+  docType: publicDocumentTypeEnum("doc_type").notNull(), testsText: text("tests_text"),
+  analytes: text("analytes").array().notNull().default(sql`'{}'::text[]`), labName: text("lab_name"),
+  labAccreditationAsStated: text("lab_accreditation_as_stated"), reportDate: date("report_date"),
+  reportDateText: text("report_date_text"), sourceUrl: text("source_url").notNull(), sourceDomain: text("source_domain").notNull(),
+  sourcePageUrl: text("source_page_url"), foundAt: date("found_at").notNull(),
+  lastCheckedAt: timestamp("last_checked_at", { withTimezone: true }), httpStatus: numeric("http_status", { precision: 3, scale: 0 }),
+  sha256: text("sha256"), linkState: publicLinkStateEnum("link_state").notNull().default("LIVE"),
+  verificationNote: text("verification_note"), createdAt: createdAt(),
+}, (t) => [uniqueIndex("public_document_supplier_source_uq").on(t.supplierProfileId, t.sourceUrl), index("public_document_supplier_idx").on(t.supplierProfileId)]);
+
+
+export const supplierCertifications = pgTable("supplier_certifications", {
+  id: id(), supplierProfileId: uuid("supplier_profile_id").notNull().references(() => supplierProfiles.id),
+  certificationKey: text("certification_key").notNull(), otherName: text("other_name"), certifyingBody: text("certifying_body"),
+  certificateNumber: text("certificate_number"), expiresOn: date("expires_on"), sourceUrl: text("source_url"),
+  confirmedAt: date("confirmed_at"), confirmedIssuer: text("confirmed_issuer"), confirmedByUserId: uuid("confirmed_by_user_id").references(() => users.id),
+  flaggedAt: timestamp("flagged_at", { withTimezone: true }), flagNote: text("flag_note"), createdAt: createdAt(),
+}, (t) => [uniqueIndex("supplier_certification_key_uq").on(t.supplierProfileId, t.certificationKey)]);
+export const certificationSuggestions = pgTable("certification_suggestions", {
+  id: id(), supplierProfileId: uuid("supplier_profile_id").notNull().references(() => supplierProfiles.id),
+  certificationKey: text("certification_key").notNull(), note: text("note").notNull(),
+  createdByUserId: uuid("created_by_user_id").notNull().references(() => users.id), createdAt: createdAt(),
+});
+
+export const supplierProducts = pgTable("supplier_products", {
+  id: id(), supplierProfileId: uuid("supplier_profile_id").notNull().references(() => supplierProfiles.id),
+  name: text("name").notNull(), ingredient: text("ingredient").notNull(), form: text("form"), origin: text("origin"), createdAt: createdAt(),
+});
+export const supplierLots = pgTable("supplier_lots", {
+  id: id(), supplierProfileId: uuid("supplier_profile_id").notNull().references(() => supplierProfiles.id),
+  productId: uuid("product_id").notNull().references(() => supplierProducts.id), supplierLotCode: text("supplier_lot_code").notNull(),
+  quantity: numeric("quantity", { precision: 14, scale: 3 }), quantityUnit: text("quantity_unit"),
+  locationName: text("location_name"), countryCode: text("country_code"), ownerName: text("owner_name"),
+  physicalLotId: uuid("physical_lot_id").unique().references(() => physicalLots.id), createdAt: createdAt(),
+}, (t) => [uniqueIndex("supplier_lot_profile_code_uq").on(t.supplierProfileId, t.supplierLotCode), check("supplier_lot_positive_quantity", sql`quantity IS NULL OR quantity > 0`)]);
+export const supplierSamplingRequests = pgTable("supplier_sampling_requests", {
+  id: id(), supplierLotId: uuid("supplier_lot_id").notNull().unique().references(() => supplierLots.id),
+  supplierProfileId: uuid("supplier_profile_id").notNull().references(() => supplierProfiles.id),
+  samplingOrderId: uuid("sampling_order_id").references(() => samplingOrders.id), requestedAt: createdAt(),
+});
+
+export const supplierRequestTypeEnum = pgEnum("supplier_request_type", ["DOCUMENT", "SAMPLE", "QUOTE", "INVITE_SUPPLIER"]);
+export const supplierRequestStatusEnum = pgEnum("supplier_request_status", ["OPEN", "RESPONDED", "CLOSED"]);
+export const supplierRequests = pgTable("requests", {
+  id: id(), type: supplierRequestTypeEnum("type").notNull(), buyerOrganizationId: uuid("buyer_org_id").notNull().references(() => organizations.id),
+  supplierProfileId: uuid("supplier_profile_id").notNull().references(() => supplierProfiles.id),
+  lotId: uuid("lot_id").references(() => physicalLots.id), message: text("message").notNull(), quantityText: text("quantity_text"), qualification: jsonb("qualification"),
+  status: supplierRequestStatusEnum("status").notNull().default("OPEN"), createdAt: createdAt(), updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
+}, (t) => [index("request_buyer_idx").on(t.buyerOrganizationId), index("request_supplier_idx").on(t.supplierProfileId)]);
+export const supplierRequestReplies = pgTable("request_replies", {
+  id: id(), requestId: uuid("request_id").notNull().references(() => supplierRequests.id),
+  authorOrganizationId: uuid("author_org_id").notNull().references(() => organizations.id), authorUserId: uuid("author_user_id").notNull().references(() => users.id), message: text("message").notNull(), createdAt: createdAt(),
+});
+
+export const claimRequestStatusEnum = pgEnum("claim_request_status", ["PENDING", "APPROVED", "REJECTED"]);
+export const profileClaims = pgTable("profile_claims", {
+  id: id(), supplierProfileId: uuid("supplier_profile_id").notNull().references(() => supplierProfiles.id),
+  claimantOrganizationId: uuid("claimant_org_id").notNull().references(() => organizations.id), claimantUserId: uuid("claimant_user_id").notNull().references(() => users.id),
+  primaryEmail: text("primary_email").notNull(), domainMatched: boolean("domain_matched").notNull(), proofNote: text("proof_note"),
+  status: claimRequestStatusEnum("status").notNull().default("PENDING"), reviewNote: text("review_note"), reviewedByUserId: uuid("reviewed_by_user_id").references(() => users.id),
+  reviewedAt: timestamp("reviewed_at", { withTimezone: true }), createdAt: createdAt(),
+}, (t) => [uniqueIndex("claim_profile_user_uq").on(t.supplierProfileId, t.claimantUserId)]);
+export const takedownRequests = pgTable("takedown_requests", {
+  id: id(), company: text("company").notNull(), name: text("name").notNull(), email: text("email").notNull(),
+  profileUrl: text("profile_url").notNull(), whatToRemove: text("what_to_remove").notNull(), reason: text("reason").notNull(),
+  resolvedAt: timestamp("resolved_at", { withTimezone: true }), resolvedByUserId: uuid("resolved_by_user_id").references(() => users.id), createdAt: createdAt(),
+});
+export const publicFormQuotas = pgTable("public_form_quotas", { key: text("key").primaryKey(), attempts: numeric("attempts", { precision: 5, scale: 0 }).notNull(), resetsAt: timestamp("resets_at", { withTimezone: true }).notNull() });

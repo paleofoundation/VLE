@@ -1,0 +1,14 @@
+import Link from "next/link";
+import type { ButtonHTMLAttributes, HTMLAttributes, ReactNode } from "react";
+export function Arrow({diagonal=false}:{diagonal?:boolean}) {return <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">{diagonal?<path d="M6 18 18 6M6 6h12v12"/>:<path d="M4 12h15m-6-6 6 6-6 6"/>}</svg>}
+export function SearchIcon(){return <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4 4"/></svg>}
+export function DocumentIcon(){return <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" aria-hidden="true"><path d="M14 3H5v18h14V8Zm0 0v5h5M8 12h8M8 16h6"/></svg>}
+export function Button({variant="primary",className="",...props}:ButtonHTMLAttributes<HTMLButtonElement>&{variant?:"primary"|"secondary"|"quiet"}){return <button className={`fw-button fw-${variant} ${className}`} {...props}/>}
+export function ButtonLink({href,children,variant="primary"}:{href:string;children:ReactNode;variant?:"primary"|"secondary"|"quiet"}){return <Link className={`fw-button fw-${variant}`} href={href}>{children}</Link>}
+export function Card({className="",...props}:HTMLAttributes<HTMLElement>){return <article className={`fw-card ${className}`} {...props}/>}
+export function Badge({children,verified=false}:{children:ReactNode;verified?:boolean}){return <span className={`fw-badge ${verified?"fw-verified":""}`}>{verified?<span aria-label="VLE verified">✓ </span>:null}{children}</span>}
+export function Label({children,htmlFor}:{children:ReactNode;htmlFor?:string}){return <label className="fw-label" htmlFor={htmlFor}>{children}</label>}
+export function EmptyState({title,children}:{title:string;children:ReactNode}){return <div className="fw-empty"><DocumentIcon/><h3>{title}</h3><div>{children}</div></div>}
+export function Table({children,caption}:{children:ReactNode;caption:string}){return <div className="fw-table-scroll" role="region" aria-label={caption} tabIndex={0}><table className="fw-table"><caption className="sr-only">{caption}</caption>{children}</table></div>}
+export function PriceTag({price}:{price?:{amount:string;unit:string;currency:string}|null}){return price?<strong>{price.currency} {price.amount}<small> / {price.unit}</small></strong>:<Link className="fw-price" href="/sign-in">Sign in to see prices <Arrow/></Link>}
+export function ResultRow({analyte,value,unit,interpretation,source}:{analyte:string;value:string;unit:string;interpretation?:string;source:string}){return <tr><th scope="row">{analyte}</th><td>{value} <span className="fw-muted">{unit}</span>{interpretation?<small className="fw-result-note">{interpretation}</small>:null}</td><td><a href={source} rel="noopener noreferrer">Original report <Arrow diagonal/></a></td></tr>}

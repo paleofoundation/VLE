@@ -17,6 +17,8 @@ const hours = z.coerce.number().int().min(1).max(168);
 function refreshCommercial() {
   revalidatePath("/find");
   revalidatePath("/buyer");
+  revalidatePath("/dashboard/brand");
+  revalidatePath("/dashboard/supplier");
   revalidatePath("/supplier");
   revalidatePath("/ops");
   revalidatePath("/ops/commercial");

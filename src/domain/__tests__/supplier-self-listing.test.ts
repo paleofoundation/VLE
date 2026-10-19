@@ -1,0 +1,5 @@
+import { expect, it } from "vitest";
+import { inventoryIsComplete, supplierLotSchema, supplierProfileSchema } from "../supplier-self-listing";
+it("stores unknown inventory as null without inventing quantity", () => { const data = supplierLotSchema.parse({ productId: "11111111-1111-4111-8111-111111111111", supplierLotCode: "REAL-CODE", quantity: "", quantityUnit: "", locationName: "", countryCode: "", ownerName: "" }); expect(data.quantity).toBeNull(); expect(inventoryIsComplete(data)).toBe(false); });
+it("requires real inventory facts before creating a sampling order", () => { expect(inventoryIsComplete({ quantity: "25.000", quantityUnit: "kg", locationName: "Warehouse", countryCode: "GR", ownerName: "Owner" })).toBe(true); expect(inventoryIsComplete({ quantity: "0", quantityUnit: "kg", locationName: "Warehouse", countryCode: "GR", ownerName: "Owner" })).toBe(false); });
+it("rejects invalid public slugs and script URLs", () => { expect(supplierProfileSchema.safeParse({ displayName: "Company", slug: "../ops", website: "javascript:alert(1)", country: "Greece", about: "", categories: ["Olive oil"] }).success).toBe(false); });

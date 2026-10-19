@@ -1,0 +1,3 @@
+"use client";
+import {useEffect} from "react";
+export function ViewEvent({supplier}:{supplier:string}){useEffect(()=>{void fetch("/api/events",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({supplier,kind:"PROFILE"}),keepalive:true});const record=(event:MouseEvent)=>{const target=event.target;if(!(target instanceof Element))return;const a=target.closest("a[data-document]");if(a)void fetch("/api/events",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({supplier,kind:"DOCUMENT",document:a.getAttribute("href")}),keepalive:true});};document.addEventListener("click",record);return ()=>document.removeEventListener("click",record);},[supplier]);return null;}

@@ -30,6 +30,9 @@ export const PUBLIC_SITEMAP_PATHS = [
   "/join",
   "/contaminants",
   "/suppliers",
+  "/documents",
+  "/claim",
+  "/takedown",
   "/suppliers/kasandrinos",
   "/articles",
   ...ARTICLE_PATHS,
@@ -50,6 +53,9 @@ export const ROBOTS_DISALLOW_PATHS = [
   "/buyer",
   "/find",
   "/sign-in",
+  "/sign-up",
+  "/onboarding",
+  "/requests",
 ] as const;
 
 /**

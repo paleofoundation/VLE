@@ -13,7 +13,7 @@ const coreFeatures = [
   "Browse the public eligibility shelf",
   "Use supplier, buyer, and laboratory walkthroughs",
   "See EXAMPLE limits and pilot boundaries clearly",
-  "Request reviewed access for a real organization",
+  "Sign up for a real organization",
 ] as const;
 
 const assistedFeatures = [
@@ -55,10 +55,10 @@ export default function JoinPage() {
         <div className="joinHeroCopy">
           <p className="eyebrow eyebrowLight">Join VLE · Public pilot</p>
           <h1 id="join-heading">The core exchange is free. Human help is optional.</h1>
-          <p>Explore the eligibility shelf, learn each role, and request reviewed access without a checkout. Evidence—not payment—decides whether a lot can be called QUALIFIED or publicly listed.</p>
+          <p>Explore the eligibility shelf, learn each role, and request reviewed access without a checkout. Evidence, rather than payment, decides whether a lot can be called QUALIFIED or publicly listed.</p>
           <div className="actions">
-            <Link className="button" href="#choose-role">Choose your role</Link>
-            <Link className="textLink textLinkLight" href="/access">Request reviewed access</Link>
+            <Link className="button" href="/sign-up">Create your account</Link>
+            <Link className="textLink textLinkLight" href="/sign-up">Sign up</Link>
             <Link className="textLink textLinkLight" href="/faq">Read the diligence FAQ</Link>
           </div>
         </div>
@@ -92,7 +92,7 @@ export default function JoinPage() {
             <h3>Use VLE</h3>
             <p>The complete public pilot journey, with reviewed organization access when you are ready to work with real lot facts.</p>
             <ul>{coreFeatures.map((feature) => <li key={feature}><span aria-hidden="true">✓</span>{feature}</li>)}</ul>
-            <Link className="button buttonDark" href="/access">Request reviewed access</Link>
+            <Link className="button buttonDark" href="/sign-up">Sign up</Link>
             <small>PENDING MAPPING is an intentional identity-to-organization review gate, not a paid tier.</small>
           </article>
 
@@ -101,7 +101,7 @@ export default function JoinPage() {
             <h3>Work with a human</h3>
             <p>For teams that want hands-on implementation help. Scope and timing are discussed with ICS; no VLE fee is invented here.</p>
             <ul>{assistedFeatures.map((feature) => <li key={feature}><span aria-hidden="true">→</span>{feature}</li>)}</ul>
-            <Link className="button buttonDark" href="/access">Request an ICS briefing</Link>
+            <Link className="button buttonDark" href="/sign-up">Request an ICS briefing</Link>
             <small>White-glove help never purchases QUALIFIED status, listing eligibility, or TECRID authenticity.</small>
           </article>
         </div>

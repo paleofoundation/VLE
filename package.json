@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint .",
-    "typecheck": "tsc --noEmit",
+    "typecheck": "next typegen && tsc --noEmit",
     "test": "vitest run",
     "test:integration": "dotenv -e .env.local -- vitest run src/db/__tests__/triggers.integration.test.ts",
     "check": "npm run lint && npm run typecheck && npm test",
@@ -15,7 +15,9 @@
     "db:migrate": "dotenv -e .env.local -- drizzle-kit migrate",
     "db:seed": "dotenv -e .env.local -- tsx scripts/seed.ts",
     "db:setup": "npm run db:migrate && npm run db:seed",
-    "access:bootstrap": "dotenv -e .env.local -- tsx scripts/bootstrap-clerk-ops.ts"
+    "access:bootstrap": "dotenv -e .env.local -- tsx scripts/bootstrap-clerk-ops.ts",
+    "db:seed:public": "dotenv -e .env.local -- tsx scripts/seed-public-suppliers.ts",
+    "db:seed:certifications": "dotenv -e .env.local -- tsx scripts/seed-kasandrinos-certifications.ts"
   },
   "dependencies": {
     "@clerk/nextjs": "^7.9.1",

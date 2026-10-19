@@ -36,6 +36,55 @@
       "when": 1792046691530,
       "tag": "0004_contaminant_documents",
       "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1792397718842,
+      "tag": "0005_public_listings",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1792398505860,
+      "tag": "0006_self_serve_onboarding",
+      "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1792398778717,
+      "tag": "0007_supplier_certifications",
+      "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1792399229379,
+      "tag": "0008_supplier_self_listing",
+      "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "7",
+      "when": 1792399652342,
+      "tag": "0009_brand_supplier_requests",
+      "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "7",
+      "when": 1792400149069,
+      "tag": "0010_claims_takedowns",
+      "breakpoints": true
+    },
+    {
+      "idx": 11,
+      "version": "7",
+      "when": 1792400272490,
+      "tag": "0011_claim_draft_privacy",
+      "breakpoints": true
     }
   ]
 }

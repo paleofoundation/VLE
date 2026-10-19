@@ -1,4 +1,9 @@
 import Link from "next/link";
+import { SupplierRequestLinks } from "@/components/listing/request-links";
+import GenericSupplierPage from "../[slug]/page";
+import { notFound } from "next/navigation";
+import { PublicCertifications } from "@/components/listing/certifications";
+import { listDocuments, getSupplier } from "@/lib/public-listings";
 import { publicPageMetadata } from "@/lib/seo";
 import {
   supplierDocumentNotice,
@@ -25,11 +30,16 @@ const lotSteps = [
   { title: "Reserved", detail: "Awaiting qualification and a recorded reservation." },
 ] as const;
 
-export default function KasandrinosSupplierPage() {
+export const dynamic = "force-dynamic";
+export default async function KasandrinosSupplierPage() {
+  const profile = await getSupplier("kasandrinos");
+  if (!profile) notFound();
+  const removedSources = new Set((await listDocuments({ supplier: "kasandrinos", includeUnavailable: true })).filter((row) => row.document.linkState === "NO_LONGER_PUBLISHED").map((row) => row.document.sourceUrl));
+  if (profile.listingSource === "MEMBER") return GenericSupplierPage({ params: Promise.resolve({ slug: "kasandrinos" }), searchParams: Promise.resolve({}) });
   return (
     <main id="main-content" className={styles.profile}>
       <aside className={styles.profileBanner} aria-label="Profile listing status">
-        Listed from public documents. Not a VLE member. <a href="mailto:marcus@vle.exchange">Claim this profile</a>.
+        Listed from public documents. Not a VLE member. Is this your company? <Link href="/claim/kasandrinos">Claim this profile</Link>.
       </aside>
       <div className={styles.breadcrumb}>
         <Link className="back" href="/suppliers">Supplier profiles</Link>
@@ -98,12 +108,13 @@ export default function KasandrinosSupplierPage() {
           {kasandrinosReports.map((report) => (
             <li key={report.url}>
               <div><h3>{report.category}</h3><p>{report.subject}</p><small className={styles.documentLabel}>{supplierDocumentNotice(report.date)}</small></div>
-              <a href={report.url} className="textLink" aria-label={`Open ${report.category}: ${report.subject} PDF`} rel="noopener noreferrer">Open PDF <span aria-hidden="true">↗</span></a>
+              {removedSources.has(report.url) ? <p>No longer published by supplier</p> : <a href={report.url} className="textLink" aria-label={`Open ${report.category}: ${report.subject} PDF`} rel="noopener noreferrer">Open PDF <span aria-hidden="true">↗</span></a>}
             </li>
           ))}
         </ul>
       </section>
 
+      <PublicCertifications profileId={profile.id} />
       <section className={styles.lotSection} id="vle-lot" aria-labelledby="lot-heading">
         <div className={styles.lotIntro}>
           <p className="eyebrow eyebrowLight">Lot-specific evidence</p>
@@ -120,8 +131,9 @@ export default function KasandrinosSupplierPage() {
           ))}
         </ol>
       </section>
+      <SupplierRequestLinks slug="kasandrinos" member={false} />
       <section className={styles.claimSection} aria-label="Claim or takedown requests">
-        <p>To claim this profile or request a takedown, email <a href="mailto:marcus@vle.exchange">marcus@vle.exchange</a>. Takedown requests are honoured within 5 business days.</p>
+        <p>To claim this profile, <Link href="/claim/kasandrinos">use the claim form</Link>. To request a takedown, <Link href="/takedown?profile=kasandrinos">use the takedown form</Link> or email <a href="mailto:marcus@vle.exchange">marcus@vle.exchange</a>. Takedown requests are honoured within 5 business days.</p>
       </section>
       <div className={styles.sourceNote}>
         <p>Sources: <a href="https://www.kasandrinos.com/">Kasandrinos</a> product pages and <a href={kasandrinosTransparencyUrl}>Transparency page</a>. Documents checked 19 October 2026. Document labels use dates stated in the documents.</p>

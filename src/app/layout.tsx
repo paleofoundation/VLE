@@ -35,6 +35,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <span className="brandName">Verified Lot Exchange</span>
           </Link>
           <nav aria-label="Main navigation">
+            <Link href="/documents">Documents</Link>
             <Link href="/for-suppliers">For Suppliers</Link>
             <Link href="/for-buyers">For Buyers</Link>
             <Link href="/for-laboratories">For Laboratories</Link>

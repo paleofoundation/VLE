@@ -19,7 +19,7 @@ export default async function DocumentsPage({ searchParams }: { searchParams: Pr
         <span className={styles.chip}>{d.docType}</span><h2><Link href={`/suppliers/${s.slug}`}>{s.displayName}</Link></h2>
         <p><strong>{d.productName ?? "Product not stated"}</strong><br />Lot / batch: {d.lotOrBatch ?? "Not stated"}</p><p>{d.testsText}</p>
         <p>{d.labName ?? "Lab not named on document"}<br />Accreditation as stated: {d.labAccreditationAsStated ?? "Not stated"}</p>
-        <p>Report date: {d.reportDate ?? d.reportDateText ?? "Not stated"}</p><DocumentSourceLabel domain={d.sourceDomain} date={d.foundAt} sourcePageUrl={d.sourcePageUrl} />
+        <p>Report date: {d.reportDate ?? d.reportDateText ?? "Not stated"}</p>{d.supplierReported ? <small>Supplier-reported. Not a VLE-verified result.</small> : <DocumentSourceLabel domain={d.sourceDomain} date={d.foundAt} sourcePageUrl={d.sourcePageUrl} />}
         {d.linkState === "LIVE" ? <a className="textLink" href={d.sourceUrl} rel="nofollow noopener noreferrer">Open original document ↗</a> : <p>No longer published by supplier</p>}
       </article>)}</div> : <p className={styles.empty}>No documents match these filters.</p>}
     </div></div>

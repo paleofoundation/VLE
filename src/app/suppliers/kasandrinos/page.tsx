@@ -1,4 +1,8 @@
 import Link from "next/link";
+import GenericSupplierPage from "../[slug]/page";
+import { notFound } from "next/navigation";
+import { PublicCertifications } from "@/components/listing/certifications";
+import { getSupplier } from "@/lib/public-listings";
 import { publicPageMetadata } from "@/lib/seo";
 import {
   supplierDocumentNotice,
@@ -25,7 +29,11 @@ const lotSteps = [
   { title: "Reserved", detail: "Awaiting qualification and a recorded reservation." },
 ] as const;
 
-export default function KasandrinosSupplierPage() {
+export const dynamic = "force-dynamic";
+export default async function KasandrinosSupplierPage() {
+  const profile = await getSupplier("kasandrinos");
+  if (!profile) notFound();
+  if (profile.listingSource === "MEMBER") return GenericSupplierPage({ params: Promise.resolve({ slug: "kasandrinos" }), searchParams: Promise.resolve({}) });
   return (
     <main id="main-content" className={styles.profile}>
       <aside className={styles.profileBanner} aria-label="Profile listing status">
@@ -104,6 +112,7 @@ export default function KasandrinosSupplierPage() {
         </ul>
       </section>
 
+      <PublicCertifications profileId={profile.id} />
       <section className={styles.lotSection} id="vle-lot" aria-labelledby="lot-heading">
         <div className={styles.lotIntro}>
           <p className="eyebrow eyebrowLight">Lot-specific evidence</p>

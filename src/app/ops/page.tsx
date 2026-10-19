@@ -82,6 +82,8 @@ export default async function OpsPage() {
 
   return (
     <main id="main-content" className="opsPage">
+      <Link className="textLink" href="/ops/supplier-sampling">Supplier TECRID requests →</Link>
+      <Link className="textLink" href="/ops/certifications">Review supplier certifications →</Link>
       <section className="opsHero">
         <div>
           <p className="eyebrow">Managed cocoa + avocado fruit pilots</p>

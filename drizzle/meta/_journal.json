@@ -64,6 +64,13 @@
       "when": 1792399229379,
       "tag": "0008_supplier_self_listing",
       "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "7",
+      "when": 1792399652342,
+      "tag": "0009_brand_supplier_requests",
+      "breakpoints": true
     }
   ]
 }

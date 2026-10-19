@@ -1,3 +1,7 @@
+import { getDb } from "@/db";
+import { eq } from "drizzle-orm";
+import { supplierProfiles } from "@/db/schema";
+import { SupplierRequestLinks } from "@/components/listing/request-links";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -17,7 +21,7 @@ export async function generateMetadata({ params }: PageProps<"/lots/[slug]">): P
   const { slug } = await params;
   const listing = await getListing(slug);
   return listing
-    ? { title: `${listing.lotCode} — Passed ${listing.profileName} v${listing.profileVersion} | VLE` }
+    ? { title: `${listing.lotCode}  |  Passed ${listing.profileName} v${listing.profileVersion} | VLE` }
     : { title: "Lot unavailable | VLE" };
 }
 
@@ -25,9 +29,11 @@ export default async function LotPage({ params }: PageProps<"/lots/[slug]">) {
   const { slug } = await params;
   const listing = await getListing(slug);
   if (!listing) notFound();
+  const profile = await getDb().query.supplierProfiles.findFirst({ where: eq(supplierProfiles.organizationId, listing.supplierOrganizationId) });
 
   return (
     <main id="main-content" className="lotDetailPage">
+      {profile && !profile.hidden ? <SupplierRequestLinks slug={profile.slug} member={profile.listingSource === "MEMBER"} lotId={listing.physicalLotId} /> : null}
       <div className="detailBreadcrumb">
         <Link className="back" href="/">Passed lots</Link>
         <span aria-hidden="true">/</span>

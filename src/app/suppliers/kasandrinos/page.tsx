@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { PublicCertifications } from "@/components/listing/certifications";
 import { getSupplier } from "@/lib/public-listings";
 import { publicPageMetadata } from "@/lib/seo";
 import {
@@ -29,7 +30,8 @@ const lotSteps = [
 
 export const dynamic = "force-dynamic";
 export default async function KasandrinosSupplierPage() {
-  if (!await getSupplier("kasandrinos")) notFound();
+  const profile = await getSupplier("kasandrinos");
+  if (!profile) notFound();
   return (
     <main id="main-content" className={styles.profile}>
       <aside className={styles.profileBanner} aria-label="Profile listing status">
@@ -108,6 +110,7 @@ export default async function KasandrinosSupplierPage() {
         </ul>
       </section>
 
+      <PublicCertifications profileId={profile.id} />
       <section className={styles.lotSection} id="vle-lot" aria-labelledby="lot-heading">
         <div className={styles.lotIntro}>
           <p className="eyebrow eyebrowLight">Lot-specific evidence</p>

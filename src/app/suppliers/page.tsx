@@ -1,52 +1,24 @@
 import Link from "next/link";
-import { PageStructuredData } from "../page-structured-data";
-import { TecridVerificationNudge } from "../tecrid-nudge";
+import { listSuppliers } from "@/lib/public-listings";
+import { listingFilters, type SearchValues } from "@/domain/listing-filters";
+import { ListingFiltersForm } from "@/components/listing/filters";
+import styles from "@/components/listing/directory.module.css";
 import { publicPageMetadata } from "@/lib/seo";
-import { seoJsonLdPages } from "@/lib/structured-data";
-import styles from "./suppliers.module.css";
-
-const page = seoJsonLdPages["/suppliers"];
-
-export const metadata = publicPageMetadata("/suppliers", page.name, page.description);
-
-export default function SupplierProfilesPage() {
-  return (
-    <main id="main-content" className="supplierProfilePage">
-      <PageStructuredData path="/suppliers" />
-      <section className="articleHero" aria-labelledby="supplier-profiles-heading">
-        <div>
-          <p className="eyebrow eyebrowLight">Supplier profiles</p>
-          <h1 id="supplier-profiles-heading">Meet the supplier. Follow the evidence.</h1>
-          <p>Explore supplier products, published source documents, and the status of their VLE lots. A supplier profile does not establish lot qualification.</p>
-        </div>
-      </section>
-      <section className={styles.directory} aria-label="Supplier directory">
-        <Link className={styles.card} href="/suppliers/kasandrinos">
-          <div className={styles.copy}>
-            <p className="eyebrow">Greece · Organic extra virgin olive oil</p>
-            <h2>Kasandrinos</h2>
-            <p className={styles.legalName}>Kasandrinos International LLC</p>
-            <p>Family-grown olive oil from Greece. Products, brand-published certifications and test reports, and a pending VLE lot.</p>
-            <span className={styles.status}>VLE lot: Pending</span>
-            <span className="textLink">View supplier profile <span aria-hidden="true">↗</span></span>
-          </div>
-        </Link>
-      </section>
-      <TecridVerificationNudge surface="profile" />
-      <section className="supplierProfileBody">
-        <h2>What a profile shows</h2>
-        <ul>
-          <li>The supplier organization name.</li>
-          <li>Contaminant documents attached to that organization&apos;s lots or to a compliance profile, if any exist.</li>
-          <li>The TECRID verification recommendation and any recorded lot-specific evidence.</li>
-        </ul>
-        <p>Brand-published documents are labeled separately from VLE lot evidence. An empty document list on a profile means no file has been recorded.</p>
-        <div className="actions">
-          <Link className="button buttonDark" href="/for-suppliers">Supplier onboarding</Link>
-          <Link className="textLink" href="/contaminants">Documentation types</Link>
-          <Link className="textLink" href="/access">Request reviewed access</Link>
-        </div>
-      </section>
-    </main>
-  );
+import { PageStructuredData } from "../page-structured-data";
+export const dynamic = "force-dynamic";
+export const metadata = publicPageMetadata("/suppliers", "Ingredient suppliers with public documents | VLE", "Browse supplier-published ingredient documents freely. Filter by category, reported tests and date. Supplier-published documents are not VLE-verified results.");
+export default async function SuppliersPage({ searchParams }: { searchParams: Promise<SearchValues> }) {
+  const filters = listingFilters(await searchParams);
+  const [suppliers, all] = await Promise.all([listSuppliers(filters), listSuppliers()]);
+  const countries = [...new Set(all.map((s) => s.country).filter((s): s is string => !!s))].sort();
+  return <main id="main-content" className={styles.page}>
+    <PageStructuredData path="/suppliers" />
+    <header className={styles.hero}><p className="eyebrow">Ingredient sourcing / public evidence</p><h1>Find suppliers with documents.</h1><p>Read original supplier-published files freely. Each document names its source. Lot qualification requires separate VLE evidence.</p></header>
+    <div className={styles.layout}><ListingFiltersForm filters={filters} countries={countries} /><div><p className={styles.results}>{suppliers.length} suppliers match these filters</p>
+      {suppliers.length ? <div className={styles.cards}>{suppliers.map((s) => <article className={styles.card} key={s.id}>
+        <span className={styles.chip}>{s.listingSource === "MEMBER" ? "VLE member" : "Listed from public documents"}</span><h2><Link href={`/suppliers/${s.slug}`}>{s.displayName}</Link></h2>
+        <p>{s.country ?? "Country not stated"}<br />{s.categories.join(" · ")}</p><div className={styles.metrics}><span><strong>{s.productCount}</strong>products in documents</span><span><strong>{s.documentCount}</strong>public documents</span></div>
+        <p>Latest report: {s.latestReportDate ?? "Date not stated"}</p><Link className="textLink" href={`/suppliers/${s.slug}`}>View profile →</Link>
+      </article>)}</div> : <p className={styles.empty}>No suppliers match these filters.</p>}</div></div>
+  </main>;
 }

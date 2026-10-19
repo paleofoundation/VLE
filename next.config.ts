@@ -2,7 +2,6 @@ import type { NextConfig } from "next";
 import { publicRobotsHeaders, wwwToApexRedirects } from "./src/lib/site";
 
 const nextConfig: NextConfig = {
-  turbopack: { root: __dirname },
   async redirects() {
     return [
       {

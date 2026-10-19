@@ -2,13 +2,15 @@ import type { NextConfig } from "next";
 import { publicRobotsHeaders, wwwToApexRedirects } from "./src/lib/site";
 
 const nextConfig: NextConfig = {
+  turbopack: { root: __dirname },
   async redirects() {
     return [
       {
         source: "/pricing",
-        destination: "/join",
+        destination: "/for-suppliers",
         statusCode: 301,
       },
+      ...[["/access", "/sign-in"], ["/find", "/suppliers"], ["/join", "/for-suppliers"], ["/buyer", "/dashboard/brand"], ["/supplier", "/dashboard/supplier"], ["/for-buyers", "/suppliers"]].map(([source, destination]) => ({source, destination, statusCode: 301 as const})),
       ...wwwToApexRedirects(),
     ];
   },

@@ -72,7 +72,7 @@ export function isIndexedPublicPath(path: string) {
 }
 
 export function skipsClerkHandshake(path: string) {
-  if (path.startsWith("/suppliers/")) return true;
+  if (path.startsWith("/suppliers/") || ["/about", "/contact", "/claim", "/takedown"].includes(path)) return true;
   return (PUBLIC_PATHS_WITHOUT_CLERK as readonly string[]).includes(path);
 }
 

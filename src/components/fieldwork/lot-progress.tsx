@@ -1,0 +1,2 @@
+const steps=["Lot","Sample","TECRID","QUALIFIED","Reserved"] as const;
+export function LotProgress({completed=[]}:{completed?:string[]}){return <ol className="fw-lot-progress" aria-label="VLE lot progression">{steps.map((s,i)=><li key={s} data-complete={completed.includes(s)}><span className="fw-step-number">{completed.includes(s)?"✓":String(i+1).padStart(2,"0")}</span><strong>{s}</strong><small>{completed.includes(s)?"Recorded":"Pending"}</small></li>)}</ol>}

@@ -1,0 +1,60 @@
+{
+  "checked": "2026-10-19",
+  "source": "https://www.kasandrinos.com/pages/transparency-1",
+  "assets": [
+    {
+      "name": "100ml",
+      "path": "public/suppliers/kasandrinos/100ml.jpg",
+      "url": "https://cdn.shopify.com/s/files/1/0128/0914/2330/files/Product-100mlBottle.jpg?v=1786644398&width=800",
+      "productUrl": "https://www.kasandrinos.com/products/1-100ml-glass-bottle",
+      "title": "100ml Bottle - Organic EVOO"
+    },
+    {
+      "name": "250ml",
+      "path": "public/suppliers/kasandrinos/250ml.png",
+      "url": "https://cdn.shopify.com/s/files/1/0128/0914/2330/files/250mlBottleFront_Kasandrinos.png?v=1734193711&width=800",
+      "productUrl": "https://www.kasandrinos.com/products/1-250ml-glass-bottle",
+      "title": "250ml Bottle - Organic EVOO"
+    },
+    {
+      "name": "500ml",
+      "path": "public/suppliers/kasandrinos/500ml.png",
+      "url": "https://cdn.shopify.com/s/files/1/0128/0914/2330/files/500mlBottleFront_Kasandrinos.png?v=1734193640&width=800",
+      "productUrl": "https://www.kasandrinos.com/products/1-500-ml-glass-bottle",
+      "title": "500ml Bottle - Organic EVOO"
+    },
+    {
+      "name": "1l",
+      "path": "public/suppliers/kasandrinos/1l.png",
+      "url": "https://cdn.shopify.com/s/files/1/0128/0914/2330/files/1LBottleFront_Kasandrinos.png?v=1734193328&width=800",
+      "productUrl": "https://www.kasandrinos.com/products/1-1-liter-glass-bottle",
+      "title": "1L Bottle - Organic EVOO"
+    },
+    {
+      "name": "3l-can",
+      "path": "public/suppliers/kasandrinos/3l-can.jpg",
+      "url": "https://cdn.shopify.com/s/files/1/0128/0914/2330/files/3LFront_2026.jpg?v=1765991626&width=800",
+      "productUrl": "https://www.kasandrinos.com/products/1-3-liter-can",
+      "title": "3L Can - Organic EVOO"
+    },
+    {
+      "name": "3l-bag-in-box",
+      "path": "public/suppliers/kasandrinos/3l-bag-in-box.png",
+      "url": "https://cdn.shopify.com/s/files/1/0128/0914/2330/files/3LBiBSpoutFrontWRAPPED.png?v=1768684460&width=800",
+      "productUrl": "https://www.kasandrinos.com/products/1-3-liter-bag-in-a-box",
+      "title": "3L Bag in a Box - Organic EVOO"
+    },
+    {
+      "name": "travel-packets",
+      "path": "public/suppliers/kasandrinos/travel-packets.jpg",
+      "url": "https://cdn.shopify.com/s/files/1/0128/0914/2330/files/2_63728a4f-2dfd-442b-967a-c4d04324d20f.jpg?v=1768686511&width=800",
+      "productUrl": "https://www.kasandrinos.com/products/box-of-20-travel-packets",
+      "title": "12ml Travel Packets (20) - Organic EVOO"
+    },
+    {
+      "name": "logo",
+      "path": "public/suppliers/kasandrinos/logo.png",
+      "url": "https://www.kasandrinos.com/cdn/shop/files/Kasandrinos-Logo-Brown_3x_e2e820ac-500f-4369-aeb0-9201b796fef1.png?v=1614323353&width=600"
+    }
+  ]
+}

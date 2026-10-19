@@ -28,6 +28,7 @@ const publicCatalog = [
   "/join",
   "/contaminants",
   "/suppliers",
+  "/suppliers/kasandrinos",
   "/articles",
   "/articles/not-a-supplier-directory",
   "/articles/tested-without-a-public-result",
@@ -62,7 +63,7 @@ describe("public search catalog", () => {
   });
 
   it("keeps commercial money pages indexable and off the Clerk handshake", () => {
-    for (const path of ["/for-suppliers", "/for-buyers", "/for-laboratories"] as const) {
+    for (const path of ["/for-suppliers", "/for-buyers", "/for-laboratories", "/suppliers/kasandrinos"] as const) {
       expect(isPublicSitemapPath(path)).toBe(true);
       expect(skipsClerkHandshake(path)).toBe(true);
       expect(publicPageMetadata(path, "Title", "Description").robots).toEqual({ index: true, follow: true });

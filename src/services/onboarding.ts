@@ -20,6 +20,6 @@ export async function completeOnboarding(identity: SignupIdentity, input: unknow
     await tx.insert(memberships).values({ userId: user.id, organizationId: org.id, role: data.role, companyRole: data.companyRole });
     if (data.role === "SUPPLIER") await tx.insert(supplierProfiles).values({ organizationId: org.id, slug, displayName: data.companyName, website: data.website, country: data.country, categories: data.categories, listingSource: "MEMBER", claimStatus: "CLAIMED", hidden: true });
     await appendAuditEvent(tx, { userId: user.id, organizationId: org.id, roles: [data.role] }, { eventType: "SELF_SERVE_ONBOARDING", entityType: "organization", entityId: org.id, data: { kind: data.role, website: data.website, country: data.country, companyRole: data.companyRole } });
-    return data.role === "SUPPLIER" ? "/supplier" : "/buyer";
+    return data.role === "SUPPLIER" ? "/supplier/certifications?onboarding=1" : "/buyer";
   });
 }

@@ -1,0 +1,7 @@
+import { expect, it } from "vitest";
+import { onboardingSchema, safeNext, websiteEmailMatches } from "../onboarding";
+const valid = { role: "SUPPLIER", companyName: "A supplier", website: "https://example.com", country: "Greece", companyRole: "Owner", categories: ["Olive oil"] };
+it("permits only supplier and brand roles", () => { expect(onboardingSchema.safeParse(valid).success).toBe(true); expect(onboardingSchema.safeParse({ ...valid, role: "ADMIN" }).success).toBe(false); expect(onboardingSchema.safeParse({ ...valid, role: "OPS" }).success).toBe(false); });
+it("requires supplier categories and HTTPS websites", () => { expect(onboardingSchema.safeParse({ ...valid, categories: [] }).success).toBe(false); expect(onboardingSchema.safeParse({ ...valid, website: "javascript:alert(1)" }).success).toBe(false); expect(onboardingSchema.safeParse({ ...valid, role: "BUYER", categories: [] }).success).toBe(true); });
+it("rejects external redirects and auth loops", () => { for (const v of ["https://evil.test", "//evil.test", "/\\evil.test", "/sign-in", "/onboarding?next=x"]) expect(safeNext(v)).toBeNull(); expect(safeNext("/suppliers?category=Rice")).toBe("/suppliers?category=Rice"); });
+it("matches exact company domains without suffix attacks", () => { expect(websiteEmailMatches("https://www.example.com", "owner@example.com")).toBe(true); expect(websiteEmailMatches("https://example.com", "owner@fake-example.com")).toBe(false); expect(websiteEmailMatches("invalid", "owner@example.com")).toBe(false); });

@@ -1,52 +1,32 @@
 import Link from "next/link";
-import { cancelReservationAction, createQuoteAction, transitionQuoteAction } from "@/app/commercial-actions";
-import { TecridVerificationNudge } from "../tecrid-nudge";
-import { SupplierContaminantDesk } from "./contaminant-desk";
+import { eq } from "drizzle-orm";
+import { getDb } from "@/db";
+import { supplierProducts, supplierLots, publicDocuments, supplierSamplingRequests } from "@/db/schema";
 import { getCurrentPageActor } from "@/lib/page-actor";
-import { formatQuantity } from "@/lib/presentation";
-import { listCommercialWorkspace } from "@/services/commercial";
-import { listSupplierContaminantDesk } from "@/services/contaminants";
-
+import { ownSupplierProfile } from "@/services/certifications";
+import { publicSupplierLots } from "@/services/supplier-self-listing";
+import { CATEGORIES, DOCUMENT_TYPES, ANALYTES } from "@/domain/public-listings";
+import { LotStatusSteps } from "@/components/listing";
+import { SupplierWriteForm } from "./write-form";
+import styles from "@/components/listing/directory.module.css";
 export const dynamic = "force-dynamic";
-
-const date = (value: Date) => new Intl.DateTimeFormat("en", { dateStyle: "medium", timeStyle: "short", timeZone: "UTC" }).format(value);
-
-export default async function SupplierDeskPage() {
+export default async function SupplierDashboard() {
   const actor = await getCurrentPageActor();
-  if (!actor.roles.some((role) => role === "SUPPLIER" || role === "OPS" || role === "ADMIN")) {
-    return <main id="main-content" className="accessPage"><div className="accessCard"><span className="mono">AUTHZ / SUPPLIER</span><h1>Supplier access required.</h1><Link className="textLink" href="/">Return to the public shelf</Link></div></main>;
-  }
-  const [workspace, contaminantDesk] = await Promise.all([
-    listCommercialWorkspace(actor, "SUPPLIER"),
-    actor.roles.includes("SUPPLIER") ? listSupplierContaminantDesk(actor) : Promise.resolve(null),
+  if (!actor.roles.includes("SUPPLIER")) return <main id="main-content" className={styles.page}><h1>Supplier account required</h1><Link href="/">Return home</Link></main>;
+  const profile = await ownSupplierProfile(actor);
+  const [products, lots, documents, requests, publicLots] = await Promise.all([
+    getDb().select().from(supplierProducts).where(eq(supplierProducts.supplierProfileId, profile.id)),
+    getDb().select().from(supplierLots).where(eq(supplierLots.supplierProfileId, profile.id)),
+    getDb().select({ id: publicDocuments.id, productName: publicDocuments.productName, docType: publicDocuments.docType }).from(publicDocuments).where(eq(publicDocuments.supplierProfileId, profile.id)),
+    getDb().select().from(supplierSamplingRequests).where(eq(supplierSamplingRequests.supplierProfileId, profile.id)), publicSupplierLots(profile.id),
   ]);
-  const requirements = new Map(workspace.requirements.map((item) => [item.id, item]));
-  return (
-    <main id="main-content" className="commercialPage">
-      <Link className="button buttonDark" href="/supplier/certifications">Manage certifications</Link>
-      <section className="commercialHero"><div><p className="eyebrow">Supplier desk · Cocoa powder</p><h1>Matched demand and quotes</h1><p className="sectionLead">Quote only against an eligible listing. Quote acceptance and reservation intent never override listing eligibility or create an Order.</p></div><Link className="textLink" href="/ops/commercial">Commercial operations →</Link></section>
-      <section className="commercialBoard">
-        <div className="boardHeading"><div><p className="eyebrow">Matched requirements</p><h2>Quote queue</h2></div><p>Draft and sent quotes expire automatically. Withdrawn, expired, and accepted states are terminal.</p></div>
-        <div className="commercialList">
-          {workspace.matches.map((match) => {
-            const requirement = requirements.get(match.requirementId);
-            const quotes = workspace.quotes.filter((quote) => quote.requirementMatchId === match.id);
-            const hasOpenQuote = quotes.some(({ status }) => status === "DRAFT" || status === "SENT" || status === "ACCEPTED");
-            return <article className="commercialCard" key={match.id}>
-              <div className="commercialCardHead"><div><span className={`stateChip ${match.status === "ACTIVE" ? "state-qualified" : "state-unlisted"}`}>{match.status} match</span><h3>{match.lotCode}</h3><p>{requirement ? `${formatQuantity(requirement.quantity)} ${requirement.quantityUnit} to ${requirement.destination}` : "Buyer requirement"}</p></div><time>{date(match.matchedAt)}</time></div>
-              {match.status === "ACTIVE" && !hasOpenQuote && requirement ? <form action={createQuoteAction} className="quoteForm"><input type="hidden" name="requirementMatchId" value={match.id} /><input type="hidden" name="currency" value="USD" /><label>Quote quantity <span>kg</span><input name="quantity" type="number" min={Number(requirement.quantity)} max={Number(match.quantity)} defaultValue={Number(requirement.quantity)} step="1" required /></label><label>Unit price <span>USD / kg</span><input name="unitPrice" type="number" min="0.0001" step="0.0001" required placeholder="4.2500" /></label><label>Quote expiry<select name="expiresInHours" defaultValue="48"><option value="24">24 hours</option><option value="48">48 hours</option><option value="72">72 hours</option></select></label><label className="wideField">Terms <span>optional</span><input name="terms" maxLength={1000} placeholder="Packaging or commercial notes; no freight booking" /></label><button className="button buttonSmall" type="submit">Create draft quote</button></form> : null}
-              {quotes.map((quote) => {
-                const reservation = workspace.reservations.find((item) => item.supplierQuoteId === quote.id);
-                return <div className="quoteRow" key={quote.id}><div><span className={`stateChip state-${quote.status.toLowerCase()}`}>Quote {quote.status}</span><strong>{quote.currency} {Number(quote.unitPrice).toFixed(2)} / {quote.quantityUnit}</strong><small>{formatQuantity(quote.quantity)} {quote.quantityUnit} · expires {date(quote.expiresAt)}</small></div><div className="commercialActions">{quote.status === "DRAFT" ? <><form action={transitionQuoteAction}><input type="hidden" name="quoteId" value={quote.id} /><input type="hidden" name="to" value="SENT" /><button className="button buttonSmall" type="submit">Send quote</button></form><form action={transitionQuoteAction}><input type="hidden" name="quoteId" value={quote.id} /><input type="hidden" name="to" value="WITHDRAWN" /><button className="textButton" type="submit">Withdraw</button></form></> : null}{quote.status === "SENT" ? <form action={transitionQuoteAction}><input type="hidden" name="quoteId" value={quote.id} /><input type="hidden" name="to" value="WITHDRAWN" /><button className="textButton" type="submit">Withdraw quote</button></form> : null}{reservation ? <div className="reservationRecord"><span className={`stateChip state-${reservation.status.toLowerCase()}`}>Intent {reservation.status}</span><small>{reservation.statusReason ?? `Expires ${date(reservation.expiresAt)}`}</small>{reservation.status === "ACTIVE" ? <form action={cancelReservationAction}><input type="hidden" name="reservationId" value={reservation.id} /><input type="hidden" name="reason" value="Cancelled by supplier" /><button className="textButton" type="submit">Cancel intent</button></form> : null}</div> : null}</div></div>;
-              })}
-              {match.status === "INVALIDATED" ? <p className="warningText">No new quote is permitted: {match.invalidationReason}</p> : null}
-            </article>;
-          })}
-          {!workspace.matches.length ? <div className="opsEmpty"><span className="mono">PILOT GATE / ELIGIBLE MATCH</span><h3>Quote queue ready; eligibility handoff pending.</h3><p>Supplier quoting opens only after operations binds a reviewed cocoa requirement to one of your currently eligible public listings. An empty queue means that gate has not been bypassed.</p></div> : null}
-        </div>
-      </section>
-      <TecridVerificationNudge surface="profile" />
-      {contaminantDesk ? <SupplierContaminantDesk desk={contaminantDesk} /> : <p className="sectionLead">Contaminant documents are attached by the supplier organization from this desk. Operations can read them on the lot workflow.</p>}
-    </main>
-  );
+  const productFields = (p?: typeof products[number]) => <><input type="hidden" name="id" value={p?.id ?? ""} /><label>Product name<input name="name" required defaultValue={p?.name} maxLength={200} /></label><label>Ingredient<input name="ingredient" required defaultValue={p?.ingredient} maxLength={200} /></label><label>Form<input name="form" defaultValue={p?.form ?? ""} maxLength={300} /></label><label>Origin<input name="origin" defaultValue={p?.origin ?? ""} maxLength={300} /></label></>;
+  const lotFields = (lot?: typeof lots[number]) => <><input type="hidden" name="id" value={lot?.id ?? ""} /><label>Product<select name="productId" required defaultValue={lot?.productId}>{products.map((p) => <option key={p.id} value={p.id}>{p.name}</option>)}</select></label><label>Lot or batch ID<input name="supplierLotCode" required defaultValue={lot?.supplierLotCode} maxLength={160} /></label><label>Quantity available (optional)<input name="quantity" inputMode="decimal" defaultValue={lot?.quantity ?? ""} /></label><label>Quantity unit<input name="quantityUnit" defaultValue={lot?.quantityUnit ?? ""} maxLength={30} /></label><label>Stock location<input name="locationName" defaultValue={lot?.locationName ?? ""} maxLength={300} /></label><label>Two-letter stock country code<input name="countryCode" defaultValue={lot?.countryCode ?? ""} maxLength={2} /></label><label>Owner or authorizer<input name="ownerName" defaultValue={lot?.ownerName ?? ""} maxLength={300} /></label></>;
+  return <main id="main-content" className={styles.page}><header className={styles.hero}><p className="eyebrow">Supplier workspace</p><h1>Your ingredients, ready to find.</h1><p>{profile.hidden ? "Your profile is not public." : "Your profile is published."} Supplier-reported documents do not establish lot qualification.</p><div className={styles.actions}><Link className="textLink" href="/supplier/certifications">Certifications</Link><Link className="textLink" href="/supplier/commercial">Commercial desk</Link>{!profile.hidden ? <Link className="textLink" href={`/suppliers/${profile.slug}`}>View public profile</Link> : null}</div></header>
+    <section className={styles.section}><h2>Company profile</h2><SupplierWriteForm operation="profile"><label>Display name<input name="displayName" defaultValue={profile.displayName} required maxLength={160} /></label><label>Profile URL slug<input name="slug" defaultValue={profile.slug} readOnly={!!profile.publishedAt || profile.listingSource === "PUBLIC_DOCUMENTS"} required pattern="[a-z0-9]+(-[a-z0-9]+)*" maxLength={100} /></label><label>Country<input name="country" defaultValue={profile.country ?? ""} required maxLength={120} /></label><label>Website<input name="website" type="url" defaultValue={profile.website ?? ""} required /></label><label>One-line factual About<input name="about" defaultValue={profile.about ?? ""} maxLength={500} /></label><fieldset><legend>Categories</legend>{CATEGORIES.map((c) => <label key={c}><input type="checkbox" name="categories" value={c} defaultChecked={profile.categories.includes(c)} /> {c} </label>)}</fieldset></SupplierWriteForm>
+    <SupplierWriteForm operation="publish" button={profile.hidden ? "Publish profile" : "Unpublish profile"}><input type="hidden" name="publish" value={String(profile.hidden)} /><p>Publishing makes your company profile, products, lots and supplier-reported documents public. It does not qualify a lot.</p></SupplierWriteForm></section>
+    <section className={styles.section}><h2>Products</h2>{products.map((p) => <details key={p.id}><summary>{p.name}</summary><SupplierWriteForm operation="product">{productFields(p)}</SupplierWriteForm></details>)}<details><summary>Add a product</summary><SupplierWriteForm operation="product" button="Add product">{productFields()}</SupplierWriteForm></details></section>
+    <section className={styles.section}><h2>Lots</h2>{lots.map((lot) => { const live = publicLots.find((l) => l.id === lot.id); const request = requests.find((r) => r.supplierLotId === lot.id); return <article className={styles.card} key={lot.id}><h3>{lot.supplierLotCode}</h3><p>{lot.quantity ? `${lot.quantity} ${lot.quantityUnit ?? ""}` : "Quantity not stated"}. Status: {live?.status ?? "Physical lot not created"}</p><LotStatusSteps records={live?.records} />{!lot.physicalLotId ? <details><summary>Edit lot details</summary><SupplierWriteForm operation="lot">{lotFields(lot)}</SupplierWriteForm></details> : null}<SupplierWriteForm operation="sampling" button="Get a TECRID for this lot"><input type="hidden" name="lotId" value={lot.id} /><p>{request?.samplingOrderId ? "Sampling requested. Operations will arrange the next step." : request ? "Request queued for operations. Complete the inventory details and request again to start sampling." : "Request independent sampling. Unknown inventory details stay blank."}</p></SupplierWriteForm></article>; })}{products.length ? <details><summary>Add a lot</summary><SupplierWriteForm operation="lot" button="Add lot">{lotFields()}</SupplierWriteForm></details> : <p>Add a product before adding a lot.</p>}</section>
+    <section className={styles.section}><h2>Documents</h2>{documents.map((d) => <p key={d.id}>{d.productName}: {d.docType}</p>)}{products.length ? <details><summary>Add an original document link</summary><SupplierWriteForm operation="document" button="Add document"><label>Product<select name="productId" required>{products.map((p) => <option key={p.id} value={p.id}>{p.name}</option>)}</select></label><label>Lot (optional)<select name="supplierLotId"><option value="">Not lot-specific</option>{lots.map((l) => <option key={l.id} value={l.id}>{l.supplierLotCode}</option>)}</select></label><label>Document type<select name="docType">{DOCUMENT_TYPES.map((t) => <option key={t}>{t}</option>)}</select></label><label>Original document URL<input type="url" name="sourceUrl" required /></label><label>Supplier page publishing this file<input type="url" name="sourcePageUrl" /></label><label>Tests as reported<input name="testsText" maxLength={2000} /></label><label>Laboratory<input name="labName" maxLength={300} /></label><label>Accreditation as stated<input name="labAccreditationAsStated" maxLength={300} /></label><label>Report date<input type="date" name="reportDate" /></label><fieldset><legend>Analytes stated in the document</legend>{ANALYTES.map((a) => <label key={a}><input name="analytes" type="checkbox" value={a} /> {a} </label>)}</fieldset></SupplierWriteForm></details> : <p>Add a product before adding a document.</p>}</section>
+  </main>;
 }

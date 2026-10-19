@@ -78,6 +78,13 @@
       "when": 1792400700000,
       "tag": "0010_astra_requests_events",
       "breakpoints": true
+    },
+    {
+      "idx": 11,
+      "version": "7",
+      "when": 1792401000000,
+      "tag": "0011_astra_brand_requirements",
+      "breakpoints": true
     }
   ]
 }

@@ -1,10 +1,10 @@
 import { Pool } from "@neondatabase/serverless";
 import { drizzle } from "drizzle-orm/neon-serverless";
 import * as schema from "./schema";
-import {scopedDatabaseUrl} from "./preview-scope";
+import {scopedDatabaseUrl,astraPreviewSchema} from "./preview-scope";
 
 function createDb() {
-  const databaseUrl = process.env.DATABASE_URL;
+  const databaseUrl = astraPreviewSchema(process.env) ? process.env.ASTRA_PREVIEW_DATABASE_URL ?? process.env.DATABASE_URL_UNPOOLED ?? process.env.DATABASE_URL : process.env.DATABASE_URL;
   if (!databaseUrl) throw new Error("DATABASE_URL is required");
   return drizzle(new Pool({ connectionString: scopedDatabaseUrl(databaseUrl,process.env) }), { schema });
 }

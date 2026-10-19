@@ -15,7 +15,8 @@
     "db:migrate": "dotenv -e .env.local -- drizzle-kit migrate",
     "db:seed": "dotenv -e .env.local -- tsx scripts/seed.ts",
     "db:setup": "npm run db:migrate && npm run db:seed",
-    "access:bootstrap": "dotenv -e .env.local -- tsx scripts/bootstrap-clerk-ops.ts"
+    "access:bootstrap": "dotenv -e .env.local -- tsx scripts/bootstrap-clerk-ops.ts",
+    "prebuild": "node --import tsx scripts/sync-faq-sourcing.mts"
   },
   "dependencies": {
     "@clerk/nextjs": "^7.9.1",

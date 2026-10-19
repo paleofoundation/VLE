@@ -231,7 +231,7 @@ export const supplierProfiles = pgTable("supplier_profiles", {
   id: id(), organizationId: uuid("organization_id").unique().references(() => organizations.id),
   slug: text("slug").notNull().unique(), displayName: text("display_name").notNull(),
   country: text("country"), website: text("website"), categories: text("categories").array().notNull().default(sql`'{}'::text[]`),
-  certificationsShown: text("certifications_shown"),
+  certificationsShown: text("certifications_shown"), about: text("about"), publishedAt: timestamp("published_at", { withTimezone: true }),
   listingSource: listingSourceEnum("listing_source").notNull().default("PUBLIC_DOCUMENTS"),
   claimStatus: claimStatusEnum("claim_status").notNull().default("UNCLAIMED"),
   hidden: boolean("hidden").notNull().default(false), createdAt: createdAt(),
@@ -239,6 +239,7 @@ export const supplierProfiles = pgTable("supplier_profiles", {
 
 export const publicDocuments = pgTable("public_documents", {
   id: id(), supplierProfileId: uuid("supplier_profile_id").notNull().references(() => supplierProfiles.id),
+  supplierReported: boolean("supplier_reported").notNull().default(false),
   productName: text("product_name"), lotOrBatch: text("lot_or_batch"),
   docType: publicDocumentTypeEnum("doc_type").notNull(), testsText: text("tests_text"),
   analytes: text("analytes").array().notNull().default(sql`'{}'::text[]`), labName: text("lab_name"),
@@ -262,4 +263,21 @@ export const certificationSuggestions = pgTable("certification_suggestions", {
   id: id(), supplierProfileId: uuid("supplier_profile_id").notNull().references(() => supplierProfiles.id),
   certificationKey: text("certification_key").notNull(), note: text("note").notNull(),
   createdByUserId: uuid("created_by_user_id").notNull().references(() => users.id), createdAt: createdAt(),
+});
+
+export const supplierProducts = pgTable("supplier_products", {
+  id: id(), supplierProfileId: uuid("supplier_profile_id").notNull().references(() => supplierProfiles.id),
+  name: text("name").notNull(), ingredient: text("ingredient").notNull(), form: text("form"), origin: text("origin"), createdAt: createdAt(),
+});
+export const supplierLots = pgTable("supplier_lots", {
+  id: id(), supplierProfileId: uuid("supplier_profile_id").notNull().references(() => supplierProfiles.id),
+  productId: uuid("product_id").notNull().references(() => supplierProducts.id), supplierLotCode: text("supplier_lot_code").notNull(),
+  quantity: numeric("quantity", { precision: 14, scale: 3 }), quantityUnit: text("quantity_unit"),
+  locationName: text("location_name"), countryCode: text("country_code"), ownerName: text("owner_name"),
+  physicalLotId: uuid("physical_lot_id").unique().references(() => physicalLots.id), createdAt: createdAt(),
+}, (t) => [uniqueIndex("supplier_lot_profile_code_uq").on(t.supplierProfileId, t.supplierLotCode), check("supplier_lot_positive_quantity", sql`quantity IS NULL OR quantity > 0`)]);
+export const supplierSamplingRequests = pgTable("supplier_sampling_requests", {
+  id: id(), supplierLotId: uuid("supplier_lot_id").notNull().unique().references(() => supplierLots.id),
+  supplierProfileId: uuid("supplier_profile_id").notNull().references(() => supplierProfiles.id),
+  samplingOrderId: uuid("sampling_order_id").references(() => samplingOrders.id), requestedAt: createdAt(),
 });

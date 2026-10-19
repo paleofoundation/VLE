@@ -249,3 +249,17 @@ export const publicDocuments = pgTable("public_documents", {
   sha256: text("sha256"), linkState: publicLinkStateEnum("link_state").notNull().default("LIVE"),
   verificationNote: text("verification_note"), createdAt: createdAt(),
 }, (t) => [uniqueIndex("public_document_supplier_source_uq").on(t.supplierProfileId, t.sourceUrl), index("public_document_supplier_idx").on(t.supplierProfileId)]);
+
+
+export const supplierCertifications = pgTable("supplier_certifications", {
+  id: id(), supplierProfileId: uuid("supplier_profile_id").notNull().references(() => supplierProfiles.id),
+  certificationKey: text("certification_key").notNull(), otherName: text("other_name"), certifyingBody: text("certifying_body"),
+  certificateNumber: text("certificate_number"), expiresOn: date("expires_on"), sourceUrl: text("source_url"),
+  confirmedAt: date("confirmed_at"), confirmedIssuer: text("confirmed_issuer"), confirmedByUserId: uuid("confirmed_by_user_id").references(() => users.id),
+  flaggedAt: timestamp("flagged_at", { withTimezone: true }), flagNote: text("flag_note"), createdAt: createdAt(),
+}, (t) => [uniqueIndex("supplier_certification_key_uq").on(t.supplierProfileId, t.certificationKey)]);
+export const certificationSuggestions = pgTable("certification_suggestions", {
+  id: id(), supplierProfileId: uuid("supplier_profile_id").notNull().references(() => supplierProfiles.id),
+  certificationKey: text("certification_key").notNull(), note: text("note").notNull(),
+  createdByUserId: uuid("created_by_user_id").notNull().references(() => users.id), createdAt: createdAt(),
+});

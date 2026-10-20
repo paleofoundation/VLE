@@ -4,32 +4,29 @@ import { ExchangeShell } from "@/exchange/shell";
 import { BrandLimits } from "@/exchange/brand-limits";
 import { CompareBoard } from "@/exchange/compare";
 import { RequestDock } from "@/exchange/request-dock";
-import { Badge, PriceTag } from "@/exchange/ui";
-import { exampleLots, exampleSupplier } from "@/exchange/example-data";
+import { LabPending, PhotoSlot } from "@/exchange/ui";
+import { formatSizes, kasandrinos } from "@/exchange/example-data";
 import { SITE_URL } from "@/lib/site";
 
 const path = "/suppliers/kasandrinos/extra-virgin-olive-oil";
 
 export const metadata: Metadata = {
-  title: "EXAMPLE extra virgin olive oil | Kasandrinos | VLE",
-  description: "Example product page. The spec sheet and lot results are placeholder data marked EXAMPLE.",
+  title: "Kasandrinos Organic Extra Virgin Olive Oil | Kasandrinos | VLE",
+  description: "Kasandrinos Organic Extra Virgin Olive Oil from Greece. Sizes and description from kasandrinos.com. Lab results pending.",
   robots: { index: true, follow: true },
   alternates: { canonical: `${SITE_URL}${path}` },
 };
 
 const spec = [
-  ["Product", exampleSupplier.productName],
-  ["Category", exampleSupplier.categoryLabel],
-  ["Supplier", exampleSupplier.name],
-  ["Form", exampleSupplier.form],
-  ["Process", exampleSupplier.process],
-  ["Pack", exampleSupplier.pack],
-  ["Shelf life", exampleSupplier.shelfLife],
-  ["Storage", exampleSupplier.storage],
-  ["MOQ (minimum order)", exampleSupplier.moq],
-  ["Lead time", exampleSupplier.leadTime],
-  ["Volumes", exampleSupplier.volumes],
-  ["Markets", exampleSupplier.markets],
+  ["Product", kasandrinos.productName],
+  ["Category", kasandrinos.categoryLabel],
+  ["Supplier", kasandrinos.name],
+  ["Company", kasandrinos.vendor],
+  ["Origin", kasandrinos.origin],
+  ["Olives", kasandrinos.olives],
+  ["Process", kasandrinos.process],
+  ["Sizes", formatSizes(kasandrinos.sizes)],
+  ["Description", kasandrinos.description],
 ] as const;
 
 export default function ExtraVirginOliveOilPage() {
@@ -37,29 +34,16 @@ export default function ExtraVirginOliveOilPage() {
     <ExchangeShell dock>
       <main id="main-content">
         <div className="x-wrap">
-          <p className="x-banner" role="note">
-            <strong>Example product.</strong> Every number and lab result on this page is placeholder data marked EXAMPLE.
-          </p>
           <p className="x-kicker">
-            <Link className="x-text-link" href={exampleSupplier.path}>
-              {exampleSupplier.name}
+            <Link className="x-text-link" href={kasandrinos.path}>
+              {kasandrinos.name}
             </Link>
           </p>
           <div className="x-profile">
             <div>
-              <h1 className="x-display">{exampleSupplier.productName}</h1>
-              <p className="x-lead">Spec sheet. Not a marketing blurb.</p>
-              <div className="x-facts">
-                <PriceTag mode="hidden" />
-                <div>
-                  <p className="x-price-label">MOQ (minimum order)</p>
-                  <p>{exampleSupplier.moq}</p>
-                </div>
-                <div>
-                  <p className="x-price-label">Lead time</p>
-                  <p>{exampleSupplier.leadTime}</p>
-                </div>
-              </div>
+              <PhotoSlot />
+              <h1 className="x-display">{kasandrinos.productName}</h1>
+              <p className="x-lead">{kasandrinos.description}</p>
               <section className="x-section" aria-labelledby="spec-heading">
                 <h2 id="spec-heading">Spec sheet</h2>
                 <dl className="x-spec">
@@ -70,26 +54,15 @@ export default function ExtraVirginOliveOilPage() {
                     </div>
                   ))}
                 </dl>
+                <p className="x-note">Product name, origin, sizes, and description are from kasandrinos.com.</p>
               </section>
               <section className="x-section" aria-labelledby="product-lots">
-                <h2 id="product-lots">
-                  Lot results <Badge tone="accent">EXAMPLE</Badge>
-                </h2>
-                <BrandLimits lots={exampleLots} />
+                <h2 id="product-lots">Lot results</h2>
+                <LabPending />
+                <BrandLimits />
               </section>
-              <CompareBoard
-                options={exampleLots.map((lot) => ({
-                  id: lot.id,
-                  title: lot.name,
-                  rows: [
-                    { label: "Analyte", value: lot.results[0]?.analyte ?? "" },
-                    { label: "Value", value: lot.results[0]?.value ?? "" },
-                    { label: "Plain words", value: lot.results[0]?.plain ?? "" },
-                    { label: "Lab", value: lot.results[0]?.lab ?? "" },
-                    { label: "Date", value: lot.results[0]?.date ?? "" },
-                  ],
-                }))}
-              />
+              <CompareBoard options={[]} />
+              <p className="x-note">No lots are on file to compare. Lab results pending.</p>
             </div>
             <RequestDock />
           </div>

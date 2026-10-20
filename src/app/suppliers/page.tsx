@@ -7,10 +7,11 @@ import { SearchForm, SupplierCard } from "@/exchange/ui";
 import {
   categories,
   contaminants,
+  countries,
   directoryHref,
   documentAges,
-  exampleDocuments,
-  exampleSupplier,
+  formatSizes,
+  kasandrinos,
   filterChips,
   hrefWithout,
   isSearch,
@@ -81,14 +82,16 @@ function FilterGroups({ filters }: { filters: FilterState }) {
         <legend>Country</legend>
         <div>
           <Choice filters={filters} group="country" value={undefined} label="Any" />
-          <Choice filters={filters} group="country" value="example-country" label="EXAMPLE country" />
+          {countries.map((country) => (
+            <Choice key={country.id} filters={filters} group="country" value={country.id} label={country.label} />
+          ))}
         </div>
       </fieldset>
       <fieldset className="x-filter-group">
         <legend>Certification</legend>
         <div>
           <Choice filters={filters} group="certification" value={undefined} label="Any" />
-          <Choice filters={filters} group="certification" value="example-certification" label="EXAMPLE certification" />
+          <Choice filters={filters} group="certification" value="on-file" label="On file" />
         </div>
       </fieldset>
       <fieldset className="x-filter-group">
@@ -108,7 +111,7 @@ function FilterGroups({ filters }: { filters: FilterState }) {
         </div>
       </fieldset>
       <p className="x-note">
-        A price on file still shows Sign in to see prices until a buyer is signed in.{" "}
+        When a listing has a price on file, a signed-out visitor sees Sign in to see prices. This listing has no price on file.{" "}
         <Link className="x-text-link" href="/suppliers?category=cocoa">
           Preview an empty search
         </Link>
@@ -164,35 +167,35 @@ export default async function SuppliersPage({
                   <SupplierCard />
                 </div>
               ) : (
-                <p>No example supplier matched these filters.</p>
+                <p>No supplier matched these filters.</p>
               )}
               <CompareBoard
                 options={[
                   {
-                    id: exampleSupplier.id,
-                    title: exampleSupplier.name,
+                    id: kasandrinos.id,
+                    title: kasandrinos.name,
                     rows: [
-                      { label: "Makes", value: exampleSupplier.makes },
-                      { label: "Volumes", value: exampleSupplier.volumes },
-                      { label: "Markets", value: exampleSupplier.markets },
-                      { label: "MOQ (minimum order)", value: exampleSupplier.moq },
-                      { label: "Lead time", value: exampleSupplier.leadTime },
-                      { label: "Lead, plain words", value: "Not detected" },
+                      { label: "Makes", value: kasandrinos.makes },
+                      { label: "Origin", value: kasandrinos.origin },
+                      { label: "Sizes", value: formatSizes(kasandrinos.sizes) },
+                      { label: "Description", value: kasandrinos.description },
                     ],
                   },
                 ]}
               />
               <section className="x-section" aria-labelledby="public-docs">
                 <h2 id="public-docs">Document library</h2>
-                <p>These example records are visible to everyone. No sign-in.</p>
+                <p>Documents are visible to everyone. No sign-in. No documents are on file.</p>
                 <ul className="x-doc-list">
-                  {exampleDocuments.map((document) => (
-                    <li key={document.id} className="x-doc">
-                      <p className="x-badge">Public</p>
-                      <h3 className="x-h3">{document.name}</h3>
-                      <p>{document.date}</p>
-                    </li>
-                  ))}
+                  <li className="x-doc">
+                    <p className="x-badge">Public</p>
+                    <h3 className="x-h3">No documents are on file</h3>
+                    <p>
+                      <Link className="x-text-link" href={`${kasandrinos.path}#documents`}>
+                        Open the Kasandrinos document section
+                      </Link>
+                    </p>
+                  </li>
                 </ul>
               </section>
               {searched && (matched ? 1 : 0) < 2 ? <NeedForm found={matched ? 1 : 0} /> : null}

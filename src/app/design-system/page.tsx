@@ -104,13 +104,13 @@ export default function DesignSystemPage() {
                 Products <span className="x-count">1</span>
               </span>
               <span>
-                Lots <span className="x-count">2</span>
+                Lots <span className="x-count">0</span>
               </span>
               <span>
-                Documents <span className="x-count">3</span>
+                Documents <span className="x-count">0</span>
               </span>
               <span>
-                Certifications <span className="x-count">2</span>
+                Certifications <span className="x-count">0</span>
               </span>
             </div>
           </section>

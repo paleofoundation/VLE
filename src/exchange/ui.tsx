@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { useId } from "react";
 import { EXAMPLE_SEARCH, PRICE_LINE } from "./copy";
-import { exampleSearchHref, exampleSupplier, type ExampleLot, type ExampleResult } from "./example-data";
+import { examplePrice, exampleSearchHref, formatSizes, kasandrinos, type ExampleLot, type ExampleResult } from "./example-data";
 
 export function SearchForm({ defaultQuery = "" }: { defaultQuery?: string }) {
   const id = useId();
@@ -51,7 +51,7 @@ export function PriceTag({ mode }: { mode: "hidden" | "example" }) {
     return (
       <p className="x-price" data-testid="price-example">
         <span className="x-price-label">Price per unit</span>
-        <strong>{exampleSupplier.priceExample}</strong>
+        <strong>{examplePrice}</strong>
         <Badge>Signed-in view, EXAMPLE</Badge>
       </p>
     );
@@ -71,29 +71,36 @@ export function SupplierCard() {
     <article className="x-card" data-testid="supplier-card">
       <PhotoSlot />
       <div className="x-card-body">
-        <Badge tone="accent">EXAMPLE</Badge>
         <h3 className="x-h3">
-          <Link className="x-text-link" href={exampleSupplier.path}>
-            {exampleSupplier.name}
+          <Link className="x-text-link" href={kasandrinos.path}>
+            {kasandrinos.name}
           </Link>
         </h3>
-        <p>{exampleSupplier.makes}</p>
+        <p>{kasandrinos.productName}</p>
         <dl className="x-meta">
           <div>
             <dt>Category</dt>
-            <dd>{exampleSupplier.categoryLabel}</dd>
+            <dd>{kasandrinos.categoryLabel}</dd>
           </div>
           <div>
-            <dt>MOQ (minimum order)</dt>
-            <dd>{exampleSupplier.moq}</dd>
+            <dt>Origin</dt>
+            <dd>{kasandrinos.origin}</dd>
           </div>
           <div>
-            <dt>Lead time</dt>
-            <dd>{exampleSupplier.leadTime}</dd>
+            <dt>Sizes</dt>
+            <dd>{formatSizes(kasandrinos.sizes)}</dd>
           </div>
         </dl>
       </div>
     </article>
+  );
+}
+
+export function LabPending() {
+  return (
+    <p className="x-banner" role="status" data-testid="lab-pending">
+      <strong>Lab results pending.</strong> Verified lot numbers and lab results are not on file. No test values are shown.
+    </p>
   );
 }
 
@@ -142,22 +149,18 @@ export function ProfileTabs() {
   const tabs = [
     { href: "#overview", label: "Overview" },
     { href: "#products", label: "Products", count: 1 },
-    { href: "#lots", label: "Lots", count: exampleLotsCount() },
-    { href: "#documents", label: "Documents", count: 3 },
-    { href: "#certifications", label: "Certifications", count: 2 },
+    { href: "#lots", label: "Lots", count: 0 },
+    { href: "#documents", label: "Documents", count: 0 },
+    { href: "#certifications", label: "Certifications", count: 0 },
   ];
   return (
     <nav className="x-tabs" aria-label="Profile sections" data-testid="profile-tabs">
       {tabs.map((tab) => (
         <a key={tab.href} href={tab.href}>
           {tab.label}
-          {tab.count ? <span className="x-count">{tab.count}</span> : null}
+          <span className="x-count">{tab.count}</span>
         </a>
       ))}
     </nav>
   );
-}
-
-function exampleLotsCount() {
-  return 2;
 }

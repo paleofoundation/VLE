@@ -3,7 +3,7 @@ import { SiteStructuredData } from "./site-structured-data";
 import { ExchangeShell } from "@/exchange/shell";
 import { SearchForm, SupplierCard } from "@/exchange/ui";
 import { FREE_LINE, HERO_LINE } from "@/exchange/copy";
-import { categories, exampleDocuments, exampleSupplier } from "@/exchange/example-data";
+import { categories, kasandrinos } from "@/exchange/example-data";
 import { publicPageMetadata } from "@/lib/seo";
 
 export const metadata = publicPageMetadata(
@@ -42,8 +42,8 @@ export default function HomePage() {
           </section>
 
           <section className="x-section" aria-labelledby="suppliers-heading">
-            <h2 id="suppliers-heading">Example supplier</h2>
-            <p>One example profile is on this list. It is marked EXAMPLE. It is not a live record.</p>
+            <h2 id="suppliers-heading">Supplier</h2>
+            <p>One listing is on this list. Product name, origin, sizes, and description come from kasandrinos.com. Lab results pending.</p>
             <div className="x-card-grid">
               <SupplierCard />
             </div>
@@ -71,18 +71,16 @@ export default function HomePage() {
             <h2 id="library-heading">Document library</h2>
             <p>Documents are open to everyone. They are never behind sign-in.</p>
             <ul className="x-doc-list">
-              {exampleDocuments.map((document) => (
-                <li key={document.id} className="x-doc">
-                  <p className="x-badge">Public</p>
-                  <h3 className="x-h3">{document.name}</h3>
-                  <p>{document.date}</p>
-                  <p>
-                    <Link className="x-text-link" href={`${exampleSupplier.path}#documents`}>
-                      Open the example record
-                    </Link>
-                  </p>
-                </li>
-              ))}
+              <li className="x-doc">
+                <p className="x-badge">Public</p>
+                <h3 className="x-h3">No documents are on file</h3>
+                <p>Kasandrinos has no public documents yet. A document added later stays open to everyone.</p>
+                <p>
+                  <Link className="x-text-link" href={`${kasandrinos.path}#documents`}>
+                    Open the document section
+                  </Link>
+                </p>
+              </li>
             </ul>
           </section>
         </div>

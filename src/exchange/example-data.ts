@@ -78,60 +78,47 @@ export const exampleLots: ExampleLot[] = [
   },
 ];
 
-export const exampleDocuments = [
-  {
-    id: "coa",
-    name: "EXAMPLE certificate of analysis",
-    date: "EXAMPLE 2026-09-01",
-    age: "EXAMPLE 49 days",
-  },
-  {
-    id: "spec",
-    name: "EXAMPLE specification sheet",
-    date: "EXAMPLE 2026-08-15",
-    age: "EXAMPLE 66 days",
-  },
-  {
-    id: "lot-record",
-    name: "EXAMPLE lot record",
-    date: "EXAMPLE 2026-09-01",
-    age: "EXAMPLE 49 days",
-  },
-] as const;
+/** Signed-in price specimen on the design system only. Not a Kasandrinos price. */
+export const examplePrice = "EXAMPLE 12.40 USD per kg";
 
-export const exampleCertifications = [
-  { id: "example-certification", name: "EXAMPLE certification" },
-  { id: "example-certification-2", name: "EXAMPLE second certification" },
-] as const;
+export const countries = [{ id: "greece", label: "Greece" }] as const;
 
-export const exampleSupplier = {
+/**
+ * Facts checked on kasandrinos.com product pages and the homepage those pages belong to.
+ * Name, origin, sizes, and description only. No lab values, lot numbers, or certifications.
+ */
+export const kasandrinos = {
   id: "kasandrinos",
   name: "Kasandrinos",
+  vendor: "Kasandrinos International",
   path: "/suppliers/kasandrinos",
   productPath: "/suppliers/kasandrinos/extra-virgin-olive-oil",
-  productName: "Extra virgin olive oil",
+  productName: "Kasandrinos Organic Extra Virgin Olive Oil",
   categoryId: "olive-oil",
   categoryLabel: "Olive oil",
-  makes: "Extra virgin olive oil",
-  volumes: "EXAMPLE 500 kg to EXAMPLE 20,000 kg",
-  markets: "EXAMPLE retail brands and EXAMPLE supplement licensees",
-  moq: "EXAMPLE 500 kg",
-  leadTime: "EXAMPLE 21 days",
-  countryId: "example-country",
-  countryLabel: "EXAMPLE country",
-  certificationIds: ["example-certification", "example-certification-2"],
-  contaminants: ["lead"],
-  notDetectedContaminants: ["lead"],
-  hasPrice: true,
-  priceExample: "EXAMPLE 12.40 USD per kg",
-  /** Age of the newest example document. Fixed so the example does not expire. */
-  documentAgeDays: 49,
-  form: "EXAMPLE liquid",
-  process: "EXAMPLE cold extraction",
-  pack: "EXAMPLE 5 kg and EXAMPLE 200 kg",
-  shelfLife: "EXAMPLE 18 months",
-  storage: "EXAMPLE cool and dark",
+  makes: "Kasandrinos Organic Extra Virgin Olive Oil",
+  origin: "Greece",
+  countryId: "greece",
+  countryLabel: "Greece",
+  olives: "Koroneiki and Athinolia",
+  process: "Cold-pressed, extracted without heat",
+  sizes: [
+    "100ml Bottle",
+    "250ml Bottle",
+    "500ml Bottle",
+    "1L Bottle",
+    "3L Can",
+    "3L Bag in a Box",
+    "12ml Travel Packets (1)",
+    "12ml Travel Packets (20)",
+  ],
+  description:
+    "Organic extra virgin olive oil, cold-pressed from hand-picked olives. Grown and pressed at family farms in Greece, using Koroneiki and Athinolia olives. Kasandrinos describes a fruity aroma and a peppery finish.",
 } as const;
+
+export function formatSizes(sizes: readonly string[]) {
+  return sizes.join(", ");
+}
 
 export const exampleSearchHref = `/suppliers?q=${encodeURIComponent(EXAMPLE_SEARCH)}`;
 
@@ -217,8 +204,8 @@ export function parsePlainQuery(q: string): Omit<FilterState, "q" | "explicit"> 
     category,
     contaminant,
     result: text.includes("not detected") ? "not-detected" : undefined,
-    country: text.includes("example country") ? "example-country" : undefined,
-    certification: text.includes("certification") || text.includes("certified") ? "example-certification" : undefined,
+    country: text.includes("greece") ? "greece" : undefined,
+    certification: text.includes("certification") || text.includes("certified") ? "on-file" : undefined,
     documentAge,
     hasPrice,
   };
@@ -239,9 +226,8 @@ export function readFilters(raw: DirectoryParams): FilterState {
   const category = categoryIds.has(categoryParam) ? categoryParam : explicit ? undefined : parsed.category;
   const contaminant = contaminantIds.has(contaminantParam) ? contaminantParam : explicit ? undefined : parsed.contaminant;
   const result = resultParam === "not-detected" ? "not-detected" : explicit ? undefined : parsed.result;
-  const country = countryParam === "example-country" ? "example-country" : explicit ? undefined : parsed.country;
-  const certification =
-    certificationParam === "example-certification" ? "example-certification" : explicit ? undefined : parsed.certification;
+  const country = countryParam === "greece" ? "greece" : explicit ? undefined : parsed.country;
+  const certification = certificationParam === "on-file" ? "on-file" : explicit ? undefined : parsed.certification;
   const documentAge = ageIds.has(ageParam) ? ageParam : explicit ? undefined : parsed.documentAge;
 
   let hasPrice = false;
@@ -257,8 +243,8 @@ export function filterChips(filters: FilterState): FilterChip[] {
   if (filters.category) chips.push({ key: "category", label: `Category: ${categoryLabel(filters.category)}` });
   if (filters.contaminant) chips.push({ key: "contaminant", label: `Contaminant tested: ${contaminantLabel(filters.contaminant)}` });
   if (filters.result === "not-detected") chips.push({ key: "result", label: "Result: Not detected" });
-  if (filters.country) chips.push({ key: "country", label: "Country: EXAMPLE country" });
-  if (filters.certification) chips.push({ key: "certification", label: "Certification: EXAMPLE certification" });
+  if (filters.country === "greece") chips.push({ key: "country", label: "Country: Greece" });
+  if (filters.certification) chips.push({ key: "certification", label: "Certification: on file" });
   if (filters.documentAge) chips.push({ key: "documentAge", label: `Document age: ${documentAgeLabel(filters.documentAge)}` });
   if (filters.hasPrice) chips.push({ key: "hasPrice", label: "Has price: on file" });
   return chips;
@@ -296,10 +282,6 @@ function parsedAnything(parsed: Omit<FilterState, "q" | "explicit">) {
   );
 }
 
-function listed(values: readonly string[], value: string) {
-  return values.some((item) => item === value);
-}
-
 export function supplierMatches(filters: FilterState) {
   if (filters.q && !filters.explicit) {
     const parsed = parsePlainQuery(filters.q);
@@ -307,16 +289,13 @@ export function supplierMatches(filters: FilterState) {
     const namesSupplier = text.includes("kasandrinos") || text.includes("olive");
     if (!parsedAnything(parsed) && !namesSupplier) return false;
   }
-  if (filters.category && filters.category !== exampleSupplier.categoryId) return false;
-  if (filters.contaminant && !listed(exampleSupplier.contaminants, filters.contaminant)) return false;
-  if (filters.result === "not-detected") {
-    const analyte = filters.contaminant ?? "lead";
-    if (!listed(exampleSupplier.notDetectedContaminants, analyte)) return false;
-  }
-  if (filters.country && filters.country !== exampleSupplier.countryId) return false;
-  if (filters.certification && !listed(exampleSupplier.certificationIds, filters.certification)) return false;
-  if (filters.documentAge && exampleSupplier.documentAgeDays > Number(filters.documentAge)) return false;
-  if (filters.hasPrice && !exampleSupplier.hasPrice) return false;
+  if (filters.category && filters.category !== kasandrinos.categoryId) return false;
+  if (filters.contaminant) return false;
+  if (filters.result === "not-detected") return false;
+  if (filters.country && filters.country !== kasandrinos.countryId) return false;
+  if (filters.certification) return false;
+  if (filters.documentAge) return false;
+  if (filters.hasPrice) return false;
   return true;
 }
 

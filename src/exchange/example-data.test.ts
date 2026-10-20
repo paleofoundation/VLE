@@ -21,7 +21,7 @@ describe("plain-language search", () => {
       "Contaminant tested: Lead",
       "Result: Not detected",
     ]);
-    expect(supplierMatches(filters)).toBe(true);
+    expect(supplierMatches(filters)).toBe(false);
   });
 
   it("treats an unmatched category as nothing", () => {
@@ -38,7 +38,19 @@ describe("plain-language search", () => {
       result: "not-detected",
     });
     expect(filters.category).toBeUndefined();
-    expect(supplierMatches(filters)).toBe(true);
+    expect(supplierMatches(filters)).toBe(false);
+  });
+
+  it("matches olive oil from Greece and skips lab filters with no lab file", () => {
+    const greece = readFilters({ q: "olive oil from greece" });
+    expect(filterChips(greece).map((chip) => chip.label)).toEqual(["Category: Olive oil", "Country: Greece"]);
+    expect(supplierMatches(greece)).toBe(true);
+    expect(supplierMatches(readFilters({ category: "olive-oil" }))).toBe(true);
+    const certified = readFilters({ q: "certified olive oil" });
+    expect(filterChips(certified).map((chip) => chip.label)).toContain("Certification: on file");
+    expect(supplierMatches(certified)).toBe(false);
+    expect(supplierMatches(readFilters({ hasPrice: "1" }))).toBe(false);
+    expect(supplierMatches(readFilters({ documentAge: "90" }))).toBe(false);
   });
 
   it("finds nothing when the words do not map to a listing", () => {
@@ -68,5 +80,27 @@ describe("round 1 copy rules", () => {
       expect(source.toLowerCase(), file).not.toContain("partner");
       expect(source, file).not.toMatch(/\bN\/A\b/i);
     }
+  });
+
+  it("keeps the EXAMPLE label off the real listing pages", () => {
+    const files = [
+      path.join("src", "app", "page.tsx"),
+      path.join("src", "app", "suppliers", "page.tsx"),
+      path.join("src", "app", "suppliers", "kasandrinos", "page.tsx"),
+      path.join("src", "app", "suppliers", "kasandrinos", "extra-virgin-olive-oil", "page.tsx"),
+      path.join("src", "exchange", "brand-limits.tsx"),
+      path.join("src", "exchange", "confirm-upload.tsx"),
+    ];
+    for (const file of files) {
+      expect(readFileSync(file, "utf8"), file).not.toContain("EXAMPLE");
+    }
+    const pending = readFileSync(path.join("src", "exchange", "ui.tsx"), "utf8");
+    expect(pending).toContain("Lab results pending.");
+    const facts = readFileSync(path.join("src", "exchange", "example-data.ts"), "utf8");
+    const listing = facts.slice(facts.indexOf("export const kasandrinos"), facts.indexOf("export function formatSizes"));
+    expect(listing).toContain("Kasandrinos Organic Extra Virgin Olive Oil");
+    expect(listing).toContain("Greece");
+    expect(listing).toContain("12ml Travel Packets (20)");
+    expect(listing).not.toContain("EXAMPLE");
   });
 });

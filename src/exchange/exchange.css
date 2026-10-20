@@ -61,6 +61,8 @@ body:has(.exchange) > .siteFooter {
 .x-header-inner,
 .x-wrap {
   width: min(1120px, calc(100% - 32px));
+  max-width: calc(100% - 32px);
+  min-width: 0;
   margin: 0 auto;
 }
 
@@ -296,7 +298,7 @@ body:has(.exchange) > .siteFooter {
   line-height: 1.4;
 }
 
-.x-card-grid { display: grid; gap: 16px; }
+.x-results-wrap { max-width: 100%; overflow-x: auto; }
 
 .x-card {
   display: flex;
@@ -437,6 +439,7 @@ body:has(.exchange) > .siteFooter {
   z-index: 20;
   display: flex;
   gap: 8px;
+  max-width: 100%;
   margin: 0 0 32px;
   padding: 8px 0;
   overflow-x: auto;
@@ -471,7 +474,14 @@ body:has(.exchange) > .siteFooter {
   font-weight: 600;
 }
 
-.x-directory { display: grid; gap: 32px; }
+.x-directory,
+.x-profile,
+.x-card-grid { display: grid; grid-template-columns: minmax(0, 1fr); min-width: 0; }
+
+.x-directory,
+.x-profile { gap: 32px; }
+
+.x-card-grid { gap: 16px; }
 
 .x-filters-desktop { display: none; }
 
@@ -522,7 +532,8 @@ body:has(.exchange) > .siteFooter {
 .x-price strong,
 .x-price a { display: block; margin-top: 8px; font-size: 18px; }
 
-.x-results-wrap { overflow-x: auto; }
+.x-profile > div,
+.x-directory > div { min-width: 0; max-width: 100%; }
 
 .x-results {
   width: 100%;
@@ -613,20 +624,17 @@ body:has(.exchange) > .siteFooter {
 }
 
 .x-poll {
-  position: fixed;
-  z-index: 45;
-  right: 16px;
-  bottom: 16px;
-  width: min(280px, calc(100% - 32px));
-  max-height: calc(100vh - 32px);
-  overflow: auto;
+  position: relative;
+  z-index: 1;
+  width: min(280px, 100%);
+  margin: 0 0 0 auto;
   padding: 16px;
   border: 1px solid var(--x-line);
   border-radius: 8px;
   background: var(--x-surface);
 }
 
-.exchange-has-dock .x-poll { bottom: 188px; }
+.exchange-has-dock .x-footer { padding-bottom: 128px; }
 
 .x-poll p { margin: 0 0 16px; font-size: 14px; }
 
@@ -700,7 +708,10 @@ body:has(.exchange) > .siteFooter {
 
 @media (min-width: 960px) {
   .x-header-inner,
-  .x-wrap { width: min(1120px, calc(100% - 96px)); }
+  .x-wrap {
+    width: min(1120px, calc(100% - 96px));
+    max-width: calc(100% - 96px);
+  }
   .x-nav { display: flex; }
   .x-nav-mobile { display: none; }
   .x-hero h1,
@@ -734,7 +745,7 @@ body:has(.exchange) > .siteFooter {
     border: 1px solid var(--x-line);
     border-radius: 8px;
   }
-  .exchange-has-dock .x-poll { bottom: 16px; }
+  .exchange-has-dock .x-footer { padding-bottom: 0; }
   .x-principles { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
 

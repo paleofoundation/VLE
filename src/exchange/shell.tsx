@@ -73,9 +73,9 @@ export function ExchangeShell({
               Sign in
             </Link>
           </nav>
+          <CornerPoll />
         </div>
       </footer>
-      <CornerPoll />
     </div>
   );
 }

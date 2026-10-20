@@ -29,7 +29,7 @@ export function BrandLimits({ lots }: { lots: ExampleLot[] }) {
         }}
       >
         <p>
-          A brand saves its own limits. Lots that meet them are marked. This screen starts with an EXAMPLE limit: lead under EXAMPLE {EXAMPLE_LIMIT}. It is kept in this browser only. Account saving is not in this round.
+          A brand saves its own limits. Lots that meet them are marked. This screen starts with an EXAMPLE limit: lead under EXAMPLE {EXAMPLE_LIMIT}. Saving it here updates the marks on this screen. Account saving is not in this round.
         </p>
         <label htmlFor="lead-limit">Lead under</label>
         <input id="lead-limit" inputMode="decimal" value={draft} onChange={(event) => setDraft(event.target.value)} />

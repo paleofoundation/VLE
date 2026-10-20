@@ -150,7 +150,7 @@ export default async function SuppliersPage({
           ) : null}
           <div className="x-directory">
             <div>
-              <details className="x-filters-mobile">
+              <details className="x-filters-mobile" open>
                 <summary>Filters</summary>
                 <FilterGroups filters={filters} />
               </details>

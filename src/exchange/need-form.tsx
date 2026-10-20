@@ -7,7 +7,7 @@ export function NeedForm({ found }: { found: number }) {
   const [sent, setSent] = useState<{ need: string; volume: string; timing: string; use: string } | null>(null);
   return (
     <section className="x-section" data-testid="empty-search" aria-labelledby="need-heading">
-      {found === 0 ? <p>Nothing on the example list matched.</p> : <p>This search found little.</p>}
+      {found === 0 ? <p>Nothing matched.</p> : <p>This search found little.</p>}
       <h2 id="need-heading">{NEED_LINE}</h2>
       {sent ? (
         <p className="x-next" role="status">

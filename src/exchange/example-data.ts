@@ -1,4 +1,5 @@
 import { EXAMPLE_SEARCH } from "./copy";
+import type { ExchangeLot } from "./listing";
 
 export const categories = [
   { id: "olive-oil", label: "Olive oil" },
@@ -115,6 +116,80 @@ export const kasandrinos = {
   description:
     "Organic extra virgin olive oil, cold-pressed from hand-picked olives. Grown and pressed at family farms in Greece, using Koroneiki and Athinolia olives. Kasandrinos describes a fruity aroma and a peppery finish.",
 } as const;
+
+/** No lots are on file, so no COA is attached. The product stays a draft. */
+export const kasandrinosLots: readonly ExchangeLot[] = [];
+
+/**
+ * Primary product photo from each public size page on kasandrinos.com.
+ * Alt text uses the alt published with the file, or the product title when that page left alt empty.
+ */
+export const kasandrinosPhotos = [
+  {
+    src: "/suppliers/kasandrinos/100ml-bottle.jpg",
+    alt: "A bottle of Kasandrinos Organic Olive Oil. Product of Greece olive oil, featuring a black cap and a yellow-green label with a brown 'K' logo",
+    size: "100ml Bottle",
+    source: "https://www.kasandrinos.com/products/1-100ml-glass-bottle",
+    width: 1200,
+    height: 1200,
+  },
+  {
+    src: "/suppliers/kasandrinos/250ml-bottle.webp",
+    alt: "250ml Bottle - Organic EVOO",
+    size: "250ml Bottle",
+    source: "https://www.kasandrinos.com/products/1-250ml-glass-bottle",
+    width: 1200,
+    height: 1200,
+  },
+  {
+    src: "/suppliers/kasandrinos/500ml-bottle.webp",
+    alt: "500ml Bottle - Organic EVOO",
+    size: "500ml Bottle",
+    source: "https://www.kasandrinos.com/products/1-500-ml-glass-bottle",
+    width: 1200,
+    height: 1200,
+  },
+  {
+    src: "/suppliers/kasandrinos/1l-bottle.webp",
+    alt: "1L Bottle - Organic EVOO",
+    size: "1L Bottle",
+    source: "https://www.kasandrinos.com/products/1-1-liter-glass-bottle",
+    width: 1200,
+    height: 1200,
+  },
+  {
+    src: "/suppliers/kasandrinos/3l-can.webp",
+    alt: "3L Can - Organic EVOO",
+    size: "3L Can",
+    source: "https://www.kasandrinos.com/products/1-3-liter-can",
+    width: 1200,
+    height: 1200,
+  },
+  {
+    src: "/suppliers/kasandrinos/3l-bag-in-a-box.webp",
+    alt: "3L Bag in a Box - Organic EVOO",
+    size: "3L Bag in a Box",
+    source: "https://www.kasandrinos.com/products/1-3-liter-bag-in-a-box",
+    width: 900,
+    height: 900,
+  },
+  {
+    src: "/suppliers/kasandrinos/12ml-packet.webp",
+    alt: "KASANDRINOS Olive Oil 12 ML Pack",
+    size: "12ml Travel Packets (1)",
+    source: "https://www.kasandrinos.com/products/12ml-travel-packets-1-organic-evoo",
+    width: 1200,
+    height: 1200,
+  },
+  {
+    src: "/suppliers/kasandrinos/12ml-packets-20.webp",
+    alt: "12ml Travel Packets (20) - Organic EVOO",
+    size: "12ml Travel Packets (20)",
+    source: "https://www.kasandrinos.com/products/box-of-20-travel-packets",
+    width: 1000,
+    height: 1000,
+  },
+] as const;
 
 export function formatSizes(sizes: readonly string[]) {
   return sizes.join(", ");

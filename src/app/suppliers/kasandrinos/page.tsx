@@ -4,8 +4,8 @@ import { BrandLimits } from "@/exchange/brand-limits";
 import { ProfileClaims } from "@/exchange/claims";
 import { ConfirmUpload } from "@/exchange/confirm-upload";
 import { RequestDock } from "@/exchange/request-dock";
-import { FileSlot, LabPending, PhotoSlot, ProfileTabs } from "@/exchange/ui";
-import { formatSizes, kasandrinos } from "@/exchange/example-data";
+import { DraftAwaitingCoa, FileSlot, LabPending, ProductPhotos, ProfileTabs } from "@/exchange/ui";
+import { formatSizes, kasandrinos, kasandrinosPhotos } from "@/exchange/example-data";
 import { publicPageMetadata } from "@/lib/seo";
 
 export const metadata = publicPageMetadata(
@@ -23,7 +23,7 @@ export default function KasandrinosPage() {
             <div>
               <ProfileTabs />
               <section id="overview" className="x-anchor" aria-labelledby="profile-heading">
-                <PhotoSlot />
+                <ProductPhotos photos={kasandrinosPhotos} />
                 <p className="x-kicker">{kasandrinos.vendor}</p>
                 <h1 id="profile-heading" className="x-display">
                   {kasandrinos.name}
@@ -51,13 +51,13 @@ export default function KasandrinosPage() {
                     <dd>{formatSizes(kasandrinos.sizes)}</dd>
                   </div>
                 </dl>
-                <p className="x-note">Product name, origin, sizes, and description are from kasandrinos.com. Empty fields stay hidden.</p>
+                <p className="x-note">Product name, origin, sizes, description, and photos are from kasandrinos.com. Empty fields stay hidden.</p>
               </section>
 
               <section id="products" className="x-section x-anchor" aria-labelledby="products-heading">
                 <h2 id="products-heading">Products</h2>
+                <DraftAwaitingCoa />
                 <article className="x-card">
-                  <PhotoSlot />
                   <div className="x-card-body">
                     <h3 className="x-h3">
                       <Link className="x-text-link" href={kasandrinos.productPath}>

@@ -43,7 +43,9 @@ export default function HomePage() {
 
           <section className="x-section" aria-labelledby="suppliers-heading">
             <h2 id="suppliers-heading">Supplier</h2>
-            <p>One listing is on this list. Product name, origin, sizes, and description come from kasandrinos.com. Lab results pending.</p>
+            <p>
+              Kasandrinos is the supplier on this list. Its olive oil is a draft preview awaiting a COA, so the product is not published on the exchange. Product name, origin, sizes, and description come from kasandrinos.com. Lab results pending.
+            </p>
             <div className="x-card-grid">
               <SupplierCard />
             </div>

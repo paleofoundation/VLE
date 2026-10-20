@@ -1,7 +1,9 @@
 import Link from "next/link";
+import Image from "next/image";
 import { useId } from "react";
 import { EXAMPLE_SEARCH, PRICE_LINE } from "./copy";
-import { examplePrice, exampleSearchHref, formatSizes, kasandrinos, type ExampleLot, type ExampleResult } from "./example-data";
+import { examplePrice, exampleSearchHref, formatSizes, kasandrinos, kasandrinosLots, type ExampleLot, type ExampleResult } from "./example-data";
+import { DRAFT_AWAITING_COA, isPublishedProduct } from "./listing";
 
 export function SearchForm({ defaultQuery = "" }: { defaultQuery?: string }) {
   const id = useId();
@@ -46,6 +48,47 @@ export function FileSlot() {
   );
 }
 
+export function CoaSlot() {
+  return (
+    <div className="x-slot-file" data-testid="coa-slot" role="img" aria-label="COA slot. A certificate of analysis attached to a specific lot will go here.">
+      <span>COA slot</span>
+      <small>A certificate of analysis attached to a specific lot will go here.</small>
+    </div>
+  );
+}
+
+export function DraftAwaitingCoa() {
+  if (isPublishedProduct(kasandrinosLots)) return null;
+  return (
+    <p className="x-banner" role="status" data-testid="draft-preview">
+      <strong>{DRAFT_AWAITING_COA}</strong> A product cannot be published on the public exchange without a COA attached to a specific lot. Without that COA, it stays a draft that only the supplier can see.
+    </p>
+  );
+}
+
+export function ProductPhotos({
+  photos,
+}: {
+  photos: readonly { src: string; alt: string; size: string; source: string; width: number; height: number }[];
+}) {
+  return (
+    <div className="x-photo-grid" data-testid="product-photos">
+      {photos.map((photo) => (
+        <figure key={photo.src} className="x-photo">
+          <Image src={photo.src} alt={photo.alt} width={photo.width} height={photo.height} sizes="(min-width: 720px) 40vw, 100vw" />
+          <figcaption>
+            {photo.size}. Source:{" "}
+            <a className="x-text-link" href={photo.source}>
+              {photo.source.replace("https://", "")}
+            </a>
+          </figcaption>
+        </figure>
+      ))}
+      <p className="x-note">Product photos published on kasandrinos.com.</p>
+    </div>
+  );
+}
+
 export function PriceTag({ mode }: { mode: "hidden" | "example" }) {
   if (mode === "example") {
     return (
@@ -71,6 +114,7 @@ export function SupplierCard() {
     <article className="x-card" data-testid="supplier-card">
       <PhotoSlot />
       <div className="x-card-body">
+        {isPublishedProduct(kasandrinosLots) ? null : <Badge>{DRAFT_AWAITING_COA}</Badge>}
         <h3 className="x-h3">
           <Link className="x-text-link" href={kasandrinos.path}>
             {kasandrinos.name}

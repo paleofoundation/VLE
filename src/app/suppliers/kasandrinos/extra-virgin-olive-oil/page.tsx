@@ -4,16 +4,17 @@ import { ExchangeShell } from "@/exchange/shell";
 import { BrandLimits } from "@/exchange/brand-limits";
 import { CompareBoard } from "@/exchange/compare";
 import { RequestDock } from "@/exchange/request-dock";
-import { LabPending, PhotoSlot } from "@/exchange/ui";
-import { formatSizes, kasandrinos } from "@/exchange/example-data";
+import { CoaSlot, DraftAwaitingCoa, LabPending, ProductPhotos } from "@/exchange/ui";
+import { formatSizes, kasandrinos, kasandrinosLots, kasandrinosPhotos } from "@/exchange/example-data";
+import { isPublishedProduct } from "@/exchange/listing";
 import { SITE_URL } from "@/lib/site";
 
 const path = "/suppliers/kasandrinos/extra-virgin-olive-oil";
 
 export const metadata: Metadata = {
   title: "Kasandrinos Organic Extra Virgin Olive Oil | Kasandrinos | VLE",
-  description: "Kasandrinos Organic Extra Virgin Olive Oil from Greece. Sizes and description from kasandrinos.com. Lab results pending.",
-  robots: { index: true, follow: true },
+  description: "Draft preview of Kasandrinos Organic Extra Virgin Olive Oil. Awaiting a COA attached to a specific lot. Not a published listing.",
+  robots: isPublishedProduct(kasandrinosLots) ? { index: true, follow: true } : { index: false, follow: false },
   alternates: { canonical: `${SITE_URL}${path}` },
 };
 
@@ -39,10 +40,11 @@ export default function ExtraVirginOliveOilPage() {
               {kasandrinos.name}
             </Link>
           </p>
+          <DraftAwaitingCoa />
           <div className="x-profile">
             <div>
-              <PhotoSlot />
               <h1 className="x-display">{kasandrinos.productName}</h1>
+              <ProductPhotos photos={kasandrinosPhotos} />
               <p className="x-lead">{kasandrinos.description}</p>
               <section className="x-section" aria-labelledby="spec-heading">
                 <h2 id="spec-heading">Spec sheet</h2>
@@ -54,7 +56,12 @@ export default function ExtraVirginOliveOilPage() {
                     </div>
                   ))}
                 </dl>
-                <p className="x-note">Product name, origin, sizes, and description are from kasandrinos.com.</p>
+                <p className="x-note">Product name, origin, sizes, description, and photos are from kasandrinos.com.</p>
+              </section>
+              <section className="x-section" aria-labelledby="coa-heading">
+                <h2 id="coa-heading">Certificate of analysis</h2>
+                <p>A COA has to be attached to a specific lot before this product can be published. No COA is on file.</p>
+                <CoaSlot />
               </section>
               <section className="x-section" aria-labelledby="product-lots">
                 <h2 id="product-lots">Lot results</h2>

@@ -340,6 +340,35 @@ body:has(.exchange) > .siteFooter {
   background: var(--x-paper);
 }
 
+.x-photo-grid {
+  display: grid;
+  gap: 16px;
+  margin: 16px 0 0;
+  min-width: 0;
+}
+
+.x-photo {
+  margin: 0;
+  min-width: 0;
+  border: 1px solid var(--x-line);
+  border-radius: 8px;
+  background: var(--x-surface);
+  overflow: hidden;
+}
+
+.x-photo img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.x-photo figcaption {
+  padding: 8px 16px 16px;
+  color: var(--x-muted);
+  font-size: 14px;
+  overflow-wrap: anywhere;
+}
+
 .x-card-body,
 .x-pad { padding: 16px; }
 
@@ -700,7 +729,9 @@ body:has(.exchange) > .siteFooter {
   .x-spec { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .x-card-grid,
   .x-principles,
-  .x-doc-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .x-doc-list,
+  .x-photo-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .x-photo-grid .x-note { grid-column: 1 / -1; }
   .x-button-row,
   .x-badge-row { grid-template-columns: repeat(3, minmax(0, max-content)); }
   .x-swatches { grid-template-columns: repeat(2, minmax(0, 1fr)); }

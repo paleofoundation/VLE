@@ -2,7 +2,8 @@ import { readFileSync, readdirSync, statSync } from "node:fs";
 import path from "node:path";
 import { describe, expect, it } from "vitest";
 import { EXAMPLE_SEARCH, HERO_LINE, NEED_LINE, PRICE_LINE } from "./copy";
-import { filterChips, readFilters, supplierMatches } from "./example-data";
+import { kasandrinosLots, filterChips, readFilters, supplierMatches } from "./example-data";
+import { isPublishedProduct } from "./listing";
 
 function filesUnder(dir: string): string[] {
   return readdirSync(dir).flatMap((name) => {
@@ -102,5 +103,13 @@ describe("round 1 copy rules", () => {
     expect(listing).toContain("Greece");
     expect(listing).toContain("12ml Travel Packets (20)");
     expect(listing).not.toContain("EXAMPLE");
+    expect(isPublishedProduct(kasandrinosLots)).toBe(false);
+    const product = readFileSync(path.join("src", "app", "suppliers", "kasandrinos", "extra-virgin-olive-oil", "page.tsx"), "utf8");
+    expect(product).toContain("DraftAwaitingCoa");
+    expect(product).toContain("CoaSlot");
+    expect(product).toContain("kasandrinosPhotos");
+    for (const file of [path.join("src", "app", "page.tsx"), path.join("src", "app", "suppliers", "page.tsx"), path.join("src", "app", "design-system", "page.tsx")]) {
+      expect(readFileSync(file, "utf8"), file).not.toContain("/suppliers/kasandrinos/");
+    }
   });
 });

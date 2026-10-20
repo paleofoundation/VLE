@@ -12,6 +12,7 @@ import {
   documentAges,
   formatSizes,
   kasandrinos,
+  kasandrinosLots,
   filterChips,
   hrefWithout,
   isSearch,
@@ -19,6 +20,7 @@ import {
   supplierMatches,
   type FilterState,
 } from "@/exchange/example-data";
+import { DRAFT_AWAITING_COA, isPublishedProduct } from "@/exchange/listing";
 import { publicPageMetadata } from "@/lib/seo";
 import { seoJsonLdPages } from "@/lib/structured-data";
 
@@ -179,6 +181,7 @@ export default async function SuppliersPage({
                       { label: "Origin", value: kasandrinos.origin },
                       { label: "Sizes", value: formatSizes(kasandrinos.sizes) },
                       { label: "Description", value: kasandrinos.description },
+                      { label: "Publication", value: isPublishedProduct(kasandrinosLots) ? "Published" : DRAFT_AWAITING_COA },
                     ],
                   },
                 ]}

@@ -75,7 +75,7 @@ export function ProductPhotos({
     <div className="x-photo-grid" data-testid="product-photos">
       {photos.map((photo) => (
         <figure key={photo.src} className="x-photo">
-          <Image src={photo.src} alt={photo.alt} width={photo.width} height={photo.height} sizes="(min-width: 720px) 40vw, 100vw" />
+          <Image src={photo.src} alt={photo.alt} width={photo.width} height={photo.height} sizes="(min-width: 720px) 40vw, 100vw" loading="eager" />
           <figcaption>
             {photo.size}. Source:{" "}
             <a className="x-text-link" href={photo.source}>

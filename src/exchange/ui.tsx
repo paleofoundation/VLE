@@ -1,0 +1,210 @@
+import Link from "next/link";
+import Image from "next/image";
+import { useId } from "react";
+import { EXAMPLE_SEARCH, PRICE_LINE } from "./copy";
+import { examplePrice, exampleSearchHref, formatSizes, kasandrinos, kasandrinosLots, type ExampleLot, type ExampleResult } from "./example-data";
+import { DRAFT_AWAITING_COA, isPublishedProduct } from "./listing";
+
+export function SearchForm({ defaultQuery = "" }: { defaultQuery?: string }) {
+  const id = useId();
+  return (
+    <form className="x-search" action="/suppliers" method="get" role="search" data-testid="search">
+      <label htmlFor={id}>Search in plain language</label>
+      <div className="x-search-row">
+        <input id={id} name="q" defaultValue={defaultQuery} placeholder={EXAMPLE_SEARCH} autoComplete="off" enterKeyHint="search" />
+        <button className="x-btn" type="submit">
+          Search
+        </button>
+      </div>
+      <p className="x-example-search">
+        Example search:{" "}
+        <Link className="x-text-link" href={exampleSearchHref}>
+          {EXAMPLE_SEARCH}
+        </Link>
+      </p>
+    </form>
+  );
+}
+
+export function Badge({ children, tone = "neutral" }: { children: React.ReactNode; tone?: "neutral" | "accent" }) {
+  return <span className={tone === "accent" ? "x-badge x-badge-accent" : "x-badge"}>{children}</span>;
+}
+
+export function PhotoSlot() {
+  return (
+    <div className="x-slot" role="img" aria-label="Photo slot. A supplier photo will go here.">
+      <span>Photo slot</span>
+      <small>A supplier photo will go here.</small>
+    </div>
+  );
+}
+
+export function FileSlot() {
+  return (
+    <div className="x-slot-file" role="img" aria-label="File slot. A supplier file will go here.">
+      <span>File slot</span>
+      <small>A supplier file will go here.</small>
+    </div>
+  );
+}
+
+export function CoaSlot() {
+  return (
+    <div className="x-slot-file" data-testid="coa-slot" role="img" aria-label="COA slot. A certificate of analysis attached to a specific lot will go here.">
+      <span>COA slot</span>
+      <small>A certificate of analysis attached to a specific lot will go here.</small>
+    </div>
+  );
+}
+
+export function DraftAwaitingCoa() {
+  if (isPublishedProduct(kasandrinosLots)) return null;
+  return (
+    <p className="x-banner" role="status" data-testid="draft-preview">
+      <strong>{DRAFT_AWAITING_COA}</strong> A product cannot be published on the public exchange without a COA attached to a specific lot. Without that COA, it stays a draft that only the supplier can see.
+    </p>
+  );
+}
+
+export function ProductPhotos({
+  photos,
+}: {
+  photos: readonly { src: string; alt: string; size: string; source: string; width: number; height: number }[];
+}) {
+  return (
+    <div className="x-photo-grid" data-testid="product-photos">
+      {photos.map((photo) => (
+        <figure key={photo.src} className="x-photo">
+          <Image src={photo.src} alt={photo.alt} width={photo.width} height={photo.height} sizes="(min-width: 720px) 40vw, 100vw" loading="eager" />
+          <figcaption>
+            {photo.size}. Source:{" "}
+            <a className="x-text-link" href={photo.source}>
+              {photo.source.replace("https://", "")}
+            </a>
+          </figcaption>
+        </figure>
+      ))}
+      <p className="x-note">Product photos published on kasandrinos.com.</p>
+    </div>
+  );
+}
+
+export function PriceTag({ mode }: { mode: "hidden" | "example" }) {
+  if (mode === "example") {
+    return (
+      <p className="x-price" data-testid="price-example">
+        <span className="x-price-label">Price per unit</span>
+        <strong>{examplePrice}</strong>
+        <Badge>Signed-in view, EXAMPLE</Badge>
+      </p>
+    );
+  }
+  return (
+    <p className="x-price" data-testid="price-gate">
+      <span className="x-price-label">Price per unit</span>
+      <Link className="x-text-link" href="/email-sign-in">
+        {PRICE_LINE}
+      </Link>
+    </p>
+  );
+}
+
+export function SupplierCard() {
+  return (
+    <article className="x-card" data-testid="supplier-card">
+      <PhotoSlot />
+      <div className="x-card-body">
+        {isPublishedProduct(kasandrinosLots) ? null : <Badge>{DRAFT_AWAITING_COA}</Badge>}
+        <h3 className="x-h3">
+          <Link className="x-text-link" href={kasandrinos.path}>
+            {kasandrinos.name}
+          </Link>
+        </h3>
+        <p>{kasandrinos.productName}</p>
+        <dl className="x-meta">
+          <div>
+            <dt>Category</dt>
+            <dd>{kasandrinos.categoryLabel}</dd>
+          </div>
+          <div>
+            <dt>Origin</dt>
+            <dd>{kasandrinos.origin}</dd>
+          </div>
+          <div>
+            <dt>Sizes</dt>
+            <dd>{formatSizes(kasandrinos.sizes)}</dd>
+          </div>
+        </dl>
+      </div>
+    </article>
+  );
+}
+
+export function LabPending() {
+  return (
+    <p className="x-banner" role="status" data-testid="lab-pending">
+      <strong>Lab results pending.</strong> Verified lot numbers and lab results are not on file. No test values are shown.
+    </p>
+  );
+}
+
+const columns: { key: keyof ExampleResult; label: string }[] = [
+  { key: "analyte", label: "Analyte" },
+  { key: "value", label: "Value" },
+  { key: "unit", label: "Unit" },
+  { key: "limit", label: "Limit" },
+  { key: "method", label: "Method" },
+  { key: "lab", label: "Lab" },
+  { key: "date", label: "Date" },
+  { key: "plain", label: "Plain words" },
+];
+
+export function ResultsTable({ lot }: { lot: ExampleLot }) {
+  return (
+    <div className="x-results-wrap">
+      <table className="x-results" data-testid="results-table">
+        <caption>EXAMPLE results for {lot.name}. Not a real lab report.</caption>
+        <thead>
+          <tr>
+            {columns.map((column) => (
+              <th key={column.key} scope="col">
+                {column.label}
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {lot.results.map((row) => (
+            <tr key={`${lot.id}-${row.analyte}`}>
+              {columns.map((column) => (
+                <td key={column.key} data-label={column.label} className={column.key === "plain" && row.plain === "Not detected" ? "x-plain" : undefined}>
+                  {row[column.key]}
+                </td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
+export function ProfileTabs() {
+  const tabs = [
+    { href: "#overview", label: "Overview" },
+    { href: "#products", label: "Products", count: 1 },
+    { href: "#lots", label: "Lots", count: 0 },
+    { href: "#documents", label: "Documents", count: 0 },
+    { href: "#certifications", label: "Certifications", count: 0 },
+  ];
+  return (
+    <nav className="x-tabs" aria-label="Profile sections" data-testid="profile-tabs">
+      {tabs.map((tab) => (
+        <a key={tab.href} href={tab.href}>
+          {tab.label}
+          <span className="x-count">{tab.count}</span>
+        </a>
+      ))}
+    </nav>
+  );
+}

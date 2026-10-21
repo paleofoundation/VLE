@@ -1,132 +1,101 @@
 import Link from "next/link";
+import { ExchangeShell } from "@/exchange/shell";
+import { BrandLimits } from "@/exchange/brand-limits";
+import { ProfileClaims } from "@/exchange/claims";
+import { ConfirmUpload } from "@/exchange/confirm-upload";
+import { RequestDock } from "@/exchange/request-dock";
+import { DraftAwaitingCoa, FileSlot, LabPending, ProductPhotos, ProfileTabs } from "@/exchange/ui";
+import { formatSizes, kasandrinos, kasandrinosPhotos } from "@/exchange/example-data";
 import { publicPageMetadata } from "@/lib/seo";
-import {
-  supplierDocumentNotice,
-  kasandrinosCertifications,
-  kasandrinosProducts,
-  kasandrinosReports,
-  kasandrinosTransparencyUrl,
-} from "@/content/suppliers/kasandrinos";
-import styles from "./profile.module.css";
 
 export const metadata = publicPageMetadata(
   "/suppliers/kasandrinos",
-  "Kasandrinos supplier profile | VLE",
-  "Kasandrinos International LLC: family-grown organic extra virgin olive oil from Greece. Listed from public documents. Not a VLE member. Explore supplier-published documents and pending VLE steps.",
+  "Kasandrinos | VLE",
+  "Kasandrinos Organic Extra Virgin Olive Oil from Greece. Sizes and description from kasandrinos.com. Lab results pending.",
 );
 
-// Advance a step only when a real, lot-specific record supports it.
-// Supplier-published reports below do not satisfy any of these steps.
-const lotSteps = [
-  { title: "Lot", detail: "Awaiting a confirmed purchase and lot identity." },
-  { title: "Sample", detail: "Awaiting laboratory receipt and the sample custody record." },
-  { title: "TECRID", detail: "Awaiting authenticated evidence bound to the lot." },
-  { title: "QUALIFIED", detail: "Awaiting a qualification decision against the olive oil standard." },
-  { title: "Reserved", detail: "Awaiting qualification and a recorded reservation." },
-] as const;
-
-export default function KasandrinosSupplierPage() {
+export default function KasandrinosPage() {
   return (
-    <main id="main-content" className={styles.profile}>
-      <aside className={styles.profileBanner} aria-label="Profile listing status">
-        Listed from public documents. Not a VLE member. <a href="mailto:marcus@vle.exchange">Claim this profile</a>.
-      </aside>
-      <div className={styles.breadcrumb}>
-        <Link className="back" href="/suppliers">Supplier profiles</Link>
-        <span aria-hidden="true">/</span><span>Kasandrinos</span>
-      </div>
+    <ExchangeShell dock current="/suppliers">
+      <main id="main-content">
+        <div className="x-wrap">
+          <div className="x-profile">
+            <div>
+              <ProfileTabs />
+              <section id="overview" className="x-anchor" aria-labelledby="profile-heading">
+                <ProductPhotos photos={kasandrinosPhotos} />
+                <p className="x-kicker">{kasandrinos.vendor}</p>
+                <h1 id="profile-heading" className="x-display">
+                  {kasandrinos.name}
+                </h1>
+                <p className="x-lead">{kasandrinos.description}</p>
+                <dl className="x-spec">
+                  <div>
+                    <dt>Makes</dt>
+                    <dd>{kasandrinos.makes}</dd>
+                  </div>
+                  <div>
+                    <dt>Origin</dt>
+                    <dd>{kasandrinos.origin}</dd>
+                  </div>
+                  <div>
+                    <dt>Olives</dt>
+                    <dd>{kasandrinos.olives}</dd>
+                  </div>
+                  <div>
+                    <dt>Process</dt>
+                    <dd>{kasandrinos.process}</dd>
+                  </div>
+                  <div>
+                    <dt>Sizes</dt>
+                    <dd>{formatSizes(kasandrinos.sizes)}</dd>
+                  </div>
+                </dl>
+                <p className="x-note">Product name, origin, sizes, description, and photos are from kasandrinos.com. Empty fields stay hidden.</p>
+              </section>
 
-      <section className={styles.hero} aria-labelledby="supplier-name">
-        <div className={styles.heroCopy}>
-          <p className="eyebrow eyebrowLight">Supplier profile · Greece</p>
-          <h1 id="supplier-name">Kasandrinos</h1>
-          <p className={styles.legalName}>Kasandrinos International LLC</p>
-          <p className={styles.intro}>Family-grown organic extra virgin olive oil from Greece.</p>
-          <p className={styles.heroDescription}>From family farms in Laconia, Greece. Explore the supplier&apos;s products and published documents, then follow the VLE lot as evidence is recorded.</p>
-          <div className="actions">
-            <a className="button" href="https://www.kasandrinos.com/" rel="noopener noreferrer">Visit kasandrinos.com <span aria-hidden="true">↗</span></a>
-            <a className="textLink textLinkLight" href="#vle-lot">Follow the VLE lot</a>
+              <section id="products" className="x-section x-anchor" aria-labelledby="products-heading">
+                <h2 id="products-heading">Products</h2>
+                <DraftAwaitingCoa />
+                <article className="x-card">
+                  <div className="x-card-body">
+                    <h3 className="x-h3">
+                      <Link className="x-text-link" href={kasandrinos.productPath}>
+                        {kasandrinos.productName}
+                      </Link>
+                    </h3>
+                    <p>{kasandrinos.description}</p>
+                  </div>
+                </article>
+              </section>
+
+              <section id="lots" className="x-section x-anchor" aria-labelledby="lots-heading">
+                <h2 id="lots-heading">Lots</h2>
+                <LabPending />
+                <BrandLimits />
+                <div className="x-section">
+                  <ConfirmUpload />
+                </div>
+              </section>
+
+              <section id="documents" className="x-section x-anchor" aria-labelledby="documents-heading">
+                <h2 id="documents-heading">Documents</h2>
+                <p>Documents are open to everyone. They are never behind sign-in. Request a document from the request panel. The record itself stays public.</p>
+                <p>No documents are on file.</p>
+                <FileSlot />
+              </section>
+
+              <section id="certifications" className="x-section x-anchor" aria-labelledby="certs-heading">
+                <h2 id="certifications-heading">Certifications</h2>
+                <p>Supplier-reported unless confirmed by the issuing body.</p>
+                <p>No certifications are on file.</p>
+              </section>
+              <ProfileClaims />
+            </div>
+            <RequestDock />
           </div>
         </div>
-      </section>
-
-      <nav className={styles.sectionNav} aria-label="Supplier profile sections">
-        <a href="#products">Products</a>
-        <a href="#certifications">Certifications</a>
-        <a href="#brand-reports">Brand-published test reports</a>
-        <a href="#vle-lot">VLE lot</a>
-      </nav>
-
-      <section className={styles.section} id="products" aria-labelledby="products-heading">
-        <div className={styles.sectionHeading}>
-          <div><p className="eyebrow">The product range</p><h2 id="products-heading">Greek olive oil, in every format.</h2></div>
-          <p>Each product links to the supplier&apos;s original product page on kasandrinos.com.</p>
-        </div>
-        <div className={styles.products}>
-          {kasandrinosProducts.map((product) => (
-            <a className={styles.product} key={product.url} href={product.url} rel="noopener noreferrer">
-              <div className={styles.productCopy}><h3>{product.name}</h3><p>{product.format}</p><span>View product <span aria-hidden="true">↗</span></span></div>
-            </a>
-          ))}
-        </div>
-      </section>
-
-      <section className={`${styles.section} ${styles.certSection}`} id="certifications" aria-labelledby="certifications-heading">
-        <div className={styles.sectionHeading}>
-          <div><p className="eyebrow">Brand-published documents</p><h2 id="certifications-heading">Certifications</h2></div>
-          <p>Certification documents linked from the supplier&apos;s <a href={kasandrinosTransparencyUrl} className={styles.inlineLink}>Transparency page</a>. These do not establish VLE lot qualification.</p>
-        </div>
-        <div className={styles.certifications}>
-          {kasandrinosCertifications.map((certificate) => (
-            <article className={styles.certificate} key={certificate.url}>
-              <h3>{certificate.name}</h3><p>{certificate.description}</p>
-              <small className={styles.documentLabel}>{supplierDocumentNotice(certificate.date)}</small>
-              {"statusNote" in certificate ? <p className={styles.statusNote}>{certificate.statusNote}</p> : null}
-              <a href={certificate.url} className="textLink" rel="noopener noreferrer">Open certificate PDF <span aria-hidden="true">↗</span></a>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section className={styles.section} id="brand-reports" aria-labelledby="reports-heading">
-        <div className={styles.sectionHeading}>
-          <div><p className="eyebrow">Source documents</p><h2 id="reports-heading">Brand-published test reports</h2></div>
-          <p>Read the original PDFs on the supplier&apos;s <a href={kasandrinosTransparencyUrl} className={styles.inlineLink}>Transparency page</a>. Each report applies to the sample it describes.</p>
-        </div>
-        <div className={styles.reportBoundary}><strong>Supplier-published documents</strong><p>These documents are background evidence. They do not report results for a VLE lot.</p></div>
-        <ul className={styles.reports}>
-          {kasandrinosReports.map((report) => (
-            <li key={report.url}>
-              <div><h3>{report.category}</h3><p>{report.subject}</p><small className={styles.documentLabel}>{supplierDocumentNotice(report.date)}</small></div>
-              <a href={report.url} className="textLink" aria-label={`Open ${report.category}: ${report.subject} PDF`} rel="noopener noreferrer">Open PDF <span aria-hidden="true">↗</span></a>
-            </li>
-          ))}
-        </ul>
-      </section>
-
-      <section className={styles.lotSection} id="vle-lot" aria-labelledby="lot-heading">
-        <div className={styles.lotIntro}>
-          <p className="eyebrow eyebrowLight">Lot-specific evidence</p>
-          <h2 id="lot-heading">VLE lot</h2>
-          <p>Each step stays Pending until its real record exists.</p>
-          <p>Supplier-published reports do not advance this pipeline. No confirmed purchase, VLE test result, TECRID, qualification decision, or reservation has been recorded.</p>
-        </div>
-        <ol className={styles.steps}>
-          {lotSteps.map((step, index) => (
-            <li key={step.title}>
-              <span className={styles.stepNumber} aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
-              <div><div className={styles.stepHeading}><h3>{step.title}</h3><span className={styles.pending}>Pending</span></div><p>{step.detail}</p></div>
-            </li>
-          ))}
-        </ol>
-      </section>
-      <section className={styles.claimSection} aria-label="Claim or takedown requests">
-        <p>To claim this profile or request a takedown, email <a href="mailto:marcus@vle.exchange">marcus@vle.exchange</a>. Takedown requests are honoured within 5 business days.</p>
-      </section>
-      <div className={styles.sourceNote}>
-        <p>Sources: <a href="https://www.kasandrinos.com/">Kasandrinos</a> product pages and <a href={kasandrinosTransparencyUrl}>Transparency page</a>. Documents checked 19 October 2026. Document labels use dates stated in the documents.</p>
-        <p>Disclosure: Paleo Foundation also operates VLE.</p>
-      </div>
-    </main>
+      </main>
+    </ExchangeShell>
   );
 }

@@ -71,8 +71,12 @@ export function isIndexedPublicPath(path: string) {
   return isPublicSitemapPath(path) || path.startsWith("/suppliers/");
 }
 
+/** Round 1 public screens. They stay off the sitemap catalog and off Clerk. */
+const EXCHANGE_PUBLIC_PATHS = ["/design-system", "/email-sign-in"] as const;
+
 export function skipsClerkHandshake(path: string) {
   if (path.startsWith("/suppliers/")) return true;
+  if ((EXCHANGE_PUBLIC_PATHS as readonly string[]).includes(path)) return true;
   return (PUBLIC_PATHS_WITHOUT_CLERK as readonly string[]).includes(path);
 }
 

@@ -18,6 +18,11 @@ export default function proxy(request: NextRequest, event: NextFetchEvent) {
   }
 
   const { pathname, searchParams } = request.nextUrl;
+  // Match the existing local actor mechanism without contacting Clerk in local tests.
+  if (process.env.NODE_ENV !== "production" && process.env.VLE_DEV_ACTOR &&
+      ["localhost", "127.0.0.1"].includes(request.nextUrl.hostname)) {
+    return NextResponse.next();
+  }
   // Anonymous `/access` is on the public allowlist. clerkMiddleware 307s document GETs
   // to the dev-instance handshake, and stripping that return URL loops until GSC reports Redirect error.
   if (requestSkipsClerk(pathname, searchParams.keys(), cookieHeader)) {

@@ -1,4 +1,4 @@
-import { asc, eq, inArray } from "drizzle-orm";
+import { and, asc, eq, inArray } from "drizzle-orm";
 import { getDb } from "@/db";
 import {
   auditEvents,
@@ -68,7 +68,7 @@ export async function exportLotCompliancePack(actor: Actor, lotId: string, gener
       notes: contaminantDocuments.notes,
       attachedAt: contaminantDocuments.attachedAt,
       createdAt: contaminantDocuments.createdAt,
-    }).from(contaminantDocuments).where(eq(contaminantDocuments.physicalLotId, lotId)).orderBy(asc(contaminantDocuments.attachedAt)),
+    }).from(contaminantDocuments).where(and(eq(contaminantDocuments.physicalLotId, lotId), eq(contaminantDocuments.visibility, "PUBLIC"))).orderBy(asc(contaminantDocuments.attachedAt)),
     db.select({
       id: lotArtifacts.id,
       artifactType: lotArtifacts.artifactType,

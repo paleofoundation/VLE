@@ -90,6 +90,7 @@ export const lotArtifacts = pgTable("lot_artifacts", {
  * change lot status, create a sample, or qualify a listing.
  */
 export const contaminantDocuments = pgTable("contaminant_documents", {
+  visibility: text("visibility").notNull().default("PUBLIC"),
   id: id(),
   documentationType: contaminantDocumentationTypeEnum("documentation_type").notNull(),
   supplierOrganizationId: uuid("supplier_organization_id").notNull().references(() => organizations.id),
@@ -218,3 +219,14 @@ export const auditEvents = pgTable("audit_events", {
   eventType: text("event_type").notNull(), entityType: text("entity_type").notNull(), entityId: uuid("entity_id").notNull(),
   data: jsonb("data").notNull(), previousHash: text("previous_hash"), eventHash: text("event_hash").notNull().unique(), createdAt: createdAt(),
 }, (table) => [index("audit_entity_idx").on(table.entityType, table.entityId, table.createdAt)]);
+
+// Gated entities are declared separately; their migration remains a draft only.
+export {
+  gatedEligibility,
+  gatedAssignments,
+  gatedVersions,
+  gatedInvitations,
+  gatedGrants,
+  gatedEvents,
+  gatedAttempts,
+} from "../gated/schema";

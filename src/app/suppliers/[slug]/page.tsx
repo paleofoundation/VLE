@@ -44,7 +44,7 @@ export default async function SupplierProfilePage({ params }: PageProps<"/suppli
       <header className="articleHeader">
         <p className="eyebrow">Supplier profile</p>
         <h1>{profile.organization.name}</h1>
-        <p>Contaminant documents below are file references this organization attached. VLE has not added results. A qualification decision, when one exists, stays on the lot.</p>
+        <p>Contaminant documents below were attached by this organization. Uploaded PDFs are available only to that supplier and operations. VLE has not added results. A qualification decision, when one exists, stays on the lot.</p>
       </header>
       <TecridVerificationNudge surface="profile" />
       <section className="supplierProfileBody" aria-labelledby="profile-documents-heading">
@@ -60,7 +60,7 @@ export default async function SupplierProfilePage({ params }: PageProps<"/suppli
                   <strong>{document.fileName}</strong>
                   <p>{subject}. {document.documentDate ? `Document dated ${formatDate(document.documentDate)}. ` : ""}{document.retestOn ? `Retest ${formatDate(document.retestOn)}.` : "No retest date recorded."}</p>
                   {type ? <a className="textLink" href={type.indexUrl} rel="noopener noreferrer">{type.indexName}</a> : null}
-                  <a className="textLink" href={document.referenceUrl} rel="noopener noreferrer nofollow">Open reference</a>
+                  {document.referenceUrl ? <a className="textLink" href={document.referenceUrl} rel="noopener noreferrer nofollow">Open reference</a> : <span>PDF on file. Supplier and operations access only.</span>}
                 </li>
               );
             })}

@@ -1,0 +1,13 @@
+✔ valid scoped actor assertion is consumed once across concurrent requests (23.11175ms)
+✔ reference HMAC binds audience, origin, path, method and exact actor body (12.224667ms)
+✔ tampering actor, audience, path or origin fails without consuming the valid nonce (35.765667ms)
+✔ expired, future, missing-store and reused-purpose credentials fail closed (1.496041ms)
+✔ oversized signed-looking body is bounded before verification (0.644208ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 5
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 783.75725

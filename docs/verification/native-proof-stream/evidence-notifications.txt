@@ -1,0 +1,10 @@
+PASS: scoped inbox, duplicate requests, personal synchronized reads, authenticated relay, shared grant/revoke, revoked managers, safe links and source outage.
+✔ tests/evidence-notifications.mjs (1063.1665ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 1
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1070.592125

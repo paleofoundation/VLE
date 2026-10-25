@@ -1,0 +1,13 @@
+PASS: role tabs, unknown-role fallback, signed-out precedence, active state and role-only Explore groups.
+PASS: More opens, Close/native Escape/backdrop/navigation/desktop resize close, focus returns, background unlocks.
+PASS: merged scoped proof statuses, freshness, program, issuer and certification scope are preserved.
+PASS: honest proof strip, real information destinations, standalone manifest and iOS metadata, no service worker.
+✔ tests/mobile-shell.mjs (110.398375ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 1
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 117.637459

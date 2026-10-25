@@ -1,4 +1,6 @@
 import assert from 'node:assert/strict';
+import {createHash} from 'node:crypto';
+const hash=value=>createHash('sha256').update(value).digest('hex');
 import {readFileSync,readdirSync} from 'node:fs';
 import {Miniflare} from 'miniflare';
 import {proofRequest,proofProjection,receiveEvidence} from '../server/proof-exchange.js';
@@ -46,9 +48,10 @@ try{
  await call(other,{action:'confirm-release',id:release.id},403);
  await call(viewer,{action:'confirm-release',id:release.id},403);
  function envelope(overrides={}){
-  return {schemaVersion:'vle-evidence/1',environment:'production',deliveryId:crypto.randomUUID(),eventId:crypto.randomUUID(),sequence:1,event:'credential.issued',occurredAt:new Date(now).toISOString(),recipient:{type:'marketplace',organizationId:env.VLE_TECRID_RECIPIENT_ID},credential:{tecrid:'TEC-SYNTHETIC-ONLY',version:1,status:'active',program:'SYNTHETIC program',issuingLab:'SYNTHETIC laboratory',issuedAt:'2026-10-20T00:00:00Z',retestDue:'2026-12-25T00:00:00Z',verificationUrl:'https://tecrid.com/records/TEC-SYNTHETIC-ONLY',fingerprint:'a'.repeat(64),verification:{signatureVerified:true,fingerprintVerified:true,currentVersion:true},identity:{originatingSupplierId:'kasandrinos-team',lotId:'KAS-227-KB',supplierLotId:'227 K/B',ingredientCode:'SYNTHETIC-EVOO'}},grant:{id:'synthetic-grant',status:'active',accessLevel:'full_record',publicStatus:true,recipientOrganizationId:env.VLE_TECRID_RECIPIENT_ID,expiresAt:null,brandOrganizationIds:[brandId]},...overrides};
+  return {schemaVersion:'vle-evidence/1',environment:'production',operation:'upsert',streamId:hash(JSON.stringify(['TEC-SYNTHETIC-ONLY',env.VLE_TECRID_RECIPIENT_ID])),deliveryId:crypto.randomUUID(),eventId:crypto.randomUUID(),sequence:1,event:'credential.issued',occurredAt:new Date(now).toISOString(),recipient:{type:'marketplace',organizationId:env.VLE_TECRID_RECIPIENT_ID},credential:{tecrid:'TEC-SYNTHETIC-ONLY',version:1,status:'active',program:'analytical-record',issuingLab:'SYNTHETIC laboratory',issuedAt:'2026-10-20T00:00:00Z',retestDue:'2026-12-25T00:00:00Z',verificationUrl:'https://tecrid.com/records/TEC-SYNTHETIC-ONLY',fingerprint:'a'.repeat(64),verification:{signatureVerified:true,fingerprintVerified:true,currentVersion:true},identity:{originatingSupplier:'tecrid-synthetic-supplier',mappingId:'synthetic-mapping',originatingSupplierId:'kasandrinos-team',lotId:'KAS-227-KB',supplierLotId:'227 K/B',ingredientCode:'SYNTHETIC-EVOO'}},grant:{id:'synthetic-grant',controllerOrganizationId:'tecrid-synthetic-brand',status:'active',accessLevel:'full_record',publicStatus:true,recipientOrganizationId:env.VLE_TECRID_RECIPIENT_ID,expiresAt:null,brandOrganizationIds:[brandId]},...overrides};
  }
  async function signed(data,{time=now,secret=env.VLE_TECRID_WEBHOOK_SECRET,alter=false,eventHeader=data.eventId}={}){
+  if(data.operation==='upsert'){data.snapshot??={results:[]};data.snapshot.tecrid??=data.credential.tecrid;data.snapshot.version??=data.credential.version;data.snapshot.resultsAccess??={accessLevel:data.grant.accessLevel};data.snapshotFingerprint??=hash(JSON.stringify(data.snapshot));}
   const text=JSON.stringify(data),timestamp=String(Math.floor(time/1000));const key=await crypto.subtle.importKey('raw',new TextEncoder().encode(secret),{name:'HMAC',hash:'SHA-256'},false,['sign']);
   const signature=Array.from(new Uint8Array(await crypto.subtle.sign('HMAC',key,new TextEncoder().encode(timestamp+'.'+text))),x=>x.toString(16).padStart(2,'0')).join('');
   return new Request('https://vle.test/api/integrations/tecrid/deliveries',{method:'POST',headers:{'content-type':'application/json','X-TECRID-Signature':`t=${timestamp},v1=${signature}`,'X-TECRID-Event-Id':eventHeader},body:alter?text+' ':text});
@@ -61,11 +64,12 @@ try{
  await receive(envelope({recipient:{type:'marketplace',organizationId:'wrong'}}),403);
  let invalid=envelope();invalid.credential.verification.signatureVerified=false;await receive(invalid,422);
  invalid=envelope();invalid.credential.verification.currentVersion=false;await receive(invalid,422);
- invalid=envelope();invalid.credential.identity={originatingSupplierId:'kasandrinos-team',ingredientCode:'SYNTHETIC-EVOO'};await receive(invalid,422); // ambiguous code
+ invalid=envelope();invalid.credential.identity={originatingSupplier:'tecrid-synthetic-supplier',mappingId:'synthetic-mapping',originatingSupplierId:'kasandrinos-team',ingredientCode:'SYNTHETIC-EVOO'};await receive(invalid,422); // ambiguous code
  invalid=envelope();invalid.credential.identity.ingredientCode='wrong';await receive(invalid,422);
  invalid=envelope();invalid.credential.verificationUrl='https://evil.test/records/TEC-SYNTHETIC-ONLY';await receive(invalid,400);
- // Injected snapshot data is discarded, even for a full_record delivery.
+ // Full-record data is retained privately and never enters the public projection.
  data.snapshot={results:[{analyte:'SYNTHETIC-SECRET-RESULT',value:12345}]};
+ delete data.snapshotFingerprint;
  await receive(data);const duplicate=await receive(data,200);check(duplicate.duplicate,'Exact retry is idempotent');
  await receive({...data,sequence:2},409);
  projection=await proofProjection(db,{},now);
@@ -82,18 +86,18 @@ try{
  const otherRelease=await call(owner,{action:'assert-release',lotId:'KAS-227-KB',brandId:otherId,label:'SYNTHETIC ungranted brand'});await call(other,{action:'confirm-release',id:otherRelease.id});
  projection=await proofProjection(db,{},now);check(projection.organizations.find(o=>o.id===otherId).tecrids.length===0,'Confirmation alone cannot bypass the grant');
  await call(owner,{action:'lot',id:'KAS-227-KB',supplierLotId:'227 K/B',ingredientCode:'changed',product:'changed'},409);
- let next=structuredClone(data);next.deliveryId=crypto.randomUUID();next.eventId=crypto.randomUUID();next.sequence=3;next.event='credential.corrected';next.credential.version=2;next.credential.fingerprint='b'.repeat(64);await receive(next);
+ let next=structuredClone(data);next.deliveryId=crypto.randomUUID();next.eventId=crypto.randomUUID();next.sequence=3;next.event='credential.corrected';next.credential.version=2;next.credential.fingerprint='b'.repeat(64);next.snapshot.version=2;delete next.snapshotFingerprint;await receive(next);
  const old=structuredClone(data);old.deliveryId=crypto.randomUUID();old.eventId=crypto.randomUUID();old.sequence=2;await receive(old);
  projection=await proofProjection(db,{},now);check(kas().tecrids[0].version===2,'Late event cannot roll back current evidence');
- let revoke=structuredClone(next);revoke.deliveryId=crypto.randomUUID();revoke.eventId=crypto.randomUUID();revoke.sequence=4;revoke.event='grant.revoked';revoke.grant.status='revoked';await receive(revoke);
+ let revoke=structuredClone(next);revoke.deliveryId=crypto.randomUUID();revoke.eventId=crypto.randomUUID();revoke.sequence=4;revoke.event='grant.revoked';revoke.grant.status='revoked';revoke.operation='tombstone';revoke.reason='synthetic_grant_withdrawal';revoke.grant.publicStatus=false;revoke.grant.brandOrganizationIds=[];delete revoke.snapshot;delete revoke.snapshotFingerprint;await receive(revoke);
  projection=await proofProjection(db,{},now);check(kas().tecrids.length===0,'Grant revocation removes public evidence immediately');check(projection.organizations.find(o=>o.id===brandId).tecrids.length===0,'Grant revocation removes downstream evidence');
- // Same-version credential revocation remains visible within a still-active public status grant.
- revoke=structuredClone(next);revoke.deliveryId=crypto.randomUUID();revoke.eventId=crypto.randomUUID();revoke.sequence=5;revoke.event='credential.revoked';revoke.credential.status='revoked';await receive(revoke);
- projection=await proofProjection(db,{},now);check(kas().tecrids[0].status==='revoked','Revoked status is retained, never presented as active');check(proofCounts(kas()).startsWith('0 active'),'Count includes active credentials only');
+ // Credential withdrawal removes retained findings and public proof; audit metadata remains.
+ revoke=structuredClone(next);revoke.deliveryId=crypto.randomUUID();revoke.eventId=crypto.randomUUID();revoke.sequence=5;revoke.event='credential.revoked';revoke.credential.status='revoked';revoke.operation='tombstone';revoke.reason='synthetic_credential_revocation';revoke.grant.status='revoked';revoke.grant.publicStatus=false;revoke.grant.brandOrganizationIds=[];delete revoke.snapshot;delete revoke.snapshotFingerprint;await receive(revoke);
+ projection=await proofProjection(db,{},now);check(kas().tecrids.length===0,'Revoked evidence is removed from public proof');check((await db.prepare('SELECT snapshot_json FROM lot_tecrid_grants WHERE tecrid=?').bind(revoke.credential.tecrid).first()).snapshot_json===null,'Revoked private payload is dropped');check(proofCounts(kas()).startsWith('0 active'),'Count includes active credentials only');
  await call(brand,{action:'withdraw-release',id:release.id});projection=await proofProjection(db,{},now);check(projection.organizations.find(o=>o.id===brandId).tecrids.length===0,'Withdrawing a release removes inherited proof');
  const expiry=structuredClone(revoke);expiry.deliveryId=crypto.randomUUID();expiry.eventId=crypto.randomUUID();expiry.sequence=6;expiry.grant.expiresAt='2026-10-24T00:00:00Z';await receive(expiry);projection=await proofProjection(db,{},now);check(kas().tecrids.length===0,'Expired grant never reveals proof');
  const privateStatus=structuredClone(revoke);privateStatus.deliveryId=crypto.randomUUID();privateStatus.eventId=crypto.randomUUID();privateStatus.sequence=7;privateStatus.grant.publicStatus=false;await receive(privateStatus);projection=await proofProjection(db,{},now);check(kas().tecrids.length===0,'Marketplace access does not imply consent to public status');
- const sku=envelope();sku.credential.tecrid='TEC-SYNTHETIC-SKU';sku.credential.verificationUrl='https://tecrid.com/records/TEC-SYNTHETIC-SKU';sku.credential.identity={originatingSupplierId:'kasandrinos-team',productSku:'SYNTHETIC-SKU-ONLY'};await receive(sku);
+ const sku=envelope();sku.credential.tecrid='TEC-SYNTHETIC-SKU';sku.credential.verificationUrl='https://tecrid.com/records/TEC-SYNTHETIC-SKU';sku.streamId=hash(JSON.stringify([sku.credential.tecrid,env.VLE_TECRID_RECIPIENT_ID]));sku.credential.identity={originatingSupplier:'tecrid-synthetic-supplier',mappingId:'synthetic-mapping',originatingSupplierId:'kasandrinos-team',productSku:'SYNTHETIC-SKU-ONLY'};await receive(sku);
  projection=await proofProjection(db,{},now);check(projection.lots.find(l=>l.id==='SYNTHETIC-SKU-LOT').tecrids.length===1,'Signed productSku fallback matches the SKU even when an ingredientCode is also registered');
  // Event id deduplication and simultaneous retries preserve one receipt.
  const concurrent=envelope({deliveryId:'synthetic-concurrent',eventId:'synthetic-concurrent-event',sequence:8});concurrent.credential.version=3;concurrent.credential.fingerprint='c'.repeat(64);

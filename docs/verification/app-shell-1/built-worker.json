@@ -1,0 +1,62 @@
+[
+  {
+    "path": "/",
+    "status": 200,
+    "type": "text/html; charset=utf-8",
+    "bytes": 1350
+  },
+  {
+    "path": "/suppliers",
+    "status": 200,
+    "type": "text/html; charset=utf-8",
+    "bytes": 1378
+  },
+  {
+    "path": "/faq",
+    "status": 200,
+    "type": "text/html; charset=utf-8",
+    "bytes": 1335
+  },
+  {
+    "path": "/boundaries",
+    "status": 200,
+    "type": "text/html; charset=utf-8",
+    "bytes": 1358
+  },
+  {
+    "path": "/vle.webmanifest",
+    "status": 200,
+    "type": "application/manifest+json",
+    "bytes": 463
+  },
+  {
+    "path": "/icons/vle-180.png",
+    "status": 200,
+    "type": "image/png",
+    "bytes": 3556
+  },
+  {
+    "path": "/icons/vle-192.png",
+    "status": 200,
+    "type": "image/png",
+    "bytes": 3767
+  },
+  {
+    "path": "/icons/vle-512.png",
+    "status": 200,
+    "type": "image/png",
+    "bytes": 16517
+  },
+  {
+    "path": "/mobile-shell.js",
+    "status": 200,
+    "type": "text/javascript; charset=utf-8",
+    "bytes": 7485
+  },
+  {
+    "path": "/mobile-shell.css",
+    "status": 200,
+    "type": "text/css; charset=utf-8",
+    "bytes": 6315
+  }
+]

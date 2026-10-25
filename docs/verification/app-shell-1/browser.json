@@ -1,0 +1,624 @@
+[
+  {
+    "name": "home-390",
+    "dialogOpen": false,
+    "headerCount": 1,
+    "phoneVisible": true,
+    "scrollWidth": 390,
+    "tabs": [
+      {
+        "current": "page",
+        "height": 59.046875,
+        "label": "Home",
+        "width": 71.59375
+      },
+      {
+        "current": null,
+        "height": 59.046875,
+        "label": "Find lots",
+        "width": 71.6015625
+      },
+      {
+        "current": null,
+        "height": 59.046875,
+        "label": "Verify",
+        "width": 71.6015625
+      },
+      {
+        "current": null,
+        "height": 59.046875,
+        "label": "Sign in",
+        "width": 71.6015625
+      },
+      {
+        "current": null,
+        "height": 59.046875,
+        "label": "More",
+        "width": 71.59375
+      }
+    ],
+    "url": "/",
+    "viewport": {
+      "height": 844,
+      "width": 390
+    }
+  },
+  {
+    "name": "find-lots-390",
+    "dialogOpen": false,
+    "headerCount": 1,
+    "phoneVisible": true,
+    "scrollWidth": 390,
+    "tabs": [
+      {
+        "current": null,
+        "height": 59.046875,
+        "label": "Home",
+        "width": 71.59375
+      },
+      {
+        "current": "page",
+        "height": 59.046875,
+        "label": "Find lots",
+        "width": 71.6015625
+      },
+      {
+        "current": null,
+        "height": 59.046875,
+        "label": "Verify",
+        "width": 71.6015625
+      },
+      {
+        "current": null,
+        "height": 59.046875,
+        "label": "Sign in",
+        "width": 71.6015625
+      },
+      {
+        "current": null,
+        "height": 59.046875,
+        "label": "More",
+        "width": 71.59375
+      }
+    ],
+    "url": "/suppliers",
+    "viewport": {
+      "height": 844,
+      "width": 390
+    }
+  },
+  {
+    "name": "brand-requests-390",
+    "dialogOpen": false,
+    "headerCount": 1,
+    "phoneVisible": true,
+    "scrollWidth": 390,
+    "tabs": [
+      {
+        "current": null,
+        "height": 59.046875,
+        "label": "Home",
+        "width": 71.59375
+      },
+      {
+        "current": null,
+        "height": 59.046875,
+        "label": "Find lots",
+        "width": 71.6015625
+      },
+      {
+        "current": "page",
+        "height": 59.046875,
+        "label": "Requests",
+        "width": 71.6015625
+      },
+      {
+        "current": null,
+        "height": 59.046875,
+        "label": "Alerts",
+        "width": 71.6015625
+      },
+      {
+        "current": null,
+        "height": 59.046875,
+        "label": "More",
+        "width": 71.59375
+      }
+    ],
+    "url": "/requests",
+    "viewport": {
+      "height": 844,
+      "width": 390
+    }
+  },
+  {
+    "name": "faq-390",
+    "dialogOpen": false,
+    "headerCount": 1,
+    "phoneVisible": true,
+    "scrollWidth": 390,
+    "tabs": [
+      {
+        "current": null,
+        "height": 59.046875,
+        "label": "Home",
+        "width": 71.59375
+      },
+      {
+        "current": null,
+        "height": 59.046875,
+        "label": "Find lots",
+        "width": 71.6015625
+      },
+      {
+        "current": null,
+        "height": 59.046875,
+        "label": "Requests",
+        "width": 71.6015625
+      },
+      {
+        "current": null,
+        "height": 59.046875,
+        "label": "Alerts",
+        "width": 71.6015625
+      },
+      {
+        "current": null,
+        "height": 59.046875,
+        "label": "More",
+        "width": 71.59375
+      }
+    ],
+    "url": "/faq",
+    "viewport": {
+      "height": 844,
+      "width": 390
+    }
+  },
+  {
+    "name": "supplier-my-lots-390",
+    "dialogOpen": false,
+    "headerCount": 1,
+    "phoneVisible": true,
+    "scrollWidth": 390,
+    "tabs": [
+      {
+        "current": null,
+        "height": 59.046875,
+        "label": "Home",
+        "width": 71.59375
+      },
+      {
+        "current": "page",
+        "height": 59.046875,
+        "label": "My lots",
+        "width": 71.6015625
+      },
+      {
+        "current": null,
+        "height": 59.046875,
+        "label": "Requests",
+        "width": 71.6015625
+      },
+      {
+        "current": null,
+        "height": 59.046875,
+        "label": "Alerts",
+        "width": 71.6015625
+      },
+      {
+        "current": null,
+        "height": 59.046875,
+        "label": "More",
+        "width": 71.59375
+      }
+    ],
+    "url": "/workspace/documents",
+    "viewport": {
+      "height": 844,
+      "width": 390
+    }
+  },
+  {
+    "name": "supplier-alerts-390",
+    "dialogOpen": false,
+    "headerCount": 1,
+    "phoneVisible": true,
+    "scrollWidth": 390,
+    "tabs": [
+      {
+        "current": null,
+        "height": 59.046875,
+        "label": "Home",
+        "width": 71.59375
+      },
+      {
+        "current": null,
+        "height": 59.046875,
+        "label": "My lots",
+        "width": 71.6015625
+      },
+      {
+        "current": null,
+        "height": 59.046875,
+        "label": "Requests",
+        "width": 71.6015625
+      },
+      {
+        "current": "page",
+        "height": 59.046875,
+        "label": "Alerts",
+        "width": 71.6015625
+      },
+      {
+        "current": null,
+        "height": 59.046875,
+        "label": "More",
+        "width": 71.59375
+      }
+    ],
+    "url": "/notifications",
+    "viewport": {
+      "height": 844,
+      "width": 390
+    }
+  },
+  {
+    "name": "member-390",
+    "dialogOpen": false,
+    "headerCount": 1,
+    "phoneVisible": true,
+    "scrollWidth": 390,
+    "tabs": [
+      {
+        "current": "page",
+        "height": 59.046875,
+        "label": "Home",
+        "width": 90.25
+      },
+      {
+        "current": null,
+        "height": 59.046875,
+        "label": "Find lots",
+        "width": 90.25
+      },
+      {
+        "current": null,
+        "height": 59.046875,
+        "label": "Alerts",
+        "width": 90.25
+      },
+      {
+        "current": null,
+        "height": 59.046875,
+        "label": "More",
+        "width": 90.25
+      }
+    ],
+    "url": "/",
+    "viewport": {
+      "height": 844,
+      "width": 390
+    }
+  },
+  {
+    "name": "home-430",
+    "dialogOpen": false,
+    "headerCount": 1,
+    "phoneVisible": true,
+    "scrollWidth": 430,
+    "tabs": [
+      {
+        "current": "page",
+        "height": 59.046875,
+        "label": "Home",
+        "width": 79.59375
+      },
+      {
+        "current": null,
+        "height": 59.046875,
+        "label": "Find lots",
+        "width": 79.6015625
+      },
+      {
+        "current": null,
+        "height": 59.046875,
+        "label": "Verify",
+        "width": 79.6015625
+      },
+      {
+        "current": null,
+        "height": 59.046875,
+        "label": "Sign in",
+        "width": 79.6015625
+      },
+      {
+        "current": null,
+        "height": 59.046875,
+        "label": "More",
+        "width": 79.59375
+      }
+    ],
+    "url": "/",
+    "viewport": {
+      "height": 932,
+      "width": 430
+    }
+  },
+  {
+    "name": "home-320",
+    "dialogOpen": false,
+    "headerCount": 1,
+    "phoneVisible": true,
+    "scrollWidth": 320,
+    "tabs": [
+      {
+        "current": "page",
+        "height": 59.046875,
+        "label": "Home",
+        "width": 57.59375
+      },
+      {
+        "current": null,
+        "height": 59.046875,
+        "label": "Find lots",
+        "width": 57.6015625
+      },
+      {
+        "current": null,
+        "height": 59.046875,
+        "label": "Verify",
+        "width": 57.6015625
+      },
+      {
+        "current": null,
+        "height": 59.046875,
+        "label": "Sign in",
+        "width": 57.6015625
+      },
+      {
+        "current": null,
+        "height": 59.046875,
+        "label": "More",
+        "width": 57.59375
+      }
+    ],
+    "url": "/",
+    "viewport": {
+      "height": 740,
+      "width": 320
+    }
+  },
+  {
+    "name": "home-767",
+    "dialogOpen": false,
+    "headerCount": 1,
+    "phoneVisible": true,
+    "scrollWidth": 767,
+    "tabs": [
+      {
+        "current": "page",
+        "height": 59.046875,
+        "label": "Home",
+        "width": 147
+      },
+      {
+        "current": null,
+        "height": 59.046875,
+        "label": "Find lots",
+        "width": 147
+      },
+      {
+        "current": null,
+        "height": 59.046875,
+        "label": "Verify",
+        "width": 147
+      },
+      {
+        "current": null,
+        "height": 59.046875,
+        "label": "Sign in",
+        "width": 147
+      },
+      {
+        "current": null,
+        "height": 59.046875,
+        "label": "More",
+        "width": 147
+      }
+    ],
+    "url": "/",
+    "viewport": {
+      "height": 900,
+      "width": 767
+    }
+  },
+  {
+    "name": "desktop-boundary-768",
+    "dialogOpen": false,
+    "headerCount": 3,
+    "phoneVisible": false,
+    "scrollWidth": 768,
+    "tabs": [
+      {
+        "current": "page",
+        "height": 0,
+        "label": "Home",
+        "width": 0
+      },
+      {
+        "current": null,
+        "height": 0,
+        "label": "Find lots",
+        "width": 0
+      },
+      {
+        "current": null,
+        "height": 0,
+        "label": "Verify",
+        "width": 0
+      },
+      {
+        "current": null,
+        "height": 0,
+        "label": "Sign in",
+        "width": 0
+      },
+      {
+        "current": null,
+        "height": 0,
+        "label": "More",
+        "width": 0
+      }
+    ],
+    "url": "/",
+    "viewport": {
+      "height": 900,
+      "width": 768
+    }
+  },
+  {
+    "name": "desktop-1280",
+    "dialogOpen": false,
+    "headerCount": 3,
+    "phoneVisible": false,
+    "scrollWidth": 1280,
+    "tabs": [
+      {
+        "current": "page",
+        "height": 0,
+        "label": "Home",
+        "width": 0
+      },
+      {
+        "current": null,
+        "height": 0,
+        "label": "Find lots",
+        "width": 0
+      },
+      {
+        "current": null,
+        "height": 0,
+        "label": "Verify",
+        "width": 0
+      },
+      {
+        "current": null,
+        "height": 0,
+        "label": "Sign in",
+        "width": 0
+      },
+      {
+        "current": null,
+        "height": 0,
+        "label": "More",
+        "width": 0
+      }
+    ],
+    "url": "/",
+    "viewport": {
+      "height": 900,
+      "width": 1280
+    }
+  },
+  {
+    "name": "short-sheet-390x600",
+    "backgroundLocked": true,
+    "clientHeight": 471,
+    "dialog": true,
+    "headingTop": 56,
+    "scrollHeight": 725,
+    "viewport": {
+      "height": 600,
+      "width": 390
+    }
+  },
+  {
+    "name": "lot-detail-390",
+    "dialogOpen": false,
+    "headerCount": 1,
+    "phoneVisible": true,
+    "scrollWidth": 390,
+    "tabs": [
+      {
+        "current": null,
+        "height": 58,
+        "label": "Home",
+        "width": 71.59375
+      },
+      {
+        "current": "page",
+        "height": 58,
+        "label": "Find lots",
+        "width": 71.6015625
+      },
+      {
+        "current": null,
+        "height": 58,
+        "label": "Verify",
+        "width": 71.6015625
+      },
+      {
+        "current": null,
+        "height": 58,
+        "label": "Sign in",
+        "width": 71.6015625
+      },
+      {
+        "current": null,
+        "height": 58,
+        "label": "More",
+        "width": 71.59375
+      }
+    ],
+    "url": "/lots/KAS-227-KB",
+    "viewport": {
+      "height": 844,
+      "width": 390
+    }
+  },
+  {
+    "name": "final-home-390",
+    "dialogOpen": false,
+    "headerCount": 1,
+    "phoneVisible": true,
+    "scrollWidth": 390,
+    "tabs": [
+      {
+        "current": "page",
+        "height": 58,
+        "label": "Home",
+        "width": 71.59375
+      },
+      {
+        "current": null,
+        "height": 58,
+        "label": "Find lots",
+        "width": 71.6015625
+      },
+      {
+        "current": null,
+        "height": 58,
+        "label": "Verify",
+        "width": 71.6015625
+      },
+      {
+        "current": null,
+        "height": 58,
+        "label": "Sign in",
+        "width": 71.6015625
+      },
+      {
+        "current": null,
+        "height": 58,
+        "label": "More",
+        "width": 71.59375
+      }
+    ],
+    "url": "/",
+    "viewport": {
+      "height": 844,
+      "width": 390
+    }
+  }
+]

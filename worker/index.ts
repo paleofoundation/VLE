@@ -1,3 +1,4 @@
+import {guardMutationRequest} from "../server/abuse-budget.js";
 import {deliverKasAccessNotifications} from '../server/kasandrinos-request-notifications.js';
 import {deliverNotifications} from '../server/sourcing.js';
 import handler from "vinext/server/fetch-handler";
@@ -26,6 +27,9 @@ const worker = {
       };
     }
     return runWithConnectorBinding(binding, async () => {
+      const guarded = await guardMutationRequest(request, env);
+      if (guarded instanceof Response) return guarded;
+      request = guarded;
       const response = await handler.fetch(request, env, ctx);
       if (new URL(request.url).pathname.startsWith("/api/sourcing")) ctx.waitUntil(deliverNotifications(env.DB, env).catch(() => {}));
       if (["/api/tecrid-report-permissions", "/api/bootstrap"].includes(new URL(request.url).pathname)) ctx.waitUntil(deliverKasAccessNotifications(env.DB, env).catch(() => {}));

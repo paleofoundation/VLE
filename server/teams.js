@@ -1,3 +1,5 @@
+import {takeBudget} from './abuse-budget.js';
+import {boundedText} from './service-assertion.js';
 const headers={'Cache-Control':'private, no-store','Vary':'Cookie'};
 const json=(data,status=200)=>Response.json(data,{status,headers});
 const emailValue=v=>{const s=String(v||'').trim().toLowerCase();if(s.length>254||!/^[^\s@<>]+@[a-z0-9.-]+\.[a-z]{2,}$/.test(s))throw Error('Enter a valid email.');return s;};
@@ -46,7 +48,8 @@ export async function teamRequest(request,db,user){
   return json({teams,selected,members,domains,email});
  }
  if(request.method!=='POST'||request.headers.get('origin')!==new URL(request.url).origin)return json({error:'Same-origin POST required.'},403);
- const raw=await request.text();if(raw.length>5000)throw Error('Request too large.');const d=JSON.parse(raw);
+ if(!await takeBudget(db,'team-account-mutation',selected?.id||user.userId,60,60000))return json({error:'Account request limit reached. Try again shortly.'},429);
+ const raw=await boundedText(request,5000);if(raw.length>5000)throw Error('Request too large.');const d=JSON.parse(raw);
  if(d.action==='select'){
   if(d.id&&!teams.some(t=>t.id===d.id))throw Error('Account unavailable.');
   await db.prepare('INSERT INTO team_selections (user_id,team_id) VALUES (?,?) ON CONFLICT(user_id) DO UPDATE SET team_id=excluded.team_id').bind(user.userId,d.id||null).run();return json({ok:true});

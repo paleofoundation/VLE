@@ -1,0 +1,1 @@
+PASS: issuance-bound recipient/token, mail-only denial, tamper and replay denial, idempotent delivery, recipient quota across requests, fixed link/redirect scope and zero real mail.

@@ -1,0 +1,17 @@
+# Verified Lot Exchange
+
+> VLE connects brands and ingredient suppliers around specific lots. Public pages describe supplier listings, lot evidence, and how the exchange works.
+
+Public listings and supplier-reported documents do not by themselves establish certification. A laboratory result is not a certification. TEST examples remain distinct from production credentials. Current status, scope, issuer and source matter when interpreting evidence.
+
+Private workspaces, reports and results require the account owner's authorization. This public guide grants no access and contains no private records.
+
+## Public guide
+
+- [Home](https://vle.exchange/): The ingredient exchange.
+- [About VLE](https://vle.exchange/about): What the exchange does.
+- [How it works](https://vle.exchange/how-it-works): The sourcing process.
+- [Sourcing boundaries](https://vle.exchange/boundaries): What evidence and exchange activity establish.
+- [Frequently asked questions](https://vle.exchange/faq): Public questions and answers.
+- [Ingredient suppliers](https://vle.exchange/suppliers): Public supplier and documented lot listings.
+- [Kasandrinos](https://vle.exchange/suppliers/kasandrinos): Public supplier information and lot evidence.

@@ -1,0 +1,176 @@
+{
+  "read_at": "2026-10-25T22:16:25.418263+02:00",
+  "method": "Read-only unauthenticated GET; no redirects or data modified; schema parsed from raw server HTML, no browser JS execution.",
+  "results": [
+    {
+      "url": "https://www.wikibiome.com/llms.txt",
+      "status": 404,
+      "final_url": "https://www.wikibiome.com/llms.txt",
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 23796,
+      "sha256": "0bf435315b70391d9581c7452b8998be452fc29ba424d27c23b6eaf8d507cdfd",
+      "markdown_heading": "<!DOCTYPE html><html lang=\"en\"><head><meta charSet=\"utf-8\"/><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"/><link rel=\"preload\" h",
+      "looks_like_html": true
+    },
+    {
+      "url": "https://www.wikibiome.com/",
+      "status": 200,
+      "final_url": "https://www.wikibiome.com/",
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 74448,
+      "sha256": "5a3c60d46efdaaba3d1d8e6d529720b7b41aff869350be6dddff1d7ee323e690",
+      "json_ld_blocks": 1,
+      "json_ld_valid": true,
+      "types": [
+        "ImageObject",
+        "Organization",
+        "WebSite"
+      ]
+    },
+    {
+      "url": "https://vle.exchange/llms.txt",
+      "status": 404,
+      "final_url": "https://vle.exchange/llms.txt",
+      "content_type": "text/plain",
+      "bytes": 9,
+      "sha256": "e3ebaa16dd9d9b9fc107c42183fb6cf9d22927e1af03dbbdfa0ccc38e4e4ac31",
+      "markdown_heading": "Not found",
+      "looks_like_html": false
+    },
+    {
+      "url": "https://vle.exchange/",
+      "status": 200,
+      "final_url": "https://vle.exchange/",
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 1858,
+      "sha256": "e939ba7c89f4ecebf34018619349aa1e49564bb740e5cbf024c3bb364cb63d5d",
+      "json_ld_blocks": 0,
+      "json_ld_valid": true,
+      "types": []
+    },
+    {
+      "url": "https://tecrid.com/llms.txt",
+      "status": 404,
+      "final_url": "https://tecrid.com/llms.txt",
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 27409,
+      "sha256": "d6d813b361bf583bfd0013aa0039adc013e308e33f64fac6563188f099f8ddab",
+      "markdown_heading": "<!DOCTYPE html><html lang=\"en\"><head><meta charSet=\"utf-8\"/><meta name=\"viewport\" content=\"width=device-width, viewport-fit=cover, initial-scale=1\"/><",
+      "looks_like_html": true
+    },
+    {
+      "url": "https://tecrid.com/",
+      "status": 200,
+      "final_url": "https://tecrid.com/",
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 43372,
+      "sha256": "54f763e66fb2d0781f67f69ffcbfe478b5c1c80522f50a8ee0a25dff67edbed3",
+      "json_ld_blocks": 1,
+      "json_ld_valid": true,
+      "types": [
+        "Organization",
+        "Person",
+        "PropertyValue",
+        "Service",
+        "WebSite"
+      ]
+    },
+    {
+      "url": "https://microbialmetallomics.com/llms.txt",
+      "status": 200,
+      "final_url": "https://microbialmetallomics.com/llms.txt",
+      "content_type": "text/plain; charset=utf-8",
+      "bytes": 27754,
+      "sha256": "974cb2987fab018c9b2bb180b5f2f933bf3a7e779cfdc366c41e121c42273c25",
+      "markdown_heading": "# Microbial Metallomics",
+      "looks_like_html": false
+    },
+    {
+      "url": "https://microbialmetallomics.com/",
+      "status": 200,
+      "final_url": "https://microbialmetallomics.com/",
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 61705,
+      "sha256": "a92c6ea1fdd973cc1a156d882bf958f851b3f981f08ed6c4f0e9415dc8d77207",
+      "json_ld_blocks": 2,
+      "json_ld_valid": true,
+      "types": [
+        "Answer",
+        "DefinedTerm",
+        "FAQPage",
+        "Organization",
+        "Person",
+        "PropertyValue",
+        "Question",
+        "Thing",
+        "WebSite"
+      ]
+    },
+    {
+      "url": "https://heavymetaltested.com/llms.txt",
+      "status": 404,
+      "final_url": "https://heavymetaltested.com/llms.txt",
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 24916,
+      "sha256": "ba9feedd1689682c349422a50d069574e7700ceaec9063a6471c81d199371d0b",
+      "markdown_heading": "<!DOCTYPE html><html lang=\"en\"><head><meta charSet=\"utf-8\"/><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"/><link rel=\"stylesheet",
+      "looks_like_html": true
+    },
+    {
+      "url": "https://heavymetaltested.com/",
+      "status": 200,
+      "final_url": "https://heavymetaltested.com/",
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 71586,
+      "sha256": "e8622e74f531900c2050d5b7d0f3f3f11470aca691b8a6670de2283cb68c8ec4",
+      "json_ld_blocks": 1,
+      "json_ld_valid": true,
+      "types": [
+        "Offer",
+        "Organization",
+        "Person",
+        "Service",
+        "WebSite"
+      ]
+    },
+    {
+      "url": "https://vle.exchange/suppliers/kasandrinos",
+      "status": 200,
+      "final_url": "https://vle.exchange/suppliers/kasandrinos",
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 1896,
+      "sha256": "d5f1ac84930d1f05d80aa7e1b29ab36978a5be3df6f91f9631e66615f75834c5",
+      "json_ld_blocks": 0,
+      "json_ld_valid": true,
+      "types": []
+    },
+    {
+      "url": "https://vle.exchange/lots/KAS-227-KB",
+      "status": 200,
+      "final_url": "https://vle.exchange/lots/KAS-227-KB",
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 1888,
+      "sha256": "c63097ceff20a537e1a1b138df3e12b7d36a70e619747760a5659716d480f7c2",
+      "json_ld_blocks": 0,
+      "json_ld_valid": true,
+      "types": []
+    },
+    {
+      "url": "https://tecrid.com/join",
+      "status": 200,
+      "final_url": "https://tecrid.com/join",
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 53131,
+      "sha256": "6054069c2570b22442e8da72993b85278dfbaafa5c6365ef0ad937d9cda4559d",
+      "json_ld_blocks": 1,
+      "json_ld_valid": true,
+      "types": [
+        "Organization",
+        "Person",
+        "PropertyValue",
+        "Service",
+        "WebSite"
+      ]
+    }
+  ]
+}

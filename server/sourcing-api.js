@@ -1,3 +1,5 @@
+import {takeBudget} from './abuse-budget.js';
+import {boundedText} from './service-assertion.js';
 import {sourcingIdentity,recipientEmail} from './teams.js';
 import {briefInput,sharedBrief,candidates,roomRole,transitionRoom} from './sourcing.js';
 import {kasLots} from './kasandrinos.js';
@@ -41,6 +43,7 @@ export async function sourcingRequest(request,db,bucket,user,p){
  }
  if(request.method!=='POST')return json({error:'Not found'},404);
  if(request.headers.get('origin')!==new URL(request.url).origin)return json({error:'Same-origin request required.'},403);
+ if(!await takeBudget(db,'sourcing-account-mutation',user.userId,120,60000))return json({error:'Account request limit reached. Try again shortly.'},429);
  if(path==='/api/sourcing/upload'){
   if(!supplier&&!isManager)return json({error:'Set up your supplier workspace first.'},403);
   if(Number(request.headers.get('content-length'))>12000000)return json({error:'PDF must be under 10 MB.'},413);
@@ -53,7 +56,7 @@ export async function sourcingRequest(request,db,bucket,user,p){
   return json({id:keyId,message:'Report submitted privately for review.'});
  }
  if(path!=='/api/sourcing')return json({error:'Not found'},404);
- const raw=await request.text();if(raw.length>20000)return json({error:'Request too large.'},413);
+ const raw=await boundedText(request,60000);if(raw.length>20000)return json({error:'Request too large.'},413);
  const d=JSON.parse(raw);if(d.accountId!==user.userId)return json({error:'Your active account changed. Refresh before saving.'},409);
  if(d.action==='save-brief'){
   if(!p.buyer)return json({error:'An explicit brand account membership is required.'},403);

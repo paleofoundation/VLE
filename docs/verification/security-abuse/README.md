@@ -1,0 +1,5 @@
+# F11 receiver verification
+
+The first commit proves mail-only recipient/token selection was accepted. The fix requires a separate short-lived issuance assertion, exact body binding and nonce, then applies idempotent hashed delivery claims and recipient/global quotas. Team/sourcing and Worker mutation budgets share the existing operational rate-limiter table; JSON is bounded before parsing. No schema/migration changes.
+
+Mail tests cover mail-only denial, recipient tampering, signed replay, freshly signed duplicate suppression and quotas across requests, with zero real mail. Concurrent budget tests admit exactly the configured count and retain only hashed keys. All VLE suites and build pass; focused JavaScript lint and whitespace pass. Paired protocol verification still passes both directions. See ABUSE-CONTROLS.md for default limits, operator bindings and multipart/public-read boundaries. Distinct issuance credentials must be provisioned only under a separate release gate. No production change, real message, merge or deploy.

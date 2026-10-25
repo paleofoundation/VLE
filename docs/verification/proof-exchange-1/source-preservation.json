@@ -1,0 +1,16 @@
+{
+  "heroMarkupUnchanged": true,
+  "heroSha256": "562b7ec68d98f64e15de84c9297249bbcf1b369cbd95d923feb8f6e7b9b52341",
+  "disclosureMarkupUnchanged": true,
+  "unchangedFiles": {
+    "public/app.css": "2ba60064082180b85abfdd000e63756e9790a5861fe460e1564909ec6aada7d7",
+    "public/storefront.css": "04467328ec69e2f96284eb765e040d9f8b4bcd6526a493bd66d93c73c1f89245",
+    "server/kasandrinos-reports.json": "a4b0f69a4a04c63773fac42e9a4414fc0356cbade3c757791477e76c7aea53c0",
+    "server/tecrid-test-references.json": "9041923d53537bb03dd188d6385efe293ae548dcca70c5a01fdd4487fb3ffc5f",
+    "server/kasandrinos-report-permissions.js": "4f1eb9890ce61de8a9d45446b00c032950111fe94c62e05ecd8451fe3fbdbb8e",
+    "server/tecrid-report-service.ts": "c4c59b36a44c0dba12f2f760b7a76fd5710dee378d8fa354e4955744657a4964"
+  },
+  "base": "af39326",
+  "preview": "http://127.0.0.1:5177",
+  "productionDeployment": false
+}

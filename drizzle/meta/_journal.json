@@ -71,6 +71,13 @@
       "when": 1792762512558,
       "tag": "0009_evidence_notification_reads",
       "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "6",
+      "when": 1792910078228,
+      "tag": "0010_proof_exchange",
+      "breakpoints": true
     }
   ]
 }

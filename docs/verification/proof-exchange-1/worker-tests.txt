@@ -1,0 +1,1 @@
+PASS: built Worker routes, anonymous pages/bootstrap, private mutation rejection, real HMAC receiver, atomic receipt, idempotent retry, status-only public projection, private log isolation and zero outbound calls.

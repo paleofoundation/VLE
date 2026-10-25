@@ -1,3 +1,4 @@
+import {proofProjection} from '../../../server/proof-exchange.js';
 import {reportPermission} from '../../../server/kasandrinos-report-permissions.js';
 import {teamRequest,canEditKas,selectedTeam} from '../../../server/teams.js';
 import {sourcingRequest} from '../../../server/sourcing-api.js';
@@ -57,7 +58,7 @@ async function projection(c:any){
  const kas={...kasCatalog(),storefront:publicStorefront(sf)};
  const testReportAccess:Record<string,any>={};
  if(user)for(const report of kas.reports.filter((r:any)=>r.tecridTest))testReportAccess[report.id]=await reportPermission(database(),user,report.reportNumber);
- return {state:result,lots,kasandrinos:kas,version,session:{signedIn:!!user,email:user?.email||null,name:user?.displayName||null,companyEmail:p.companyEmail,canReview:p.owner,canManageStorefront:canManageStorefront(user,p.owner,sf)||await canEditKas(database(),user),supplierConnected:true,pilotController:user?.email?.toLowerCase()==='karen@paleofoundation.com',team,canBuy:p.buyer,hasSupplierWorkspace:!!state.supplierProfile,canViewEvidence:buyer,testReportAccess,signIn:'/email-sign-in'}};
+ return {proof:await proofProjection(database(),env),state:result,lots,kasandrinos:kas,version,session:{signedIn:!!user,email:user?.email||null,name:user?.displayName||null,companyEmail:p.companyEmail,canReview:p.owner,canManageStorefront:canManageStorefront(user,p.owner,sf)||await canEditKas(database(),user),supplierConnected:true,pilotController:user?.email?.toLowerCase()==='karen@paleofoundation.com',team,canBuy:p.buyer,hasSupplierWorkspace:!!state.supplierProfile,canViewEvidence:buyer,testReportAccess,signIn:'/email-sign-in'}};
 }
 async function save(c:any){
  const r=await database().prepare('UPDATE review_sessions SET state=?,version=version+1 WHERE user_id=? AND version=?').bind(JSON.stringify(c.state),c.user.userId,c.version).run();

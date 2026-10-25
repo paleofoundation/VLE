@@ -1,0 +1,29 @@
+✔ unapproved verified buyer cannot read controlled report ll-43301 (53.686791ms)
+✔ unapproved verified buyer cannot read controlled report ll-43295 (70.406ms)
+✔ unapproved verified buyer cannot read controlled report ll-43296 (57.846541ms)
+✔ unapproved verified buyer cannot read controlled report ll-43298 (48.907417ms)
+✔ unapproved verified buyer cannot read controlled report ll-43302 (43.076625ms)
+✔ unapproved verified buyer cannot read controlled report ll-43297 (43.585792ms)
+✔ unapproved verified buyer cannot read controlled report ll-43300 (46.004833ms)
+✔ unapproved verified buyer cannot read controlled report ll-43299 (43.951542ms)
+✔ unapproved verified buyer cannot read controlled report athens-12-4338 (42.327458ms)
+✔ unapproved verified buyer cannot read controlled report woc-c2526-00228 (68.544084ms)
+✔ unapproved verified buyer cannot read controlled report envirolabs-5-92-24 (54.172041ms)
+✔ unapproved verified buyer cannot read controlled report organic-addendum (49.433042ms)
+✔ unapproved verified buyer cannot read controlled report non-gmo-2026 (51.932958ms)
+✔ unapproved verified buyer cannot read controlled report kosher-2026 (41.1895ms)
+✔ unapproved verified buyer cannot read controlled report paleo-keto-archive (41.564167ms)
+✔ unapproved verified buyer cannot read controlled report organic-spices (39.471209ms)
+✔ anonymous report request is denied before reading private storage (0.24175ms)
+✔ the source manifest publishes no original report location (0.07525ms)
+✔ missing private storage never falls back to an external source (0.244ms)
+Kasandrinos report unavailable
+✔ an explicit controller reaches storage and loses that authority immediately on revocation (78.484917ms)
+ℹ tests 20
+ℹ suites 0
+ℹ pass 20
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1780.523125

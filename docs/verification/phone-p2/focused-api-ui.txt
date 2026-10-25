@@ -1,0 +1,19 @@
+PASS: two-action card, direct two-tap Answer link, quick replies, explicit share, escaped source data, canonical links and missing/viewer states.
+PASS: asynchronous cross-account data is rejected before rendering; no automatic retry loop.
+✔ tests/phone-request-ui.mjs (82.504625ms)
+PASS: personal-email membership, anonymous/origin/operator guards, empty-by-default verified catalog and exact recipient selection.
+PASS: stable all-verified fanout, no late recipients on retry, concurrent idempotency, private recipient views and optimistic answer writes.
+PASS: reviewed source hash/lot binding, source-derived digitized data, two-record sharing, no PDF required, reference-only answers and metadata-only audit/notifications.
+PASS: native consent plus exact release scope, metadata/result separation, receiver-OFF guard and immediate tombstone-driven loss of shared access.
+PASS: only live registry-verified certificates are shareable; revocation redacts them. Quotes retain original values and the same brand scope, without pricing logic.
+PASS: source/document/request/supplier withdrawal removes access immediately, stale references cannot restore data and withdrawals remain scoped.
+PASS: independent account lists and viewer identity preserved.
+✔ tests/phone-requests.mjs (3721.810875ms)
+ℹ tests 2
+ℹ suites 0
+ℹ pass 2
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 3731.435292

@@ -91,7 +91,7 @@ replace('document',{body:{classList:{toggle(){}}},querySelector:s=>s==='#app'?ro
 replace('window',{addEventListener(){}});replace('localStorage',{removeItem(){}});replace('setInterval',()=>0);
 replace('location',{pathname:'/',search:''});
 let role='out';
-replace('fetch',async path=>{if(path==='/api/sourcing')return {ok:true,json:async()=>({accountId:'synthetic',canBuy:true,isSupplier:true,briefs:[],rooms:[],opportunities:[],notifications:[],submissions:[]})};if(path==='/api/sourcing/waiting')return {ok:true,json:async()=>({accountId:'synthetic',tasks:[]})};assert.equal(path,'/api/bootstrap');return {ok:true,json:async()=>({state:{...initial(),role,supplier:'kasandrinos'},proof:seed,version:0,lots:allLots(),kasandrinos:catalog,session:{signedIn:role!=='out',email:null}})};});
+replace('fetch',async path=>{if(path==='/api/sourcing')return {ok:true,json:async()=>({accountId:'synthetic',canBuy:true,isSupplier:true,briefs:[],rooms:[],opportunities:[],notifications:[],submissions:[]})};if(path==='/api/sourcing/waiting'||path==='/api/requests/waiting')return {ok:true,json:async()=>({accountId:'synthetic',tasks:[]})};assert.equal(path,'/api/bootstrap');return {ok:true,json:async()=>({state:{...initial(),role,supplier:'kasandrinos'},proof:seed,version:0,lots:allLots(),kasandrinos:catalog,session:{signedIn:role!=='out',email:null}})};});
 try{
  for(const nextRole of ['out','brand','supplier','retailer','other']){
   role=nextRole;location.pathname='/';await import(`../public/app.js?proof-role=${role}`);await new Promise(setImmediate);

@@ -1,0 +1,16 @@
+PASS: personal-email membership, anonymous/origin/operator guards, empty-by-default verified catalog and exact recipient selection.
+PASS: stable all-verified fanout, no late recipients on retry, concurrent idempotency, private recipient views and optimistic answer writes.
+PASS: reviewed source hash/lot binding, source-derived digitized data, two-record sharing, no PDF required, reference-only answers and metadata-only audit/notifications.
+PASS: native consent plus exact release scope, metadata/result separation, receiver-OFF guard and immediate tombstone-driven loss of shared access.
+PASS: only live registry-verified certificates are shareable; revocation redacts them. Quotes retain original values and the same brand scope, without pricing logic.
+PASS: source/document/request/supplier withdrawal removes access immediately, stale references cannot restore data and withdrawals remain scoped.
+PASS: independent account lists and viewer identity preserved.
+✔ tests/phone-requests.mjs (5536.260041ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 1
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 5544.292375

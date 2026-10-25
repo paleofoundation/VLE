@@ -15,4 +15,3 @@
   121:9  warning  'error' is defined but never used  @typescript-eslint/no-unused-vars
 
 ✖ 11 problems (0 errors, 11 warnings)
-

@@ -1,0 +1,150 @@
+[
+  {
+    "check": "email-auth",
+    "exit": 0,
+    "seconds": 1.73
+  },
+  {
+    "check": "evidence-notifications",
+    "exit": 0,
+    "seconds": 1.35
+  },
+  {
+    "check": "homepage-regressions",
+    "exit": 0,
+    "seconds": 0.21
+  },
+  {
+    "check": "kasandrinos-request-notifications",
+    "exit": 0,
+    "seconds": 1.63
+  },
+  {
+    "check": "kasandrinos",
+    "exit": 0,
+    "seconds": 0.2
+  },
+  {
+    "check": "mobile-shell",
+    "exit": 0,
+    "seconds": 0.21
+  },
+  {
+    "check": "pilot",
+    "exit": 0,
+    "seconds": 3.38
+  },
+  {
+    "check": "proof-chips",
+    "exit": 0,
+    "seconds": 0.25,
+    "rerun": "after intentional signed-home fixture updates"
+  },
+  {
+    "check": "proof-exchange",
+    "exit": 0,
+    "seconds": 1.95
+  },
+  {
+    "check": "proof-worker",
+    "exit": 0,
+    "seconds": 0.91
+  },
+  {
+    "check": "report-gate",
+    "exit": 0,
+    "seconds": 0.18
+  },
+  {
+    "check": "security-dependencies",
+    "exit": 0,
+    "seconds": 0.25
+  },
+  {
+    "check": "security-domain-membership",
+    "exit": 0,
+    "seconds": 1.23
+  },
+  {
+    "check": "security-headers",
+    "exit": 0,
+    "seconds": 0.92
+  },
+  {
+    "check": "security-mail-issuance",
+    "exit": 0,
+    "seconds": 0.29
+  },
+  {
+    "check": "security-notification-privacy",
+    "exit": 0,
+    "seconds": 0.86
+  },
+  {
+    "check": "security-rate-budgets",
+    "exit": 0,
+    "seconds": 2.69
+  },
+  {
+    "check": "security-reports",
+    "exit": 0,
+    "seconds": 1.46
+  },
+  {
+    "check": "security-service-assertions",
+    "exit": 0,
+    "seconds": 0.82
+  },
+  {
+    "check": "security-service-boundary",
+    "exit": 0,
+    "seconds": 0.29
+  },
+  {
+    "check": "security-team-audit",
+    "exit": 0,
+    "seconds": 1.39
+  },
+  {
+    "check": "sourcing",
+    "exit": 0,
+    "seconds": 3.49
+  },
+  {
+    "check": "storefront",
+    "exit": 0,
+    "seconds": 0.2
+  },
+  {
+    "check": "teams",
+    "exit": 0,
+    "seconds": 2.87
+  },
+  {
+    "check": "tecrid-email-relay",
+    "exit": 0,
+    "seconds": 1.01
+  },
+  {
+    "check": "tecrid-report-service",
+    "exit": 0,
+    "seconds": 2.61
+  },
+  {
+    "check": "tecrid-test-links",
+    "exit": 0,
+    "seconds": 0.2
+  },
+  {
+    "check": "waiting",
+    "exit": 0,
+    "seconds": 2.03,
+    "rerun": "PASS after latest-message race and bounded JSON checks"
+  },
+  {
+    "check": "lint",
+    "exit": 0,
+    "seconds": 1.2,
+    "rerun": "after intentional signed-home fixture updates"
+  }
+]

@@ -91,15 +91,16 @@ replace('document',{body:{classList:{toggle(){}}},querySelector:s=>s==='#app'?ro
 replace('window',{addEventListener(){}});replace('localStorage',{removeItem(){}});replace('setInterval',()=>0);
 replace('location',{pathname:'/',search:''});
 let role='out';
-replace('fetch',async path=>{assert.equal(path,'/api/bootstrap');return {ok:true,json:async()=>({state:{...initial(),role,supplier:'kasandrinos'},proof:seed,version:0,lots:allLots(),kasandrinos:catalog,session:{signedIn:role!=='out',email:null}})};});
+replace('fetch',async path=>{if(path==='/api/sourcing')return {ok:true,json:async()=>({accountId:'synthetic',canBuy:true,isSupplier:true,briefs:[],rooms:[],opportunities:[],notifications:[],submissions:[]})};if(path==='/api/sourcing/waiting')return {ok:true,json:async()=>({accountId:'synthetic',tasks:[]})};assert.equal(path,'/api/bootstrap');return {ok:true,json:async()=>({state:{...initial(),role,supplier:'kasandrinos'},proof:seed,version:0,lots:allLots(),kasandrinos:catalog,session:{signedIn:role!=='out',email:null}})};});
 try{
  for(const nextRole of ['out','brand','supplier','retailer','other']){
-  role=nextRole;location.pathname='/';await import(`../public/app.js?proof-role=${role}`);
+  role=nextRole;location.pathname='/';await import(`../public/app.js?proof-role=${role}`);await new Promise(setImmediate);
   const nav=root.innerHTML.match(/<nav class="phone-tabs"[\s\S]*?<\/nav>/)?.[0];
   check(Boolean(nav),'Phone tabs render beside proof');
   const labels=[...nav.matchAll(/<span>([^<]+)<\/span>/g)].map(m=>m[1]);
   assert.deepEqual(labels,tabsFor(role,role!=='out').map(t=>t.label));checks++;
-  check(root.innerHTML.includes('Supplier proof'),'Home supplier card proof');
+  if(['brand','supplier'].includes(role)){check(root.innerHTML.includes('Waiting on you'),'Signed role home shows the scoped task inbox');check(!root.innerHTML.includes('data-explore-open'),'Role phone home removes the menu');continue;}
+  check(root.innerHTML.includes('Supplier proof'),'Public home supplier card proof');
   const cards=[...root.innerHTML.matchAll(/<article class="lot-card[\s\S]*?<\/article>/g)];
   check(cards.length===6,'All six actual lot cards render');
   check(cards.every(c=>c[0].includes('No TECRID yet')&&c[0].includes('Last tested:')),'Every actual lot card has proof and date');

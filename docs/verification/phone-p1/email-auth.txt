@@ -1,0 +1,21 @@
+# SERVER_ERROR:  Error: Email delivery failed. Please try again shortly.
+    at Object.sendMagicLink (file:///Users/kmfp/Documents/Codex/2026-10-25/you-are-conductor-the-single-codex/work/vle/server/auth-factory.ts:27:27)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async file:///Users/kmfp/Documents/Codex/2026-10-25/you-are-conductor-the-single-codex/work/vle/node_modules/better-auth/dist/plugins/magic-link/index.mjs:108:5
+    at async file:///Users/kmfp/Documents/Codex/2026-10-25/you-are-conductor-the-single-codex/work/vle/node_modules/@better-auth/core/dist/api/index.mjs:56:11
+    at async internalHandler (file:///Users/kmfp/Documents/Codex/2026-10-25/you-are-conductor-the-single-codex/work/vle/node_modules/better-call/dist/endpoint.mjs:29:20)
+    at async file:///Users/kmfp/Documents/Codex/2026-10-25/you-are-conductor-the-single-codex/work/vle/node_modules/better-auth/dist/api/dispatch.mjs:231:18
+    at async processRequest (file:///Users/kmfp/Documents/Codex/2026-10-25/you-are-conductor-the-single-codex/work/vle/node_modules/better-call/dist/router.mjs:82:11)
+    at async handler (file:///Users/kmfp/Documents/Codex/2026-10-25/you-are-conductor-the-single-codex/work/vle/node_modules/better-call/dist/router.mjs:105:16)
+    at async file:///Users/kmfp/Documents/Codex/2026-10-25/you-are-conductor-the-single-codex/work/vle/node_modules/@better-auth/core/dist/context/transaction.mjs:38:13
+    at async file:///Users/kmfp/Documents/Codex/2026-10-25/you-are-conductor-the-single-codex/work/vle/tests/email-auth.mjs:30:3
+PASS: D1 email auth, verified identity, hashed one-use token, expiry, secure cookie, CSRF, sign-out revocation, redirect validation, persisted rate limit, delivery failure.
+✔ tests/email-auth.mjs (1632.4755ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 1
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1640.222459

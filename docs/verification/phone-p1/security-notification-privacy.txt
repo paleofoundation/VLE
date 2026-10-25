@@ -1,0 +1,11 @@
+✔ request notification contains no requester mailbox (1.789333ms)
+✔ team mail sends individual recipients with no other mailbox in the envelope (51.560625ms)
+✔ database failures reveal no private text in logs or write responses (24.732833ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 3
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 771.398791

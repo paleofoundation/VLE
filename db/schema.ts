@@ -97,3 +97,8 @@ export const proofCertifications=sqliteTable('proof_certifications',{
 export const proofAudit=sqliteTable('proof_audit',{
  id:text('id').primaryKey().notNull(),organizationId:text('organization_id').notNull(),action:text('action').notNull(),subjectId:text('subject_id').notNull(),actor:text('actor').notNull(),createdAt:text('created_at').notNull(),
 });
+
+// Participant decisions are data, separate from message text and evidence permissions.
+export const sourcingDecisions=sqliteTable('sourcing_decisions',{
+ id:text('id').primaryKey().notNull(),roomId:text('room_id').notNull().references(()=>sourcingRooms.id),accountId:text('account_id').notNull(),actorId:text('actor_id').notNull(),taskKey:text('task_key').notNull(),kind:text('kind').notNull(),decision:text('decision').notNull(),roomVersion:integer('room_version').notNull(),createdAt:text('created_at').notNull(),
+},t=>[uniqueIndex('sourcing_decisions_task_account').on(t.roomId,t.accountId,t.taskKey)]);

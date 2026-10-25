@@ -1,4 +1,5 @@
-import { sqliteTable, text, integer, primaryKey } from "drizzle-orm/sqlite-core";
+import { sqliteTable, text, integer, primaryKey, uniqueIndex, index, check } from "drizzle-orm/sqlite-core";
+import {sql} from 'drizzle-orm';
 export const reviewSessions = sqliteTable("review_sessions", {userId:text("user_id").primaryKey(), state:text("state").notNull(), version:integer("version").notNull().default(0)});
 export const evidenceViews = sqliteTable("evidence_views", {id:text("id").primaryKey(), userId:text("user_id").notNull(), email:text("email").notNull(), name:text("name").notNull(), company:text("company").notNull(), lot:text("lot").notNull(), supplier:text("supplier").notNull(), viewedAt:text("viewed_at").notNull()});
 
@@ -71,3 +72,28 @@ export const kasAccessNotifications=sqliteTable('kas_access_notifications',{
 export const evidenceNotificationReads=sqliteTable("evidence_notification_reads",{
  notificationId:text("notification_id").notNull(),recipientEmail:text("recipient_email").notNull(),readAt:text("read_at").notNull(),
 },table=>[primaryKey({columns:[table.notificationId,table.recipientEmail]})]);
+
+export const proofOrganizations=sqliteTable('proof_organizations',{
+ id:text('id').primaryKey().notNull(),teamId:text('team_id').notNull().unique().references(()=>teamAccounts.id),slug:text('slug').notNull().unique(),name:text('name').notNull(),
+});
+export const organizationRoles=sqliteTable('organization_roles',{
+ organizationId:text('organization_id').notNull().references(()=>proofOrganizations.id),role:text('role').notNull(),
+},t=>[primaryKey({columns:[t.organizationId,t.role]}),check('organization_roles_role_check',sql`${t.role} IN ('supplier','brand','private_label_manufacturer','retailer','certification_body')`)]);
+export const proofLots=sqliteTable('proof_lots',{
+ id:text('id').primaryKey().notNull(),supplierId:text('supplier_id').notNull().references(()=>proofOrganizations.id),supplierLotId:text('supplier_lot_id').notNull(),ingredientCode:text('ingredient_code'),productSku:text('product_sku'),product:text('product').notNull(),
+},t=>[uniqueIndex('proof_lots_supplier_lot').on(t.supplierId,t.supplierLotId),index('proof_lots_ingredient').on(t.supplierId,t.ingredientCode)]);
+export const lotReleases=sqliteTable('lot_releases',{
+ id:text('id').primaryKey().notNull(),lotId:text('lot_id').notNull().references(()=>proofLots.id),brandId:text('brand_id').notNull().references(()=>proofOrganizations.id),label:text('label').notNull(),assertedBy:text('asserted_by').notNull(),assertedAt:text('asserted_at').notNull(),confirmedBy:text('confirmed_by'),confirmedAt:text('confirmed_at'),withdrawnAt:text('withdrawn_at'),
+},t=>[uniqueIndex('lot_releases_lot_brand_label').on(t.lotId,t.brandId,t.label)]);
+export const proofDeliveryReceipts=sqliteTable('proof_delivery_receipts',{
+ deliveryId:text('delivery_id').primaryKey().notNull(),eventId:text('event_id').notNull().unique(),bodyHash:text('body_hash').notNull(),lotId:text('lot_id').notNull().references(()=>proofLots.id),tecrid:text('tecrid').notNull(),sequence:integer('sequence').notNull(),receivedAt:text('received_at').notNull(),
+});
+export const lotTecrids=sqliteTable('lot_tecrids',{
+ tecrid:text('tecrid').primaryKey().notNull(),lotId:text('lot_id').notNull().references(()=>proofLots.id),version:integer('version').notNull(),sequence:integer('sequence').notNull(),status:text('status').notNull(),program:text('program').notNull(),issuingLab:text('issuing_lab').notNull(),issuedAt:text('issued_at').notNull(),retestDue:text('retest_due'),verificationUrl:text('verification_url').notNull(),fingerprint:text('fingerprint').notNull(),grantId:text('grant_id').notNull(),grantStatus:text('grant_status').notNull(),accessLevel:text('access_level').notNull(),publicStatus:integer('public_status').notNull().default(0),grantExpiresAt:text('grant_expires_at'),brandIds:text('brand_ids').notNull(),receivedAt:text('received_at').notNull(),
+});
+export const proofCertifications=sqliteTable('proof_certifications',{
+ id:text('id').primaryKey().notNull(),organizationId:text('organization_id').notNull().references(()=>proofOrganizations.id),lotId:text('lot_id').references(()=>proofLots.id),title:text('title').notNull(),program:text('program').notNull(),issuer:text('issuer').notNull(),registry:text('registry'),registryId:text('registry_id'),scope:text('scope').notNull(),issuedAt:text('issued_at'),expiresAt:text('expires_at'),reportedStatus:text('reported_status').notNull().default('unknown'),sourceReportId:text('source_report_id'),note:text('note').notNull().default(''),
+},t=>[check('proof_certifications_registry_check',sql`${t.registry} IN ('paleo','ics')`)]);
+export const proofAudit=sqliteTable('proof_audit',{
+ id:text('id').primaryKey().notNull(),organizationId:text('organization_id').notNull(),action:text('action').notNull(),subjectId:text('subject_id').notNull(),actor:text('actor').notNull(),createdAt:text('created_at').notNull(),
+});

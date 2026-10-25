@@ -1,0 +1,1 @@
+PASS: 86 proof exchange checks. Real D1 migrations, roles, two-sided release authorization, HMAC, replay and concurrency, signed lot identity, disclosure, correction/revocation, registry status, expiry, freshness, audit, receipt isolation and escaping.

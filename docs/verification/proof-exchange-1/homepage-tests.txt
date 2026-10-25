@@ -1,0 +1,2 @@
+PASS: actual anonymous homepage renders lookup first and all three cards in the following section.
+PASS: actual anonymous homepage renders expanded sourcing boundaries with all three paragraphs.

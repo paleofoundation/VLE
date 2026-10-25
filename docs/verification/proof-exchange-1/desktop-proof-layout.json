@@ -1,0 +1,12 @@
+{
+  "certifications": 5,
+  "editor": false,
+  "overflow": false,
+  "proofWalls": 1,
+  "roles": "Supplier\nBrand\nPrivate-label manufacturer",
+  "url": "http://127.0.0.1:5177/organizations/kasandrinos#proof-wall",
+  "viewport": {
+    "height": 1000,
+    "width": 1440
+  }
+}

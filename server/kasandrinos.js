@@ -18,17 +18,15 @@ export function kasCatalog(){
  const publicReports=reports.map(report=>{const {sourceURL,sha256,bytes,file,...metadata}=report;return {...metadata,tecridTest:tecridTestReference(report)};});
  return {supplier:kasSupplier,lots:kasLots,reports:publicReports,importedAt:'2026-10-21',valuesStatus:'Awaiting supplier confirmation'};
 }
-export async function reportBytes(report,bucket,transport=fetch){
- const key='kasandrinos/source-reports/'+report.sha256+'.pdf';
- const cached=bucket?await bucket.get(key):null;
- if(cached)return cached.body;
- const response=await transport(report.sourceURL,{redirect:'manual',signal:AbortSignal.timeout(20000)});
- if(!response.ok)throw Error('The source report is temporarily unavailable.');
- if(Number(response.headers.get('content-length'))>12_000_000)throw Error('Unexpected report size.');
- const data=await response.arrayBuffer();
+// Original evidence is provisioned through reviewed private storage only.
+// Never fetch a public source URL on a cache miss.
+export async function reportBytes(report,bucket){
+ if(!bucket)throw Error('Private source storage is unavailable.');
+ const object=await bucket.get('kasandrinos/source-reports/'+report.sha256+'.pdf');
+ if(!object)throw Error('The private source report is unavailable.');
+ const data=await object.arrayBuffer();
  if(data.byteLength!==report.bytes||new TextDecoder().decode(data.slice(0,5))!=='%PDF-')throw Error('The source report has changed and needs review.');
  const hash=Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',data)),b=>b.toString(16).padStart(2,'0')).join('');
  if(hash!==report.sha256)throw Error('The source report has changed and needs review.');
- if(bucket)await bucket.put(key,data,{httpMetadata:{contentType:'application/pdf'},customMetadata:{sha256:hash,reportId:report.id}});
  return data;
 }

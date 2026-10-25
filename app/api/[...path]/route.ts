@@ -156,9 +156,8 @@ async function authRequest(request:Request){
 
 async function serveKasReport(c:any,report:any){
  try{
-  if(kasCatalog().reports.find((r:any)=>r.id===report.id)?.tecridTest){
-   if(!(await reportPermission(database(),c.user,report.reportNumber)).canReadPdf)return failure('Original PDFs are private source evidence. Request the digital TECRID card on TECRID.',403);
-  }else if(!c.p.buyer||c.state.role!=='brand')return failure('Brand-buyer permission required.',403);
+  // Every original report uses the same current controller authority check.
+  if(!(await reportPermission(database(),c.user,report.reportNumber)).canReadPdf)return failure('Original PDFs are private source evidence. Request approved digital evidence from the controller.',403);
   const bytes=await reportBytes(report,(env as any).BUCKET);
   await logView(c,{id:report.lotNumbers.length?report.lotNumbers.join(', ')+' · '+report.reportNumber:'Supplier reference · '+report.reportNumber,supplier:'kasandrinos'});
   return new Response(bytes,{headers:{...privateHeaders,'Content-Type':'application/pdf','Content-Disposition':`inline; filename="Kasandrinos-${report.id}.pdf"`,'X-Report-SHA256':report.sha256}});

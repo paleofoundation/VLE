@@ -17,3 +17,7 @@ Verification includes exact producer fixtures (copied byte-for-byte from TECRID 
 Local cross-tests are not a live-site rehearsal or a physical phone SLA. Deployment still requires the full TECRID mint/security chain, #33 fix propagation, operator-reviewed mappings and consent, distinct credentials/private storage, both reviewed draft migrations and the separate disposable-account rehearsal. Existing downloaded copies and requests already in flight cannot be recalled. Channel outage/retry conditions remain operational gates.
 
 Merge order: phone P1 #78 lands first and keeps its exact `0011_volatile_raza` schema and snapshot. This branch includes that schema prerequisite without copying the phone UI; native consumer DDL is byte-identical under `0012_chief_cammi`, and its snapshot follows P1 0011. The journal has one ordered entry for each. This is a normal follow-up commit; no production migration or history rewrite.
+
+## Ordered phone prerequisite integration
+
+Per Elon22:38, this branch now contains the full P1 implementation from #78 via normal merge915cd9f. #78 lands first, then this consumer. P1 keeps exact0011, native schema stays0012; no migration was generated. Schema/journal conflict resolution preserves both reviewed tables and ordered snapshots. Build and all29 test files plus focused lint pass; Drizzle reports no changes. Evidence is in verification/native-proof-stream/phone-merge-checks.json. Receiver remains OFF; no production migration or deployment occurred.

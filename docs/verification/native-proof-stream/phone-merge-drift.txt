@@ -1,0 +1,38 @@
+No config path provided, using default 'drizzle.config.ts'
+Reading config file '/Users/kmfp/Documents/Codex/2026-10-25/you-are-conductor-the-single-codex/work/vle/drizzle.config.ts'
+33 tables
+auth_account 13 columns 0 indexes 1 fks
+evidence_notification_reads 3 columns 0 indexes 0 fks
+evidence_views 8 columns 0 indexes 0 fks
+kas_access_notifications 15 columns 1 indexes 0 fks
+kas_report_permission_events 9 columns 0 indexes 0 fks
+kas_report_permissions 11 columns 0 indexes 0 fks
+lot_releases 9 columns 1 indexes 2 fks
+lot_tecrid_grants 24 columns 0 indexes 2 fks
+lot_tecrids 18 columns 0 indexes 1 fks
+organization_roles 2 columns 0 indexes 1 fks
+proof_audit 6 columns 0 indexes 0 fks
+proof_certifications 14 columns 0 indexes 2 fks
+proof_delivery_receipts 8 columns 2 indexes 1 fks
+proof_lots 6 columns 2 indexes 1 fks
+proof_organizations 4 columns 2 indexes 1 fks
+proof_stream_state 12 columns 1 indexes 1 fks
+auth_rate_limit 4 columns 1 indexes 0 fks
+review_sessions 3 columns 0 indexes 0 fks
+auth_session 8 columns 1 indexes 1 fks
+sourcing_briefs 8 columns 0 indexes 0 fks
+sourcing_decisions 9 columns 1 indexes 1 fks
+sourcing_events 6 columns 0 indexes 0 fks
+sourcing_notifications 10 columns 0 indexes 0 fks
+sourcing_preferences 2 columns 0 indexes 0 fks
+sourcing_rooms 11 columns 0 indexes 0 fks
+supplier_storefronts 6 columns 0 indexes 0 fks
+supplier_submissions 7 columns 0 indexes 0 fks
+team_accounts 7 columns 0 indexes 0 fks
+team_domains 4 columns 0 indexes 0 fks
+team_members 5 columns 0 indexes 0 fks
+team_selections 2 columns 0 indexes 0 fks
+auth_user 7 columns 1 indexes 0 fks
+auth_verification 6 columns 0 indexes 0 fks
+
+No schema changes, nothing to migrate 😴

@@ -1,0 +1,165 @@
+{
+  "merge_commit": "915cd9fe84e931af58c91f42c104aea5f34c2046",
+  "parents": [
+    "a1406be87df49c262401aaffff58cdacf5824023",
+    "925fa7e46b9fd2214a5763774b09070d47a2b0c1"
+  ],
+  "checks": [
+    {
+      "check": "email-auth",
+      "exit": 0,
+      "seconds": 1.81
+    },
+    {
+      "check": "evidence-notifications",
+      "exit": 0,
+      "seconds": 1.39
+    },
+    {
+      "check": "homepage-regressions",
+      "exit": 0,
+      "seconds": 0.21
+    },
+    {
+      "check": "kasandrinos-request-notifications",
+      "exit": 0,
+      "seconds": 1.45
+    },
+    {
+      "check": "kasandrinos",
+      "exit": 0,
+      "seconds": 0.2
+    },
+    {
+      "check": "mobile-shell",
+      "exit": 0,
+      "seconds": 0.21
+    },
+    {
+      "check": "native-proof-stream",
+      "exit": 0,
+      "seconds": 1.88
+    },
+    {
+      "check": "pilot",
+      "exit": 0,
+      "seconds": 3.89
+    },
+    {
+      "check": "proof-chips",
+      "exit": 0,
+      "seconds": 0.24
+    },
+    {
+      "check": "proof-exchange",
+      "exit": 0,
+      "seconds": 2.43
+    },
+    {
+      "check": "proof-worker",
+      "exit": 0,
+      "seconds": 1.0
+    },
+    {
+      "check": "report-gate",
+      "exit": 0,
+      "seconds": 0.2
+    },
+    {
+      "check": "security-dependencies",
+      "exit": 0,
+      "seconds": 0.31
+    },
+    {
+      "check": "security-domain-membership",
+      "exit": 0,
+      "seconds": 1.41
+    },
+    {
+      "check": "security-headers",
+      "exit": 0,
+      "seconds": 1.02
+    },
+    {
+      "check": "security-mail-issuance",
+      "exit": 0,
+      "seconds": 0.3
+    },
+    {
+      "check": "security-notification-privacy",
+      "exit": 0,
+      "seconds": 0.92
+    },
+    {
+      "check": "security-rate-budgets",
+      "exit": 0,
+      "seconds": 2.99
+    },
+    {
+      "check": "security-reports",
+      "exit": 0,
+      "seconds": 1.63
+    },
+    {
+      "check": "security-service-assertions",
+      "exit": 0,
+      "seconds": 0.89
+    },
+    {
+      "check": "security-service-boundary",
+      "exit": 0,
+      "seconds": 0.3
+    },
+    {
+      "check": "security-team-audit",
+      "exit": 0,
+      "seconds": 1.56
+    },
+    {
+      "check": "sourcing",
+      "exit": 0,
+      "seconds": 4.2
+    },
+    {
+      "check": "storefront",
+      "exit": 0,
+      "seconds": 0.22
+    },
+    {
+      "check": "teams",
+      "exit": 0,
+      "seconds": 3.29
+    },
+    {
+      "check": "tecrid-email-relay",
+      "exit": 0,
+      "seconds": 1.14
+    },
+    {
+      "check": "tecrid-report-service",
+      "exit": 0,
+      "seconds": 2.89
+    },
+    {
+      "check": "tecrid-test-links",
+      "exit": 0,
+      "seconds": 0.2
+    },
+    {
+      "check": "waiting",
+      "exit": 0,
+      "seconds": 2.35
+    },
+    {
+      "check": "lint",
+      "exit": 0,
+      "seconds": 2.61
+    }
+  ],
+  "build": "PASS",
+  "schema_drift": "No changes",
+  "schema_resolution": "Exact premerge consumer schema/journal includes approved P1 sourcingDecisions and native stream/grants; both migration/snapshot bytes preserved.",
+  "history": "Normal merge authorized by Elon22:38; no rebase/force/rewrite",
+  "receiver": "OFF",
+  "production": "No migration/deploy/credentials/real messages"
+}

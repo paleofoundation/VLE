@@ -1,0 +1,112 @@
+[
+  {
+    "check": "build",
+    "exit": 0,
+    "seconds": 6.78
+  },
+  {
+    "check": "email-auth",
+    "exit": 0,
+    "seconds": 2.69
+  },
+  {
+    "check": "evidence-notifications",
+    "exit": 0,
+    "seconds": 0.99
+  },
+  {
+    "check": "homepage-regressions",
+    "exit": 0,
+    "seconds": 0.16
+  },
+  {
+    "check": "kasandrinos-request-notifications",
+    "exit": 0,
+    "seconds": 1.19
+  },
+  {
+    "check": "kasandrinos",
+    "exit": 0,
+    "seconds": 0.16
+  },
+  {
+    "check": "mobile-shell",
+    "exit": 0,
+    "seconds": 0.16
+  },
+  {
+    "check": "pilot",
+    "exit": 0,
+    "seconds": 2.82
+  },
+  {
+    "check": "proof-exchange",
+    "exit": 0,
+    "seconds": 2.46
+  },
+  {
+    "check": "proof-worker",
+    "exit": 0,
+    "seconds": 0.89
+  },
+  {
+    "check": "report-gate",
+    "exit": 0,
+    "seconds": 0.16
+  },
+  {
+    "check": "security-domain-membership",
+    "exit": 0,
+    "seconds": 2.18
+  },
+  {
+    "check": "security-reports",
+    "exit": 0,
+    "seconds": 1.31
+  },
+  {
+    "check": "security-service-assertions",
+    "exit": 0,
+    "seconds": 0.71
+  },
+  {
+    "check": "security-service-boundary",
+    "exit": 0,
+    "seconds": 0.25
+  },
+  {
+    "check": "sourcing",
+    "exit": 0,
+    "seconds": 3.23
+  },
+  {
+    "check": "storefront",
+    "exit": 0,
+    "seconds": 0.16
+  },
+  {
+    "check": "teams",
+    "exit": 0,
+    "seconds": 2.34
+  },
+  {
+    "check": "tecrid-email-relay",
+    "exit": 0,
+    "seconds": 0.23
+  },
+  {
+    "check": "tecrid-report-service",
+    "exit": 0,
+    "seconds": 2.32
+  },
+  {
+    "check": "tecrid-test-links",
+    "exit": 0,
+    "seconds": 0.16
+  },
+  {
+    "check": "lint",
+    "exit": 0,
+    "seconds": 2.31
+  }
+]

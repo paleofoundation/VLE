@@ -1,3 +1,4 @@
+import {signedServiceInit} from '../server/service-assertion.js';
 import assert from 'node:assert/strict';
 import {readFileSync,readdirSync} from 'node:fs';
 import {Miniflare} from 'miniflare';
@@ -14,8 +15,8 @@ try{
  const list=async(user,id)=>evidenceNotifications(db,user,await reportManagerRole(db,user),id);
  assert.equal((await list(owner)).items.length,1);assert.equal((await list(buyer)).items.length,0);assert.equal((await list(outsider)).items.length,0);
  const id='vle:request:'+notice.notificationId;assert.equal((await list(outsider,id)).status,404);await list(owner,id);assert.equal((await list(owner)).items[0].read,true);assert.equal((await list(admin)).items[0].read,false);assert.equal((await reportPermission(db,buyer,'43301')).canReadResults,false);
- const env={DB:db,TECRID_EMAIL_RELAY_SECRET:'synthetic-secret'};
- const service=async(user,action,id,token='synthetic-secret')=>reportPermissions(new Request('https://vle.exchange/api/tecrid-report-permissions',{method:'POST',headers:{authorization:`Bearer ${token}`},body:JSON.stringify({action,id,actor:{...user,emailVerified:true}})}),env);
+ const env={DB:db,TECRID_EMAIL_RELAY_SECRET:'synthetic-secret',TECRID_NOTIFICATION_SERVICE_SECRET:'synthetic-notification-'.repeat(4)};
+ const service=async(user,action,id,token='synthetic-secret')=>{const url='https://vle.exchange/api/tecrid-report-permissions',body={action,id,actor:{...user,emailVerified:true}};return reportPermissions(new Request(url,token==='synthetic-secret'?await signedServiceInit(url,body,env,'notifications-to-vle'):{method:'POST',headers:{authorization:`Bearer ${token}`},body:JSON.stringify(body)}),env);};
  assert.equal((await service(owner,'notifications',undefined,'wrong')).status,401);assert.equal((await (await service(owner,'notifications')).json()).items[0].read,true);
  await call(owner,{action:'grant',email:buyer.email,reports:[{reportNumber:'43301',revision:1}],card:true});
  assert.equal((await reportPermission(db,buyer,'43301')).canReadResults,true);assert.equal((await reportPermission(db,{...buyer,userId:'different-vle-user-id'},'43301')).canReadResults,true);
@@ -23,7 +24,7 @@ try{
  assert.equal((await service(buyer,'notification-read',decisions[0].id)).status,200);assert.equal((await list(buyer)).items[0].read,true);
  await call(owner,{action:'revoke',email:buyer.email,reports:[{reportNumber:'43301',revision:2}]});assert.equal((await reportPermission(db,buyer,'43301')).canReadResults,false);assert.equal((await list(buyer)).items.length,2);
  await db.prepare("UPDATE team_members SET role='revoked' WHERE email=?").bind(admin.email).run();assert.equal((await list(admin)).items.length,0);
- const items=await registryNotifications(env,buyer,undefined,async(url,options)=>{assert.equal(url,'https://tecrid.com/api/integrations/vle/notifications');assert.equal(options.redirect,'error');assert.equal(options.headers.authorization,'Bearer synthetic-secret');assert.equal(JSON.parse(options.body).actor.email,buyer.email);return Response.json({items:[{id:'tecrid:example',href:'https://evil.test'}]});});assert.equal(items[0].href,'https://tecrid.com/notifications');
+ const items=await registryNotifications(env,buyer,undefined,async(url,options)=>{assert.equal(url,'https://tecrid.com/api/integrations/vle/notifications');assert.equal(options.redirect,'error');assert(options.headers.authorization.startsWith('TECRID-HMAC '));assert.equal(JSON.parse(options.body).actor.email,buyer.email);return Response.json({items:[{id:'tecrid:example',href:'https://evil.test'}]});});assert.equal(items[0].href,'https://tecrid.com/notifications');
  await assert.rejects(()=>registryNotifications(env,buyer,undefined,async()=>new Response(null,{status:503})));
  console.log('PASS: scoped inbox, duplicate requests, personal synchronized reads, authenticated relay, shared grant/revoke, revoked managers, safe links and source outage.');
 }finally{await mf.dispose();}

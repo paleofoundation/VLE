@@ -1,3 +1,4 @@
+import {permissionAudience,boundedText} from "./service-assertion.js";
 import {privateFetch} from './private-fetch.js';
 import {serviceAuthorized} from './tecrid-service-auth.js';
 import {deliverKasAccessNotifications} from './kasandrinos-request-notifications.js';
@@ -18,7 +19,7 @@ export function validateTranscript(input:any,report:any){
  return {reportNumber:report.reportNumber,sourceSha256:report.sha256,sandbox:true,productionAuthority:false,reviewStatus:'UNAPPROVED_TRANSCRIPTION',results};
 }
 export async function importTranscripts(request:Request,env:Record<string,any>){
- if(!await serviceAuthorized(request,env))return json({error:'Unauthorized'},401);
+ if(!await serviceAuthorized(request,env,'report-import'))return json({error:'Unauthorized'},401);
  if(!env.BUCKET)return json({error:'Storage unavailable'},503);
  let input;try{const body=await request.text();if(body.length>128000)return json({error:'Too large'},413);input=JSON.parse(body);}catch{return json({error:'Invalid request'},400);}
  const fixed=kasReports.filter((r:any)=>tecridTestReference(r));let documents;
@@ -30,7 +31,7 @@ export async function importTranscripts(request:Request,env:Record<string,any>){
  return json({stored:documents.length,sandbox:true,productionAuthority:false});
 }
 export async function reportAccess(request:Request,env:Record<string,any>,readPdf=reportBytes){
- if(!await serviceAuthorized(request,env))return json({error:'Unauthorized'},401);
+ if(!await serviceAuthorized(request,env,'report-read'))return json({error:'Unauthorized'},401);
  let input;try{const text=await request.text();if(text.length>4096)return json({error:'Too large'},413);input=JSON.parse(text);}catch{return json({error:'Invalid request'},400);}
  const actor=input?.actor;
  if(!actor||actor.emailVerified!==true||typeof actor.userId!=='string'||!actor.userId.startsWith('email:')||actor.userId.length>160||typeof actor.email!=='string'||actor.email.length>254||! /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(actor.email))return json({error:'Verified email identity required'},403);
@@ -52,9 +53,8 @@ export async function reportAccess(request:Request,env:Record<string,any>,readPd
 }
 
 export async function reportPermissions(request:Request,env:Record<string,any>,notificationTransport:typeof fetch=privateFetch){
- if(!await serviceAuthorized(request,env))return json({error:'Unauthorized'},401);
- if(!env.DB)return json({error:'Permissions unavailable'},503);
- let input;try{const text=await request.text();if(text.length>12000)return json({error:'Too large'},413);input=JSON.parse(text);}catch{return json({error:'Invalid request'},400);}
+ let input;try{const text=await boundedText(request,12000);if(text.length>12000)return json({error:'Too large'},413);input=JSON.parse(text);}catch{return json({error:'Invalid request'},400);}
+ if(!await serviceAuthorized(request,env,permissionAudience(input)))return json({error:'Unauthorized'},401);
  const actor=input?.actor;
  if(!actor||actor.emailVerified!==true||typeof actor.userId!=='string'||!actor.userId.startsWith('email:')||actor.userId.length>160||typeof actor.email!=='string'||actor.email.length>254||! /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(actor.email))return json({error:'Verified email identity required'},403);
  const response=await reportPermissionRequest(env.DB,{userId:'tecrid:'+actor.userId,email:actor.email.toLowerCase()},input);

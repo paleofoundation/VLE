@@ -1,3 +1,4 @@
+import {signedServiceInit} from '../server/service-assertion.js';
 import assert from 'node:assert/strict';
 import {readFileSync,readdirSync} from 'node:fs';
 import {Miniflare} from 'miniflare';
@@ -11,7 +12,7 @@ try{
  const db=await mf.getD1Database('DB');for(const f of readdirSync(new URL('../drizzle',import.meta.url)).filter(x=>x.endsWith('.sql')).sort())for(const sql of readFileSync(new URL('../drizzle/'+f,import.meta.url),'utf8').split('--> statement-breakpoint'))if(sql.trim())await db.prepare(sql).run();await ensureKasTeam(db);
  const setup=await db.prepare("SELECT * FROM kas_access_notifications WHERE dedupe_key='installation-check:kas-access-notifications-v1'").first();assert.equal(setup.kind,'delivery_test');assert.equal((await db.prepare('SELECT count(*) AS count FROM kas_report_permissions').first()).count,0);assert.equal((await db.prepare('SELECT count(*) AS count FROM kas_report_permission_events').first()).count,0);
  await db.prepare("DELETE FROM kas_access_notifications WHERE kind='delivery_test'").run();
- const env={DB:db,RESEND_API_KEY:'synthetic-key',VLE_EMAIL_FROM:'Synthetic sender <sender@company.test>',TECRID_EMAIL_RELAY_SECRET:'synthetic-service'};
+ const env={DB:db,RESEND_API_KEY:'synthetic-key',VLE_EMAIL_FROM:'Synthetic sender <sender@company.test>',TECRID_EMAIL_RELAY_SECRET:'synthetic-service',TECRID_NOTIFICATION_SERVICE_SECRET:'synthetic-notification-'.repeat(4),TECRID_REPORT_PERMISSION_SECRET:'synthetic-permission-'.repeat(4)};
  const buyer={userId:'email:buyer',email:'recipient@company.test'},owner={userId:'email:owner',email:KAS_REQUEST_EMAIL};
  const call=async(user,input,status=200)=>{const r=await reportPermissionRequest(db,user,input);const j=await r.json();assert.equal(r.status,status,JSON.stringify(j));return j;};
  await call(buyer,{action:'request',reportNumber:'unknown',results:true},404);assert.equal((await db.prepare('SELECT count(*) AS count FROM kas_access_notifications').first()).count,0);
@@ -35,11 +36,11 @@ try{
  // Card notifications are escaped and contain no source attachment. File-only legacy notifications fail closed.
  const cardNotice={id:crypto.randomUUID(),kind:'access_request',report_number:'43301',requester_email:'untrusted"@company.test',requested_results:1,requested_pdf:0,created_at:'TEST'};
  const msg=notificationMessage(cardNotice);assert(msg.text.includes('Requested access: digital TECRID card'));assert(msg.html.includes('untrusted&quot;@company.test'));assert.throws(()=>notificationMessage({...cardNotice,requested_results:0,requested_pdf:1}));
- const req=(token)=>new Request('https://service.test/api/tecrid-request-notification',{method:'POST',headers:{authorization:'Bearer '+token},body:JSON.stringify({action:'delivery-test',to:'intruder@evil.test'})});
- assert.equal((await notificationService(req('wrong'),env,transport)).status,401);let before=calls.length;let smoke=await notificationService(req('synthetic-service'),env,transport);assert.equal((await smoke.json()).notificationStatus,'sent');assert.equal(calls.length,before+1);assert.deepEqual(calls.at(-1).body.to,[KAS_REQUEST_EMAIL]);assert.match(calls.at(-1).body.text,/No access request was created/);await notificationService(req('synthetic-service'),env,transport);assert.equal(calls.length,before+1);
+ const req=async(token)=>{const url='https://service.test/api/tecrid-request-notification',body={action:'delivery-test',to:'intruder@evil.test'};return new Request(url,token==='synthetic-service'?await signedServiceInit(url,body,env,'notification-worker'):{method:'POST',headers:{authorization:'Bearer '+token},body:JSON.stringify(body)});};
+ assert.equal((await notificationService(await req('wrong'),env,transport)).status,401);let before=calls.length;let smoke=await notificationService(await req('synthetic-service'),env,transport);assert.equal((await smoke.json()).notificationStatus,'sent');assert.equal(calls.length,before+1);assert.deepEqual(calls.at(-1).body.to,[KAS_REQUEST_EMAIL]);assert.match(calls.at(-1).body.text,/No access request was created/);await notificationService(await req('synthetic-service'),env,transport);assert.equal(calls.length,before+1);
  // The actual service handler sends a new verified request immediately after commit.
- const serviceReq=verified=>new Request('https://service.test/api/tecrid-report-permissions',{method:'POST',headers:{authorization:'Bearer synthetic-service'},body:JSON.stringify({action:'request',reportNumber:'43300',card:true,actor:{...buyer,emailVerified:verified}})});
- before=calls.length;assert.equal((await reportPermissions(serviceReq(false),env,transport)).status,403);assert.equal(calls.length,before);
- const accepted=await reportPermissions(serviceReq(true),env,transport);assert.equal(accepted.status,200);assert.equal(calls.length,before+1);const delivered=await accepted.json();assert.equal((await db.prepare('SELECT status FROM kas_access_notifications WHERE id=?').bind(delivered.notificationId).first()).status,'sent');assert.equal((await reportPermission(db,buyer,'43300')).canReadResults,false);
+ const serviceReq=async verified=>{const url='https://service.test/api/tecrid-report-permissions';return new Request(url,await signedServiceInit(url,{action:'request',reportNumber:'43300',card:true,actor:{...buyer,emailVerified:verified}},env,'report-permission'));};
+ before=calls.length;assert.equal((await reportPermissions(await serviceReq(false),env,transport)).status,403);assert.equal(calls.length,before);
+ const accepted=await reportPermissions(await serviceReq(true),env,transport);assert.equal(accepted.status,200);assert.equal(calls.length,before+1);const delivered=await accepted.json();assert.equal((await db.prepare('SELECT status FROM kas_access_notifications WHERE id=?').bind(delivered.notificationId).first()).status,'sent');assert.equal((await reportPermission(db,buyer,'43300')).canReadResults,false);
  console.log('PASS: atomic request outbox, fixed Karen recipient, scopes, TEST-only content, authenticated review links, duplicate/race suppression, retry/backoff/idempotency, stale-request cancellation and service-only smoke check.');
 }finally{await mf.dispose();}

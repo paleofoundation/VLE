@@ -1,0 +1,17 @@
+✔ valid scoped actor assertion is consumed once across concurrent requests (19.577708ms)
+✔ reference HMAC binds audience, origin, path, method and exact actor body (7.685666ms)
+✔ tampering actor, audience, path or origin fails without consuming the valid nonce (8.496875ms)
+✔ expired, future, missing-store and reused-purpose credentials fail closed (0.989917ms)
+✔ oversized signed-looking body is bounded before verification (0.492958ms)
+✔ mail credential cannot authenticate any report-service audience (30.341667ms)
+✔ mail credential rejected before report operation /api/tecrid-report-access (0.724292ms)
+✔ mail credential rejected before report operation /api/tecrid-report-permissions (1.170917ms)
+✔ mail credential rejected before report operation /api/tecrid-transcript-import (0.419167ms)
+ℹ tests 9
+ℹ suites 0
+ℹ pass 9
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 633.928167

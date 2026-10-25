@@ -11,3 +11,5 @@ The unchanged limiter fails three new regressions, including a second client bei
 PR #71 merges main c025f326d7b6566590af514c1f33af8e48e5705f and its updated security-stack parent. The client-before-global correction and regressions are inherited unchanged. The production build, all 23 test files, focused lint (zero errors), and whitespace pass. See pr71-checks.json. No PR merge, retarget, deploy, production data, or TECRID change.
 
 PR #72 merges main c025f326d7b6566590af514c1f33af8e48e5705f and its updated security-stack parent. The client-before-global correction and regressions are inherited unchanged. The production build, all 24 test files, focused lint (zero errors), and whitespace pass. See pr72-checks.json. No PR merge, retarget, deploy, production data, or TECRID change.
+
+PR #74 merges main c025f326d7b6566590af514c1f33af8e48e5705f and its updated security-stack parent. The client-before-global correction and regressions are inherited unchanged. The production build, all 25 test files, focused lint (zero errors), and whitespace pass. See pr74-checks.json. No PR merge, retarget, deploy, production data, or TECRID change.

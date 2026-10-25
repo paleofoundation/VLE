@@ -1,0 +1,13 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /team
+Disallow: /brand
+Disallow: /sourcing
+Disallow: /requests
+Disallow: /deals
+Disallow: /notifications
+Disallow: /workspace
+Disallow: /email-sign-in
+Disallow: /design-system
+Sitemap: https://vle.exchange/sitemap.xml

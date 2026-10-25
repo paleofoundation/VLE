@@ -1,0 +1,12 @@
+import assert from 'node:assert/strict';
+import {tecridEmailRelay} from '../server/tecrid-email-relay.ts';
+const env={TECRID_EMAIL_RELAY_SECRET:'test-secret',RESEND_API_KEY:'test-provider',VLE_EMAIL_FROM:'Test <mail@example.test>'};let sent=0;
+const call=(body,token='test-secret')=>tecridEmailRelay(new Request('https://vle.test/api/tecrid-email',{method:'POST',headers:{authorization:`Bearer ${token}`},body:JSON.stringify(body)}),env,async(url,options)=>{sent++;assert.equal(url,'https://api.resend.com/emails');const mail=JSON.parse(options.body);assert(mail.subject.includes('TECRID'));assert(!mail.text.includes('test-secret'));return Response.json({id:'test'});});
+const good={email:'lab@example.test',url:'https://tecrid.com/api/auth/magic-link/verify?token=test&callbackURL=%2Fdashboard'};
+assert.equal((await call(good,'wrong')).status,401);
+assert.equal((await call({...good,url:'https://evil.test/api/auth/magic-link/verify?token=test'})).status,400);
+assert.equal((await call({...good,url:'https://tecrid.com/other?token=test'})).status,400);
+assert.equal((await call({...good,url:good.url+'&errorCallbackURL=https://evil.test'})).status,400);
+assert.equal((await call({...good,email:'bad\naddress'})).status,400);assert.equal(sent,0);
+assert.equal((await call(good)).status,200);assert.equal(sent,1);
+console.log('PASS: authenticated relay, strict TECRID link/redirect scope, email validation, provider dispatch.');

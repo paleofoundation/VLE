@@ -1,0 +1,30 @@
+import assert from 'node:assert/strict';
+import {readFileSync,readdirSync} from 'node:fs';
+import {Miniflare} from 'miniflare';
+import {teamRequest,sourcingIdentity,canEditKas,teamRole} from '../server/teams.js';
+import {sourcingRequest} from '../server/sourcing-api.js';
+const mf=new Miniflare({modules:true,script:'export default {fetch(){return new Response("test")}}',d1Databases:['DB'],r2Buckets:['BUCKET'],compatibilityDate:'2026-05-15'});
+try{
+const db=await mf.getD1Database('DB'),bucket=await mf.getR2Bucket('BUCKET');for(const f of readdirSync(new URL('../drizzle',import.meta.url)).filter(x=>x.endsWith('.sql')).sort())for(const sql of readFileSync(new URL('../drizzle/'+f,import.meta.url),'utf8').split('--> statement-breakpoint'))if(sql.trim())await db.prepare(sql).run();
+const karen={userId:'k',email:'karen@paleofoundation.com'},tony={userId:'t',email:'tony@kasandrinos.com'},staff={userId:'s',email:'staff@kasandrinos.com'},outsider={userId:'x',email:'staff@sub.kasandrinos.com'};
+const call=async(u,d,status=200)=>{if(d&&!['create','select'].includes(d.action)){const state=await (await teamRequest(new Request('https://vle.test/api/team'),db,u)).json();d={teamId:state.selected?.id,...d};}const r=await teamRequest(new Request('https://vle.test/api/team',{method:d?'POST':'GET',headers:{origin:'https://vle.test'},...(d?{body:JSON.stringify(d)}:{})}),db,u),j=await r.json();assert.equal(r.status,status,JSON.stringify(j));return j;};
+assert.equal((await call(karen)).teams[0].role,'owner');assert.equal((await call(tony)).teams[0].role,'admin');assert.equal((await call(staff)).teams.length,0);assert(await canEditKas(db,tony));assert(!await canEditKas(db,staff));
+await call(karen,{action:'select',id:'kasandrinos-team'});await call(tony,{action:'select',id:'kasandrinos-team'});
+await call(tony,{action:'domain',domain:'kasandrinos.com',role:'editor'},400);
+await call(karen,{action:'domain',domain:'gmail.com',role:'viewer'},400);
+await call(karen,{action:'domain',domain:'kasandrinos.com',role:'viewer',teamId:'another-account'},409);
+await call(karen,{action:'domain',domain:'kasandrinos.com',role:'viewer'});
+assert.equal((await call(outsider)).teams.length,0);assert.equal((await call(staff)).teams[0].role,'eligible');
+await call(staff,{action:'select',id:'kasandrinos-team'});assert.equal((await sourcingIdentity(db,staff,{buyer:true})).p.readOnly,true);assert(!await canEditKas(db,staff));
+let r=await sourcingRequest(new Request('https://vle.test/api/sourcing',{method:'POST',headers:{origin:'https://vle.test'},body:JSON.stringify({action:'preferences',enabled:false})}),db,bucket,staff,{buyer:true,owner:false});assert.equal(r.status,403);
+await call(staff,{action:'member',email:'intruder@evil.test',role:'admin'},403);
+await call(karen,{action:'member',email:staff.email,role:'editor'});assert(await canEditKas(db,staff));
+let snap=await call(karen);const member=snap.members.find(m=>m.email===staff.email);await call(karen,{action:'remove-member',id:member.id});assert(!await canEditKas(db,staff));assert.equal((await call(staff)).teams.length,0);await call(staff,{action:'select',id:'kasandrinos-team'},400);
+await call(karen,{action:'member',email:staff.email,role:'viewer'});await call(staff,{action:'select',id:'kasandrinos-team'});
+const domain=(await call(karen)).domains[0];await call(karen,{action:'remove-domain',id:domain.id});assert.equal((await call(staff)).selected.role,'viewer');
+await call(karen,{action:'create',name:'Brand QA',kind:'buyer'});const brand=(await call(karen)).selected;assert.notEqual(brand.id,'kasandrinos-team');
+await call(karen,{action:'member',email:tony.email,role:'editor'});await call(tony,{action:'select',id:brand.id});assert.equal((await sourcingIdentity(db,karen,{buyer:true})).user.userId,(await sourcingIdentity(db,tony,{buyer:true})).user.userId);
+await call(tony,{action:'select',id:''});assert.equal((await sourcingIdentity(db,tony,{buyer:true})).user.userId,'t');
+await call(karen,{action:'select',id:'kasandrinos-team'});const founding=(await call(karen)).members.find(m=>m.email===tony.email);await call(karen,{action:'remove-member',id:founding.id});assert(!await canEditKas(db,tony));await call(karen);assert(!await canEditKas(db,tony));
+console.log('PASS: founding account permissions, exact verified-domain joining, viewer write denial, owner-only domain/admin grants, revocation, explicit invitations, tenant switching and personal isolation.');
+}finally{await mf.dispose();}

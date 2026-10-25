@@ -1,0 +1,47 @@
+✖ Next cache and image advisories are patched in every locked and installed copy (2.422292ms)
+✖ every Sharp copy includes the image memory disclosure fix (2.22475ms)
+✔ Next lint configuration and install metadata agree with the locked runtime (0.454208ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 1
+ℹ fail 2
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 120.799416
+
+✖ failing tests:
+
+test at tests/security-dependencies.mjs:13:1
+✖ Next cache and image advisories are patched in every locked and installed copy (2.422292ms)
+  AssertionError [ERR_ASSERTION]: Next must include the 16.4.1 security fixes
+      at TestContext.<anonymous> (file:///Users/kmfp/Documents/ChatGPT/TECRID/orders-20261025/security-vle/tests/security-dependencies.mjs:16:27)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1201:25)
+      at Test.start (node:internal/test_runner/test:1096:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:385:17) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }
+
+test at tests/security-dependencies.mjs:18:1
+✖ every Sharp copy includes the image memory disclosure fix (2.22475ms)
+  AssertionError [ERR_ASSERTION]: Sharp must include the 0.35.5 security fix
+      at TestContext.<anonymous> (file:///Users/kmfp/Documents/ChatGPT/TECRID/orders-20261025/security-vle/tests/security-dependencies.mjs:21:27)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1201:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:831:18)
+      at Test.postRun (node:internal/test_runner/test:1330:19)
+      at Test.run (node:internal/test_runner/test:1258:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:385:3) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }

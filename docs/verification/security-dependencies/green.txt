@@ -1,0 +1,12 @@
+✔ Next cache and image advisories are patched in every locked and installed copy (1.335584ms)
+✔ every Sharp copy includes the image memory safety fix (0.515625ms)
+✔ Next lint configuration and install metadata agree with the locked runtime (0.217125ms)
+✔ the installed patched Sharp native runtime still processes a synthetic image (1293.114167ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 4
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1411.608333

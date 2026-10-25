@@ -1,0 +1,29 @@
+✔ unapproved verified buyer cannot read controlled report ll-43301 (45.349625ms)
+✔ unapproved verified buyer cannot read controlled report ll-43295 (48.847417ms)
+✔ unapproved verified buyer cannot read controlled report ll-43296 (65.172417ms)
+✔ unapproved verified buyer cannot read controlled report ll-43298 (49.772083ms)
+✔ unapproved verified buyer cannot read controlled report ll-43302 (45.506791ms)
+✔ unapproved verified buyer cannot read controlled report ll-43297 (43.757333ms)
+✔ unapproved verified buyer cannot read controlled report ll-43300 (41.782208ms)
+✔ unapproved verified buyer cannot read controlled report ll-43299 (35.08425ms)
+✔ unapproved verified buyer cannot read controlled report athens-12-4338 (66.349208ms)
+✔ unapproved verified buyer cannot read controlled report woc-c2526-00228 (30.109208ms)
+✔ unapproved verified buyer cannot read controlled report envirolabs-5-92-24 (31.74425ms)
+✔ unapproved verified buyer cannot read controlled report organic-addendum (43.299791ms)
+✔ unapproved verified buyer cannot read controlled report non-gmo-2026 (60.8285ms)
+✔ unapproved verified buyer cannot read controlled report kosher-2026 (247.822667ms)
+✔ unapproved verified buyer cannot read controlled report paleo-keto-archive (185.999667ms)
+✔ unapproved verified buyer cannot read controlled report organic-spices (70.326792ms)
+✔ anonymous report request is denied before reading private storage (0.240583ms)
+✔ the source manifest publishes no original report location (0.073208ms)
+✔ missing private storage never falls back to an external source (0.227834ms)
+Kasandrinos report unavailable ll-43301 object.arrayBuffer is not a function
+✔ an explicit controller reaches storage and loses that authority immediately on revocation (78.499541ms)
+ℹ tests 20
+ℹ suites 0
+ℹ pass 20
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1965.350292

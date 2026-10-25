@@ -1,3 +1,4 @@
+import {signedServiceInit,permissionAudience} from '../server/service-assertion.js';
 import assert from 'node:assert/strict';
 import {readFileSync,readdirSync} from 'node:fs';
 import {Miniflare} from 'miniflare';
@@ -11,16 +12,16 @@ try{
  const db=await mf.getD1Database('DB'),bucket=await mf.getR2Bucket('BUCKET');
  for(const f of readdirSync(new URL('../drizzle',import.meta.url)).filter(x=>x.endsWith('.sql')).sort())for(const sql of readFileSync(new URL('../drizzle/'+f,import.meta.url),'utf8').split('--> statement-breakpoint'))if(sql.trim())await db.prepare(sql).run();
  await ensureKasTeam(db);
- const env={DB:db,BUCKET:bucket,TECRID_EMAIL_RELAY_SECRET:'test'};
+ const env={DB:db,BUCKET:bucket,TECRID_EMAIL_RELAY_SECRET:'test',TECRID_REPORT_READ_SECRET:'synthetic-read-'.repeat(4),TECRID_REPORT_PERMISSION_SECRET:'synthetic-permission-'.repeat(4),TECRID_REPORT_IMPORT_SECRET:'synthetic-import-'.repeat(4)};
  const owner={userId:'email:owner',email:'karen@paleofoundation.com',emailVerified:true},admin={userId:'email:admin',email:'tony@kasandrinos.com',emailVerified:true},buyer={userId:'email:buyer',email:'buyer@company.test',emailVerified:true};
- const req=(body,token='test')=>new Request('https://service.test',{method:'POST',headers:{authorization:`Bearer ${token}`},body:JSON.stringify(body)});
- const call=async(actor,input,status=200)=>{const r=await reportPermissions(req({...input,actor}),env);const j=await r.json();assert.equal(r.status,status,JSON.stringify(j));assert(r.headers.get('cache-control').includes('no-store'));return j;};
- const access=(actor,r=report,kind='card')=>reportAccess(req({actor,reportNumber:r.reportNumber,kind}),env,async()=>new TextEncoder().encode('%PDF-synthetic'));
+ const req=async(body,token='test')=>new Request('https://service.test',token==='test'?await signedServiceInit('https://service.test',body,env,body.transcripts?'report-import':body.kind?'report-read':permissionAudience(body)):{method:'POST',headers:{authorization:`Bearer ${token}`},body:JSON.stringify(body)});
+ const call=async(actor,input,status=200)=>{const r=await reportPermissions(await req({...input,actor}),env);const j=await r.json();assert.equal(r.status,status,JSON.stringify(j));assert(r.headers.get('cache-control').includes('no-store'));return j;};
+ const access=async(actor,r=report,kind='card')=>reportAccess(await req({actor,reportNumber:r.reportNumber,kind}),env,async()=>new TextEncoder().encode('%PDF-synthetic'));
  const transcripts=reports.map(r=>({reportNumber:r.reportNumber,sourceSha256:r.sha256,results:[{analyte:'Synthetic',resultText:'ND',unit:'ppb',loqText:'1 ppb',limitText:'',statusText:'',notes:''}]}));
  for(const r of reports)await bucket.put('kasandrinos/source-reports/'+r.sha256+'.pdf','%PDF-synthetic');
- assert.equal((await importTranscripts(req({transcripts}),env)).status,200);
- assert.equal((await importTranscripts(req({transcripts:transcripts.map(t=>({...t,sourceSha256:'wrong'}))}),env)).status,400);
- assert.equal((await reportAccess(req({actor:buyer,reportNumber:report.reportNumber,kind:'results'},'bad'),env)).status,401);
+ assert.equal((await importTranscripts(await req({transcripts}),env)).status,200);
+ assert.equal((await importTranscripts(await req({transcripts:transcripts.map(t=>({...t,sourceSha256:'wrong'}))}),env)).status,400);
+ assert.equal((await reportAccess(await req({actor:buyer,reportNumber:report.reportNumber,kind:'results'},'bad'),env)).status,401);
  await call({...buyer,emailVerified:false},{action:'workspace'},403);
  assert.equal((await access({...buyer,emailVerified:false})).status,403);
  // A verified company email and even the same company domain grant no default access.
@@ -55,7 +56,7 @@ try{
  await db.prepare("UPDATE team_members SET role='revoked' WHERE team_id='kasandrinos-team' AND email=?").bind(admin.email).run();assert.equal((await call(admin,{action:'workspace'})).canManage,false);assert.equal((await access(admin)).status,403);await call(admin,{...grant,reports:[{reportNumber:reports[2].reportNumber,revision:0}]},403);
  // Concurrent decisions cannot silently overwrite each other.
  const concurrent={action:'grant',email:'concurrent@company.test',reports:[{reportNumber:reports[1].reportNumber,revision:0}],card:true};
- const race=await Promise.all([reportPermissions(req({...concurrent,actor:owner}),env),reportPermissions(req({...concurrent,actor:owner}),env)]);assert.deepEqual(race.map(r=>r.status).sort(),[200,409]);
+ const race=await Promise.all([reportPermissions(await req({...concurrent,actor:owner}),env),reportPermissions(await req({...concurrent,actor:owner}),env)]);assert.deepEqual(race.map(r=>r.status).sort(),[200,409]);
  // The immutable audit preserves every decision and verified actor.
  w=await call(owner,{action:'workspace'});assert(w.events.some(e=>e.action==='request'&&e.actor_email===buyer.email));assert(w.events.some(e=>e.action==='revoke'&&e.actor_email===owner.email));
  assert.throws(()=>validateTranscript({...transcripts[0],sourceSha256:'wrong'},report));

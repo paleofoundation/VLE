@@ -1,0 +1,10 @@
+PASS: Karen same-login buyer/supplier pilot, complete quote/sample/cost/shipment/evaluation/hold lifecycle, supplier initiation, private-note isolation and stale-account/role denial.
+✔ tests/pilot.mjs (3993.821708ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 1
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 4001.104292

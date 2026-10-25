@@ -1,3 +1,5 @@
+import {takeBudget} from './abuse-budget.js';
+import {boundedText} from './service-assertion.js';
 import {sourcingIdentity,recipientEmail} from './teams.js';
 import {briefInput,sharedBrief,candidates,roomRole,transitionRoom} from './sourcing.js';
 import {kasLots} from './kasandrinos.js';
@@ -41,6 +43,7 @@ export async function sourcingRequest(request,db,bucket,user,p){
  }
  if(request.method!=='POST')return json({error:'Not found'},404);
  if(request.headers.get('origin')!==new URL(request.url).origin)return json({error:'Same-origin request required.'},403);
+ if(!await takeBudget(db,'sourcing-account-mutation',user.userId,120,60000))return json({error:'Account request limit reached. Try again shortly.'},429);
  if(path==='/api/sourcing/upload'){
   if(!supplier&&!isManager)return json({error:'Set up your supplier workspace first.'},403);
   if(Number(request.headers.get('content-length'))>12000000)return json({error:'PDF must be under 10 MB.'},413);
@@ -53,10 +56,10 @@ export async function sourcingRequest(request,db,bucket,user,p){
   return json({id:keyId,message:'Report submitted privately for review.'});
  }
  if(path!=='/api/sourcing')return json({error:'Not found'},404);
- const raw=await request.text();if(raw.length>20000)return json({error:'Request too large.'},413);
+ const raw=await boundedText(request,60000);if(raw.length>20000)return json({error:'Request too large.'},413);
  const d=JSON.parse(raw);if(d.accountId!==user.userId)return json({error:'Your active account changed. Refresh before saving.'},409);
  if(d.action==='save-brief'){
-  if(!p.buyer)return json({error:'Company-email buyer access required.'},403);
+  if(!p.buyer)return json({error:'An explicit brand account membership is required.'},403);
   const b=briefInput(d),key=d.id||id();
   if(d.id){const old=await brief(d.id);if(old.shared)throw Error('Unshare the brief before editing its requirements.');const r=await run('UPDATE sourcing_briefs SET body=?,category=?,version=version+1 WHERE id=? AND owner_id=? AND version=?',JSON.stringify(b),b.category,key,user.userId,d.version).run();if(!r.meta.changes)return json({error:'This brief changed. Refresh before saving.'},409);}
   else await run('INSERT INTO sourcing_briefs (id,owner_id,category,body,created_at) VALUES (?,?,?,?,?)',key,user.userId,b.category,JSON.stringify(b),now()).run();
@@ -77,7 +80,7 @@ export async function sourcingRequest(request,db,bucket,user,p){
  if(d.action==='start-room'||d.action==='respond'){
   let buyerId,supplierEmail,supplierName,summary,submissionId=null,supplierAccountId=null,lot=String(d.lot||''),b;
   if(d.action==='start-room'){
-   if(!p.buyer)throw Error('Company-email buyer access required.');b=await brief(d.briefId);if(b.status!=='Open')throw Error('This brief is closed.');
+   if(!p.buyer)throw Error('An explicit brand account membership is required.');b=await brief(d.briefId);if(b.status!=='Open')throw Error('This brief is closed.');
    if(!kasLots.some(l=>l.id===lot&&l.category===b.category))throw Error('Choose a matching catalog lot.');
    if(!sf?.manager_email)throw Error('Kasandrinos’s supplier account is not connected yet. Save this candidate and return after its manager is assigned.');
    buyerId=user.userId;supplierAccountId='kasandrinos-team';supplierEmail=sf.manager_email;supplierName='Kasandrinos';summary=sharedBrief(JSON.parse(b.body));
@@ -112,5 +115,5 @@ export async function sourcingRequest(request,db,bucket,user,p){
   await db.batch([run('UPDATE supplier_submissions SET status=?,review=? WHERE id=?',d.status,note,d.id),notice(JSON.parse(r.body).email,'Your lot document review has been updated.','/workspace/documents',r.owner_id)]);return json({ok:true});
  }
  return json({error:'Unknown action.'},400);
- }catch(error){return json({error:error.message||'Unable to complete the request.'},400);}
+ }catch(error){return json({error:'Unable to complete this sourcing action. Check the fields and try again.'},400);}
 }

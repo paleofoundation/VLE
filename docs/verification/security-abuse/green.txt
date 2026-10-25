@@ -1,0 +1,10 @@
+✔ mail credential alone cannot choose a token and recipient (34.64725ms)
+✔ concurrent budgets admit only the configured count, independent of request IP (64.947292ms)
+ℹ tests 2
+ℹ suites 0
+ℹ pass 2
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 670.101875

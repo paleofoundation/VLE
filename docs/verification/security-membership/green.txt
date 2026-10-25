@@ -1,0 +1,34 @@
+✔ company mailbox alone supplies no buyer authority (0.599625ms)
+✔ legacy domain membership supplies no team role or list entry (53.524792ms)
+✔ same-domain user cannot select or join a private team (40.128167ms)
+✔ bootstrap grants no buyer capability from the mailbox domain (217.452208ms)
+✔ explicit invitation grants authority and its revocation removes it (141.348666ms)
+✔ unapproved verified buyer cannot read controlled report ll-43301 (56.9815ms)
+✔ unapproved verified buyer cannot read controlled report ll-43295 (48.925167ms)
+✔ unapproved verified buyer cannot read controlled report ll-43296 (47.846666ms)
+✔ unapproved verified buyer cannot read controlled report ll-43298 (45.64875ms)
+✔ unapproved verified buyer cannot read controlled report ll-43302 (44.119125ms)
+✔ unapproved verified buyer cannot read controlled report ll-43297 (44.2155ms)
+✔ unapproved verified buyer cannot read controlled report ll-43300 (40.43725ms)
+✔ unapproved verified buyer cannot read controlled report ll-43299 (48.164416ms)
+✔ unapproved verified buyer cannot read controlled report athens-12-4338 (44.718708ms)
+✔ unapproved verified buyer cannot read controlled report woc-c2526-00228 (37.826375ms)
+✔ unapproved verified buyer cannot read controlled report envirolabs-5-92-24 (38.188208ms)
+✔ unapproved verified buyer cannot read controlled report organic-addendum (36.781083ms)
+✔ unapproved verified buyer cannot read controlled report non-gmo-2026 (39.88425ms)
+✔ unapproved verified buyer cannot read controlled report kosher-2026 (33.023458ms)
+✔ unapproved verified buyer cannot read controlled report paleo-keto-archive (31.356083ms)
+✔ unapproved verified buyer cannot read controlled report organic-spices (34.368709ms)
+✔ anonymous report request is denied before reading private storage (0.230666ms)
+✔ the source manifest publishes no original report location (0.075333ms)
+✔ missing private storage never falls back to an external source (0.25175ms)
+Kasandrinos report unavailable ll-43301 object.arrayBuffer is not a function
+✔ an explicit controller reaches storage and loses that authority immediately on revocation (68.640167ms)
+ℹ tests 25
+ℹ suites 0
+ℹ pass 25
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1461.25475

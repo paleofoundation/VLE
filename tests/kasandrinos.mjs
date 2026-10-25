@@ -21,12 +21,12 @@ assert.equal(allLots(initial()).length,6);
 const stale={...initial(),supplier:'aegean',supplierProfile:{id:'account-private',name:'Private company'},requests:[{id:'EXAMPLE-REQ-01',brand:'example-foods',responses:['EXAMPLE-DEAL-01']},{id:'private-request',brand:'workspace-brand',responses:['EXAMPLE-DEAL-01']}],deals:[{id:'EXAMPLE-DEAL-01',supplier:'aegean',lot:'EXAMPLE-OLIVE-01'}],views:[{supplier:'aegean',lot:'EXAMPLE-OLIVE-01'}],draft:{published:true,id:'EXAMPLE-OLIVE-02',coa:true,confirmed:true,values:[1,2,3,4]}};
 assert(allLots(stale).every(l=>l.real&&l.supplier==='kasandrinos'&&!l.id.startsWith('EXAMPLE-')));
 retireCatalogExamples(stale);assert.equal(stale.deals.length,0);assert.equal(stale.views.length,0);assert(!stale.draft.published);assert.deepEqual(stale.draft.values,[]);assert.equal(stale.requests.length,1);assert.deepEqual(stale.requests[0].responses,[]);assert.equal(stale.supplierProfile.name,'Private company');assert.equal(stale.supplier,'kasandrinos');
-// Full original bytes only; source changes cannot silently replace a report.
-const data=Buffer.from('%PDF-1.7\nlocal fixture\n%%EOF'),report={id:'test',sourceURL:'https://source.test/report.pdf',bytes:data.length,sha256:createHash('sha256').update(data).digest('hex')};let stored,fetches=0;
-const bucket={async get(){return stored?{body:stored}:null;},async put(key,body){assert(key.includes(report.sha256));stored=body;}};
-const transport=async(url,options)=>{assert.equal(options.redirect,'manual');fetches++;return new Response(data,{headers:{'Content-Type':'application/pdf'}})};
-assert.equal(Buffer.from(await reportBytes(report,bucket,transport)).compare(data),0);await reportBytes(report,bucket,transport);assert.equal(fetches,1);
-await assert.rejects(reportBytes({...report,sha256:'0'.repeat(64)},null,transport),/changed/);
-await assert.rejects(reportBytes({...report,bytes:1},null,transport),/changed/);
-await assert.rejects(reportBytes(report,null,async()=>new Response(null,{status:302,headers:{Location:'https://other.test/'}})),/unavailable/);
-console.log('PASS: six real lots; nine exact/shared report associations; two unmatched references; certification scope/date caveats; no values or prices invented; real trading blocked pending supplier account; PDF integrity and private cache.');
+// Full original bytes from private storage only; changed objects fail closed.
+const data=Buffer.from('%PDF-1.7\nlocal fixture\n%%EOF'),report={id:'test',bytes:data.length,sha256:createHash('sha256').update(data).digest('hex')};
+const bucket={async get(key){assert(key.includes(report.sha256));return {arrayBuffer:async()=>data};}};
+assert.equal(Buffer.from(await reportBytes(report,bucket)).compare(data),0);
+await assert.rejects(reportBytes({...report,sha256:'0'.repeat(64)},{get:async()=>({arrayBuffer:async()=>data})}),/changed/);
+await assert.rejects(reportBytes({...report,bytes:1},bucket),/changed/);
+await assert.rejects(reportBytes(report,null),/unavailable/);
+await assert.rejects(reportBytes(report,{get:async()=>null}),/unavailable/);
+console.log('PASS: catalog provenance and scope; no invented values; controller-only private PDF storage and integrity.');

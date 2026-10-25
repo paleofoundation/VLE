@@ -1,0 +1,10 @@
+PASS: 192 proof chip/state, empty, scope/date, safe-link, profile/card integration and actual role-tab checks.
+✔ tests/proof-chips.mjs (142.509083ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 1
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 149.714125

@@ -1,0 +1,88 @@
+✖ company mailbox alone supplies no buyer authority (1.440708ms)
+✖ legacy domain membership supplies no team role or list entry (11.5105ms)
+✖ same-domain user cannot select or join a private team (66.077042ms)
+✖ bootstrap grants no buyer capability from the mailbox domain (218.489917ms)
+✔ explicit invitation grants authority and its revocation removes it (166.652167ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 1
+ℹ fail 4
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1284.890542
+
+✖ failing tests:
+
+test at tests/security-domain-membership.mjs:16:1
+✖ company mailbox alone supplies no buyer authority (1.440708ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  true !== false
+  
+      at TestContext.<anonymous> (file:///Users/kmfp/Documents/ChatGPT/TECRID/orders-20261025/security-vle/tests/security-domain-membership.mjs:16:70)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1201:25)
+      at Test.start (node:internal/test_runner/test:1096:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:385:17) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: true,
+    expected: false,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/security-domain-membership.mjs:17:1
+✖ legacy domain membership supplies no team role or list entry (11.5105ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  'editor' !== null
+  
+      at TestContext.<anonymous> (file:///Users/kmfp/Documents/ChatGPT/TECRID/orders-20261025/security-vle/tests/security-domain-membership.mjs:17:86)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1208:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:831:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'editor',
+    expected: null,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/security-domain-membership.mjs:18:1
+✖ same-domain user cannot select or join a private team (66.077042ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  200 !== 400
+  
+      at TestContext.<anonymous> (file:///Users/kmfp/Documents/ChatGPT/TECRID/orders-20261025/security-vle/tests/security-domain-membership.mjs:18:79)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1208:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:831:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 200,
+    expected: 400,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/security-domain-membership.mjs:19:1
+✖ bootstrap grants no buyer capability from the mailbox domain (218.489917ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  true !== false
+  
+      at TestContext.<anonymous> (file:///Users/kmfp/Documents/ChatGPT/TECRID/orders-20261025/security-vle/tests/security-domain-membership.mjs:19:178)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1208:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:831:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: true,
+    expected: false,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

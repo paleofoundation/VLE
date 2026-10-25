@@ -4,7 +4,7 @@ import {privateFetch} from './private-fetch.js';
 export async function notificationService(request:Request,env:Record<string,any>,transport:typeof fetch=privateFetch){
  const headers={'Cache-Control':'private, no-store','Vary':'Authorization'};
  const json=(data:unknown,status=200)=>Response.json(data,{status,headers});
- if(!await serviceAuthorized(request,env))return json({error:'Unauthorized'},401);
+ if(!await serviceAuthorized(request,env,'notification-worker'))return json({error:'Unauthorized'},401);
  let input;try{const text=await request.text();if(text.length>1000)return json({error:'Too large'},413);input=JSON.parse(text);}catch{return json({error:'Invalid request'},400);}
  if(!env.DB)return json({error:'Notification storage unavailable'},503);
  if(input.action!=='delivery-test')return json({error:'Unknown notification operation'},400);

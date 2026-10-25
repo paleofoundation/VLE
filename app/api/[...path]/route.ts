@@ -71,8 +71,8 @@ async function logView(c:any,l:any){
 export async function GET(request:Request){
  try{
   const path=new URL(request.url).pathname;
-  if(path==='/api/team'){return teamRequest(request,database(),await getEmailUser(request));}
-  if(path.startsWith('/api/sourcing')){const user=await getEmailUser(request);return sourcingRequest(request,database(),(env as any).BUCKET,user,permissions(user));}
+  if(path==='/api/team'){return await teamRequest(request,database(),await getEmailUser(request));}
+  if(path.startsWith('/api/sourcing')){const user=await getEmailUser(request);return await sourcingRequest(request,database(),(env as any).BUCKET,user,permissions(user));}
   if(path.startsWith('/api/auth/'))return authRequest(request);
   if(path==='/api/storefront'||/^\/api\/storefront-assets\/[a-f0-9-]{36}\.(png|jpg|webp)$/.test(path)){const user=await getEmailUser(request);return await storefrontRequest(request,database(),(env as any).BUCKET,user,permissions(user));}
   if(path!=='/api/bootstrap'&&!/^\/api\/(coa|evidence)\/(KAS-\d+-KB)$/.test(path)&&!/^\/api\/reports\/kasandrinos\/[a-z0-9-]+$/.test(path))return failure('Not found',404);
@@ -91,12 +91,12 @@ export async function GET(request:Request){
   if(lot.real)return serveKasReport(c,kasReports.find(r=>r.id===lot.primaryReport));
   await logView(c,lot);
   return new Response(pdf(lot),{headers:{...privateHeaders,'Content-Type':'application/pdf','Content-Disposition':`attachment; filename="${lot.id}-COA-EXAMPLE.pdf"`}});
- }catch(error){console.error('VLE request failed',error);return failure('This request could not be completed. Please try again.',503);}
+ }catch(error){console.error('VLE request failed');return failure('This request could not be completed. Please try again.',503);}
 }
 export async function POST(request:Request){
  try{
-  if(new URL(request.url).pathname==='/api/team'){return teamRequest(request,database(),await getEmailUser(request));}
-  if(new URL(request.url).pathname.startsWith('/api/sourcing')){const user=await getEmailUser(request);return sourcingRequest(request,database(),(env as any).BUCKET,user,permissions(user));}
+  if(new URL(request.url).pathname==='/api/team'){return await teamRequest(request,database(),await getEmailUser(request));}
+  if(new URL(request.url).pathname.startsWith('/api/sourcing')){const user=await getEmailUser(request);return await sourcingRequest(request,database(),(env as any).BUCKET,user,permissions(user));}
   if(new URL(request.url).pathname.startsWith('/api/auth/'))return authRequest(request);
   if(['/api/storefront','/api/storefront/upload'].includes(new URL(request.url).pathname)){const user=await getEmailUser(request);return await storefrontRequest(request,database(),(env as any).BUCKET,user,permissions(user));}
   if(new URL(request.url).pathname!=='/api/action')return failure('Not found',404);
@@ -108,7 +108,7 @@ export async function POST(request:Request){
   if(version!==c.version)return failure('This demo changed in another tab. Reload and try again.',409);
   if(['inquiry','post-request','respond-request','close-request','transition','attachment','load-coa','confirm-values'].includes(action))return failure('Use the sourcing workspace for this action.',410);
   const s=c.state;
-  const buyerPermission=()=>{if(!c.p.buyer)throw Error('Use your company email for brand-buyer access.');};
+  const buyerPermission=()=>{if(!c.p.buyer)throw Error('Open a brand account you own or were invited to.');};
   const buyer=()=>{buyerPermission();if(s.role!=='brand')throw Error('Open your brand workspace first.');};
   const reviewer=()=>{if(!c.p.owner)throw Error('Only the site owner can use supplier review accounts.');};
   const supplier=()=>{throw Error('Supplier document uploads are not connected yet.');};
@@ -138,7 +138,7 @@ export async function POST(request:Request){
   else if(action==='confirm-values'){supplier();if(!s.draft.coa||data.lot!==s.draft.id||!Array.isArray(data.confirmed)||!data.confirmed.every((v:any)=>v===true)||data.confirmed.length!==4||!Array.isArray(data.values)||data.values.length!==4||data.values.some((v:any)=>!Number.isFinite(v)||v<0))throw Error('Match the lot and confirm all four valid values.');s.draft.values=data.values;s.draft.confirmed=true;s.draft.published=true;}
   else return failure('Unknown action',400);
   await save(c);return json(await projection(c));
- }catch(error){return failure(error instanceof Error?error.message:'Request failed',400);}
+ }catch(error){return failure('This action could not be completed. Check the fields and try again.',400);}
 }
 
 async function authRequest(request:Request){
@@ -156,11 +156,10 @@ async function authRequest(request:Request){
 
 async function serveKasReport(c:any,report:any){
  try{
-  if(kasCatalog().reports.find((r:any)=>r.id===report.id)?.tecridTest){
-   if(!(await reportPermission(database(),c.user,report.reportNumber)).canReadPdf)return failure('Original PDFs are private source evidence. Request the digital TECRID card on TECRID.',403);
-  }else if(!c.p.buyer||c.state.role!=='brand')return failure('Brand-buyer permission required.',403);
+  // Every original report uses the same current controller authority check.
+  if(!(await reportPermission(database(),c.user,report.reportNumber)).canReadPdf)return failure('Original PDFs are private source evidence. Request approved digital evidence from the controller.',403);
   const bytes=await reportBytes(report,(env as any).BUCKET);
   await logView(c,{id:report.lotNumbers.length?report.lotNumbers.join(', ')+' · '+report.reportNumber:'Supplier reference · '+report.reportNumber,supplier:'kasandrinos'});
   return new Response(bytes,{headers:{...privateHeaders,'Content-Type':'application/pdf','Content-Disposition':`inline; filename="Kasandrinos-${report.id}.pdf"`,'X-Report-SHA256':report.sha256}});
- }catch(error){console.error('Kasandrinos report unavailable',report.id,error instanceof Error?error.message:'Unknown source error');return failure('This source report is unavailable or changed. Please try again after it has been reviewed.',503);}
+ }catch(error){console.error('Kasandrinos report unavailable');return failure('This source report is unavailable or changed. Please try again after it has been reviewed.',503);}
 }

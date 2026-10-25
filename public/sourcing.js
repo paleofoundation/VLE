@@ -40,7 +40,7 @@ function renderSourcing(path,session,role,rerender){
  if(path==='/deals/room'){const r=data.rooms.find(r=>r.id===key);return r?roomDetail(r):'<div class="panel"><h2>Conversation unavailable</h2><p>Only its participants can open this conversation.</p></div>';}
  if(path==='/deals')return `${title('YOUR CONVERSATIONS','Keep the next step in view.','Shared messages, quotes, samples, evaluations and soft holds.')}<div class="room-grid">${data.rooms.map(roomCard).join('')||'<div class="panel"><p>No conversations yet. Start with a sourcing brief or respond to a shared opportunity.</p>'+link('Sourcing workspace','/requests')+'</div>'}</div>`;
  if(path==='/requests'&&role==='supplier')return opportunities();
- if(!data.canBuy)return '<div class="panel"><h2>Brand-buyer access requires a company email.</h2>'+link('Your workspaces','/email-sign-in')+'</div>';
+ if(!data.canBuy)return '<div class="panel"><h2>Open an account you own or were invited to.</h2>'+link('Your accounts','/team')+'</div>';
  if(path==='/requests/new')return title('PRIVATE SOURCING BRIEF','Define your next ingredient.','Save privately first. Choose what to share afterward.')+briefForm();
  if(params.has('edit')){const r=data.briefs.find(r=>r.id===params.get('edit'));return r&&!r.shared?briefForm(r):'<p>Unshare the brief before editing, or select a brief you own.</p>';}
  if(key){const r=data.briefs.find(r=>r.id===key);return r?briefDetail(r):'<p>Private brief not found.</p>';}

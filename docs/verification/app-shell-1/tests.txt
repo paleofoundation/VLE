@@ -1,0 +1,80 @@
+
+email-auth.mjs: exit 0
+PASS: D1 email auth, verified identity, hashed one-use token, expiry, secure cookie, CSRF, sign-out revocation, redirect validation, persisted rate limit, delivery failure.
+2026-10-25T12:13:00.964Z WARN [Better Auth]: Rate limiting could not determine a client IP and is falling back to a single shared per-path bucket. Ensure your runtime forwards a trusted client IP header, then set `advanced.ipAddress.ipAddressHeaders` or `advanced.ipAddress.trustedProxies` so the address can be resolved.
+2026-10-25T12:13:01.206Z ERROR [Better Auth]: Invalid origin: https://evil.test
+2026-10-25T12:13:01.257Z ERROR [Better Auth]: Invalid callbackURL: https://evil.test
+2026-10-25T12:13:01.323Z ERROR [Better Auth]: Error Error: Email delivery failed. Please try again shortly.
+    at Object.sendMagicLink (file:///Users/kmfp/.codex/worktrees/vle-app-shell/VLE.Exchange/server/auth-factory.ts:26:27)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async file:///private/tmp/vle-finalize/node_modules/better-auth/dist/plugins/magic-link/index.mjs:108:5
+    at async file:///private/tmp/vle-finalize/node_modules/@better-auth/core/dist/api/index.mjs:56:11
+    at async internalHandler (file:///private/tmp/vle-finalize/node_modules/better-call/dist/endpoint.mjs:29:20)
+    at async file:///private/tmp/vle-finalize/node_modules/better-auth/dist/api/dispatch.mjs:231:18
+    at async processRequest (file:///private/tmp/vle-finalize/node_modules/better-call/dist/router.mjs:82:11)
+    at async handler (file:///private/tmp/vle-finalize/node_modules/better-call/dist/router.mjs:105:16)
+    at async file:///private/tmp/vle-finalize/node_modules/@better-auth/core/dist/context/transaction.mjs:38:13
+    at async file:///Users/kmfp/.codex/worktrees/vle-app-shell/VLE.Exchange/tests/email-auth.mjs:30:3
+# SERVER_ERROR:  Error: Email delivery failed. Please try again shortly.
+    at Object.sendMagicLink (file:///Users/kmfp/.codex/worktrees/vle-app-shell/VLE.Exchange/server/auth-factory.ts:26:27)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async file:///private/tmp/vle-finalize/node_modules/better-auth/dist/plugins/magic-link/index.mjs:108:5
+    at async file:///private/tmp/vle-finalize/node_modules/@better-auth/core/dist/api/index.mjs:56:11
+    at async internalHandler (file:///private/tmp/vle-finalize/node_modules/better-call/dist/endpoint.mjs:29:20)
+    at async file:///private/tmp/vle-finalize/node_modules/better-auth/dist/api/dispatch.mjs:231:18
+    at async processRequest (file:///private/tmp/vle-finalize/node_modules/better-call/dist/router.mjs:82:11)
+    at async handler (file:///private/tmp/vle-finalize/node_modules/better-call/dist/router.mjs:105:16)
+    at async file:///private/tmp/vle-finalize/node_modules/@better-auth/core/dist/context/transaction.mjs:38:13
+    at async file:///Users/kmfp/.codex/worktrees/vle-app-shell/VLE.Exchange/tests/email-auth.mjs:30:3
+
+evidence-notifications.mjs: exit 0
+PASS: scoped inbox, duplicate requests, personal synchronized reads, authenticated relay, shared grant/revoke, revoked managers, safe links and source outage.
+
+homepage-regressions.mjs: exit 0
+PASS: actual anonymous homepage renders lookup first and all three cards in the following section.
+PASS: actual anonymous homepage renders expanded sourcing boundaries with all three paragraphs.
+
+kasandrinos-request-notifications.mjs: exit 0
+PASS: atomic request outbox, fixed Karen recipient, scopes, TEST-only content, authenticated review links, duplicate/race suppression, retry/backoff/idempotency, stale-request cancellation and service-only smoke check.
+
+kasandrinos.mjs: exit 0
+PASS: six real lots; nine exact/shared report associations; two unmatched references; certification scope/date caveats; no values or prices invented; real trading blocked pending supplier account; PDF integrity and private cache.
+
+mobile-shell.mjs: exit 0
+PASS: role tabs, unknown-role fallback, signed-out precedence, active state and role-only Explore groups.
+PASS: More opens, Close/native Escape/backdrop/navigation/desktop resize close, focus returns, background unlocks.
+PASS: honest proof strip, real information destinations, standalone manifest and iOS metadata, no service worker.
+
+pilot.mjs: exit 0
+PASS: Karen same-login buyer/supplier pilot, complete quote/sample/cost/shipment/evaluation/hold lifecycle, supplier initiation, private-note isolation and stale-account/role denial.
+
+proof-exchange.mjs: exit 0
+PASS: 86 proof exchange checks. Real D1 migrations, roles, two-sided release authorization, HMAC, replay and concurrency, signed lot identity, disclosure, correction/revocation, registry status, expiry, freshness, audit, receipt isolation and escaping.
+
+proof-worker.mjs: exit 0
+PASS: built Worker routes, anonymous pages/bootstrap, private mutation rejection, real HMAC receiver, atomic receipt, idempotent retry, status-only public projection, private log isolation and zero outbound calls.
+
+report-gate.mjs: exit 0
+Eight report mappings, denied access and safe sign-in destinations passed
+
+sourcing.mjs: exit 0
+PASS: real D1/R2 private brief isolation, controlled sharing, cross-account messaging, transitions, concurrency, document access, review, email retries/preferences and confidential-content exclusion.
+
+storefront.mjs: exit 0
+PASS: supplier storefront allowlist; real lots only; HTML escaping; authorized manager checks; publication isolation; gallery descriptions; section ordering; evidence and commercial gates.
+
+teams.mjs: exit 0
+PASS: founding account permissions, exact verified-domain joining, viewer write denial, owner-only domain/admin grants, revocation, explicit invitations, tenant switching and personal isolation.
+
+tecrid-email-relay.mjs: exit 0
+PASS: authenticated relay, strict TECRID link/redirect scope, email validation, provider dispatch.
+
+tecrid-report-service.mjs: exit 0
+PASS: all eight source-bound TEST reports; owner/admin roles; exact-email requests; digital-card grants with controller-only source PDFs; grant, expiry, revoke; stale-write denial; role revocation; audit; private caching and service authentication.
+
+tecrid-test-links.mjs: exit 0
+PASS: eight exact report/hash/lot matches; sandbox-only display; no unrelated links or PDF access changes.
+PASS: role tabs, unknown-role fallback, signed-out precedence, active state and role-only Explore groups.
+PASS: More opens, Close/native Escape/backdrop/navigation/desktop resize close, focus returns, background unlocks.
+PASS: merged scoped proof statuses, freshness, program, issuer and certification scope are preserved.
+PASS: honest proof strip, real information destinations, standalone manifest and iOS metadata, no service worker.

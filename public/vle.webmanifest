@@ -1,0 +1,15 @@
+{
+  "id": "/",
+  "name": "Verified Lot Exchange",
+  "short_name": "VLE",
+  "description": "Find lots, inspect their evidence and keep sourcing conversations together.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#f8f8f2",
+  "theme_color": "#075a4f",
+  "icons": [
+    {"src": "/icons/vle-192.png", "sizes": "192x192", "type": "image/png"},
+    {"src": "/icons/vle-512.png", "sizes": "512x512", "type": "image/png"}
+  ]
+}

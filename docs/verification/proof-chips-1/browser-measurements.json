@@ -1,0 +1,124 @@
+[
+  {
+    "chips": [
+      {
+        "font": "16px",
+        "height": 44
+      },
+      {
+        "font": "16px",
+        "height": 44
+      },
+      {
+        "font": "16px",
+        "height": 44
+      },
+      {
+        "font": "16px",
+        "height": 44
+      },
+      {
+        "font": "16px",
+        "height": 44
+      }
+    ],
+    "page": "/suppliers/kasandrinos",
+    "proofBottom": 605.390625,
+    "scrollWidth": 390,
+    "tabsTop": 773,
+    "viewport": [
+      390,
+      844
+    ]
+  },
+  {
+    "lotDates": [
+      "Last tested: Jan 29, 2026",
+      "Last tested: Jan 29, 2026",
+      "Last tested: Jan 29, 2026",
+      "Last tested: Nov 21, 2025",
+      "Last tested: Nov 21, 2025",
+      "Last tested: Nov 21, 2025"
+    ],
+    "lotStrips": 6,
+    "page": "/",
+    "scrollWidth": 390,
+    "viewport": [
+      390,
+      844
+    ]
+  },
+  {
+    "chips": [
+      {
+        "font": "16px",
+        "height": 44,
+        "right": 348.828125,
+        "text": "SYNTHETIC·QUALIFIED\nQUALIFIED\n↗",
+        "width": 311.828125
+      },
+      {
+        "font": "16px",
+        "height": 127.96875,
+        "right": 353,
+        "text": "SYNTHETIC·LONG-IDENTIFIER-LONG-IDENTIFIER-LONG-IDENTIFIER-LONG-IDENTIFIER-LONG-IDENTIFIER-LONG-IDENTIFIER-LONG-IDENTIFIER-\npending\n↗",
+        "width": 316
+      },
+      {
+        "font": "16px",
+        "height": 63.1875,
+        "right": 353,
+        "text": "SYNTHETIC·QUALIFIED\nactive · lapsed\n↗",
+        "width": 316
+      },
+      {
+        "font": "16px",
+        "height": 44,
+        "right": 326.9765625,
+        "text": "SYNTHETIC·QUALIFIED\nrevoked\n↗",
+        "width": 289.9765625
+      },
+      {
+        "font": "16px",
+        "height": 44,
+        "right": 297.96875,
+        "text": "SYNTHETIC certification\nactive",
+        "width": 260.96875
+      },
+      {
+        "font": "16px",
+        "height": 44,
+        "right": 343.6328125,
+        "text": "Lab result, not a certification\npending",
+        "width": 306.6328125
+      }
+    ],
+    "page": "SYNTHETIC chip states",
+    "scrollWidth": 390,
+    "viewport": [
+      390,
+      844
+    ]
+  },
+  {
+    "lotRows": 6,
+    "page": "/suppliers/kasandrinos",
+    "phoneTabs": "none",
+    "proof": "grid",
+    "scrollWidth": 1280,
+    "viewport": [
+      1280,
+      900
+    ]
+  },
+  {
+    "lotProofs": 6,
+    "page": "/",
+    "phoneTabs": "none",
+    "scrollWidth": 1280,
+    "viewport": [
+      1280,
+      900
+    ]
+  }
+]

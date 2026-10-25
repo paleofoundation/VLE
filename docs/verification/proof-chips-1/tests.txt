@@ -1,0 +1,39 @@
+PASS tests/email-auth.mjs
+PASS: D1 email auth, verified identity, hashed one-use token, expiry, secure cookie, CSRF, sign-out revocation, redirect validation, persisted rate limit, delivery failure.
+PASS tests/evidence-notifications.mjs
+PASS: scoped inbox, duplicate requests, personal synchronized reads, authenticated relay, shared grant/revoke, revoked managers, safe links and source outage.
+PASS tests/homepage-regressions.mjs
+PASS: actual anonymous homepage renders lookup first and all three cards in the following section.
+PASS: actual anonymous homepage renders expanded sourcing boundaries with all three paragraphs.
+PASS tests/kasandrinos-request-notifications.mjs
+PASS: atomic request outbox, fixed Karen recipient, scopes, TEST-only content, authenticated review links, duplicate/race suppression, retry/backoff/idempotency, stale-request cancellation and service-only smoke check.
+PASS tests/kasandrinos.mjs
+PASS: six real lots; nine exact/shared report associations; two unmatched references; certification scope/date caveats; no values or prices invented; real trading blocked pending supplier account; PDF integrity and private cache.
+PASS tests/mobile-shell.mjs
+PASS: role tabs, unknown-role fallback, signed-out precedence, active state and role-only Explore groups.
+PASS: More opens, Close/native Escape/backdrop/navigation/desktop resize close, focus returns, background unlocks.
+PASS: merged scoped proof statuses, freshness, program, issuer and certification scope are preserved.
+PASS: honest proof strip, real information destinations, standalone manifest and iOS metadata, no service worker.
+PASS tests/pilot.mjs
+PASS: Karen same-login buyer/supplier pilot, complete quote/sample/cost/shipment/evaluation/hold lifecycle, supplier initiation, private-note isolation and stale-account/role denial.
+PASS tests/proof-chips.mjs
+PASS: 192 proof chip/state, empty, scope/date, safe-link, profile/card integration and actual role-tab checks.
+PASS tests/proof-exchange.mjs
+PASS: 86 proof exchange checks. Real D1 migrations, roles, two-sided release authorization, HMAC, replay and concurrency, signed lot identity, disclosure, correction/revocation, registry status, expiry, freshness, audit, receipt isolation and escaping.
+PASS tests/proof-worker.mjs
+PASS: built Worker routes, anonymous pages/bootstrap, private mutation rejection, real HMAC receiver, atomic receipt, idempotent retry, status-only public projection, private log isolation and zero outbound calls.
+PASS tests/report-gate.mjs
+Eight report mappings, denied access and safe sign-in destinations passed
+PASS tests/sourcing.mjs
+PASS: real D1/R2 private brief isolation, controlled sharing, cross-account messaging, transitions, concurrency, document access, review, email retries/preferences and confidential-content exclusion.
+PASS tests/storefront.mjs
+PASS: supplier storefront allowlist; real lots only; HTML escaping; authorized manager checks; publication isolation; gallery descriptions; section ordering; evidence and commercial gates.
+PASS tests/teams.mjs
+PASS: founding account permissions, exact verified-domain joining, viewer write denial, owner-only domain/admin grants, revocation, explicit invitations, tenant switching and personal isolation.
+PASS tests/tecrid-email-relay.mjs
+PASS: authenticated relay, strict TECRID link/redirect scope, email validation, provider dispatch.
+PASS tests/tecrid-report-service.mjs
+PASS: all eight source-bound TEST reports; owner/admin roles; exact-email requests; digital-card grants with controller-only source PDFs; grant, expiry, revoke; stale-write denial; role revocation; audit; private caching and service authentication.
+PASS tests/tecrid-test-links.mjs
+PASS: eight exact report/hash/lot matches; sandbox-only display; no unrelated links or PDF access changes.
+17/17 test files passed. Production build, JavaScript syntax and whitespace checks passed.

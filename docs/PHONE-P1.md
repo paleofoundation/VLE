@@ -1,6 +1,6 @@
 # Waiting on you: phone phase 1
 
-Signed-in brand and supplier home pages show participant-owned sourcing tasks. The public discovery pages and proof strips keep their existing behavior. Personal email users can create or select an account through Account; no company-domain inference grants membership.
+Signed-in brand and supplier home pages show participant-owned sourcing tasks, newest activity first. The public discovery pages and proof strips keep their existing behavior. Personal email users can create or select an account through Account; no company-domain inference grants membership.
 
 Each card has at most two buttons. Approve applies the existing cost-responsibility or soft-hold transition with one tap. Not now records a deferral until a new conversation update. Answer opens the private message and reply field; Send answer saves it on the second tap, after typing. An empty inbox says you are caught up. Viewers cannot make decisions. The phone bar contains role-specific Home, Find lots or My lots, Requests, Messages and Account, without a menu or public footer.
 
@@ -8,7 +8,7 @@ Each card has at most two buttons. Approve applies the existing cost-responsibil
 
 The schema-only migration adds `sourcing_decisions`: account, human actor, room, exact task, decision, previous room version and timestamp. Approval text is not used as authority. Private replies stay in participant events. Decision records contain metadata only. These routes send no email, push, result-bearing notification, evidence grant or production side effect during validation. A soft hold is not a contract; cost approval is not evidence qualification or certification. TECRID access remains in TECRID. Phase 4 remains gated.
 
-Migration 0011 was generated independently off current main as ordered. The consumer draft #77 also starts its own 0011 sequence. Elon's chosen merge order will require ordinary schema/journal integration before the second draft is merged; neither migration has been applied to production.
+Elon's merge order is phone P1 #78 first, keeping migration 0011. Consumer draft #77 now carries the exact P1 schema prerequisite and its native migration follows as 0012. Neither has been applied to production.
 
 ## Verification
 

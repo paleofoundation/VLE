@@ -18,13 +18,14 @@ export async function waitingRequest(request,db,user,p){
  const rooms=(await run('SELECT * FROM sourcing_rooms WHERE buyer_id=? OR supplier_account_id=? OR (supplier_account_id IS NULL AND supplier_email=?) ORDER BY created_at DESC',user.userId,user.teamId||'',user.supplierEmail||user.email.toLowerCase()).all()).results;
  const taskFor=async room=>{
   const role=room.buyer_id===user.userId?'buyer':'supplier';
-  const last=await run('SELECT id,actor,body FROM sourcing_events WHERE room_id=? ORDER BY created_at DESC,id DESC LIMIT 1',room.id).first();
+  const last=await run('SELECT id,actor,body,created_at FROM sourcing_events WHERE room_id=? ORDER BY created_at DESC,id DESC LIMIT 1',room.id).first();
   if(last?.actor===role&&last.body==='Updated sourcing record: Not now recorded.')return null;
-  const task=waitingTask(room,role,last);return task?{...task,eventId:last?.id||null}:null;
+  const task=waitingTask(room,role,last);return task?{...task,eventId:last?.id||null,updatedAt:last?.created_at||room.created_at}:null;
  };
  if(request.method==='GET'&&path==='/api/sourcing/waiting'){
   const tasks=[];
   for(const room of rooms){const task=await taskFor(room);if(task)tasks.push(task);}
+  tasks.sort((a,b)=>b.updatedAt.localeCompare(a.updatedAt)||a.roomId.localeCompare(b.roomId));
   return json({accountId:user.userId,readOnly:!!p.readOnly,tasks});
  }
  const match=path.match(/^\/api\/sourcing\/waiting\/([^/]+)\/(approve|not-now|answer)$/);

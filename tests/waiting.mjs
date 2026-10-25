@@ -50,6 +50,16 @@ try{
  await db.prepare("INSERT INTO team_selections (user_id,team_id) VALUES ('buyer','view-team')").run();
  assert.equal((await list(buyer)).readOnly,true);assert.equal((await act(buyer,task,'approve')).status,403);
  console.log('PASS: viewer membership remains read-only.');
+ await seed('sort-older','Inquiry',{});
+ await seed('sort-newer','Inquiry',{});
+ await db.prepare("UPDATE sourcing_events SET created_at='2026-10-20T00:00:00Z' WHERE room_id='sort-newer'").run();
+ const ordered=(await list(stranger)).tasks;assert.equal(ordered.length,0);
+ // Room creation is identical: event activity, not room creation, chooses task order.
+ await db.prepare("DELETE FROM team_selections WHERE user_id='buyer'").run();
+ const newest=(await list(buyer)).tasks.filter(t=>t.roomId.startsWith('sort-'));
+ assert.deepEqual(newest.map(t=>t.roomId),['sort-newer','sort-older']);
+ console.log('PASS: inbox sorts by newest task activity, independent of conversation creation.');
+
  await seed('race','Inquiry',{});
  const pending=(await list(supplier)).tasks.find(t=>t.roomId==='answer');
  let armed=false;

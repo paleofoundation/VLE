@@ -1,0 +1,115 @@
+✔ unapproved verified buyer cannot read controlled report ll-43301 (46.096583ms)
+✔ unapproved verified buyer cannot read controlled report ll-43295 (46.697666ms)
+✔ unapproved verified buyer cannot read controlled report ll-43296 (43.865834ms)
+✔ unapproved verified buyer cannot read controlled report ll-43298 (87.06175ms)
+✔ unapproved verified buyer cannot read controlled report ll-43302 (57.608458ms)
+✔ unapproved verified buyer cannot read controlled report ll-43297 (39.5715ms)
+✔ unapproved verified buyer cannot read controlled report ll-43300 (45.134791ms)
+✔ unapproved verified buyer cannot read controlled report ll-43299 (45.833708ms)
+✖ unapproved verified buyer cannot read controlled report athens-12-4338 (47.038ms)
+✖ unapproved verified buyer cannot read controlled report woc-c2526-00228 (31.1975ms)
+✖ unapproved verified buyer cannot read controlled report envirolabs-5-92-24 (32.010833ms)
+✔ anonymous report request is denied before reading private storage (0.336667ms)
+✖ the source manifest publishes no original report location (0.162375ms)
+✖ missing private storage never falls back to an external source (0.593292ms)
+ℹ tests 14
+ℹ suites 0
+ℹ pass 9
+ℹ fail 5
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1870.0765
+
+✖ failing tests:
+
+test at tests/security-reports.mjs:15:2
+✖ unapproved verified buyer cannot read controlled report athens-12-4338 (47.038ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  200 !== 403
+  
+      at TestContext.<anonymous> (file:///Users/kmfp/Documents/ChatGPT/TECRID/orders-20261025/security-vle/tests/security-reports.mjs:18:10)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1208:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:831:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 200,
+    expected: 403,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/security-reports.mjs:15:2
+✖ unapproved verified buyer cannot read controlled report woc-c2526-00228 (31.1975ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  200 !== 403
+  
+      at TestContext.<anonymous> (file:///Users/kmfp/Documents/ChatGPT/TECRID/orders-20261025/security-vle/tests/security-reports.mjs:18:10)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1208:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:831:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 200,
+    expected: 403,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/security-reports.mjs:15:2
+✖ unapproved verified buyer cannot read controlled report envirolabs-5-92-24 (32.010833ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  200 !== 403
+  
+      at TestContext.<anonymous> (file:///Users/kmfp/Documents/ChatGPT/TECRID/orders-20261025/security-vle/tests/security-reports.mjs:18:10)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1208:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:831:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 200,
+    expected: 403,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/security-reports.mjs:22:1
+✖ the source manifest publishes no original report location (0.162375ms)
+  AssertionError [ERR_ASSERTION]: Original locations must be absent from the tracked manifest
+      at TestContext.<anonymous> (file:///Users/kmfp/Documents/ChatGPT/TECRID/orders-20261025/security-vle/tests/security-reports.mjs:22:71)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1201:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:831:18)
+      at Test.postRun (node:internal/test_runner/test:1330:19)
+      at Test.run (node:internal/test_runner/test:1258:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:831:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }
+
+test at tests/security-reports.mjs:23:1
+✖ missing private storage never falls back to an external source (0.593292ms)
+  AssertionError [ERR_ASSERTION]: No source fetch is allowed
+  
+  1 !== 0
+  
+      at TestContext.<anonymous> (file:///Users/kmfp/Documents/ChatGPT/TECRID/orders-20261025/security-vle/tests/security-reports.mjs:23:295)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1208:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:831:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 1,
+    expected: 0,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

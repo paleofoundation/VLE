@@ -5,9 +5,9 @@ export function permissions(user:EmailUser|null){
  const email=user?.email.toLowerCase()||'';
  const domain=email.split('@')[1]||'';
  const owner=!!user && email===OWNER_EMAIL;
- // This is the approved company-email default, not a verified-company badge.
+ // Domain classification is display metadata only. It never grants authority.
  const companyEmail=!!user && /^[a-z0-9.-]+\.[a-z]{2,}$/.test(domain) && !personalDomains.has(domain) && !domain.endsWith('.example');
- return {signedIn:!!user,companyEmail,buyer:companyEmail||owner,owner,company:domain};
+ return {signedIn:!!user,companyEmail,buyer:owner,owner,company:domain};
 }
 export const privateHeaders={'Cache-Control':'private, no-store, max-age=0','Vary':'Cookie','X-Content-Type-Options':'nosniff'};
 export function failure(message:string,status=403){return Response.json({error:message},{status,headers:privateHeaders});}

@@ -108,7 +108,7 @@ export async function POST(request:Request){
   if(version!==c.version)return failure('This demo changed in another tab. Reload and try again.',409);
   if(['inquiry','post-request','respond-request','close-request','transition','attachment','load-coa','confirm-values'].includes(action))return failure('Use the sourcing workspace for this action.',410);
   const s=c.state;
-  const buyerPermission=()=>{if(!c.p.buyer)throw Error('Use your company email for brand-buyer access.');};
+  const buyerPermission=()=>{if(!c.p.buyer)throw Error('Open a brand account you own or were invited to.');};
   const buyer=()=>{buyerPermission();if(s.role!=='brand')throw Error('Open your brand workspace first.');};
   const reviewer=()=>{if(!c.p.owner)throw Error('Only the site owner can use supplier review accounts.');};
   const supplier=()=>{throw Error('Supplier document uploads are not connected yet.');};

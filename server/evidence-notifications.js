@@ -1,3 +1,4 @@
+import {signedServiceInit} from './service-assertion.js';
 import {privateFetch} from './private-fetch.js';
 export async function evidenceNotifications(db,user,role,readId){
  const email=user.email.toLowerCase();
@@ -9,8 +10,7 @@ export async function evidenceNotifications(db,user,role,readId){
  return {items:items.map(item=>({...item,read:seen.has(item.id)}))};
 }
 export async function registryNotifications(env,user,readId,transport=privateFetch){
- if(!env.TECRID_EMAIL_RELAY_SECRET)throw Error('TECRID connection unavailable');
- const response=await transport('https://tecrid.com/api/integrations/vle/notifications',{method:'POST',redirect:'error',signal:AbortSignal.timeout(8000),headers:{authorization:`Bearer ${env.TECRID_EMAIL_RELAY_SECRET}`,'content-type':'application/json'},body:JSON.stringify({action:readId?'read':'list',id:readId,actor:{email:user.email,emailVerified:true}})});
+ const response=await transport('https://tecrid.com/api/integrations/vle/notifications',{...await signedServiceInit('https://tecrid.com/api/integrations/vle/notifications',{action:readId?'read':'list',id:readId,actor:{email:user.email,emailVerified:true}},env,'notifications-to-tecrid'),redirect:'error',signal:AbortSignal.timeout(8000)});
  if(!response.ok)throw Error('TECRID connection unavailable');const body=await response.json();if(!Array.isArray(body.items))throw Error('TECRID connection unavailable');
  return body.items.map(item=>{let href='https://tecrid.com/notifications';try{const url=new URL(item.href);if(url.origin==='https://tecrid.com')href=url.href;}catch{}return {...item,source:'tecrid',href};});
 }

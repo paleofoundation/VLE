@@ -1,0 +1,13 @@
+✔ concurrent budgets admit only the configured count, independent of request IP (74.140667ms)
+✔ a flooding client cannot spend the global budget on rejected mutations or block another sign-in (493.586625ms)
+✔ a low configured global limit retains headroom above one client allowance (47.895125ms)
+✔ principal rejections do not consume the global budget across changing IPs (656.137458ms)
+✔ the global ceiling still rejects aggregate traffic from many clients (241.30625ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 5
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2061.59825

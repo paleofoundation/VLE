@@ -2,8 +2,8 @@
 const tab=(label,href,icon)=>({label,href,icon});
 export function tabsFor(role,signedIn){
  if(!signedIn)return [tab('Home','/','home'),tab('Find lots','/suppliers','search'),tab('Verify','https://tecrid.com/verify','check'),tab('Sign in','/email-sign-in','person'),tab('More',null,'more')];
- if(role==='brand')return [tab('Home','/brand','home'),tab('Find lots','/suppliers','search'),tab('Requests','/requests','chat'),tab('Alerts','/notifications','bell'),tab('More',null,'more')];
- if(role==='supplier')return [tab('Home','/workspace','home'),tab('My lots','/workspace/documents','box'),tab('Requests','/requests','chat'),tab('Alerts','/notifications','bell'),tab('More',null,'more')];
+ if(role==='brand')return [tab('Home','/brand','home'),tab('Find lots','/suppliers','search'),tab('Requests','/requests','chat'),tab('Messages','/deals','chat'),tab('Account','/team','person')];
+ if(role==='supplier')return [tab('Home','/workspace','home'),tab('My lots','/workspace/documents','box'),tab('Requests','/requests','chat'),tab('Messages','/deals','chat'),tab('Account','/team','person')];
  return [tab('Home','/','home'),tab('Find lots','/suppliers','search'),tab('Alerts','/notifications','bell'),tab('More',null,'more')];
 }
 export function exploreGroups(role,signedIn){

@@ -5,8 +5,8 @@ import {mobileProofStrip} from '../public/kasandrinos.js';
 import {kasCatalog,kasLots} from '../server/kasandrinos.js';
 const labels=(role,signed)=>tabsFor(role,signed).map(t=>t.label);
 assert.deepEqual(labels('supplier',false),['Home','Find lots','Verify','Sign in','More']);
-assert.deepEqual(labels('brand',true),['Home','Find lots','Requests','Alerts','More']);
-assert.deepEqual(labels('supplier',true),['Home','My lots','Requests','Alerts','More']);
+assert.deepEqual(labels('brand',true),['Home','Find lots','Requests','Messages','Account']);
+assert.deepEqual(labels('supplier',true),['Home','My lots','Requests','Messages','Account']);
 for(const role of ['member','retailer','other','admin',undefined])assert.deepEqual(labels(role,true),['Home','Find lots','Alerts','More']);
 assert.equal(tabsFor('brand',true).find(t=>t.label==='Home').href,'/brand');
 assert.equal(tabsFor('supplier',true).find(t=>t.label==='My lots').href,'/workspace/documents');
@@ -19,7 +19,7 @@ for(const role of ['brand','supplier','member']){
  assert(!hrefs.includes('/email-sign-in'));
  assert(!hrefs.includes(role==='brand'?'/workspace':'/brand'));
  assert.doesNotMatch(html,/API keys/,'No key permission or screen exists on main');
- assert.match(html,/aria-controls="mobile-explore" aria-expanded="false"/);
+ if(role==='member')assert.match(html,/aria-controls="mobile-explore" aria-expanded="false"/);else {assert.doesNotMatch(html,/data-explore-open/);assert.match(html,/href="\/team"/);}
 }
 const requestHTML=mobileShell('brand',{signedIn:true},'/requests/new');
 assert.match(requestHTML,/<a href="\/requests" data-nav aria-current="page"/);

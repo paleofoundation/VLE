@@ -1,0 +1,52 @@
+
+> site-creator-vinext-starter@0.1.0 build
+> node scripts/run-framework.mjs build
+
+
+  vinext build  (Vite 8.0.13)
+
+[1/5] analyze client references...
+[2K
+transforming...✓ 1106 modules transformed.
+rendering chunks...
+✓ built in 992ms
+[2/5] analyze server references...
+[2K
+transforming...✓ 78 modules transformed.
+rendering chunks...
+✓ built in 73ms
+[3/5] build rsc environment...
+[2K
+transforming...✓ 1103 modules transformed.
+rendering chunks...
+computing gzip size...
+✓ built in 780ms
+[4/5] build client environment...
+[2K
+transforming...✓ 124 modules transformed.
+rendering chunks...
+computing gzip size...
+✓ built in 394ms
+[5/5] build ssr environment...
+[2K
+transforming...✓ 84 modules transformed.
+rendering chunks...
+computing gzip size...
+✓ built in 256ms
+[0m
+  Route (app)
+  ┌ λ /:path*
+  ├ λ /api/:path+
+  ├ λ /api/evidence-notifications
+  ├ λ /api/integrations/tecrid/deliveries
+  ├ λ /api/proof
+  ├ λ /api/tecrid-email
+  ├ λ /api/tecrid-report-access
+  ├ λ /api/tecrid-report-import
+  ├ λ /api/tecrid-report-permissions
+  ├ λ /api/tecrid-report-transcripts
+  └ λ /api/tecrid-request-notification
+
+  λ API
+
+  Build complete. Run `vinext start` to start the production server.

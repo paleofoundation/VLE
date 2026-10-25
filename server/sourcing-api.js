@@ -1,3 +1,4 @@
+import {waitingRequest} from './waiting.js';
 import {takeBudget} from './abuse-budget.js';
 import {boundedText} from './service-assertion.js';
 import {sourcingIdentity,recipientEmail} from './teams.js';
@@ -24,6 +25,7 @@ export async function sourcingRequest(request,db,bucket,user,p){
  const room=async key=>{const row=await run('SELECT * FROM sourcing_rooms WHERE id=?',key).first();if(!row||!roomRole(row,user))throw Error('Conversation not found.');return row;};
  try{
  if(request.method==='GET'){
+  if(path==='/api/sourcing/waiting')return await waitingRequest(request,db,user,p);
   if(path.startsWith('/api/sourcing/document/')){
    const row=await run('SELECT * FROM supplier_submissions WHERE id=?',path.split('/').at(-1)).first();if(!row)return json({error:'Document not found.'},404);
    const shared=p.buyer?await run("SELECT id FROM sourcing_rooms WHERE buyer_id=? AND json_extract(record,'$.source.submissionId')=? LIMIT 1",user.userId,row.id).first():null;
@@ -44,6 +46,7 @@ export async function sourcingRequest(request,db,bucket,user,p){
  if(request.method!=='POST')return json({error:'Not found'},404);
  if(request.headers.get('origin')!==new URL(request.url).origin)return json({error:'Same-origin request required.'},403);
  if(!await takeBudget(db,'sourcing-account-mutation',user.userId,120,60000))return json({error:'Account request limit reached. Try again shortly.'},429);
+ if(path.startsWith('/api/sourcing/waiting/'))return await waitingRequest(request,db,user,p);
  if(path==='/api/sourcing/upload'){
   if(!supplier&&!isManager)return json({error:'Set up your supplier workspace first.'},403);
   if(Number(request.headers.get('content-length'))>12000000)return json({error:'PDF must be under 10 MB.'},413);

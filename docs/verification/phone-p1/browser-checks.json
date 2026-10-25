@@ -1,0 +1,168 @@
+[
+  {
+    "role": "brand",
+    "width": 390,
+    "metrics": {
+      "width": 390,
+      "scroll": 390,
+      "cards": [
+        {
+          "buttons": [
+            {
+              "label": "Approve",
+              "height": 52
+            },
+            {
+              "label": "Not now",
+              "height": 52
+            }
+          ],
+          "width": 354
+        },
+        {
+          "buttons": [
+            {
+              "label": "Answer",
+              "height": 52
+            },
+            {
+              "label": "Not now",
+              "height": 52
+            }
+          ],
+          "width": 354
+        }
+      ],
+      "menuVisible": false,
+      "footerVisible": false
+    },
+    "errors": [],
+    "taps": {
+      "approve": 1,
+      "answer": 2
+    }
+  },
+  {
+    "role": "brand",
+    "width": 1440,
+    "metrics": {
+      "width": 1440,
+      "scroll": 1440,
+      "cards": [
+        {
+          "buttons": [
+            {
+              "label": "Approve",
+              "height": 52
+            },
+            {
+              "label": "Not now",
+              "height": 52
+            }
+          ],
+          "width": 470
+        },
+        {
+          "buttons": [
+            {
+              "label": "Answer",
+              "height": 52
+            },
+            {
+              "label": "Not now",
+              "height": 52
+            }
+          ],
+          "width": 470
+        }
+      ],
+      "menuVisible": false,
+      "footerVisible": true
+    },
+    "errors": [],
+    "taps": {}
+  },
+  {
+    "role": "supplier",
+    "width": 390,
+    "metrics": {
+      "width": 390,
+      "scroll": 390,
+      "cards": [
+        {
+          "buttons": [
+            {
+              "label": "Approve",
+              "height": 52
+            },
+            {
+              "label": "Not now",
+              "height": 52
+            }
+          ],
+          "width": 354
+        },
+        {
+          "buttons": [
+            {
+              "label": "Answer",
+              "height": 52
+            },
+            {
+              "label": "Not now",
+              "height": 52
+            }
+          ],
+          "width": 354
+        }
+      ],
+      "menuVisible": false,
+      "footerVisible": false
+    },
+    "errors": [],
+    "taps": {
+      "approve": 1,
+      "answer": 2
+    }
+  },
+  {
+    "role": "supplier",
+    "width": 1440,
+    "metrics": {
+      "width": 1440,
+      "scroll": 1440,
+      "cards": [
+        {
+          "buttons": [
+            {
+              "label": "Approve",
+              "height": 52
+            },
+            {
+              "label": "Not now",
+              "height": 52
+            }
+          ],
+          "width": 470
+        },
+        {
+          "buttons": [
+            {
+              "label": "Answer",
+              "height": 52
+            },
+            {
+              "label": "Not now",
+              "height": 52
+            }
+          ],
+          "width": 470
+        }
+      ],
+      "menuVisible": false,
+      "footerVisible": true
+    },
+    "errors": [],
+    "taps": {}
+  }
+]

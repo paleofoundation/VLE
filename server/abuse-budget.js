@@ -16,10 +16,14 @@ export async function guardMutationRequest(request,env){
  const url=new URL(request.url);
  if(!url.pathname.startsWith('/api/')||['GET','HEAD','OPTIONS'].includes(request.method))return request;
  try{
-  if(!await takeBudget(env.DB,'api-global','application',configuredLimit(env.TECRID_API_GLOBAL_LIMIT,3000),60000))return failure(429,'Too many requests. Try again shortly.');
-  if(!await takeBudget(env.DB,'api-ip',request.headers.get('cf-connecting-ip')||'unavailable',configuredLimit(env.TECRID_API_IP_LIMIT,120),60000))return failure(429,'Too many requests. Try again shortly.');
+  const ipLimit=configuredLimit(env.TECRID_API_IP_LIMIT,120);
+  if(!await takeBudget(env.DB,'api-ip',request.headers.get('cf-connecting-ip')||'unavailable',ipLimit,60000))return failure(429,'Too many requests. Try again shortly.');
   const principal=request.headers.get('authorization')||request.headers.get('cookie');
   if(principal&&!await takeBudget(env.DB,'api-principal',principal,configuredLimit(env.TECRID_API_PRINCIPAL_LIMIT,90),60000))return failure(429,'Too many requests. Try again shortly.');
+  // Rejected clients must never spend the shared allowance. Keep the global
+  // ceiling at least 25 client allowances, including across fixed-window resets.
+  const globalLimit=Math.max(configuredLimit(env.TECRID_API_GLOBAL_LIMIT,3000),ipLimit*25);
+  if(!await takeBudget(env.DB,'api-global','application',globalLimit,60000))return failure(429,'Too many requests. Try again shortly.');
   if(request.headers.get('content-type')?.includes('application/json')){
    try{const text=await boundedText(request,128000);return new Request(request,{body:text});}catch{return failure(413,'JSON request is too large.');}
   }

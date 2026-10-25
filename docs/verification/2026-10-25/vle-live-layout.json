@@ -1,0 +1,138 @@
+{
+  "boundaries": {
+    "content": {
+      "bottom": 2494.6640625,
+      "display": "block",
+      "height": 131.5,
+      "left": 264,
+      "opacity": "1",
+      "right": 1114,
+      "text": "Original lot reports and commercial terms have separate sign-in requirements. A source report is not a certification or a guarantee that a lot meets your targets. Supplier-reported values and buyer evaluations are distinct from authenticated laboratory evidence.\n\nPrivate sourcing notes stay in the buyer account. Explicitly shared summaries reach suppliers in the matching category. Conversations are restricted to their participants. Soft holds do not form a purchase contract; contract and payment happen off-platform.\n\nLive TECRID authentication and laboratory ordering require an authorized integration. Kasandrinos’s authorized team can receive sourcing inquiries.",
+      "top": 2363.1640625,
+      "visibility": "visible",
+      "width": 850
+    },
+    "open": true,
+    "paragraphs": [
+      "Original lot reports and commercial terms have separate sign-in requirements. A source report is not a certification or a guarantee that a lot meets your targets. Supplier-reported values and buyer evaluations are distinct from authenticated laboratory evidence.",
+      "Private sourcing notes stay in the buyer account. Explicitly shared summaries reach suppliers in the matching category. Conversations are restricted to their participants. Soft holds do not form a purchase contract; contract and payment happen off-platform.",
+      "Live TECRID authentication and laboratory ordering require an authorized integration. Kasandrinos’s authorized team can receive sourcing inquiries."
+    ],
+    "summary": {
+      "bottom": 2363.1640625,
+      "display": "flex",
+      "height": 33,
+      "left": 264,
+      "opacity": "1",
+      "right": 1242,
+      "text": "Evidence and sourcing boundaries",
+      "top": 2330.1640625,
+      "visibility": "visible",
+      "width": 978
+    }
+  },
+  "findLots": {
+    "bottom": 604.6015625,
+    "display": "flex",
+    "height": 43,
+    "left": 887.171875,
+    "opacity": "1",
+    "right": 981.1953125,
+    "text": "Find lots",
+    "top": 561.6015625,
+    "visibility": "visible",
+    "width": 94.0234375
+  },
+  "headline": {
+    "bottom": 463.6015625,
+    "display": "block",
+    "height": 201.6640625,
+    "left": 307.1953125,
+    "opacity": "1",
+    "right": 1067.1953125,
+    "text": "Know what’s in\nthe lot before\nyou buy it.",
+    "top": 261.9375,
+    "visibility": "visible",
+    "width": 760
+  },
+  "hero": {
+    "bottom": 720,
+    "display": "grid",
+    "height": 574,
+    "left": 264,
+    "opacity": "1",
+    "right": 1242,
+    "text": "THE INGREDIENT EXCHANGE\nKnow what’s in\nthe lot before\nyou buy it.\n\nFind your ingredient. Meet the supplier.\nSee the lot evidence for yourself.\n\nFind lots\nBrowse freely. Sign in for evidence and commercial terms.",
+    "top": 146,
+    "visibility": "visible",
+    "width": 978
+  },
+  "heroCards": 0,
+  "kasandrinos": {
+    "bottom": 1213.9375,
+    "display": "block",
+    "height": 465.9375,
+    "left": 264,
+    "opacity": "1",
+    "right": 741,
+    "text": "Our first supplier\nLaconia, Greece\nLot-linked COAs\nMeet Kasandrinos.\n\nOrganic extra virgin olive oil.\nSix documented lots. Original reports.\n\nExplore Kasandrinos",
+    "top": 748,
+    "visibility": "visible",
+    "width": 477
+  },
+  "roles": [
+    {
+      "bottom": 971.96875,
+      "display": "flex",
+      "height": 86.5,
+      "left": 765,
+      "opacity": "1",
+      "right": 1242,
+      "text": "Find your next supplier.\n\nSearch lots, post a Request and start a conversation.",
+      "top": 885.46875,
+      "visibility": "visible",
+      "width": 477
+    },
+    {
+      "bottom": 1076.46875,
+      "display": "flex",
+      "height": 86.5,
+      "left": 765,
+      "opacity": "1",
+      "right": 1242,
+      "text": "Meet your next buyer.\n\nAnswer relevant demand and move deals forward.",
+      "top": 989.96875,
+      "visibility": "visible",
+      "width": 477
+    }
+  ],
+  "search": {
+    "bottom": 603.3984375,
+    "display": "block",
+    "height": 40.59375,
+    "left": 352.1953125,
+    "opacity": "1",
+    "right": 877.171875,
+    "text": "",
+    "top": 562.8046875,
+    "visibility": "visible",
+    "width": 524.9765625
+  },
+  "subline": {
+    "bottom": 533.6015625,
+    "display": "block",
+    "height": 51,
+    "left": 307.1953125,
+    "opacity": "1",
+    "right": 1067.1953125,
+    "text": "Find your ingredient. Meet the supplier.\nSee the lot evidence for yourself.",
+    "top": 482.6015625,
+    "visibility": "visible",
+    "width": 760
+  },
+  "url": "https://vle.exchange/",
+  "viewport": {
+    "height": 720,
+    "width": 1280
+  }
+}

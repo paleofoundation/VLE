@@ -1,0 +1,156 @@
+# SERVER_ERROR:  Error: Email delivery failed. Please try again shortly.
+    at Object.sendMagicLink (file:///Users/kmfp/Documents/ChatGPT/TECRID/orders-20261025/security-vle/server/auth-factory.ts:27:27)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async file:///Users/kmfp/Documents/ChatGPT/TECRID/orders-20261025/security-vle/node_modules/better-auth/dist/plugins/magic-link/index.mjs:108:5
+    at async file:///Users/kmfp/Documents/ChatGPT/TECRID/orders-20261025/security-vle/node_modules/@better-auth/core/dist/api/index.mjs:56:11
+    at async internalHandler (file:///Users/kmfp/Documents/ChatGPT/TECRID/orders-20261025/security-vle/node_modules/better-call/dist/endpoint.mjs:29:20)
+    at async file:///Users/kmfp/Documents/ChatGPT/TECRID/orders-20261025/security-vle/node_modules/better-auth/dist/api/dispatch.mjs:231:18
+    at async processRequest (file:///Users/kmfp/Documents/ChatGPT/TECRID/orders-20261025/security-vle/node_modules/better-call/dist/router.mjs:82:11)
+    at async handler (file:///Users/kmfp/Documents/ChatGPT/TECRID/orders-20261025/security-vle/node_modules/better-call/dist/router.mjs:105:16)
+    at async file:///Users/kmfp/Documents/ChatGPT/TECRID/orders-20261025/security-vle/node_modules/@better-auth/core/dist/context/transaction.mjs:38:13
+    at async file:///Users/kmfp/Documents/ChatGPT/TECRID/orders-20261025/security-vle/tests/email-auth.mjs:30:3
+PASS: D1 email auth, verified identity, hashed one-use token, expiry, secure cookie, CSRF, sign-out revocation, redirect validation, persisted rate limit, delivery failure.
+PASS: scoped inbox, duplicate requests, personal synchronized reads, authenticated relay, shared grant/revoke, revoked managers, safe links and source outage.
+PASS: actual anonymous homepage renders lookup first and all three cards in the following section.
+PASS: actual anonymous homepage renders expanded sourcing boundaries with all three paragraphs.
+PASS: atomic request outbox, fixed Karen recipient, scopes, TEST-only content, authenticated review links, duplicate/race suppression, retry/backoff/idempotency, stale-request cancellation and service-only smoke check.
+PASS: catalog provenance and scope; no invented values; controller-only private PDF storage and integrity.
+PASS: Karen same-login buyer/supplier pilot, complete quote/sample/cost/shipment/evaluation/hold lifecycle, supplier initiation, private-note isolation and stale-account/role denial.
+PASS: 86 proof exchange checks. Real D1 migrations, roles, two-sided release authorization, HMAC, replay and concurrency, signed lot identity, disclosure, correction/revocation, registry status, expiry, freshness, audit, receipt isolation and escaping.
+PASS: built Worker routes, anonymous pages/bootstrap, private mutation rejection, real HMAC receiver, atomic receipt, idempotent retry, status-only public projection, private log isolation and zero outbound calls.
+Eight report mappings, denied access and safe sign-in destinations passed
+✔ Next cache and image advisories are patched in every locked and installed copy (1.60125ms)
+✔ every Sharp copy includes the image memory safety fix (0.484292ms)
+✔ Next lint configuration and install metadata agree with the locked runtime (0.224708ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 3
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 7.323125
+✔ company mailbox alone supplies no buyer authority (0.75175ms)
+✔ legacy domain membership supplies no team role or list entry (62.618375ms)
+✔ same-domain user cannot select or join a private team (63.02725ms)
+✔ bootstrap grants no buyer capability from the mailbox domain (271.260583ms)
+✔ explicit invitation grants authority and its revocation removes it (182.150208ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 5
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1081.013083
+✔ vle authenticated-capable pages have a nonce CSP, frame denial and no referrer (9.440625ms)
+✔ vle private API errors are never reusable across viewers (28.534542ms)
+✔ vle ignores client-selected CSP nonces and uses fresh nonces per response (6.218083ms)
+✔ response protection preserves VLE verified-session cookies and revocation (89.8175ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 4
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 146.199834
+✔ mail credential alone cannot choose a token and recipient (39.56225ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 1
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 44.476084
+✔ request notification contains no requester mailbox (1.718083ms)
+✔ team mail sends individual recipients with no other mailbox in the envelope (77.263042ms)
+✔ database failures reveal no private text in logs or write responses (26.6455ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 3
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 118.396459
+✔ concurrent budgets admit only the configured count, independent of request IP (110.682792ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 1
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 122.396084
+✔ unapproved verified buyer cannot read controlled report ll-43301 (59.401958ms)
+✔ unapproved verified buyer cannot read controlled report ll-43295 (64.336667ms)
+✔ unapproved verified buyer cannot read controlled report ll-43296 (55.317833ms)
+✔ unapproved verified buyer cannot read controlled report ll-43298 (50.219208ms)
+✔ unapproved verified buyer cannot read controlled report ll-43302 (49.895667ms)
+✔ unapproved verified buyer cannot read controlled report ll-43297 (44.0145ms)
+✔ unapproved verified buyer cannot read controlled report ll-43300 (44.976041ms)
+✔ unapproved verified buyer cannot read controlled report ll-43299 (46.587834ms)
+✔ unapproved verified buyer cannot read controlled report athens-12-4338 (44.573666ms)
+✔ unapproved verified buyer cannot read controlled report woc-c2526-00228 (42.975042ms)
+✔ unapproved verified buyer cannot read controlled report envirolabs-5-92-24 (47.314834ms)
+✔ unapproved verified buyer cannot read controlled report organic-addendum (52.319208ms)
+✔ unapproved verified buyer cannot read controlled report non-gmo-2026 (50.723209ms)
+✔ unapproved verified buyer cannot read controlled report kosher-2026 (44.335541ms)
+✔ unapproved verified buyer cannot read controlled report paleo-keto-archive (43.092792ms)
+✔ unapproved verified buyer cannot read controlled report organic-spices (40.977958ms)
+✔ anonymous report request is denied before reading private storage (0.205125ms)
+✔ the source manifest publishes no original report location (0.070042ms)
+✔ missing private storage never falls back to an external source (0.235583ms)
+Kasandrinos report unavailable
+✔ an explicit controller reaches storage and loses that authority immediately on revocation (84.232708ms)
+ℹ tests 20
+ℹ suites 0
+ℹ pass 20
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 880.481167
+✔ valid scoped actor assertion is consumed once across concurrent requests (28.71275ms)
+✔ reference HMAC binds audience, origin, path, method and exact actor body (18.246125ms)
+✔ tampering actor, audience, path or origin fails without consuming the valid nonce (13.777958ms)
+✔ expired, future, missing-store and reused-purpose credentials fail closed (2.713208ms)
+✔ oversized signed-looking body is bounded before verification (0.788334ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 5
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 77.131333
+✔ mail credential cannot authenticate any report-service audience (33.00425ms)
+✔ mail credential rejected before report operation /api/tecrid-report-access (0.689167ms)
+✔ mail credential rejected before report operation /api/tecrid-report-permissions (1.625292ms)
+✔ mail credential rejected before report operation /api/tecrid-transcript-import (0.636166ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 4
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 42.3975
+✔ each team grant/revoke/domain action appends exactly one actor event (661.812458ms)
+✔ an unavailable audit write rolls back the team grant (191.871833ms)
+ℹ tests 2
+ℹ suites 0
+ℹ pass 2
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1116.578459
+PASS: real D1/R2 private brief isolation, controlled sharing, cross-account messaging, transitions, concurrency, document access, review, email retries/preferences and confidential-content exclusion.
+PASS: supplier storefront allowlist; real lots only; HTML escaping; authorized manager checks; publication isolation; gallery descriptions; section ordering; evidence and commercial gates.
+PASS: founding account permissions, explicit invitations and domain denial, viewer write denial, owner-only domain/admin grants, revocation, explicit invitations, tenant switching and personal isolation.
+PASS: issuance-bound recipient/token, mail-only denial, tamper and replay denial, idempotent delivery, recipient quota across requests, fixed link/redirect scope and zero real mail.
+PASS: all eight source-bound TEST reports; owner/admin roles; exact-email requests; digital-card grants with controller-only source PDFs; grant, expiry, revoke; stale-write denial; role revocation; audit; private caching and service authentication.
+PASS: eight exact report/hash/lot matches; sandbox-only display; no unrelated links or PDF access changes.

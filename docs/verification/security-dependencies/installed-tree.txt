@@ -1,0 +1,12 @@
+site-creator-vinext-starter@0.1.0 /Users/kmfp/Documents/ChatGPT/TECRID/orders-20261025/security-vle
+├─┬ @cloudflare/vite-plugin@1.37.1
+│ └─┬ miniflare@4.20260515.0
+│   └── sharp@0.35.5 deduped
+├─┬ better-auth@1.7.12
+│ └── next@16.4.1 deduped
+├─┬ next@16.4.1
+│ └── sharp@0.35.5 overridden
+└─┬ vinext@1.0.0-beta.5
+  └─┬ @unpic/react@1.0.2
+    └── next@16.4.1 deduped
+

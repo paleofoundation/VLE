@@ -15,7 +15,7 @@ test('Next cache and image advisories are patched in every locked and installed 
  assert(all.length>=2);
  for(const version of all)assert(atLeast(version,[16,4,1]),'Next must include the 16.4.1 security fixes');
 });
-test('every Sharp copy includes the image memory disclosure fix',()=>{
+test('every Sharp copy includes the image memory safety fix',()=>{
  const all=[...versions('sharp'),read('node_modules/sharp/package.json').version];
  assert(all.length>=2);
  for(const version of all)assert(atLeast(version,[0,35,5]),'Sharp must include the 0.35.5 security fix');
@@ -25,4 +25,10 @@ test('Next lint configuration and install metadata agree with the locked runtime
  assert.equal(pkg.dependencies.next,lock.packages['node_modules/next'].version);
  assert.equal(pkg.devDependencies['eslint-config-next'],pkg.dependencies.next);
  assert.equal(read('node_modules/next/package.json').version,pkg.dependencies.next);
+});
+test('the installed patched Sharp native runtime still processes a synthetic image',async()=>{
+ const sharp=(await import('sharp')).default;
+ const {data,info}=await sharp({create:{width:2,height:2,channels:3,background:'#ffffff'}}).png().toBuffer({resolveWithObject:true});
+ assert.equal(info.format,'png');assert.equal(info.width,2);assert.equal(info.height,2);
+ assert(data.length>0);
 });

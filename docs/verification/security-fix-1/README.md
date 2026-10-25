@@ -2,7 +2,7 @@
 
 PR #69 merges main c025f326d7b6566590af514c1f33af8e48e5705f into the existing explicit-membership history. The two conflicts in public/app.js and public/teams.js retain the explicit-invitation and separate report-approval copy. Main's mobile shell and approved copy changes are preserved. No authority is inferred from an email domain.
 
-Validation: production build, all 21 tests/*.mjs files, focused lint (zero errors; existing app warnings), and whitespace pass. See pr69-checks.json for the individual commands' exit codes. Tests use disposable local fixtures and intercepted outbound providers. No production data, PR merge, retarget, deployment, or TECRID changes. Receiver remains OFF.
+Validation: production build, all 20 tests/*.mjs files, focused lint (zero errors; existing app warnings), and whitespace pass. See pr69-checks.json for the individual commands' exit codes. Tests use disposable local fixtures and intercepted outbound providers. No production data, PR merge, retarget, deployment, or TECRID changes. Receiver remains OFF.
 
 PR #70 merges the same main and updated #69, then charges the per-IP and per-principal budgets before the global budget. The effective global ceiling has a minimum of 25 per-IP allowances. Defaults remain 120/IP, 90/principal and 3000/global per minute. Distributed traffic can still reach the aggregate ceiling; this is not a general edge denial-of-service defense.
 

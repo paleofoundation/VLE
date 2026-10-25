@@ -181,7 +181,7 @@
     "lab": "World Olive Center for Health / University of Athens",
     "date": "2025-10-31",
     "lotNumbers": [],
-    "sample": "2025–2026 harvest",
+    "sample": "2025-2026 harvest",
     "scope": "unmatched",
     "matchPage": 1,
     "note": "No lot number is printed. The certificate number is not a lot ID; this report is not assigned to lot 228 K/B.",
@@ -262,7 +262,7 @@
   {
     "id": "paleo-keto-archive",
     "title": "Paleo and Keto certification letter",
-    "reportNumber": "2021–2024 letter",
+    "reportNumber": "2021-2024 letter",
     "lab": "Paleo Foundation",
     "date": "2021-01-25",
     "lotNumbers": [],

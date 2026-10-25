@@ -16,7 +16,7 @@ export function notificationMessage(row){
   if(!row.requested_results)throw Error('Legacy file-only request requires a fresh digital-card request');
   const scopes='digital TECRID card';
   subject=`[TEST] Kasandrinos digital TECRID card request · Report ${report.reportNumber}`;
-  lines=['Kasandrinos · TEST digital card access request',`Requester: ${row.requester_email}`,`Report: ${report.reportNumber} · ${report.title}`,`TEST identifier: ${tecridTestReference(report).testIdentifier}`,`Requested access: ${scopes}`,`Requested at: ${row.created_at}`,'Review this request to approve or decline:',reviewUrl,'Sign in with your authorized Kasandrinos owner or administrator email. Opening this link does not approve access.'];
+  lines=['Kasandrinos · TEST digital card access request','A verified account requested access. View requester details in the authenticated review workspace.',`Report: ${report.reportNumber} · ${report.title}`,`TEST identifier: ${tecridTestReference(report).testIdentifier}`,`Requested access: ${scopes}`,`Requested at: ${row.created_at}`,'Review this request to approve or decline:',reviewUrl,'Sign in with your authorized Kasandrinos owner or administrator email. Opening this link does not approve access.'];
  }
  lines.push('TEST ONLY · Light Labs approval and signature are pending. The digital card stays locked until an authorized controller approves access. Original PDFs remain private source evidence.');
  const text=lines.join('\n\n');

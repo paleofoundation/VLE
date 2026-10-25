@@ -1,0 +1,13 @@
+
+/Users/kmfp/Documents/ChatGPT/TECRID/orders-20261025/security-vle/server/sourcing-api.js
+  118:9  warning  'error' is defined but never used  @typescript-eslint/no-unused-vars
+
+/Users/kmfp/Documents/ChatGPT/TECRID/orders-20261025/security-vle/server/sourcing.js
+  12:39  warning  'notes' is assigned a value but never used     @typescript-eslint/no-unused-vars
+  12:45  warning  'progress' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+/Users/kmfp/Documents/ChatGPT/TECRID/orders-20261025/security-vle/server/teams.js
+  87:9  warning  'error' is defined but never used  @typescript-eslint/no-unused-vars
+
+✖ 4 problems (0 errors, 4 warnings)
+

@@ -1,0 +1,236 @@
+{
+  "organizations": [
+    {
+      "id": "kasandrinos-team",
+      "slug": "kasandrinos",
+      "name": "Kasandrinos",
+      "roles": [
+        "supplier",
+        "brand",
+        "private_label_manufacturer"
+      ],
+      "tecrids": [],
+      "certifications": [
+        {
+          "id": "organic-addendum",
+          "organization_id": "kasandrinos-team",
+          "lot_id": null,
+          "title": "Organic handling product addendum",
+          "program": "Organic handling",
+          "issuer": "Quality Assurance International",
+          "registry": null,
+          "registry_id": null,
+          "scope": "Organic handling product addendum",
+          "issued_at": "2025-11-14T00:00:00.000Z",
+          "expires_at": null,
+          "reported_status": "unknown",
+          "source_report_id": "organic-addendum",
+          "note": "Supplier-reported. Product addendum, not a lot COA. Anniversary date printed: 2026-08-06. Current status not independently verified.",
+          "status": "unknown",
+          "verification": "self-reported, not verified",
+          "checkedAt": null,
+          "registryUrl": null
+        },
+        {
+          "id": "non-gmo-2026",
+          "organization_id": "kasandrinos-team",
+          "lot_id": null,
+          "title": "Non-GMO Project verification",
+          "program": "Non-GMO Project",
+          "issuer": "FoodChain ID",
+          "registry": null,
+          "registry_id": null,
+          "scope": "KASELL SA for Kasandrinos Organic Extra Virgin Olive Oil",
+          "issued_at": "2026-03-02T00:00:00.000Z",
+          "expires_at": "2027-03-04T23:59:59.000Z",
+          "reported_status": "unknown",
+          "source_report_id": "non-gmo-2026",
+          "note": "Supplier-reported. Issued to KASELL SA for Kasandrinos Organic Extra Virgin Olive Oil. Printed expiry: 2027-03-04.",
+          "status": "unknown",
+          "verification": "self-reported, not verified",
+          "checkedAt": null,
+          "registryUrl": null
+        },
+        {
+          "id": "kosher-2026",
+          "organization_id": "kasandrinos-team",
+          "lot_id": null,
+          "title": "Kosher certificate",
+          "program": "Kosher",
+          "issuer": "Orthodox Union",
+          "registry": null,
+          "registry_id": null,
+          "scope": "Extra Virgin Olive Oil",
+          "issued_at": "2026-02-04T00:00:00.000Z",
+          "expires_at": "2027-01-31T23:59:59.000Z",
+          "reported_status": "unknown",
+          "source_report_id": "kosher-2026",
+          "note": "Supplier-reported. Extra Virgin Olive Oil. Printed validity through 2027-01-31.",
+          "status": "unknown",
+          "verification": "self-reported, not verified",
+          "checkedAt": null,
+          "registryUrl": null
+        },
+        {
+          "id": "paleo-keto-archive",
+          "organization_id": "kasandrinos-team",
+          "lot_id": null,
+          "title": "Paleo and Keto certification letter",
+          "program": "Paleo and Keto",
+          "issuer": "Paleo Foundation",
+          "registry": "paleo",
+          "registry_id": "2021-2024 letter",
+          "scope": "Historical Paleo and Keto term",
+          "issued_at": "2021-01-25T00:00:00.000Z",
+          "expires_at": "2024-01-24T23:59:59.000Z",
+          "reported_status": "expired",
+          "source_report_id": "paleo-keto-archive",
+          "note": "Supplier-reported historical document. Printed term ended 2024-01-24; not presented as a current certification.",
+          "status": "expired",
+          "verification": "self-reported, not verified; registry verification unavailable",
+          "checkedAt": null,
+          "registryUrl": null
+        },
+        {
+          "id": "organic-spices",
+          "organization_id": "kasandrinos-team",
+          "lot_id": null,
+          "title": "Organic spices certificate and system plan",
+          "program": "Organic spices",
+          "issuer": "Oregon Tilth",
+          "registry": null,
+          "registry_id": null,
+          "scope": "Ares Pepper and Zeus Blend only",
+          "issued_at": "2023-03-30T00:00:00.000Z",
+          "expires_at": null,
+          "reported_status": "unknown",
+          "source_report_id": "organic-spices",
+          "note": "Supplier-reported. Scope is Total Food Package / Kasandrinos Ares Pepper and Zeus Blend. Not evidence for olive oil.",
+          "status": "unknown",
+          "verification": "self-reported, not verified",
+          "checkedAt": null,
+          "registryUrl": null
+        }
+      ],
+      "lots": [
+        {
+          "id": "KAS-227-KB",
+          "supplier_id": "kasandrinos-team",
+          "supplier_lot_id": "227 K/B",
+          "ingredient_code": null,
+          "product_sku": null,
+          "product": "Organic extra virgin olive oil"
+        },
+        {
+          "id": "KAS-228-KB",
+          "supplier_id": "kasandrinos-team",
+          "supplier_lot_id": "228 K/B",
+          "ingredient_code": null,
+          "product_sku": null,
+          "product": "Organic extra virgin olive oil"
+        },
+        {
+          "id": "KAS-195-KB",
+          "supplier_id": "kasandrinos-team",
+          "supplier_lot_id": "195 K/B",
+          "ingredient_code": null,
+          "product_sku": null,
+          "product": "Organic extra virgin olive oil"
+        },
+        {
+          "id": "KAS-219-KB",
+          "supplier_id": "kasandrinos-team",
+          "supplier_lot_id": "219 K/B",
+          "ingredient_code": null,
+          "product_sku": null,
+          "product": "Organic extra virgin olive oil"
+        },
+        {
+          "id": "KAS-225-KB",
+          "supplier_id": "kasandrinos-team",
+          "supplier_lot_id": "225 K/B",
+          "ingredient_code": null,
+          "product_sku": null,
+          "product": "Organic extra virgin olive oil"
+        },
+        {
+          "id": "KAS-226-KB",
+          "supplier_id": "kasandrinos-team",
+          "supplier_lot_id": "226 K/B",
+          "ingredient_code": null,
+          "product_sku": null,
+          "product": "Organic extra virgin olive oil"
+        }
+      ],
+      "releases": []
+    }
+  ],
+  "lots": [
+    {
+      "id": "KAS-227-KB",
+      "supplier_id": "kasandrinos-team",
+      "supplier_lot_id": "227 K/B",
+      "ingredient_code": null,
+      "product_sku": null,
+      "product": "Organic extra virgin olive oil",
+      "tecrids": [],
+      "certifications": [],
+      "releases": []
+    },
+    {
+      "id": "KAS-228-KB",
+      "supplier_id": "kasandrinos-team",
+      "supplier_lot_id": "228 K/B",
+      "ingredient_code": null,
+      "product_sku": null,
+      "product": "Organic extra virgin olive oil",
+      "tecrids": [],
+      "certifications": [],
+      "releases": []
+    },
+    {
+      "id": "KAS-195-KB",
+      "supplier_id": "kasandrinos-team",
+      "supplier_lot_id": "195 K/B",
+      "ingredient_code": null,
+      "product_sku": null,
+      "product": "Organic extra virgin olive oil",
+      "tecrids": [],
+      "certifications": [],
+      "releases": []
+    },
+    {
+      "id": "KAS-219-KB",
+      "supplier_id": "kasandrinos-team",
+      "supplier_lot_id": "219 K/B",
+      "ingredient_code": null,
+      "product_sku": null,
+      "product": "Organic extra virgin olive oil",
+      "tecrids": [],
+      "certifications": [],
+      "releases": []
+    },
+    {
+      "id": "KAS-225-KB",
+      "supplier_id": "kasandrinos-team",
+      "supplier_lot_id": "225 K/B",
+      "ingredient_code": null,
+      "product_sku": null,
+      "product": "Organic extra virgin olive oil",
+      "tecrids": [],
+      "certifications": [],
+      "releases": []
+    },
+    {
+      "id": "KAS-226-KB",
+      "supplier_id": "kasandrinos-team",
+      "supplier_lot_id": "226 K/B",
+      "ingredient_code": null,
+      "product_sku": null,
+      "product": "Organic extra virgin olive oil",
+      "tecrids": [],
+      "certifications": [],
+      "releases": []
+    }
+  ]
+}

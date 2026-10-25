@@ -56,7 +56,7 @@ export async function sourcingRequest(request,db,bucket,user,p){
  const raw=await request.text();if(raw.length>20000)return json({error:'Request too large.'},413);
  const d=JSON.parse(raw);if(d.accountId!==user.userId)return json({error:'Your active account changed. Refresh before saving.'},409);
  if(d.action==='save-brief'){
-  if(!p.buyer)return json({error:'Company-email buyer access required.'},403);
+  if(!p.buyer)return json({error:'An explicit brand account membership is required.'},403);
   const b=briefInput(d),key=d.id||id();
   if(d.id){const old=await brief(d.id);if(old.shared)throw Error('Unshare the brief before editing its requirements.');const r=await run('UPDATE sourcing_briefs SET body=?,category=?,version=version+1 WHERE id=? AND owner_id=? AND version=?',JSON.stringify(b),b.category,key,user.userId,d.version).run();if(!r.meta.changes)return json({error:'This brief changed. Refresh before saving.'},409);}
   else await run('INSERT INTO sourcing_briefs (id,owner_id,category,body,created_at) VALUES (?,?,?,?,?)',key,user.userId,b.category,JSON.stringify(b),now()).run();
@@ -77,7 +77,7 @@ export async function sourcingRequest(request,db,bucket,user,p){
  if(d.action==='start-room'||d.action==='respond'){
   let buyerId,supplierEmail,supplierName,summary,submissionId=null,supplierAccountId=null,lot=String(d.lot||''),b;
   if(d.action==='start-room'){
-   if(!p.buyer)throw Error('Company-email buyer access required.');b=await brief(d.briefId);if(b.status!=='Open')throw Error('This brief is closed.');
+   if(!p.buyer)throw Error('An explicit brand account membership is required.');b=await brief(d.briefId);if(b.status!=='Open')throw Error('This brief is closed.');
    if(!kasLots.some(l=>l.id===lot&&l.category===b.category))throw Error('Choose a matching catalog lot.');
    if(!sf?.manager_email)throw Error('Kasandrinos’s supplier account is not connected yet. Save this candidate and return after its manager is assigned.');
    buyerId=user.userId;supplierAccountId='kasandrinos-team';supplierEmail=sf.manager_email;supplierName='Kasandrinos';summary=sharedBrief(JSON.parse(b.body));

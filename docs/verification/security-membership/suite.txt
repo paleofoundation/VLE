@@ -1,0 +1,108 @@
+2026-10-25T12:30:04.751Z WARN [Better Auth]: Rate limiting could not determine a client IP and is falling back to a single shared per-path bucket. Ensure your runtime forwards a trusted client IP header, then set `advanced.ipAddress.ipAddressHeaders` or `advanced.ipAddress.trustedProxies` so the address can be resolved.
+2026-10-25T12:30:05.032Z ERROR [Better Auth]: Invalid origin: https://evil.test
+2026-10-25T12:30:05.091Z ERROR [Better Auth]: Invalid callbackURL: https://evil.test
+2026-10-25T12:30:05.167Z ERROR [Better Auth]: Error Error: Email delivery failed. Please try again shortly.
+    at Object.sendMagicLink (file:///Users/kmfp/Documents/ChatGPT/TECRID/orders-20261025/security-vle/server/auth-factory.ts:26:27)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async file:///Users/kmfp/Documents/ChatGPT/TECRID/live-fix-20261024/vle/node_modules/better-auth/dist/plugins/magic-link/index.mjs:108:5
+    at async file:///Users/kmfp/Documents/ChatGPT/TECRID/live-fix-20261024/vle/node_modules/@better-auth/core/dist/api/index.mjs:56:11
+    at async internalHandler (file:///Users/kmfp/Documents/ChatGPT/TECRID/live-fix-20261024/vle/node_modules/better-call/dist/endpoint.mjs:29:20)
+    at async file:///Users/kmfp/Documents/ChatGPT/TECRID/live-fix-20261024/vle/node_modules/better-auth/dist/api/dispatch.mjs:231:18
+    at async processRequest (file:///Users/kmfp/Documents/ChatGPT/TECRID/live-fix-20261024/vle/node_modules/better-call/dist/router.mjs:82:11)
+    at async handler (file:///Users/kmfp/Documents/ChatGPT/TECRID/live-fix-20261024/vle/node_modules/better-call/dist/router.mjs:105:16)
+    at async file:///Users/kmfp/Documents/ChatGPT/TECRID/live-fix-20261024/vle/node_modules/@better-auth/core/dist/context/transaction.mjs:38:13
+    at async file:///Users/kmfp/Documents/ChatGPT/TECRID/orders-20261025/security-vle/tests/email-auth.mjs:30:3
+# SERVER_ERROR:  Error: Email delivery failed. Please try again shortly.
+    at Object.sendMagicLink (file:///Users/kmfp/Documents/ChatGPT/TECRID/orders-20261025/security-vle/server/auth-factory.ts:26:27)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async file:///Users/kmfp/Documents/ChatGPT/TECRID/live-fix-20261024/vle/node_modules/better-auth/dist/plugins/magic-link/index.mjs:108:5
+    at async file:///Users/kmfp/Documents/ChatGPT/TECRID/live-fix-20261024/vle/node_modules/@better-auth/core/dist/api/index.mjs:56:11
+    at async internalHandler (file:///Users/kmfp/Documents/ChatGPT/TECRID/live-fix-20261024/vle/node_modules/better-call/dist/endpoint.mjs:29:20)
+    at async file:///Users/kmfp/Documents/ChatGPT/TECRID/live-fix-20261024/vle/node_modules/better-auth/dist/api/dispatch.mjs:231:18
+    at async processRequest (file:///Users/kmfp/Documents/ChatGPT/TECRID/live-fix-20261024/vle/node_modules/better-call/dist/router.mjs:82:11)
+    at async handler (file:///Users/kmfp/Documents/ChatGPT/TECRID/live-fix-20261024/vle/node_modules/better-call/dist/router.mjs:105:16)
+    at async file:///Users/kmfp/Documents/ChatGPT/TECRID/live-fix-20261024/vle/node_modules/@better-auth/core/dist/context/transaction.mjs:38:13
+    at async file:///Users/kmfp/Documents/ChatGPT/TECRID/orders-20261025/security-vle/tests/email-auth.mjs:30:3
+PASS: D1 email auth, verified identity, hashed one-use token, expiry, secure cookie, CSRF, sign-out revocation, redirect validation, persisted rate limit, delivery failure.
+PASS: scoped inbox, duplicate requests, personal synchronized reads, authenticated relay, shared grant/revoke, revoked managers, safe links and source outage.
+PASS: actual anonymous homepage renders lookup first and all three cards in the following section.
+PASS: actual anonymous homepage renders expanded sourcing boundaries with all three paragraphs.
+PASS: atomic request outbox, fixed Karen recipient, scopes, TEST-only content, authenticated review links, duplicate/race suppression, retry/backoff/idempotency, stale-request cancellation and service-only smoke check.
+PASS: catalog provenance and scope; no invented values; controller-only private PDF storage and integrity.
+PASS: Karen same-login buyer/supplier pilot, complete quote/sample/cost/shipment/evaluation/hold lifecycle, supplier initiation, private-note isolation and stale-account/role denial.
+PASS: 86 proof exchange checks. Real D1 migrations, roles, two-sided release authorization, HMAC, replay and concurrency, signed lot identity, disclosure, correction/revocation, registry status, expiry, freshness, audit, receipt isolation and escaping.
+PASS: built Worker routes, anonymous pages/bootstrap, private mutation rejection, real HMAC receiver, atomic receipt, idempotent retry, status-only public projection, private log isolation and zero outbound calls.
+Eight report mappings, denied access and safe sign-in destinations passed
+✔ company mailbox alone supplies no buyer authority (0.559916ms)
+✔ legacy domain membership supplies no team role or list entry (61.978167ms)
+✔ same-domain user cannot select or join a private team (47.595917ms)
+✔ bootstrap grants no buyer capability from the mailbox domain (188.955042ms)
+✔ explicit invitation grants authority and its revocation removes it (121.9565ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 5
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 479.065625
+✔ unapproved verified buyer cannot read controlled report ll-43301 (46.378417ms)
+✔ unapproved verified buyer cannot read controlled report ll-43295 (49.799625ms)
+✔ unapproved verified buyer cannot read controlled report ll-43296 (44.6315ms)
+✔ unapproved verified buyer cannot read controlled report ll-43298 (40.833667ms)
+✔ unapproved verified buyer cannot read controlled report ll-43302 (44.470292ms)
+✔ unapproved verified buyer cannot read controlled report ll-43297 (47.230916ms)
+✔ unapproved verified buyer cannot read controlled report ll-43300 (37.582959ms)
+✔ unapproved verified buyer cannot read controlled report ll-43299 (37.488125ms)
+✔ unapproved verified buyer cannot read controlled report athens-12-4338 (49.244959ms)
+✔ unapproved verified buyer cannot read controlled report woc-c2526-00228 (36.618166ms)
+✔ unapproved verified buyer cannot read controlled report envirolabs-5-92-24 (39.363917ms)
+✔ unapproved verified buyer cannot read controlled report organic-addendum (42.442083ms)
+✔ unapproved verified buyer cannot read controlled report non-gmo-2026 (40.076583ms)
+✔ unapproved verified buyer cannot read controlled report kosher-2026 (33.738958ms)
+✔ unapproved verified buyer cannot read controlled report paleo-keto-archive (33.741791ms)
+✔ unapproved verified buyer cannot read controlled report organic-spices (36.918208ms)
+✔ anonymous report request is denied before reading private storage (0.186125ms)
+✔ the source manifest publishes no original report location (0.071542ms)
+✔ missing private storage never falls back to an external source (0.236458ms)
+Kasandrinos report unavailable ll-43301 object.arrayBuffer is not a function
+✔ an explicit controller reaches storage and loses that authority immediately on revocation (78.588458ms)
+ℹ tests 20
+ℹ suites 0
+ℹ pass 20
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 753.235666
+✔ valid scoped actor assertion is consumed once across concurrent requests (27.945584ms)
+✔ reference HMAC binds audience, origin, path, method and exact actor body (10.541667ms)
+✔ tampering actor, audience, path or origin fails without consuming the valid nonce (11.735416ms)
+✔ expired, future, missing-store and reused-purpose credentials fail closed (1.124625ms)
+✔ oversized signed-looking body is bounded before verification (0.503ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 5
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 61.983959
+✔ mail credential cannot authenticate any report-service audience (31.828125ms)
+✔ mail credential rejected before report operation /api/tecrid-report-access (0.786125ms)
+✔ mail credential rejected before report operation /api/tecrid-report-permissions (1.343375ms)
+✔ mail credential rejected before report operation /api/tecrid-transcript-import (0.320375ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 4
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 41.943542
+PASS: real D1/R2 private brief isolation, controlled sharing, cross-account messaging, transitions, concurrency, document access, review, email retries/preferences and confidential-content exclusion.
+PASS: supplier storefront allowlist; real lots only; HTML escaping; authorized manager checks; publication isolation; gallery descriptions; section ordering; evidence and commercial gates.
+PASS: founding account permissions, explicit invitations and domain denial, viewer write denial, owner-only domain/admin grants, revocation, explicit invitations, tenant switching and personal isolation.
+PASS: authenticated relay, strict TECRID link/redirect scope, email validation, provider dispatch.
+PASS: all eight source-bound TEST reports; owner/admin roles; exact-email requests; digital-card grants with controller-only source PDFs; grant, expiry, revoke; stale-write denial; role revocation; audit; private caching and service authentication.
+PASS: eight exact report/hash/lot matches; sandbox-only display; no unrelated links or PDF access changes.

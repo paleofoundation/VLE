@@ -14,7 +14,7 @@ await call(tony,{action:'domain',domain:'kasandrinos.com',role:'editor'},400);
 await call(karen,{action:'domain',domain:'gmail.com',role:'viewer'},400);
 await call(karen,{action:'domain',domain:'kasandrinos.com',role:'viewer',teamId:'another-account'},409);
 await call(karen,{action:'domain',domain:'kasandrinos.com',role:'viewer'});
-assert.equal((await call(outsider)).teams.length,0);assert.equal((await call(staff)).teams[0].role,'eligible');
+assert.equal((await call(outsider)).teams.length,0);assert.equal((await call(staff)).teams.length,0);await call(staff,{action:'select',id:'kasandrinos-team'},400);await call(karen,{action:'member',email:staff.email,role:'viewer'});
 await call(staff,{action:'select',id:'kasandrinos-team'});assert.equal((await sourcingIdentity(db,staff,{buyer:true})).p.readOnly,true);assert(!await canEditKas(db,staff));
 let r=await sourcingRequest(new Request('https://vle.test/api/sourcing',{method:'POST',headers:{origin:'https://vle.test'},body:JSON.stringify({action:'preferences',enabled:false})}),db,bucket,staff,{buyer:true,owner:false});assert.equal(r.status,403);
 await call(staff,{action:'member',email:'intruder@evil.test',role:'admin'},403);
@@ -26,5 +26,5 @@ await call(karen,{action:'create',name:'Brand QA',kind:'buyer'});const brand=(aw
 await call(karen,{action:'member',email:tony.email,role:'editor'});await call(tony,{action:'select',id:brand.id});assert.equal((await sourcingIdentity(db,karen,{buyer:true})).user.userId,(await sourcingIdentity(db,tony,{buyer:true})).user.userId);
 await call(tony,{action:'select',id:''});assert.equal((await sourcingIdentity(db,tony,{buyer:true})).user.userId,'t');
 await call(karen,{action:'select',id:'kasandrinos-team'});const founding=(await call(karen)).members.find(m=>m.email===tony.email);await call(karen,{action:'remove-member',id:founding.id});assert(!await canEditKas(db,tony));await call(karen);assert(!await canEditKas(db,tony));
-console.log('PASS: founding account permissions, exact verified-domain joining, viewer write denial, owner-only domain/admin grants, revocation, explicit invitations, tenant switching and personal isolation.');
+console.log('PASS: founding account permissions, explicit invitations and domain denial, viewer write denial, owner-only domain/admin grants, revocation, explicit invitations, tenant switching and personal isolation.');
 }finally{await mf.dispose();}

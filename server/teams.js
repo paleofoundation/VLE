@@ -16,7 +16,6 @@ export async function teamRole(db,team,user){
  const email=user.email.toLowerCase();if(team.owner_email===email)return 'owner';
  const m=await db.prepare('SELECT role,source FROM team_members WHERE team_id=? AND email=?').bind(team.id,email).first();
  if(m?.source==='invited')return ranks[m.role]?m.role:null;
- if(m?.source==='domain'){const d=await db.prepare('SELECT role FROM team_domains WHERE team_id=? AND domain=?').bind(team.id,email.split('@')[1]).first();return d?.role||null;}
  return null;
 }
 export async function selectedTeam(db,user){
@@ -36,10 +35,10 @@ export async function canEditKas(db,user){
 export async function recipientEmail(db,userId){const row=await db.prepare('SELECT email FROM auth_user WHERE id=? UNION ALL SELECT contact_email AS email FROM team_accounts WHERE id=? LIMIT 1').bind(userId,userId).first();return row?.email;}
 export async function teamRequest(request,db,user){
  if(!user)return json({error:'Sign in to manage your accounts.'},401);
- await ensureKasTeam(db);const email=user.email.toLowerCase(),domain=email.split('@')[1];
+ await ensureKasTeam(db);const email=user.email.toLowerCase();
  try{
- const rows=(await db.prepare('SELECT DISTINCT t.* FROM team_accounts t LEFT JOIN team_members m ON m.team_id=t.id LEFT JOIN team_domains d ON d.team_id=t.id WHERE t.owner_email=? OR m.email=? OR d.domain=?').bind(email,email,domain).all()).results;
- const teams=[];for(const t of rows){const role=await teamRole(db,t,user);const eligible=await db.prepare('SELECT role FROM team_domains WHERE team_id=? AND domain=?').bind(t.id,domain).first();const denied=await db.prepare("SELECT id FROM team_members WHERE team_id=? AND email=? AND role='revoked' AND source='invited'").bind(t.id,email).first();if(role||eligible&&!denied)teams.push({...t,role:role||'eligible'});}
+ const rows=(await db.prepare("SELECT DISTINCT t.* FROM team_accounts t LEFT JOIN team_members m ON m.team_id=t.id WHERE t.owner_email=? OR (m.email=? AND m.source='invited')").bind(email,email).all()).results;
+ const teams=[];for(const t of rows){const role=await teamRole(db,t,user);if(role)teams.push({...t,role});}
  const selected=await selectedTeam(db,user);
  if(request.method==='GET'){
   const members=selected&&(ranks[selected.role]||0)>=3?(await db.prepare('SELECT id,email,role,source FROM team_members WHERE team_id=?').bind(selected.id).all()).results:[];
@@ -50,7 +49,6 @@ export async function teamRequest(request,db,user){
  const raw=await request.text();if(raw.length>5000)throw Error('Request too large.');const d=JSON.parse(raw);
  if(d.action==='select'){
   if(d.id&&!teams.some(t=>t.id===d.id))throw Error('Account unavailable.');
-  if(d.id){const t=teams.find(t=>t.id===d.id);if(t.role==='eligible'){await db.prepare('INSERT OR REPLACE INTO team_members (id,team_id,email,role,source) SELECT ?,?,?,role,? FROM team_domains WHERE team_id=? AND domain=?').bind(t.id+':'+email,t.id,email,'domain',t.id,domain).run();}}
   await db.prepare('INSERT INTO team_selections (user_id,team_id) VALUES (?,?) ON CONFLICT(user_id) DO UPDATE SET team_id=excluded.team_id').bind(user.userId,d.id||null).run();return json({ok:true});
  }
  if(d.action==='create'){
@@ -74,12 +72,12 @@ export async function teamRequest(request,db,user){
   await db.prepare("UPDATE team_members SET role='revoked',source='invited' WHERE id=? AND team_id=?").bind(d.id,selected.id).run();return json({ok:true});
  }
  if(d.action==='domain'){
-  if(selected.role!=='owner')throw Error('Only the account owner can allow a company domain.');
+  if(selected.role!=='owner')throw Error('Only the account owner can manage domain suggestions.');
   const allowed=String(d.domain||'').trim().toLowerCase().replace(/^@/,'');if(!/^(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z]{2,}$/.test(allowed)||['gmail.com','outlook.com','hotmail.com','yahoo.com','icloud.com','proton.me','mail.com','example.com'].includes(allowed))throw Error('Use an exact company domain, not a public email provider.');
-  if(!['viewer','editor'].includes(d.role))throw Error('Domain access can grant viewer or editor permissions.');
+  if(!['viewer','editor'].includes(d.role))throw Error('Choose a suggested viewer or editor role.');
   await db.prepare('INSERT INTO team_domains (id,team_id,domain,role) VALUES (?,?,?,?) ON CONFLICT(id) DO UPDATE SET role=excluded.role').bind(selected.id+':'+allowed,selected.id,allowed,d.role).run();return json({ok:true});
  }
- if(d.action==='remove-domain'){if(selected.role!=='owner')throw Error('Only the owner can change domain access.');await db.prepare('DELETE FROM team_domains WHERE id=? AND team_id=?').bind(d.id,selected.id).run();return json({ok:true});}
+ if(d.action==='remove-domain'){if(selected.role!=='owner')throw Error('Only the owner can change domain suggestions.');await db.prepare('DELETE FROM team_domains WHERE id=? AND team_id=?').bind(d.id,selected.id).run();return json({ok:true});}
  return json({error:'Unknown account action.'},400);
  }catch(error){return json({error:error.message||'Unable to update account.'},400);}
 }

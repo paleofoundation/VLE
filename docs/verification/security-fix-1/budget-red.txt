@@ -1,0 +1,69 @@
+✔ concurrent budgets admit only the configured count, independent of request IP (71.584334ms)
+✖ a flooding client cannot spend the global budget on rejected mutations or block another sign-in (763.5575ms)
+✖ a low configured global limit retains headroom above one client allowance (20.790666ms)
+✖ principal rejections do not consume the global budget across changing IPs (817.399875ms)
+✔ the global ceiling still rejects aggregate traffic from many clients (285.443584ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 2
+ℹ fail 3
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2513.329625
+
+✖ failing tests:
+
+test at tests/security-rate-budgets.mjs:22:1
+✖ a flooding client cannot spend the global budget on rejected mutations or block another sign-in (763.5575ms)
+  AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+
+    assert.ok(await guardMutationRequest(mutation('192.0.2.2'), env) instanceof Request)
+
+      at TestContext.<anonymous> (file:///Users/kmfp/.codex/worktrees/vle-security-fix-1/VLE.Exchange/tests/security-rate-budgets.mjs:27:9)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1208:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:831:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }
+
+test at tests/security-rate-budgets.mjs:31:1
+✖ a low configured global limit retains headroom above one client allowance (20.790666ms)
+  AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+
+    assert.ok(await guardMutationRequest(mutation('192.0.2.1'), env) instanceof Request)
+
+      at TestContext.<anonymous> (file:///Users/kmfp/.codex/worktrees/vle-security-fix-1/VLE.Exchange/tests/security-rate-budgets.mjs:34:9)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1208:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:831:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }
+
+test at tests/security-rate-budgets.mjs:39:1
+✖ principal rejections do not consume the global budget across changing IPs (817.399875ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+  62 !== 2
+
+      at TestContext.<anonymous> (file:///Users/kmfp/.codex/worktrees/vle-security-fix-1/VLE.Exchange/tests/security-rate-budgets.mjs:44:9)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1208:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:831:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 62,
+    expected: 2,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

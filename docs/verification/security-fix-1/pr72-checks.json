@@ -1,0 +1,132 @@
+[
+  {
+    "check": "build",
+    "exit": 0,
+    "seconds": 3.34
+  },
+  {
+    "check": "email-auth",
+    "exit": 0,
+    "seconds": 1.27
+  },
+  {
+    "check": "evidence-notifications",
+    "exit": 0,
+    "seconds": 0.95
+  },
+  {
+    "check": "homepage-regressions",
+    "exit": 0,
+    "seconds": 0.16
+  },
+  {
+    "check": "kasandrinos-request-notifications",
+    "exit": 0,
+    "seconds": 1.29
+  },
+  {
+    "check": "kasandrinos",
+    "exit": 0,
+    "seconds": 0.16
+  },
+  {
+    "check": "mobile-shell",
+    "exit": 0,
+    "seconds": 0.16
+  },
+  {
+    "check": "pilot",
+    "exit": 0,
+    "seconds": 2.65
+  },
+  {
+    "check": "proof-exchange",
+    "exit": 0,
+    "seconds": 1.61
+  },
+  {
+    "check": "proof-worker",
+    "exit": 0,
+    "seconds": 0.75
+  },
+  {
+    "check": "report-gate",
+    "exit": 0,
+    "seconds": 0.15
+  },
+  {
+    "check": "security-domain-membership",
+    "exit": 0,
+    "seconds": 0.98
+  },
+  {
+    "check": "security-mail-issuance",
+    "exit": 0,
+    "seconds": 0.23
+  },
+  {
+    "check": "security-notification-privacy",
+    "exit": 0,
+    "seconds": 0.67
+  },
+  {
+    "check": "security-rate-budgets",
+    "exit": 0,
+    "seconds": 2.06
+  },
+  {
+    "check": "security-reports",
+    "exit": 0,
+    "seconds": 1.26
+  },
+  {
+    "check": "security-service-assertions",
+    "exit": 0,
+    "seconds": 0.64
+  },
+  {
+    "check": "security-service-boundary",
+    "exit": 0,
+    "seconds": 0.24
+  },
+  {
+    "check": "security-team-audit",
+    "exit": 0,
+    "seconds": 1.18
+  },
+  {
+    "check": "sourcing",
+    "exit": 0,
+    "seconds": 2.67
+  },
+  {
+    "check": "storefront",
+    "exit": 0,
+    "seconds": 0.15
+  },
+  {
+    "check": "teams",
+    "exit": 0,
+    "seconds": 2.53
+  },
+  {
+    "check": "tecrid-email-relay",
+    "exit": 0,
+    "seconds": 0.89
+  },
+  {
+    "check": "tecrid-report-service",
+    "exit": 0,
+    "seconds": 2.16
+  },
+  {
+    "check": "tecrid-test-links",
+    "exit": 0,
+    "seconds": 0.15
+  },
+  {
+    "check": "lint",
+    "exit": 0,
+    "seconds": 1.08
+  }
+]

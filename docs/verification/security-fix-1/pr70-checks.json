@@ -1,0 +1,122 @@
+[
+  {
+    "check": "build",
+    "exit": 0,
+    "seconds": 3.44
+  },
+  {
+    "check": "email-auth",
+    "exit": 0,
+    "seconds": 1.32
+  },
+  {
+    "check": "evidence-notifications",
+    "exit": 0,
+    "seconds": 0.96
+  },
+  {
+    "check": "homepage-regressions",
+    "exit": 0,
+    "seconds": 0.16
+  },
+  {
+    "check": "kasandrinos-request-notifications",
+    "exit": 0,
+    "seconds": 1.12
+  },
+  {
+    "check": "kasandrinos",
+    "exit": 0,
+    "seconds": 0.16
+  },
+  {
+    "check": "mobile-shell",
+    "exit": 0,
+    "seconds": 0.16
+  },
+  {
+    "check": "pilot",
+    "exit": 0,
+    "seconds": 2.63
+  },
+  {
+    "check": "proof-exchange",
+    "exit": 0,
+    "seconds": 1.88
+  },
+  {
+    "check": "proof-worker",
+    "exit": 0,
+    "seconds": 0.8
+  },
+  {
+    "check": "report-gate",
+    "exit": 0,
+    "seconds": 0.16
+  },
+  {
+    "check": "security-domain-membership",
+    "exit": 0,
+    "seconds": 1.1
+  },
+  {
+    "check": "security-mail-issuance",
+    "exit": 0,
+    "seconds": 0.25
+  },
+  {
+    "check": "security-rate-budgets",
+    "exit": 0,
+    "seconds": 2.23
+  },
+  {
+    "check": "security-reports",
+    "exit": 0,
+    "seconds": 1.17
+  },
+  {
+    "check": "security-service-assertions",
+    "exit": 0,
+    "seconds": 0.67
+  },
+  {
+    "check": "security-service-boundary",
+    "exit": 0,
+    "seconds": 0.24
+  },
+  {
+    "check": "sourcing",
+    "exit": 0,
+    "seconds": 2.89
+  },
+  {
+    "check": "storefront",
+    "exit": 0,
+    "seconds": 0.15
+  },
+  {
+    "check": "teams",
+    "exit": 0,
+    "seconds": 2.17
+  },
+  {
+    "check": "tecrid-email-relay",
+    "exit": 0,
+    "seconds": 0.85
+  },
+  {
+    "check": "tecrid-report-service",
+    "exit": 0,
+    "seconds": 2.2
+  },
+  {
+    "check": "tecrid-test-links",
+    "exit": 0,
+    "seconds": 0.16
+  },
+  {
+    "check": "lint",
+    "exit": 0,
+    "seconds": 1.24
+  }
+]

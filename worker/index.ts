@@ -1,3 +1,4 @@
+import {prepareResponseSecurity,protectResponse} from "../server/response-security.js";
 import {guardMutationRequest} from "../server/abuse-budget.js";
 import {deliverKasAccessNotifications} from '../server/kasandrinos-request-notifications.js';
 import {deliverNotifications} from '../server/sourcing.js';
@@ -27,13 +28,15 @@ const worker = {
       };
     }
     return runWithConnectorBinding(binding, async () => {
+      const security = prepareResponseSecurity(request);
+      request = security.request;
       const guarded = await guardMutationRequest(request, env);
-      if (guarded instanceof Response) return guarded;
+      if (guarded instanceof Response) return protectResponse(guarded,request,security.policy);
       request = guarded;
       const response = await handler.fetch(request, env, ctx);
       if (new URL(request.url).pathname.startsWith("/api/sourcing")) ctx.waitUntil(deliverNotifications(env.DB, env).catch(() => {}));
       if (["/api/tecrid-report-permissions", "/api/bootstrap"].includes(new URL(request.url).pathname)) ctx.waitUntil(deliverKasAccessNotifications(env.DB, env).catch(() => {}));
-      return response;
+      return protectResponse(response,request,security.policy);
     });
   },
 };

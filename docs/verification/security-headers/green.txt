@@ -1,0 +1,12 @@
+✔ vle authenticated-capable pages have a nonce CSP, frame denial and no referrer (10.026542ms)
+✔ vle private API errors are never reusable across viewers (27.40625ms)
+✔ vle ignores client-selected CSP nonces and uses fresh nonces per response (5.4705ms)
+✔ response protection preserves VLE verified-session cookies and revocation (98.670042ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 4
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1027.647334

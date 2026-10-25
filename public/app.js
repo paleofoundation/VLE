@@ -79,6 +79,7 @@ document.addEventListener('click',async e=>{const anchor=e.target.closest('a[dat
 case 'close':close();break;
 case 'sign-out':{const response=await fetch('/api/auth/sign-out',{method:'POST',headers:{'Content-Type':'application/json'},body:'{}'});if(!response.ok)throw Error('Sign-out failed. Please try again.');location.assign('/');break;}
 case 'workspace':await mutate('workspace',{role:b.dataset.role});invalidateSourcing();go(b.dataset.role==='supplier'?'/workspace':'/brand');break;
+case 'reload':location.reload();break;
 case 'role':if(!session.signedIn){go('/email-sign-in?as='+b.dataset.role);break}if(session.canReview)await mutate('role',{role:b.dataset.role});else if(b.dataset.role==='brand'&&session.canBuy)await mutate('workspace',{role:'brand'});if(b.dataset.role==='brand'&&!session.canBuy){go('/team');break}go(b.dataset.role==='brand'?'/brand':'/workspace');break;
 case 'reset':open('Reset your EXAMPLE workspace?',`<p>This restores your demonstration messages, Requests and progress. It does not delete evidence-access records.</p>${action('Reset my EXAMPLE state','reset-confirm','','orange')}`);break;
 case 'reset-confirm':await mutate('reset');go('/');toast('Your EXAMPLE workspace was reset.');break;
@@ -124,7 +125,7 @@ mountSourcing(render,go);
 document.addEventListener('click',async e=>{const b=e.target.closest('[data-pilot-account]');if(!b)return;b.disabled=true;try{const r=await fetch('/api/team',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'select',id:b.dataset.pilotAccount})});const d=await r.json();if(!r.ok)throw Error(d.error);invalidateTeams();invalidateSourcing();await refresh();go(b.dataset.pilotAccount==='karen-buyer-team'?'/brand':'/workspace');}catch(err){document.querySelector('.pilot-error').textContent=err.message;}finally{b.disabled=false;}});
 mountMobileShell();
 mountTeams(async()=>{invalidateSourcing();await refresh();render();});
-try{await refresh();render()}catch(error){$('#app').innerHTML='<main class="gate"><h1>The Ingredient Exchange</h1><p>We couldn’t load the exchange. Please refresh the page.</p><button onclick="location.reload()">Try again</button></main>';console.error(error);}
+try{await refresh();render()}catch{$('#app').innerHTML='<main class="gate"><h1>The Ingredient Exchange</h1><p>We couldn’t load the exchange. Please refresh the page.</p><button data-action="reload">Try again</button></main>';console.error('VLE load failed');}
 // Revalidate after restoring a page or returning from a sign-in/out in another tab.
 window.addEventListener('pageshow',e=>{if(e.persisted)location.reload()});
 let wasHidden=false;document.addEventListener('visibilitychange',async()=>{if(document.hidden){wasHidden=true;return}if(wasHidden){wasHidden=false;try{await refresh();close();render()}catch{location.reload()}}});

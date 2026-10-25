@@ -1,0 +1,13 @@
+✔ company mailbox alone supplies no buyer authority (0.670625ms)
+✔ legacy domain membership supplies no team role or list entry (53.975208ms)
+✔ same-domain user cannot select or join a private team (79.671416ms)
+✔ bootstrap grants no buyer capability from the mailbox domain (231.826625ms)
+✔ explicit invitation grants authority and its revocation removes it (139.760458ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 5
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1800.443

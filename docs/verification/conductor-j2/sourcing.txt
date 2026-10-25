@@ -1,0 +1,10 @@
+PASS: real D1/R2 private brief isolation, controlled sharing, cross-account messaging, transitions, concurrency, document access, review, email retries/preferences and confidential-content exclusion.
+✔ tests/sourcing.mjs (5863.925ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 1
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 5871.142625

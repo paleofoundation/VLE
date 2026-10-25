@@ -1,7 +1,7 @@
 {
   "version": "6",
   "dialect": "sqlite",
-  "id": "01584872-4945-4bdf-be3c-1196fe568b13",
+  "id": "57078b74-b0e7-4f08-a9cd-9142f7cccc27",
   "prevId": "f5935baa-b2ae-40b9-b3f8-618451a9bd3e",
   "tables": {
     "auth_account": {
@@ -641,221 +641,6 @@
       "uniqueConstraints": {},
       "checkConstraints": {}
     },
-    "lot_tecrid_grants": {
-      "name": "lot_tecrid_grants",
-      "columns": {
-        "tecrid": {
-          "name": "tecrid",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "grant_id": {
-          "name": "grant_id",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "recipient_id": {
-          "name": "recipient_id",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "controller_id": {
-          "name": "controller_id",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "stream_id": {
-          "name": "stream_id",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "lot_id": {
-          "name": "lot_id",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "version": {
-          "name": "version",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "sequence": {
-          "name": "sequence",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "status": {
-          "name": "status",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "program": {
-          "name": "program",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "issuing_lab": {
-          "name": "issuing_lab",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "issued_at": {
-          "name": "issued_at",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "retest_due": {
-          "name": "retest_due",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
-        },
-        "verification_url": {
-          "name": "verification_url",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "fingerprint": {
-          "name": "fingerprint",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "grant_status": {
-          "name": "grant_status",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "access_level": {
-          "name": "access_level",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "public_status": {
-          "name": "public_status",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false,
-          "default": 0
-        },
-        "grant_expires_at": {
-          "name": "grant_expires_at",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
-        },
-        "brand_ids": {
-          "name": "brand_ids",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "supersedes_grant_id": {
-          "name": "supersedes_grant_id",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
-        },
-        "snapshot_json": {
-          "name": "snapshot_json",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
-        },
-        "snapshot_fingerprint": {
-          "name": "snapshot_fingerprint",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
-        },
-        "received_at": {
-          "name": "received_at",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {
-        "lot_tecrid_grants_stream_id_proof_stream_state_stream_id_fk": {
-          "name": "lot_tecrid_grants_stream_id_proof_stream_state_stream_id_fk",
-          "tableFrom": "lot_tecrid_grants",
-          "tableTo": "proof_stream_state",
-          "columnsFrom": [
-            "stream_id"
-          ],
-          "columnsTo": [
-            "stream_id"
-          ],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        },
-        "lot_tecrid_grants_lot_id_proof_lots_id_fk": {
-          "name": "lot_tecrid_grants_lot_id_proof_lots_id_fk",
-          "tableFrom": "lot_tecrid_grants",
-          "tableTo": "proof_lots",
-          "columnsFrom": [
-            "lot_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        }
-      },
-      "compositePrimaryKeys": {
-        "lot_tecrid_grants_tecrid_recipient_id_grant_id_pk": {
-          "columns": [
-            "tecrid",
-            "recipient_id",
-            "grant_id"
-          ],
-          "name": "lot_tecrid_grants_tecrid_recipient_id_grant_id_pk"
-        }
-      },
-      "uniqueConstraints": {},
-      "checkConstraints": {}
-    },
     "lot_tecrids": {
       "name": "lot_tecrids",
       "columns": {
@@ -1303,13 +1088,6 @@
           "primaryKey": false,
           "notNull": true,
           "autoincrement": false
-        },
-        "stream_id": {
-          "name": "stream_id",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
         }
       },
       "indexes": {
@@ -1317,14 +1095,6 @@
           "name": "proof_delivery_receipts_event_id_unique",
           "columns": [
             "event_id"
-          ],
-          "isUnique": true
-        },
-        "proof_receipt_stream_sequence": {
-          "name": "proof_receipt_stream_sequence",
-          "columns": [
-            "stream_id",
-            "sequence"
           ],
           "isUnique": true
         }
@@ -1486,123 +1256,6 @@
           "tableTo": "team_accounts",
           "columnsFrom": [
             "team_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        }
-      },
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {},
-      "checkConstraints": {}
-    },
-    "proof_stream_state": {
-      "name": "proof_stream_state",
-      "columns": {
-        "stream_id": {
-          "name": "stream_id",
-          "type": "text",
-          "primaryKey": true,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "recipient_id": {
-          "name": "recipient_id",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "tecrid": {
-          "name": "tecrid",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "lot_id": {
-          "name": "lot_id",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "originating_supplier": {
-          "name": "originating_supplier",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "mapping_id": {
-          "name": "mapping_id",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "sequence": {
-          "name": "sequence",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "credential_version": {
-          "name": "credential_version",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "credential_fingerprint": {
-          "name": "credential_fingerprint",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "credential_status": {
-          "name": "credential_status",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "event_id": {
-          "name": "event_id",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "updated_at": {
-          "name": "updated_at",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        }
-      },
-      "indexes": {
-        "proof_stream_recipient_credential": {
-          "name": "proof_stream_recipient_credential",
-          "columns": [
-            "recipient_id",
-            "tecrid"
-          ],
-          "isUnique": true
-        }
-      },
-      "foreignKeys": {
-        "proof_stream_state_lot_id_proof_lots_id_fk": {
-          "name": "proof_stream_state_lot_id_proof_lots_id_fk",
-          "tableFrom": "proof_stream_state",
-          "tableTo": "proof_lots",
-          "columnsFrom": [
-            "lot_id"
           ],
           "columnsTo": [
             "id"
@@ -1846,6 +1499,103 @@
       },
       "indexes": {},
       "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "sourcing_decisions": {
+      "name": "sourcing_decisions",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "room_id": {
+          "name": "room_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "account_id": {
+          "name": "account_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "actor_id": {
+          "name": "actor_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "task_key": {
+          "name": "task_key",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "kind": {
+          "name": "kind",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "decision": {
+          "name": "decision",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "room_version": {
+          "name": "room_version",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {
+        "sourcing_decisions_task_account": {
+          "name": "sourcing_decisions_task_account",
+          "columns": [
+            "room_id",
+            "account_id",
+            "task_key"
+          ],
+          "isUnique": true
+        }
+      },
+      "foreignKeys": {
+        "sourcing_decisions_room_id_sourcing_rooms_id_fk": {
+          "name": "sourcing_decisions_room_id_sourcing_rooms_id_fk",
+          "tableFrom": "sourcing_decisions",
+          "tableTo": "sourcing_rooms",
+          "columnsFrom": [
+            "room_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
       "compositePrimaryKeys": {},
       "uniqueConstraints": {},
       "checkConstraints": {}

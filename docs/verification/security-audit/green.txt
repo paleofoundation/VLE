@@ -1,0 +1,10 @@
+✔ each team grant/revoke/domain action appends exactly one actor event (479.08475ms)
+✔ an unavailable audit write rolls back the team grant (146.923417ms)
+ℹ tests 2
+ℹ suites 0
+ℹ pass 2
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1554.080417

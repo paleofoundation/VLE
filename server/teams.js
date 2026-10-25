@@ -4,6 +4,7 @@ const headers={'Cache-Control':'private, no-store','Vary':'Cookie'};
 const json=(data,status=200)=>Response.json(data,{status,headers});
 const emailValue=v=>{const s=String(v||'').trim().toLowerCase();if(s.length>254||!/^[^\s@<>]+@[a-z0-9.-]+\.[a-z]{2,}$/.test(s))throw Error('Enter a valid email.');return s;};
 const ranks={viewer:1,editor:2,admin:3,owner:4};
+const auditStatement=(db,team,action,subject,user)=>db.prepare('INSERT INTO proof_audit (id,organization_id,action,subject_id,actor,created_at) VALUES (?,?,?,?,?,?)').bind(crypto.randomUUID(),team,action,subject,user.userId,new Date().toISOString());
 // Explicit account assignments requested by the site owner, not email-domain inference.
 // Operational initialization is separate from schema migrations and never changes an existing account.
 export async function ensureKasTeam(db){
@@ -11,7 +12,7 @@ export async function ensureKasTeam(db){
  await db.prepare('INSERT OR IGNORE INTO team_accounts (id,name,kind,owner_email,contact_email,created_at) VALUES (?,?,?,?,?,?)').bind('karen-buyer-team','Karen · Buyer pilot','buyer','karen@paleofoundation.com','karen@paleofoundation.com',new Date().toISOString()).run();
  await db.prepare('INSERT OR IGNORE INTO team_accounts (id,name,kind,owner_email,contact_email,supplier_key,created_at) VALUES (?,?,?,?,?,?,?)').bind('kasandrinos-team','Kasandrinos','supplier','karen@paleofoundation.com','karen@paleofoundation.com','kasandrinos',new Date().toISOString()).run();
  // Insert the founding membership only once, in the same batch as its marker. Revoked members stay revoked.
- await db.batch([db.prepare("INSERT OR IGNORE INTO team_members (id,team_id,email,role,source) SELECT 'kasandrinos-tony','kasandrinos-team','tony@kasandrinos.com','admin','invited' WHERE NOT EXISTS (SELECT 1 FROM team_selections WHERE user_id='kasandrinos-initialized')"),db.prepare("INSERT OR IGNORE INTO team_selections (user_id,team_id) VALUES ('kasandrinos-initialized',NULL)")]);
+ await db.batch([db.prepare("INSERT OR IGNORE INTO team_members (id,team_id,email,role,source) SELECT 'kasandrinos-tony','kasandrinos-team','tony@kasandrinos.com','admin','invited' WHERE NOT EXISTS (SELECT 1 FROM team_selections WHERE user_id='kasandrinos-initialized')"),db.prepare("INSERT INTO proof_audit (id,organization_id,action,subject_id,actor,created_at) SELECT ?,'kasandrinos-team','team.founding_assignment_recorded','kasandrinos-tony','system:approved-pilot-initialization',? WHERE NOT EXISTS (SELECT 1 FROM team_selections WHERE user_id='kasandrinos-initialized')").bind(crypto.randomUUID(),new Date().toISOString()),db.prepare("INSERT OR IGNORE INTO team_selections (user_id,team_id) VALUES ('kasandrinos-initialized',NULL)")]);
 }
 export async function teamRole(db,team,user){
  if(!user)return null;
@@ -56,7 +57,7 @@ export async function teamRequest(request,db,user){
  }
  if(d.action==='create'){
   const name=String(d.name||'').trim().slice(0,120);if(!name||!['buyer','supplier'].includes(d.kind))throw Error('Name the account and select buyer or supplier.');
-  const id=crypto.randomUUID();if(d.kind==='supplier'&&!['Olive oil','Cocoa','Tea and matcha','Protein','Spices','Rice'].includes(d.category))throw Error('Choose the supplier category.');await db.batch([db.prepare('INSERT INTO team_accounts (id,name,kind,owner_email,contact_email,created_at) VALUES (?,?,?,?,?,?)').bind(id,name,d.kind,email,email,new Date().toISOString()),db.prepare('INSERT INTO team_selections (user_id,team_id) VALUES (?,?) ON CONFLICT(user_id) DO UPDATE SET team_id=excluded.team_id').bind(user.userId,id),db.prepare('INSERT INTO review_sessions (user_id,state) VALUES (?,?)').bind(id,JSON.stringify(d.kind==='supplier'?{supplierProfile:{id:'account-'+id,name,category:d.category,initials:name.slice(0,2)}}:{}))]);return json({ok:true});
+  const id=crypto.randomUUID();if(d.kind==='supplier'&&!['Olive oil','Cocoa','Tea and matcha','Protein','Spices','Rice'].includes(d.category))throw Error('Choose the supplier category.');await db.batch([db.prepare('INSERT INTO team_accounts (id,name,kind,owner_email,contact_email,created_at) VALUES (?,?,?,?,?,?)').bind(id,name,d.kind,email,email,new Date().toISOString()),db.prepare('INSERT INTO team_selections (user_id,team_id) VALUES (?,?) ON CONFLICT(user_id) DO UPDATE SET team_id=excluded.team_id').bind(user.userId,id),db.prepare('INSERT INTO review_sessions (user_id,state) VALUES (?,?)').bind(id,JSON.stringify(d.kind==='supplier'?{supplierProfile:{id:'account-'+id,name,category:d.category,initials:name.slice(0,2)}}:{})),auditStatement(db,id,'team.created',id,user)]);return json({ok:true});
  }
  if(d.teamId!==selected?.id)return json({error:'Your active account changed. Refresh before changing permissions.'},409);
  if(!selected||(ranks[selected.role]||0)<3)return json({error:'Account owner or administrator permission required.'},403);
@@ -64,23 +65,24 @@ export async function teamRequest(request,db,user){
   const target=emailValue(d.email);if(target===selected.owner_email)throw Error('The owner role cannot be changed here.');
   if(!['viewer','editor','admin'].includes(d.role))throw Error('Choose a valid permission.');if(d.role==='admin'&&selected.role!=='owner')throw Error('Only the owner can appoint an administrator.');
   const existing=await db.prepare('SELECT role FROM team_members WHERE team_id=? AND email=?').bind(selected.id,target).first();if(existing?.role==='admin'&&selected.role!=='owner')throw Error('Only the owner can change an administrator.');
-  await db.prepare("INSERT INTO team_members (id,team_id,email,role,source) VALUES (?,?,?,?,'invited') ON CONFLICT(id) DO UPDATE SET role=excluded.role,source='invited'").bind(selected.id+':'+target,selected.id,target,d.role).run();
-  // Normalize the historical founding row to prevent duplicate permissions.
-  if(selected.id==='kasandrinos-team'&&target==='tony@kasandrinos.com')await db.prepare("DELETE FROM team_members WHERE id='kasandrinos-tony'").run();
+  const statements=[db.prepare("INSERT INTO team_members (id,team_id,email,role,source) VALUES (?,?,?,?,'invited') ON CONFLICT(id) DO UPDATE SET role=excluded.role,source='invited'").bind(selected.id+':'+target,selected.id,target,d.role),auditStatement(db,selected.id,'team.member_granted:'+d.role,selected.id+':'+target,user)];
+  if(selected.id==='kasandrinos-team'&&target==='tony@kasandrinos.com')statements.push(db.prepare("DELETE FROM team_members WHERE id='kasandrinos-tony'"));
+  await db.batch(statements);
   return json({ok:true});
  }
  if(d.action==='remove-member'){
   const existing=await db.prepare('SELECT * FROM team_members WHERE id=? AND team_id=?').bind(d.id,selected.id).first();if(!existing)throw Error('Member not found.');if(existing.role==='admin'&&selected.role!=='owner')throw Error('Only the owner can remove an administrator.');
   // An explicit deny prevents rejoining through a still-enabled domain policy.
-  await db.prepare("UPDATE team_members SET role='revoked',source='invited' WHERE id=? AND team_id=?").bind(d.id,selected.id).run();return json({ok:true});
+  if(existing.role==='revoked')return json({ok:true});
+  await db.batch([db.prepare("UPDATE team_members SET role='revoked',source='invited' WHERE id=? AND team_id=?").bind(d.id,selected.id),auditStatement(db,selected.id,'team.member_revoked:'+existing.role,d.id,user)]);return json({ok:true});
  }
  if(d.action==='domain'){
   if(selected.role!=='owner')throw Error('Only the account owner can manage domain suggestions.');
   const allowed=String(d.domain||'').trim().toLowerCase().replace(/^@/,'');if(!/^(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z]{2,}$/.test(allowed)||['gmail.com','outlook.com','hotmail.com','yahoo.com','icloud.com','proton.me','mail.com','example.com'].includes(allowed))throw Error('Use an exact company domain, not a public email provider.');
   if(!['viewer','editor'].includes(d.role))throw Error('Choose a suggested viewer or editor role.');
-  await db.prepare('INSERT INTO team_domains (id,team_id,domain,role) VALUES (?,?,?,?) ON CONFLICT(id) DO UPDATE SET role=excluded.role').bind(selected.id+':'+allowed,selected.id,allowed,d.role).run();return json({ok:true});
+  await db.batch([db.prepare('INSERT INTO team_domains (id,team_id,domain,role) VALUES (?,?,?,?) ON CONFLICT(id) DO UPDATE SET role=excluded.role').bind(selected.id+':'+allowed,selected.id,allowed,d.role),auditStatement(db,selected.id,'team.domain_suggestion_saved:'+d.role,selected.id+':'+allowed,user)]);return json({ok:true});
  }
- if(d.action==='remove-domain'){if(selected.role!=='owner')throw Error('Only the owner can change domain suggestions.');await db.prepare('DELETE FROM team_domains WHERE id=? AND team_id=?').bind(d.id,selected.id).run();return json({ok:true});}
+ if(d.action==='remove-domain'){if(selected.role!=='owner')throw Error('Only the owner can change domain suggestions.');const domain=await db.prepare('SELECT id FROM team_domains WHERE id=? AND team_id=?').bind(d.id,selected.id).first();if(!domain)throw Error('Domain suggestion not found.');await db.batch([db.prepare('DELETE FROM team_domains WHERE id=? AND team_id=?').bind(d.id,selected.id),auditStatement(db,selected.id,'team.domain_suggestion_removed',d.id,user)]);return json({ok:true});}
  return json({error:'Unknown account action.'},400);
  }catch(error){return json({error:error.message||'Unable to update account.'},400);}
 }

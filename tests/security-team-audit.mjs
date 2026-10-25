@@ -1,0 +1,13 @@
+import assert from 'node:assert/strict';
+import test from 'node:test';
+import {readFileSync,readdirSync} from 'node:fs';
+import {Miniflare} from 'miniflare';
+import {teamRequest} from '../server/teams.js';
+const mf=new Miniflare({modules:true,script:'export default {fetch(){return new Response("test")}}',d1Databases:['DB'],compatibilityDate:'2026-05-22'}),db=await mf.getD1Database('DB');
+for(const f of readdirSync('drizzle').filter(f=>f.endsWith('.sql')).sort())for(const s of readFileSync('drizzle/'+f,'utf8').split('--> statement-breakpoint'))if(s.trim())await db.prepare(s).run();
+test.after(async()=>mf.dispose());
+const user={userId:'synthetic-owner',email:'owner@audit.test'},base='https://vle.test/api/team';
+const call=async body=>{const state=await(await teamRequest(new Request(base),db,user)).json();return teamRequest(new Request(base,{method:'POST',headers:{origin:'https://vle.test'},body:JSON.stringify({teamId:state.selected?.id,...body})}),db,user);};
+await call({action:'create',name:'Synthetic audit team',kind:'buyer'});const team=(await(await teamRequest(new Request(base),db,user)).json()).selected;
+test('each team grant/revoke/domain action appends exactly one actor event',async()=>{let count=(await db.prepare('SELECT count(*) n FROM proof_audit WHERE organization_id=?').bind(team.id).first()).n;for(const body of [{action:'member',email:'member@audit.test',role:'editor'},{action:'remove-member',id:team.id+':member@audit.test'},{action:'domain',domain:'audit.test',role:'viewer'},{action:'remove-domain',id:team.id+':audit.test'}]){assert.equal((await call(body)).status,200);const rows=(await db.prepare('SELECT * FROM proof_audit WHERE organization_id=?').bind(team.id).all()).results;assert.equal(rows.length,++count);assert.equal(rows.at(-1).actor,user.userId);}});
+test('an unavailable audit write rolls back the team grant',async()=>{await db.prepare("CREATE TRIGGER reject_synthetic_team_audit BEFORE INSERT ON proof_audit BEGIN SELECT RAISE(ABORT,'Synthetic audit outage'); END").run();const r=await call({action:'member',email:'rollback@audit.test',role:'viewer'});assert.equal(r.status,400);assert.equal(await db.prepare('SELECT id FROM team_members WHERE team_id=? AND email=?').bind(team.id,'rollback@audit.test').first(),null);await db.prepare('DROP TRIGGER reject_synthetic_team_audit').run();});

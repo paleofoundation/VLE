@@ -1,0 +1,1 @@
+ALTER TABLE `sourcing_notifications` ADD `account_id` text;

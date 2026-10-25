@@ -1,40 +1,75 @@
 {
   "version": "7",
-  "dialect": "postgresql",
+  "dialect": "sqlite",
   "entries": [
     {
       "idx": 0,
-      "version": "7",
-      "when": 1788606337831,
-      "tag": "0000_romantic_cable",
+      "version": "6",
+      "when": 1792607831631,
+      "tag": "0000_needy_cerebro",
       "breakpoints": true
     },
     {
       "idx": 1,
-      "version": "7",
-      "when": 1788607440584,
-      "tag": "0001_harden-bindings",
+      "version": "6",
+      "when": 1792609600061,
+      "tag": "0001_black_sharon_carter",
       "breakpoints": true
     },
     {
       "idx": 2,
-      "version": "7",
-      "when": 1788624117890,
-      "tag": "0002_silent_molecule_man",
+      "version": "6",
+      "when": 1792620384878,
+      "tag": "0002_bent_thena",
       "breakpoints": true
     },
     {
       "idx": 3,
-      "version": "7",
-      "when": 1788632603737,
-      "tag": "0003_abnormal_genesis",
+      "version": "6",
+      "when": 1792660253634,
+      "tag": "0003_redundant_blue_shield",
       "breakpoints": true
     },
     {
       "idx": 4,
-      "version": "7",
-      "when": 1792046691530,
-      "tag": "0004_contaminant_documents",
+      "version": "6",
+      "when": 1792661207953,
+      "tag": "0004_wealthy_stark_industries",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "6",
+      "when": 1792661636564,
+      "tag": "0005_lean_lockheed",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "6",
+      "when": 1792661726051,
+      "tag": "0006_famous_ultimo",
+      "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "6",
+      "when": 1792681908588,
+      "tag": "0007_kas_report_permissions",
+      "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "6",
+      "when": 1792725378953,
+      "tag": "0008_kas_access_notifications",
+      "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "6",
+      "when": 1792762512558,
+      "tag": "0009_evidence_notification_reads",
       "breakpoints": true
     }
   ]

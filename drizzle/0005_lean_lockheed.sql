@@ -1,0 +1,1 @@
+ALTER TABLE `sourcing_rooms` ADD `supplier_account_id` text;

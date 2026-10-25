@@ -1,0 +1,11 @@
+import assert from 'node:assert/strict';
+import {storefrontDefaults,validateStorefront,canManageStorefront,usesAsset,publicStorefront} from '../server/storefront.js';
+import {kasCatalog} from '../server/kasandrinos.js';
+import {kasSupplierPage} from '../public/kasandrinos.js';
+const base=structuredClone(storefrontDefaults);
+assert.deepEqual(validateStorefront(base),base);
+for(const bad of [{...base,hero:'https://tracker.test/x.png'},{...base,logo:'/assets/evil.svg'},{...base,featured:['EXAMPLE-OLIVE-01']},{...base,sections:['products','products','story','evidence']},{...base,galleryAlts:[]},{...base,tagline:''}])assert.throws(()=>validateStorefront(bad));
+assert(!canManageStorefront(null,true,null));assert(canManageStorefront({email:'owner@test.com'},true,null));assert(canManageStorefront({email:'manager@kasandrinos.test'},false,{manager_email:'manager@kasandrinos.test'}));assert(!canManageStorefront({email:'stranger@test.com'},false,{manager_email:'manager@kasandrinos.test'}));
+const row={draft:JSON.stringify({...base,tagline:'Private draft'}),published:JSON.stringify(base)};assert.equal(publicStorefront(row).tagline,base.tagline);assert(usesAsset(base,base.hero));assert(!usesAsset(base,'/api/storefront-assets/unknown.png'));
+const html=kasSupplierPage({...kasCatalog(),storefront:{...base,tagline:'<img src=x onerror=alert(1)>',sections:['story','products','gallery','evidence']}},{signedIn:false,canViewEvidence:false,canManageStorefront:false});assert(html.includes('&lt;img src=x'));assert(!html.includes('<img src=x'));assert(html.indexOf('id="store-story"')<html.indexOf('id="store-products"'));assert(!html.includes('Open original PDF'));assert(!html.includes('Edit storefront'));assert(html.includes('Sign in to see prices'));assert(!html.includes('sourceURL'));
+console.log('PASS: supplier storefront allowlist; real lots only; HTML escaping; authorized manager checks; publication isolation; gallery descriptions; section ordering; evidence and commercial gates.');

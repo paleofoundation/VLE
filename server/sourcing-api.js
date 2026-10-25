@@ -115,5 +115,5 @@ export async function sourcingRequest(request,db,bucket,user,p){
   await db.batch([run('UPDATE supplier_submissions SET status=?,review=? WHERE id=?',d.status,note,d.id),notice(JSON.parse(r.body).email,'Your lot document review has been updated.','/workspace/documents',r.owner_id)]);return json({ok:true});
  }
  return json({error:'Unknown action.'},400);
- }catch(error){return json({error:error.message||'Unable to complete the request.'},400);}
+ }catch(error){return json({error:'Unable to complete this sourcing action. Check the fields and try again.'},400);}
 }

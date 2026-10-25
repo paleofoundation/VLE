@@ -84,5 +84,5 @@ export async function teamRequest(request,db,user){
  }
  if(d.action==='remove-domain'){if(selected.role!=='owner')throw Error('Only the owner can change domain suggestions.');const domain=await db.prepare('SELECT id FROM team_domains WHERE id=? AND team_id=?').bind(d.id,selected.id).first();if(!domain)throw Error('Domain suggestion not found.');await db.batch([db.prepare('DELETE FROM team_domains WHERE id=? AND team_id=?').bind(d.id,selected.id),auditStatement(db,selected.id,'team.domain_suggestion_removed',d.id,user)]);return json({ok:true});}
  return json({error:'Unknown account action.'},400);
- }catch(error){return json({error:error.message||'Unable to update account.'},400);}
+ }catch(error){return json({error:'Unable to update this account. Check the fields and try again.'},400);}
 }

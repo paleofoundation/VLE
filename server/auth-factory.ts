@@ -8,6 +8,7 @@ import { drizzleAdapter } from '@better-auth/drizzle-adapter';
 export function createEmailAuth(db:any, schema:any, config:{secret:string;baseURL:string;apiKey:string;from:string}, transport:typeof fetch=privateFetch){
  if(!config.secret || config.secret.length<32)throw Error('Email authentication is not configured.');
  return betterAuth({
+  logger:{disabled:true},
   appName:'Verified Lot Exchange',baseURL:config.baseURL,basePath:'/api/auth',secret:config.secret,
   database:drizzleAdapter(db,{provider:'sqlite',schema,transaction:false}),
   trustedOrigins:[config.baseURL,...(config.baseURL==='https://vle.exchange'?['https://www.vle.exchange','https://vle-lot-exchange-prototype.kmfp.chatgpt.site']:[])],

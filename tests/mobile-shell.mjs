@@ -1,0 +1,61 @@
+import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
+import {tabsFor,exploreGroups,mobileShell,mountMobileShell,closeExplore,mobileInformationPage} from '../public/mobile-shell.js';
+import {mobileProofStrip} from '../public/kasandrinos.js';
+import {kasCatalog,kasLots} from '../server/kasandrinos.js';
+const labels=(role,signed)=>tabsFor(role,signed).map(t=>t.label);
+assert.deepEqual(labels('supplier',false),['Home','Find lots','Verify','Sign in','More']);
+assert.deepEqual(labels('brand',true),['Home','Find lots','Requests','Alerts','More']);
+assert.deepEqual(labels('supplier',true),['Home','My lots','Requests','Alerts','More']);
+for(const role of ['member','retailer','other','admin',undefined])assert.deepEqual(labels(role,true),['Home','Find lots','Alerts','More']);
+assert.equal(tabsFor('brand',true).find(t=>t.label==='Home').href,'/brand');
+assert.equal(tabsFor('supplier',true).find(t=>t.label==='My lots').href,'/workspace/documents');
+assert.equal(tabsFor('out',false).find(t=>t.label==='Verify').href,'https://tecrid.com/verify');
+for(const role of ['brand','supplier','member']){
+ const session={signedIn:true,email:'supplier@brand.test',team:{role:'owner'}};
+ const html=mobileShell(role,session,'/requests');
+ const groups=exploreGroups(role,true),hrefs=groups.flatMap(g=>g.items.map(i=>i.href));
+ assert.equal(groups.length,4);
+ assert(!hrefs.includes('/email-sign-in'));
+ assert(!hrefs.includes(role==='brand'?'/workspace':'/brand'));
+ assert.doesNotMatch(html,/API keys/,'No key permission or screen exists on main');
+ assert.match(html,/aria-controls="mobile-explore" aria-expanded="false"/);
+}
+const requestHTML=mobileShell('brand',{signedIn:true},'/requests/new');
+assert.match(requestHTML,/<a href="\/requests" data-nav aria-current="page"/);
+assert.equal((requestHTML.match(/aria-current="page"/g)||[]).length,1);
+assert.equal((mobileShell('supplier',{signedIn:true},'/workspace/documents').match(/aria-current="page"/g)||[]).length,1);
+console.log('PASS: role tabs, unknown-role fallback, signed-out precedence, active state and role-only Explore groups.');
+// Exercise the real delegated controller with native-dialog semantics.
+const handlers={};let focused=false,expanded='false',locked=false;
+const more={isConnected:true,setAttribute:(k,v)=>{if(k==='aria-expanded')expanded=v;},focus:()=>{focused=true;}};
+const sheet={id:'mobile-explore',open:false,closest:()=>null,showModal(){this.open=true;},close(){this.open=false;handlers.close({target:this});},getBoundingClientRect:()=>({left:0,right:390,top:55,bottom:844})};
+const doc={querySelector:s=>s==='#mobile-explore'?sheet:more,body:{classList:{toggle:(_,v)=>{locked=v;}}},addEventListener:(type,fn)=>{handlers[type]=fn;}};
+let resize;
+mountMobileShell(doc,{matchMedia:()=>({addEventListener:(_,fn)=>{resize=fn;}})});
+const click=(kind,x=200,y=100)=>handlers.click({clientX:x,clientY:y,target:kind==='backdrop'?sheet:{closest:s=>s===(kind==='open'?'[data-explore-open]':'[data-explore-close]')?more:null}});
+click('open');assert(sheet.open&&locked);assert.equal(expanded,'true');
+click('close');assert(!sheet.open&&!locked&&focused);assert.equal(expanded,'false');
+click('open');sheet.close();assert(!locked);assert.equal(expanded,'false'); // Native Escape close.
+click('open');click('backdrop',200,10);assert(!sheet.open&&!locked);
+click('open');resize({matches:true});assert(!sheet.open&&!locked);
+click('open');closeExplore(doc);assert(!sheet.open); // Route change.
+console.log('PASS: More opens, Close/native Escape/backdrop/navigation/desktop resize close, focus returns, background unlocks.');
+assert.match(mobileInformationPage('/faq'),/Where do I approve access/);
+assert.match(mobileInformationPage('/boundaries'),/does not automatically certify/);
+const proof=mobileProofStrip(kasLots[0],kasCatalog());
+assert.match(proof,/<details><summary>TEST TECRIDs<\/summary>/);assert.match(proof,/Supplier-reported/);assert.match(proof,/TEST TECRID/);
+assert.match(proof,/do not establish lot or brand certification/);
+assert.doesNotMatch(mobileProofStrip(kasLots[0],{reports:[]}),/TEST TECRID/);
+const scoped={...kasLots[0],proof:{tecrids:[{tecrid:'SYNTHETIC-STATUS-ONLY',status:'revoked',freshness:'lapsed',program:'Synthetic program',issuingLab:'Synthetic lab',verificationUrl:'https://tecrid.com/records/SYNTHETIC-STATUS-ONLY'}],certifications:[{title:'Synthetic scoped certificate',status:'unknown',scope:'This lot only',verification:'self-reported'}]}};
+const scopedHTML=mobileProofStrip(scoped,{reports:[]});
+for(const token of ['SYNTHETIC-STATUS-ONLY','revoked','lapsed','Synthetic program','Synthetic lab','This lot only','Current status not verified'])assert(scopedHTML.includes(token));
+assert.doesNotMatch(scopedHTML,/No production TECRID supplied/);
+console.log('PASS: merged scoped proof statuses, freshness, program, issuer and certification scope are preserved.');
+const manifest=JSON.parse(readFileSync('public/vle.webmanifest'));
+assert.equal(manifest.display,'standalone');assert.equal(manifest.scope,'/');
+for(const icon of manifest.icons)assert(readFileSync('public'+icon.src).length>0);
+const shell=readFileSync('server/shell.ts','utf8');
+for(const token of ['viewport-fit=cover','apple-mobile-web-app-capable','apple-touch-icon','/vle.webmanifest'])assert(shell.includes(token));
+assert(!readFileSync('public/mobile-shell.js','utf8').includes('serviceWorker'));
+console.log('PASS: honest proof strip, real information destinations, standalone manifest and iOS metadata, no service worker.');

@@ -1,0 +1,6 @@
+$ node tests/homepage-regressions.mjs docs/verification/2026-10-25/vle-live-layout.json
+PASS: actual anonymous homepage renders lookup first and all three cards in the following section.
+PASS: actual anonymous homepage renders expanded sourcing boundaries with all three paragraphs.
+PASS: https://vle.exchange/ at 1280x720: lookup fits above fold, cards are below fold, sourcing text is visible.
+PASS: checks reject card crowding, collapsed, hidden and empty boundary regressions.
+Exit: 0

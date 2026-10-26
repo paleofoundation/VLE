@@ -1,3 +1,4 @@
+import {seedKasandrinosProofFixture} from './support/kasandrinos-proof-fixture.mjs';
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 const hash=value=>createHash('sha256').update(value).digest('hex');
@@ -16,6 +17,8 @@ const check=(value,message)=>{assert(value,message);checks++;};
 try{
  const db=await mf.getD1Database('DB');
  for(const file of readdirSync(new URL('../drizzle',import.meta.url)).filter(x=>x.endsWith('.sql')).sort())for(const sql of readFileSync(new URL('../drizzle/'+file,import.meta.url),'utf8').split('--> statement-breakpoint'))if(sql.trim())await db.prepare(sql).run();
+ // This test explicitly opts into the held pilot fixture on disposable local D1.
+ await seedKasandrinosProofFixture(db);
  const owner={userId:'synthetic-owner',email:'karen@paleofoundation.com'},brand={userId:'synthetic-brand',email:'synthetic@brand.test'},other={userId:'synthetic-other',email:'synthetic@other.test'},viewer={userId:'synthetic-viewer',email:'viewer@brand.test'};
  const teamCall=async(user,data)=>{const r=await teamRequest(new Request('https://vle.test/api/team',{method:'POST',headers:{origin:'https://vle.test'},body:JSON.stringify(data)}),db,user);assert.equal(r.status,200,await r.text());};
  await teamCall(owner,{action:'select',id:'kasandrinos-team'});

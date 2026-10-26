@@ -1,0 +1,25 @@
+# Verified Lot Exchange
+
+> VLE connects brands and ingredient suppliers around specific lots. Public pages describe supplier listings, lot evidence, and how the exchange works.
+
+Public listings and supplier-reported documents do not by themselves establish certification. A laboratory result is not a certification. TEST examples remain distinct from production credentials. Current status, scope, issuer and source matter when interpreting evidence.
+
+Private workspaces, reports and results require the account owner's authorization. This public guide grants no access and contains no private records.
+
+## Public guide
+
+- [Home](https://vle.exchange/): The ingredient exchange.
+- [About VLE](https://vle.exchange/about): What the exchange does.
+- [How it works](https://vle.exchange/how-it-works): The sourcing process.
+- [Ingredient suppliers](https://vle.exchange/suppliers): Public supplier and documented lot listings.
+- [Evidence resources](https://vle.exchange/resources): Public resources about documents and evidence roles.
+- [Contact and corrections](https://vle.exchange/contact): Onboarding, support, corrections and removal requests.
+- [Privacy policy](https://vle.exchange/privacy): Information use and privacy choices.
+
+## Citation
+
+Cite the public page title, its exact URL and the date accessed. For a public listing, identify the supplier and lot exactly as displayed and preserve the source, date, status and scope of each document. Do not infer certification from a listing or a laboratory result.
+
+## Contact
+
+Contact marcus@vle.exchange for supplier onboarding, account support, document corrections, profile ownership or removal requests, as published on the contact page. Include the relevant public page URL. Do not send passwords or sign-in links.

@@ -1,0 +1,1 @@
+Original VLE contract rejects 13/13 exact synthetic producer metadata/tombstone fixtures. Receiver is not interoperable until the paired repair.

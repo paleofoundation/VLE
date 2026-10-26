@@ -1,0 +1,160 @@
+{
+  "parent": "25cf27492cbaeee40afdf7eb9bf0b5b8cdd8879f",
+  "merge_order": "P1 #78 first, consumer #77 second",
+  "p1_migration": "0011_volatile_raza, exact phone PR schema/snapshot prerequisite",
+  "native_migration": "0012_chief_cammi.sql",
+  "native_sql_unchanged_sha256": "9f96a158748239221e34359576f3ef951a73d8fec53112ccbace05db3ebb0aed",
+  "snapshot_chain": "0012 prevId equals exact P1 0011 id",
+  "checks": [
+    {
+      "check": "email-auth",
+      "exit": 0,
+      "seconds": 1.78
+    },
+    {
+      "check": "evidence-notifications",
+      "exit": 0,
+      "seconds": 1.16
+    },
+    {
+      "check": "homepage-regressions",
+      "exit": 0,
+      "seconds": 0.2
+    },
+    {
+      "check": "kasandrinos-request-notifications",
+      "exit": 0,
+      "seconds": 1.28
+    },
+    {
+      "check": "kasandrinos",
+      "exit": 0,
+      "seconds": 0.19
+    },
+    {
+      "check": "mobile-shell",
+      "exit": 0,
+      "seconds": 0.2
+    },
+    {
+      "check": "native-proof-stream",
+      "exit": 0,
+      "seconds": 2.0
+    },
+    {
+      "check": "pilot",
+      "exit": 0,
+      "seconds": 3.33
+    },
+    {
+      "check": "proof-chips",
+      "exit": 0,
+      "seconds": 0.23
+    },
+    {
+      "check": "proof-exchange",
+      "exit": 0,
+      "seconds": 2.04
+    },
+    {
+      "check": "proof-worker",
+      "exit": 0,
+      "seconds": 0.93
+    },
+    {
+      "check": "report-gate",
+      "exit": 0,
+      "seconds": 0.18
+    },
+    {
+      "check": "security-dependencies",
+      "exit": 0,
+      "seconds": 0.3
+    },
+    {
+      "check": "security-domain-membership",
+      "exit": 0,
+      "seconds": 1.28
+    },
+    {
+      "check": "security-headers",
+      "exit": 0,
+      "seconds": 0.93
+    },
+    {
+      "check": "security-mail-issuance",
+      "exit": 0,
+      "seconds": 0.28
+    },
+    {
+      "check": "security-notification-privacy",
+      "exit": 0,
+      "seconds": 0.85
+    },
+    {
+      "check": "security-rate-budgets",
+      "exit": 0,
+      "seconds": 2.85
+    },
+    {
+      "check": "security-reports",
+      "exit": 0,
+      "seconds": 1.6
+    },
+    {
+      "check": "security-service-assertions",
+      "exit": 0,
+      "seconds": 0.81
+    },
+    {
+      "check": "security-service-boundary",
+      "exit": 0,
+      "seconds": 0.28
+    },
+    {
+      "check": "security-team-audit",
+      "exit": 0,
+      "seconds": 1.37
+    },
+    {
+      "check": "sourcing",
+      "exit": 0,
+      "seconds": 3.45
+    },
+    {
+      "check": "storefront",
+      "exit": 0,
+      "seconds": 0.2
+    },
+    {
+      "check": "teams",
+      "exit": 0,
+      "seconds": 2.87
+    },
+    {
+      "check": "tecrid-email-relay",
+      "exit": 0,
+      "seconds": 1.02
+    },
+    {
+      "check": "tecrid-report-service",
+      "exit": 0,
+      "seconds": 2.6
+    },
+    {
+      "check": "tecrid-test-links",
+      "exit": 0,
+      "seconds": 0.2
+    },
+    {
+      "check": "lint",
+      "exit": 0,
+      "seconds": 1.81
+    }
+  ],
+  "build": "PASS",
+  "schema_drift": "PASS, no changes",
+  "cross_fixture_files": "13 original producer envelopes unchanged",
+  "production_migration": "NOT RUN",
+  "history": "one ordinary follow-up commit, no merge or rewrite"
+}

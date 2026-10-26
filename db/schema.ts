@@ -86,8 +86,8 @@ export const lotReleases=sqliteTable('lot_releases',{
  id:text('id').primaryKey().notNull(),lotId:text('lot_id').notNull().references(()=>proofLots.id),brandId:text('brand_id').notNull().references(()=>proofOrganizations.id),label:text('label').notNull(),assertedBy:text('asserted_by').notNull(),assertedAt:text('asserted_at').notNull(),confirmedBy:text('confirmed_by'),confirmedAt:text('confirmed_at'),withdrawnAt:text('withdrawn_at'),
 },t=>[uniqueIndex('lot_releases_lot_brand_label').on(t.lotId,t.brandId,t.label)]);
 export const proofDeliveryReceipts=sqliteTable('proof_delivery_receipts',{
- deliveryId:text('delivery_id').primaryKey().notNull(),eventId:text('event_id').notNull().unique(),bodyHash:text('body_hash').notNull(),lotId:text('lot_id').notNull().references(()=>proofLots.id),tecrid:text('tecrid').notNull(),sequence:integer('sequence').notNull(),receivedAt:text('received_at').notNull(),
-});
+ deliveryId:text('delivery_id').primaryKey().notNull(),eventId:text('event_id').notNull().unique(),bodyHash:text('body_hash').notNull(),lotId:text('lot_id').notNull().references(()=>proofLots.id),tecrid:text('tecrid').notNull(),sequence:integer('sequence').notNull(),receivedAt:text('received_at').notNull(),streamId:text('stream_id'),
+},t=>[uniqueIndex('proof_receipt_stream_sequence').on(t.streamId,t.sequence)]);
 export const lotTecrids=sqliteTable('lot_tecrids',{
  tecrid:text('tecrid').primaryKey().notNull(),lotId:text('lot_id').notNull().references(()=>proofLots.id),version:integer('version').notNull(),sequence:integer('sequence').notNull(),status:text('status').notNull(),program:text('program').notNull(),issuingLab:text('issuing_lab').notNull(),issuedAt:text('issued_at').notNull(),retestDue:text('retest_due'),verificationUrl:text('verification_url').notNull(),fingerprint:text('fingerprint').notNull(),grantId:text('grant_id').notNull(),grantStatus:text('grant_status').notNull(),accessLevel:text('access_level').notNull(),publicStatus:integer('public_status').notNull().default(0),grantExpiresAt:text('grant_expires_at'),brandIds:text('brand_ids').notNull(),receivedAt:text('received_at').notNull(),
 });
@@ -97,6 +97,13 @@ export const proofCertifications=sqliteTable('proof_certifications',{
 export const proofAudit=sqliteTable('proof_audit',{
  id:text('id').primaryKey().notNull(),organizationId:text('organization_id').notNull(),action:text('action').notNull(),subjectId:text('subject_id').notNull(),actor:text('actor').notNull(),createdAt:text('created_at').notNull(),
 });
+
+export const proofStreamState=sqliteTable('proof_stream_state',{
+ streamId:text('stream_id').primaryKey().notNull(),recipientId:text('recipient_id').notNull(),tecrid:text('tecrid').notNull(),lotId:text('lot_id').notNull().references(()=>proofLots.id),originatingSupplier:text('originating_supplier').notNull(),mappingId:text('mapping_id').notNull(),sequence:integer('sequence').notNull(),credentialVersion:integer('credential_version').notNull(),credentialFingerprint:text('credential_fingerprint').notNull(),credentialStatus:text('credential_status').notNull(),eventId:text('event_id').notNull(),updatedAt:text('updated_at').notNull(),
+},t=>[uniqueIndex('proof_stream_recipient_credential').on(t.recipientId,t.tecrid)]);
+export const lotTecridGrants=sqliteTable('lot_tecrid_grants',{
+ tecrid:text('tecrid').notNull(),grantId:text('grant_id').notNull(),recipientId:text('recipient_id').notNull(),controllerId:text('controller_id').notNull(),streamId:text('stream_id').notNull().references(()=>proofStreamState.streamId),lotId:text('lot_id').notNull().references(()=>proofLots.id),version:integer('version').notNull(),sequence:integer('sequence').notNull(),status:text('status').notNull(),program:text('program').notNull(),issuingLab:text('issuing_lab').notNull(),issuedAt:text('issued_at').notNull(),retestDue:text('retest_due'),verificationUrl:text('verification_url').notNull(),fingerprint:text('fingerprint').notNull(),grantStatus:text('grant_status').notNull(),accessLevel:text('access_level').notNull(),publicStatus:integer('public_status').notNull().default(0),grantExpiresAt:text('grant_expires_at'),brandIds:text('brand_ids').notNull(),supersedesGrantId:text('supersedes_grant_id'),snapshotJson:text('snapshot_json'),snapshotFingerprint:text('snapshot_fingerprint'),receivedAt:text('received_at').notNull(),
+},t=>[primaryKey({columns:[t.tecrid,t.recipientId,t.grantId]})]);
 
 // Participant decisions are data, separate from message text and evidence permissions.
 export const sourcingDecisions=sqliteTable('sourcing_decisions',{

@@ -1,5 +1,7 @@
 # Lot proof exchange
 
+Native stream follow-up: see [NATIVE-PROOF-STREAM.md](NATIVE-PROOF-STREAM.md). The provisional single-grant contract below is historical; native grant storage, payload withdrawal and stream watermarks supersede it. Receiver remains OFF.
+
 Order: VLE-PROOF-EXCHANGE-1. PR only. No merge or deployment.
 
 The Step 0 audit was posted to `~/ops/bridge/ELON_CHATGPT.md` under CHATGPT to ELON before application edits. This branch is stacked on VLE #63, which is stacked on the live-source sync #62. The application source comes from live Sites version 27, not the older Next.js/Clerk/Postgres implementation on GitHub main.

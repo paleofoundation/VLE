@@ -1,0 +1,10 @@
+PASS: supplier storefront allowlist; real lots only; HTML escaping; authorized manager checks; publication isolation; gallery descriptions; section ordering; evidence and commercial gates.
+✔ tests/storefront.mjs (111.769375ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 1
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 120.254667

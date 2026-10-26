@@ -1,6 +1,7 @@
 import {teamRole,selectedTeam} from './teams.js';
 import {ProofError,required,identifier,dateValue,verifyDelivery,validateEnvelope,freshness} from './proof-contract.js';
 import {verifyCertification} from './proof-registry.js';
+import {acceptEvidenceStream} from './proof-stream.js';
 const roles=['supplier','brand','private_label_manufacturer','retailer','certification_body'];
 const headers={'Cache-Control':'private, no-store','Vary':'Cookie','X-Content-Type-Options':'nosniff'};
 const json=(value,status=200)=>Response.json(value,{status,headers});
@@ -19,51 +20,26 @@ export async function receiveEvidence(request,db,env,now=Date.now()){
   if(env.VLE_TECRID_RECEIVER_ENABLED!=='true')throw new ProofError('Marketplace contract is awaiting approval.',503);
   const {data,bodyHash}=await verifyDelivery(request,env.VLE_TECRID_WEBHOOK_SECRET,now);
   validateEnvelope(data,env.VLE_TECRID_RECIPIENT_ID,now);
-  const seen=await db.prepare('SELECT * FROM proof_delivery_receipts WHERE delivery_id=? OR event_id=?').bind(data.deliveryId,data.eventId).first();
-  if(seen){if(seen.delivery_id!==data.deliveryId||seen.event_id!==data.eventId||seen.body_hash!==bodyHash)throw new ProofError('Delivery identity reused with different content.',409);return json({accepted:true,duplicate:true,receivedAt:seen.received_at});}
-  const c=data.credential,g=data.grant,i=c.identity,code=i.ingredientCode||i.productSku;
-  let candidates=await rows(db,'SELECT * FROM proof_lots WHERE supplier_id=?',i.originatingSupplierId);
-  if(i.lotId)candidates=candidates.filter(l=>l.id===i.lotId);
-  if(i.supplierLotId)candidates=candidates.filter(l=>l.supplier_lot_id===i.supplierLotId);
-  if(code)candidates=candidates.filter(l=>(i.ingredientCode?l.ingredient_code:l.product_sku)===code);
-  if(candidates.length!==1)throw new ProofError('Lot identity is unmatched or ambiguous; no proof attached.',422);
-  const lot=candidates[0];
-  const prior=await db.prepare('SELECT * FROM lot_tecrids WHERE tecrid=?').bind(c.tecrid).first();
-  if(prior&&(prior.lot_id!==lot.id||prior.grant_id!==g.id))throw new ProofError('Credential lot or grant identity changed.',409);
-  if(prior&&(data.sequence>prior.sequence&&(c.version<prior.version||c.version===prior.version&&c.fingerprint!==prior.fingerprint)))throw new ProofError('Credential version regressed or fingerprint changed.',409);
-  const receivedAt=new Date(now).toISOString();
-  try{
-   await db.batch([
-    db.prepare('INSERT INTO proof_delivery_receipts VALUES (?,?,?,?,?,?,?)').bind(data.deliveryId,data.eventId,bodyHash,lot.id,c.tecrid,data.sequence,receivedAt),
-    db.prepare(`INSERT INTO lot_tecrids (tecrid,lot_id,version,sequence,status,program,issuing_lab,issued_at,retest_due,verification_url,fingerprint,grant_id,grant_status,access_level,public_status,grant_expires_at,brand_ids,received_at)
-     VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ON CONFLICT(tecrid) DO UPDATE SET
-     version=excluded.version,sequence=excluded.sequence,status=excluded.status,program=excluded.program,issuing_lab=excluded.issuing_lab,issued_at=excluded.issued_at,retest_due=excluded.retest_due,verification_url=excluded.verification_url,fingerprint=excluded.fingerprint,grant_status=excluded.grant_status,access_level=excluded.access_level,public_status=excluded.public_status,grant_expires_at=excluded.grant_expires_at,brand_ids=excluded.brand_ids,received_at=excluded.received_at
-     WHERE excluded.sequence>lot_tecrids.sequence AND excluded.version>=lot_tecrids.version AND (excluded.version>lot_tecrids.version OR excluded.fingerprint=lot_tecrids.fingerprint) AND excluded.lot_id=lot_tecrids.lot_id AND excluded.grant_id=lot_tecrids.grant_id`)
-     .bind(c.tecrid,lot.id,c.version,data.sequence,c.status,c.program,c.issuingLab,dateValue(c.issuedAt,'issued date'),dateValue(c.retestDue,'retest due',true),c.verificationUrl,c.fingerprint,g.id,g.status,g.accessLevel,g.publicStatus?1:0,dateValue(g.expiresAt,'grant expiry',true),JSON.stringify([...new Set(g.brandOrganizationIds)]),receivedAt),
-   ]);
-  }catch(error){
-   const race=await db.prepare('SELECT * FROM proof_delivery_receipts WHERE delivery_id=?').bind(data.deliveryId).first();
-   if(!race||race.event_id!==data.eventId||race.body_hash!==bodyHash)throw error;
-   return json({accepted:true,duplicate:true,receivedAt:race.received_at});
-  }
-  return json({accepted:true,duplicate:false,receivedAt},202);
+  const result=await acceptEvidenceStream(data,bodyHash,db,now);
+  return json(result,result.duplicate?200:202);
  }catch(error){return json({error:error instanceof ProofError?error.message:'Evidence could not be accepted.'},error.status||503);}
 }
 export async function proofProjection(db,env={},now=Date.now(),transport=fetch){
  const [orgs,roleRows,lots,releases,credentials,certificates]=await Promise.all([
   rows(db,'SELECT id,slug,name FROM proof_organizations'),rows(db,'SELECT * FROM organization_roles'),rows(db,'SELECT * FROM proof_lots'),
   rows(db,'SELECT id,lot_id,brand_id,label,asserted_at,confirmed_at,withdrawn_at FROM lot_releases WHERE withdrawn_at IS NULL'),
-  rows(db,"SELECT * FROM lot_tecrids WHERE public_status=1 AND grant_status='active' AND (grant_expires_at IS NULL OR grant_expires_at>?)",new Date(now).toISOString()),rows(db,'SELECT * FROM proof_certifications')
+  rows(db,"SELECT g.* FROM lot_tecrid_grants g JOIN proof_stream_state s ON s.stream_id=g.stream_id WHERE g.public_status=1 AND g.grant_status='active' AND g.status='active' AND s.credential_status='active' AND g.version=s.credential_version AND (g.grant_expires_at IS NULL OR g.grant_expires_at>?)",new Date(now).toISOString()),rows(db,'SELECT * FROM proof_certifications')
  ]);
- // An explicit allowlist is the only public TECRID projection. No signed payload or result snapshot is stored.
+ // Public proof is metadata only; grant snapshots never enter a public projection.
+ const unique=items=>[...new Map(items.sort((a,b)=>a.version-b.version||a.sequence-b.sequence).map(item=>[item.tecrid,item])).values()];
  const proof=c=>({tecrid:c.tecrid,lotId:c.lot_id,version:c.version,status:c.status,program:c.program,issuingLab:c.issuing_lab,issuedAt:c.issued_at,retestDue:c.retest_due,freshness:freshness(c.retest_due,now),verificationUrl:c.verification_url,accessLevel:'status_only',receivedAt:c.received_at});
  const certs=await Promise.all(certificates.map(c=>verifyCertification(c,orgs.find(o=>o.id===c.organization_id),env,transport,now)));
  const organizationWalls=orgs.map(o=>{
   const own=lots.filter(l=>l.supplier_id===o.id).map(l=>l.id),confirmed=releases.filter(r=>r.brand_id===o.id&&r.confirmed_at).map(r=>r.lot_id);
   const visible=credentials.filter(c=>own.includes(c.lot_id)||confirmed.includes(c.lot_id)&&JSON.parse(c.brand_ids).includes(o.id));
-  return {...o,roles:roleRows.filter(r=>r.organization_id===o.id).map(r=>r.role),tecrids:visible.map(proof),certifications:certs.filter(c=>c.organization_id===o.id),lots:lots.filter(l=>own.includes(l.id)||confirmed.includes(l.id)),releases:releases.filter(r=>r.brand_id===o.id||own.includes(r.lot_id))};
+  return {...o,roles:roleRows.filter(r=>r.organization_id===o.id).map(r=>r.role),tecrids:unique(visible).map(proof),certifications:certs.filter(c=>c.organization_id===o.id),lots:lots.filter(l=>own.includes(l.id)||confirmed.includes(l.id)),releases:releases.filter(r=>r.brand_id===o.id||own.includes(r.lot_id))};
  });
- return {organizations:organizationWalls,lots:lots.map(l=>({...l,tecrids:credentials.filter(c=>c.lot_id===l.id).map(proof),certifications:certs.filter(c=>c.lot_id===l.id),releases:releases.filter(r=>r.lot_id===l.id)}))};
+ return {organizations:organizationWalls,lots:lots.map(l=>({...l,tecrids:unique(credentials.filter(c=>c.lot_id===l.id)).map(proof),certifications:certs.filter(c=>c.lot_id===l.id),releases:releases.filter(r=>r.lot_id===l.id)}))};
 }
 export async function proofRequest(request,db,user,env={}){
  try{
@@ -98,7 +74,7 @@ export async function proofRequest(request,db,user,env={}){
    const existing=await db.prepare('SELECT * FROM proof_lots WHERE id=?').bind(id).first();
    if(existing){
     if(existing.supplier_id!==team.id||existing.supplier_lot_id!==supplierLot)throw new ProofError('Lot ownership or identity mismatch.',409);
-    if(await db.prepare('SELECT 1 FROM lot_tecrids WHERE lot_id=?').bind(id).first())throw new ProofError('Evidence-bound lot identity is immutable.',409);
+    if(await db.prepare('SELECT 1 FROM lot_tecrids WHERE lot_id=? UNION ALL SELECT 1 FROM lot_tecrid_grants WHERE lot_id=?').bind(id,id).first())throw new ProofError('Evidence-bound lot identity is immutable.',409);
     await db.batch([db.prepare('UPDATE proof_lots SET ingredient_code=?,product_sku=? WHERE id=?').bind(d.ingredientCode?code:null,d.ingredientCode?(d.productSku?required(d.productSku,'SKU'):null):code,id),audit(db,team.id,'lot.identity',id,user)]);
    }else await db.batch([db.prepare('INSERT INTO proof_lots VALUES (?,?,?,?,?,?)').bind(id,team.id,supplierLot,d.ingredientCode?code:null,d.ingredientCode?(d.productSku?required(d.productSku,'SKU'):null):code,required(d.product,'product')),audit(db,team.id,'lot.registered',id,user)]);
    return json({ok:true});

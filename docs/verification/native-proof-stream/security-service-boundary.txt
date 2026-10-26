@@ -1,0 +1,12 @@
+✔ mail credential cannot authenticate any report-service audience (34.7705ms)
+✔ mail credential rejected before report operation /api/tecrid-report-access (0.905ms)
+✔ mail credential rejected before report operation /api/tecrid-report-permissions (1.53575ms)
+✔ mail credential rejected before report operation /api/tecrid-transcript-import (0.360458ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 4
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 206.881625

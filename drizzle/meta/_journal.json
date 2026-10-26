@@ -85,6 +85,13 @@
       "when": 1792952328297,
       "tag": "0011_volatile_raza",
       "breakpoints": true
+    },
+    {
+      "idx": 12,
+      "version": "6",
+      "when": 1792953702972,
+      "tag": "0012_chief_cammi",
+      "breakpoints": true
     }
   ]
 }

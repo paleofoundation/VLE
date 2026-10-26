@@ -1,0 +1,10 @@
+PASS: eight exact report/hash/lot matches; sandbox-only display; no unrelated links or PDF access changes.
+✔ tests/tecrid-test-links.mjs (104.041291ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 1
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 111.2435

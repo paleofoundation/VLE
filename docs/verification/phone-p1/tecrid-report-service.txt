@@ -1,0 +1,10 @@
+PASS: all eight source-bound TEST reports; owner/admin roles; exact-email requests; digital-card grants with controller-only source PDFs; grant, expiry, revoke; stale-write denial; role revocation; audit; private caching and service authentication.
+✔ tests/tecrid-report-service.mjs (2509.072ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 1
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2516.339041

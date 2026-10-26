@@ -1,0 +1,17 @@
+
+/Users/kmfp/Documents/Codex/2026-10-25/you-are-conductor-the-single-codex/work/vle/public/app.js
+   1:9    warning  'proofStrip' is defined but never used                                                                                                                                                                                                                           @typescript-eslint/no-unused-vars
+  12:9    warning  'KEY' is defined but never used                                                                                                                                                                                                                                  @typescript-eslint/no-unused-vars
+  12:19   warning  'suppliers' is defined but never used                                                                                                                                                                                                                            @typescript-eslint/no-unused-vars
+  12:83   warning  'lots' is defined but never used                                                                                                                                                                                                                                 @typescript-eslint/no-unused-vars
+  12:111  warning  'canPublish' is defined but never used                                                                                                                                                                                                                           @typescript-eslint/no-unused-vars
+  12:150  warning  'now' is defined but never used                                                                                                                                                                                                                                  @typescript-eslint/no-unused-vars
+  13:44   warning  '$$' is assigned a value but never used                                                                                                                                                                                                                          @typescript-eslint/no-unused-vars
+  22:40   warning  'onlyMatch' is assigned a value but never used                                                                                                                                                                                                                   @typescript-eslint/no-unused-vars
+  66:112  warning  Expected an assignment or function call and instead saw an expression                                                                                                                                                                                            @typescript-eslint/no-unused-expressions
+  81:203  warning  Do not use `location.assign()` to navigate to internal Next.js pages. Use `redirect()` in the render phase, or `useRouter().push()` in Client Components' event handlers instead. See: https://nextjs.org/docs/messages/no-location-assign-relative-destination  @next/next/no-location-assign-relative-destination
+
+/Users/kmfp/Documents/Codex/2026-10-25/you-are-conductor-the-single-codex/work/vle/server/sourcing-api.js
+  121:9  warning  'error' is defined but never used  @typescript-eslint/no-unused-vars
+
+✖ 11 problems (0 errors, 11 warnings)

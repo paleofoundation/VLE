@@ -11,7 +11,15 @@ Private workspaces, reports and results require the account owner's authorizatio
 - [Home](https://vle.exchange/): The ingredient exchange.
 - [About VLE](https://vle.exchange/about): What the exchange does.
 - [How it works](https://vle.exchange/how-it-works): The sourcing process.
-- [Sourcing boundaries](https://vle.exchange/boundaries): What evidence and exchange activity establish.
-- [Frequently asked questions](https://vle.exchange/faq): Public questions and answers.
 - [Ingredient suppliers](https://vle.exchange/suppliers): Public supplier and documented lot listings.
-- [Kasandrinos](https://vle.exchange/suppliers/kasandrinos): Public supplier information and lot evidence.
+- [Evidence resources](https://vle.exchange/resources): Public resources about documents and evidence roles.
+- [Contact and corrections](https://vle.exchange/contact): Onboarding, support, corrections and removal requests.
+- [Privacy policy](https://vle.exchange/privacy): Information use and privacy choices.
+
+## Citation
+
+Cite the public page title, its exact URL and the date accessed. For a public listing, identify the supplier and lot exactly as displayed and preserve the source, date, status and scope of each document. Do not infer certification from a listing or a laboratory result.
+
+## Contact
+
+Contact marcus@vle.exchange for supplier onboarding, account support, document corrections, profile ownership or removal requests, as published on the contact page. Include the relevant public page URL. Do not send passwords or sign-in links.

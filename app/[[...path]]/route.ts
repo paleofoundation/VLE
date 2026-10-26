@@ -9,6 +9,6 @@ export function GET(request:Request){
  const privatePage=/^\/(proof|reports|team|brand|sourcing|requests|deals|notifications|workspace|email-sign-in|design-system)(\/|$)/.test(path);
  const title=titles[path]||'Lot evidence and ingredient sourcing | VLE';
  const head=`<link rel="canonical" href="https://vle.exchange${path.replace(/[^a-zA-Z0-9/_-]/g,'')}">${privatePage?'<meta name="robots" content="noindex,nofollow">':''}`;
- const html=shell.replace('<title>VLE | Meet your next source</title>',`<title>${title}</title>`).replace('</head>',head+(known&&!privatePage?publicSchemaTag(path,title):'')+'</head>');
+ const html=shell.replace('<title>VLE | Meet your next source</title>',`<title>${title}</title>`).replace('</head>',head+(known&&path==="/"?publicSchemaTag():'')+'</head>');
  return new Response(known?html:"Not found",{status:known?200:404,headers:{"Content-Type":known?"text/html; charset=utf-8":"text/plain","Cache-Control":"no-store","X-Content-Type-Options":"nosniff","Referrer-Policy":"same-origin"}});
 }

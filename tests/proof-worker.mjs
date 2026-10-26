@@ -1,3 +1,4 @@
+import {seedKasandrinosProofFixture} from './support/kasandrinos-proof-fixture.mjs';
 import assert from 'node:assert/strict';
 import {readdirSync,readFileSync} from 'node:fs';
 import {resolve} from 'node:path';
@@ -9,6 +10,8 @@ const mf=new Miniflare({modulesRoot:resolve('dist/server'),modules:[{type:'ESMod
 try{
  const db=await mf.getD1Database('DB');
  for(const f of readdirSync('drizzle').filter(f=>f.endsWith('.sql')).sort())for(const sql of readFileSync('drizzle/'+f,'utf8').split('--> statement-breakpoint'))if(sql.trim())await db.prepare(sql).run();
+ // This test explicitly opts into the held pilot fixture on disposable local D1.
+ await seedKasandrinosProofFixture(db);
  const base='https://vle.test';
  for(const path of ['/','/organizations/kasandrinos','/suppliers/kasandrinos','/lots/KAS-227-KB','/proof']){const r=await mf.dispatchFetch(base+path);assert.equal(r.status,200,path);const text=await r.text();assert(!text.includes('Edit site'));assert(text.includes('/app.js'));}
  let response=await mf.dispatchFetch(base+'/api/bootstrap');assert.equal(response.status,200);let body=await response.json();assert.equal(body.session.signedIn,false);assert.equal(body.proof.organizations[0].roles.length,3);assert.equal(body.proof.organizations[0].tecrids.length,0);assert.equal(body.proof.organizations[0].certifications.length,5);

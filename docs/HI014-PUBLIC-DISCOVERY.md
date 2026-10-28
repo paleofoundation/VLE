@@ -1,0 +1,11 @@
+# TEC-VLE-SEARCH-1: public discovery and retired routes
+
+The four retired public URLs now redirect before framework slash normalization: /for-buyers to /how-it-works, /for-laboratories to /resources, and /access and /join to /. Bare and trailing-slash forms return a single 301, including query and HEAD requests. Destinations return 200 with self-canonicals. There is no catch-all, private redirect or content restoration. /faq remains its existing page and is excluded from retirement.
+
+The llms.txt guide uses only anonymously verified live public links. The previous guide's named pilot supplier link is removed; /faq and /boundaries are omitted because their live responses remain 404 even though main builds them. The guide adds public resources, privacy, citation instructions and the contact published by the live information renderer. It contains no pilot records or named pilot content, private routes, invented evidence claims, or em/en dashes. Robots adds only the redundant Allow line for the guide, retaining all prior policy lines.
+
+Home emits exactly Organization and WebSite identity nodes using the existing visible Verified Lot Exchange name and canonical URL. The earlier draft's supplier/lot/page graphs are narrowed to the requested home identity scope. Private shells continue to emit no graph and retain noindex,nofollow. No rating, certification, count or status claims are added.
+
+Validation: production build and all 29 existing regression scripts pass. Compiled Worker evidence checks actual static text MIME/content, every guide page, home graph types, private noindex, retired bare/slash/query/HEAD response headers, self-canonical destinations, unknown 404, robots/sitemap and zero outbound calls. Focused lint and whitespace pass. Plain tsc reports the same inherited relay type diagnostic as a read-only main snapshot, with no new diagnostics.
+
+This ordinary follow-up stays on draft #79. Current main and this draft have no overlapping changed paths since their common ancestor, so no local merge or history integration is needed or performed. No database, migration, seed, receiver, account, audience or production changes. The production migration ledger and #81 release dependency remain Elon's gate. No live release acceptance is claimed.

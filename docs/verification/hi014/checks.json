@@ -1,0 +1,152 @@
+[
+  {
+    "check": "email-auth",
+    "exit": 0,
+    "seconds": 2.15
+  },
+  {
+    "check": "evidence-notifications",
+    "exit": 0,
+    "seconds": 1.33
+  },
+  {
+    "check": "homepage-regressions",
+    "exit": 0,
+    "seconds": 0.22
+  },
+  {
+    "check": "kasandrinos-request-notifications",
+    "exit": 0,
+    "seconds": 1.46
+  },
+  {
+    "check": "kasandrinos",
+    "exit": 0,
+    "seconds": 0.19
+  },
+  {
+    "check": "mobile-shell",
+    "exit": 0,
+    "seconds": 0.24
+  },
+  {
+    "check": "pilot",
+    "exit": 0,
+    "seconds": 4.03
+  },
+  {
+    "check": "proof-chips",
+    "exit": 0,
+    "seconds": 0.24
+  },
+  {
+    "check": "proof-exchange",
+    "exit": 0,
+    "seconds": 2.31
+  },
+  {
+    "check": "proof-worker",
+    "exit": 0,
+    "seconds": 0.97
+  },
+  {
+    "check": "public-discovery-worker",
+    "exit": 0,
+    "seconds": 0.62
+  },
+  {
+    "check": "public-discovery",
+    "exit": 0,
+    "seconds": 0.18
+  },
+  {
+    "check": "report-gate",
+    "exit": 0,
+    "seconds": 0.18
+  },
+  {
+    "check": "security-dependencies",
+    "exit": 0,
+    "seconds": 0.3
+  },
+  {
+    "check": "security-domain-membership",
+    "exit": 0,
+    "seconds": 1.34
+  },
+  {
+    "check": "security-headers",
+    "exit": 0,
+    "seconds": 0.95
+  },
+  {
+    "check": "security-mail-issuance",
+    "exit": 0,
+    "seconds": 0.29
+  },
+  {
+    "check": "security-notification-privacy",
+    "exit": 0,
+    "seconds": 0.85
+  },
+  {
+    "check": "security-rate-budgets",
+    "exit": 0,
+    "seconds": 2.65
+  },
+  {
+    "check": "security-reports",
+    "exit": 0,
+    "seconds": 1.48
+  },
+  {
+    "check": "security-service-assertions",
+    "exit": 0,
+    "seconds": 0.83
+  },
+  {
+    "check": "security-service-boundary",
+    "exit": 0,
+    "seconds": 0.3
+  },
+  {
+    "check": "security-team-audit",
+    "exit": 0,
+    "seconds": 1.43
+  },
+  {
+    "check": "sourcing",
+    "exit": 0,
+    "seconds": 4.04
+  },
+  {
+    "check": "storefront",
+    "exit": 0,
+    "seconds": 0.2
+  },
+  {
+    "check": "teams",
+    "exit": 0,
+    "seconds": 2.95
+  },
+  {
+    "check": "tecrid-email-relay",
+    "exit": 0,
+    "seconds": 1.06
+  },
+  {
+    "check": "tecrid-report-service",
+    "exit": 0,
+    "seconds": 2.64
+  },
+  {
+    "check": "tecrid-test-links",
+    "exit": 0,
+    "seconds": 0.21
+  },
+  {
+    "check": "lint",
+    "exit": 0,
+    "seconds": 1.86
+  }
+]

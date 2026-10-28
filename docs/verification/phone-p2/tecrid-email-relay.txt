@@ -1,0 +1,10 @@
+PASS: issuance-bound recipient/token, mail-only denial, tamper and replay denial, idempotent delivery, recipient quota across requests, fixed link/redirect scope and zero real mail.
+✔ tests/tecrid-email-relay.mjs (1082.153666ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 1
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1089.390125

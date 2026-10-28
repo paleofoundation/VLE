@@ -1,0 +1,15 @@
+PASS: anonymous/cross-account/origin/account-switch/action guards, concurrent approval and audit data.
+PASS: scoped hold approval, deferral/new update, expired hold, private answer, no outbound or result-bearing notifications.
+PASS: viewer membership remains read-only.
+PASS: inbox sorts by newest task activity, independent of conversation creation.
+PASS: latest-message race blocks the stale answer and audit remains metadata only.
+PASS: escaped role home, two-button cap, empty/viewer state, Answer first tap and plain-language copy.
+✔ tests/waiting.mjs (3066.054625ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 1
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 3074.101542

@@ -1,0 +1,260 @@
+{
+  "base_branch": "codex/conductor-vle-stream-consumer",
+  "base_sha": "73bdf65c0777e285512e35672d71e6c8e142703a",
+  "contains_p1": "925fa7e46b9fd2214a5763774b09070d47a2b0c1",
+  "scope": "P2 only; schema0013; no0011/0012 files in phase diff",
+  "test_files": 32,
+  "full_checks_pass": true,
+  "build": "PASS",
+  "schema_drift": "No changes",
+  "browser": [
+    {
+      "role": "brand",
+      "width": 390,
+      "taps": 3,
+      "metrics": {
+        "viewport": 390,
+        "scroll": 390,
+        "menu": false,
+        "cards": [
+          0,
+          0
+        ]
+      },
+      "stored": {
+        "requests": 2,
+        "answers": 0,
+        "notifications": 0
+      },
+      "network": [
+        {
+          "method": "GET",
+          "path": "/api/requests/waiting",
+          "status": 200
+        },
+        {
+          "method": "GET",
+          "path": "/api/requests",
+          "status": 200
+        },
+        {
+          "method": "GET",
+          "path": "/api/requests/catalog",
+          "status": 200
+        },
+        {
+          "method": "GET",
+          "path": "/api/requests/catalog",
+          "status": 200
+        },
+        {
+          "method": "POST",
+          "path": "/api/requests",
+          "status": 201
+        },
+        {
+          "method": "GET",
+          "path": "/api/requests",
+          "status": 200
+        },
+        {
+          "method": "GET",
+          "path": "/api/requests/08ec73fe-146c-4de9-9e82-1995affb1458",
+          "status": 200
+        }
+      ],
+      "errors": []
+    },
+    {
+      "role": "brand",
+      "width": 1440,
+      "taps": 3,
+      "metrics": {
+        "viewport": 1440,
+        "scroll": 1440,
+        "menu": false,
+        "cards": [
+          0,
+          0
+        ]
+      },
+      "stored": {
+        "requests": 2,
+        "answers": 0,
+        "notifications": 0
+      },
+      "network": [
+        {
+          "method": "GET",
+          "path": "/api/requests/waiting",
+          "status": 200
+        },
+        {
+          "method": "GET",
+          "path": "/api/requests",
+          "status": 200
+        },
+        {
+          "method": "GET",
+          "path": "/api/requests/catalog",
+          "status": 200
+        },
+        {
+          "method": "GET",
+          "path": "/api/requests/catalog",
+          "status": 200
+        },
+        {
+          "method": "POST",
+          "path": "/api/requests",
+          "status": 201
+        },
+        {
+          "method": "GET",
+          "path": "/api/requests",
+          "status": 200
+        },
+        {
+          "method": "GET",
+          "path": "/api/requests/925ee70f-8f6f-4375-a0d7-099b38545357",
+          "status": 200
+        }
+      ],
+      "errors": []
+    },
+    {
+      "role": "supplier",
+      "width": 390,
+      "taps": 2,
+      "metrics": {
+        "viewport": 390,
+        "scroll": 390,
+        "menu": false,
+        "cards": [
+          2
+        ]
+      },
+      "stored": {
+        "requests": 1,
+        "answers": 1,
+        "notifications": 0
+      },
+      "network": [
+        {
+          "method": "GET",
+          "path": "/api/requests/waiting",
+          "status": 200
+        },
+        {
+          "method": "GET",
+          "path": "/api/requests",
+          "status": 200
+        },
+        {
+          "method": "GET",
+          "path": "/api/requests/11111111-1111-4111-8111-111111111111",
+          "status": 200
+        },
+        {
+          "method": "GET",
+          "path": "/api/requests/11111111-1111-4111-8111-111111111111/on-file",
+          "status": 200
+        },
+        {
+          "method": "POST",
+          "path": "/api/requests/11111111-1111-4111-8111-111111111111/answer",
+          "status": 200
+        },
+        {
+          "method": "GET",
+          "path": "/api/requests",
+          "status": 200
+        },
+        {
+          "method": "GET",
+          "path": "/api/requests/11111111-1111-4111-8111-111111111111",
+          "status": 200
+        }
+      ],
+      "errors": []
+    },
+    {
+      "role": "supplier",
+      "width": 1440,
+      "taps": 2,
+      "metrics": {
+        "viewport": 1440,
+        "scroll": 1440,
+        "menu": false,
+        "cards": [
+          2
+        ]
+      },
+      "stored": {
+        "requests": 1,
+        "answers": 1,
+        "notifications": 0
+      },
+      "network": [
+        {
+          "method": "GET",
+          "path": "/api/requests/waiting",
+          "status": 200
+        },
+        {
+          "method": "GET",
+          "path": "/api/requests",
+          "status": 200
+        },
+        {
+          "method": "GET",
+          "path": "/api/requests/11111111-1111-4111-8111-111111111111",
+          "status": 200
+        },
+        {
+          "method": "GET",
+          "path": "/api/requests/11111111-1111-4111-8111-111111111111/on-file",
+          "status": 200
+        },
+        {
+          "method": "POST",
+          "path": "/api/requests/11111111-1111-4111-8111-111111111111/answer",
+          "status": 200
+        },
+        {
+          "method": "GET",
+          "path": "/api/requests",
+          "status": 200
+        },
+        {
+          "method": "GET",
+          "path": "/api/requests/11111111-1111-4111-8111-111111111111",
+          "status": 200
+        }
+      ],
+      "errors": []
+    }
+  ],
+  "targeting": [
+    {
+      "mode": "one",
+      "taps": 3,
+      "targetCount": 1
+    },
+    {
+      "mode": "list",
+      "taps": 3,
+      "targetCount": 2
+    },
+    {
+      "mode": "custom-list",
+      "taps": 5,
+      "targetCount": 1
+    },
+    {
+      "mode": "quick-reply",
+      "taps": 2
+    }
+  ],
+  "boundaries": "Synthetic local identity; real scoped APIs and disposable D1/R2. Separate compiled Worker/auth tests. ReceiverOFF, no production apply or real outbound."
+}

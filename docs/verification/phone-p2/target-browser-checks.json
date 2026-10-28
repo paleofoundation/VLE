@@ -1,0 +1,21 @@
+[
+  {
+    "mode": "one",
+    "taps": 3,
+    "targetCount": 1
+  },
+  {
+    "mode": "list",
+    "taps": 3,
+    "targetCount": 2
+  },
+  {
+    "mode": "custom-list",
+    "taps": 5,
+    "targetCount": 1
+  },
+  {
+    "mode": "quick-reply",
+    "taps": 2
+  }
+]

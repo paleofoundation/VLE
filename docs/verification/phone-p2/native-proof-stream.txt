@@ -1,0 +1,15 @@
+✔ accepts all thirteen exact metadata/tombstone fixtures from the tested TECRID producer (1082.000792ms)
+✔ stores independent scoped grants privately while public proof stays metadata only (121.56975ms)
+✔ revokes only the targeted grant and delayed or conflicting events cannot restore it (79.284583ms)
+✔ a tombstone received first prevents a late unseen upsert from storing findings (68.999125ms)
+✔ replacement identity, controller isolation and current credential versions survive concurrency (332.114083ms)
+✔ validates raw scope, supplier namespaces, fingerprint, recipient and disabled gate before storage (8.678125ms)
+✔ an active private grant never implies public proof consent (73.208042ms)
+ℹ tests 7
+ℹ suites 0
+ℹ pass 7
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2098.4355

@@ -1,0 +1,11 @@
+PASS: two-action card, direct two-tap Answer link, quick replies, explicit share, escaped source data, canonical links and missing/viewer states.
+PASS: asynchronous cross-account data is rejected before rendering; no automatic retry loop.
+✔ tests/phone-request-ui.mjs (90.960041ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 1
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 98.273833

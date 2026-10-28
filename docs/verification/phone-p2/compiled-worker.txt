@@ -1,0 +1,10 @@
+PASS: compiled Worker deep links serve a private noindex shell, invalid routes return404, and dispatch rejects all anonymous request/catalog/record routes and mutations, private responses are no-store, receiver remains OFF and zero outbound calls.
+✔ tests/phone-request-worker.mjs (1030.532458ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 1
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1038.073041

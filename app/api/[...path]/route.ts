@@ -1,3 +1,4 @@
+import {phoneRequest} from '../../../server/phone-requests.js';
 import {proofProjection} from '../../../server/proof-exchange.js';
 import {reportPermission} from '../../../server/kasandrinos-report-permissions.js';
 import {teamRequest,canEditKas,selectedTeam} from '../../../server/teams.js';
@@ -71,6 +72,7 @@ async function logView(c:any,l:any){
 export async function GET(request:Request){
  try{
   const path=new URL(request.url).pathname;
+  if(path.startsWith('/api/requests')){const user=await getEmailUser(request);return await phoneRequest(request,database(),(env as any).BUCKET,user,permissions(user),env);}
   if(path==='/api/team'){return await teamRequest(request,database(),await getEmailUser(request));}
   if(path.startsWith('/api/sourcing')){const user=await getEmailUser(request);return await sourcingRequest(request,database(),(env as any).BUCKET,user,permissions(user));}
   if(path.startsWith('/api/auth/'))return authRequest(request);
@@ -95,6 +97,7 @@ export async function GET(request:Request){
 }
 export async function POST(request:Request){
  try{
+  if(new URL(request.url).pathname.startsWith('/api/requests')){const user=await getEmailUser(request);return await phoneRequest(request,database(),(env as any).BUCKET,user,permissions(user),env);}
   if(new URL(request.url).pathname==='/api/team'){return await teamRequest(request,database(),await getEmailUser(request));}
   if(new URL(request.url).pathname.startsWith('/api/sourcing')){const user=await getEmailUser(request);return await sourcingRequest(request,database(),(env as any).BUCKET,user,permissions(user));}
   if(new URL(request.url).pathname.startsWith('/api/auth/'))return authRequest(request);

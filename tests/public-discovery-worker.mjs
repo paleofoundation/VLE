@@ -14,12 +14,14 @@ try{
  const home=await probe('/');assert.equal(home.r.status,200);assert.equal(home.canonical,'https://vle.exchange/');assert.deepEqual(home.schemas.flatMap(s=>s['@graph'].map(n=>n['@type'])),['Organization','WebSite']);
  for(const path of ['/about','/suppliers','/suppliers/kasandrinos','/lots/KAS-227-KB','/how-it-works','/resources','/faq','/privacy','/contact']){const p=await probe(path);assert.equal(p.r.status,200,path);assert.equal(p.canonical,'https://vle.exchange'+path);assert.equal(p.schemas.length,0);}
  for(const path of ['/requests','/requests/new','/brand','/workspace','/workspace/documents','/workspace/storefront','/proof','/reports/ll-43301','/team','/sourcing','/deals','/deals/room','/notifications','/email-sign-in','/design-system']){const p=await probe(path);assert.equal(p.r.status,200,path);assert.equal(p.schemas.length,0);assert(p.text.includes('noindex,nofollow'));}
- const mapping={'/for-buyers':'/how-it-works','/for-laboratories':'/resources','/access':'/','/join':'/'};
+ const {retiredPublicRedirects}=await import('../server/retired-public-redirects.mjs');
+ const mapping=Object.fromEntries(retiredPublicRedirects.map((rule)=>[rule.source,rule.destination]));
  for(const [source,destination] of Object.entries(mapping)){
   for(const suffix of ['','/','?source=old','/?source=old'])for(const method of ['GET','HEAD']){
-   const {r,text}=await probe(source+suffix,method);assert.equal(r.status,301,source+suffix);assert.equal(r.headers.get('location'),'https://vle.exchange'+destination);assert.equal(text,'');
+   const {r,text}=await probe(source+suffix,method);assert.equal(r.status,301,source+suffix+' '+method);assert.equal(r.headers.get('location'),'https://vle.exchange'+destination+(suffix.includes('?')?'?source=old':''));assert.equal(text,'');
   }
   const p=await probe(destination);assert.equal(p.r.status,200);assert.equal(p.r.headers.get('location'),null);assert.equal(p.canonical,'https://vle.exchange'+destination);
+  const followed=await probe(new URL(p.canonical).pathname);assert.equal(followed.r.status,200);assert.equal(followed.r.headers.get('location'),null);
  }
  for(const path of ['/missing-public-page','/for-buyers-extra','/access/private','/join/private','/api/health']){const p=await probe(path);assert.equal(p.r.status,404,path);assert.equal(p.r.headers.get('location'),null);}
  const guide=await probe('/llms.txt');assert.equal(guide.r.status,200);assert.match(guide.r.headers.get('content-type'),/^text\/plain/);assert.equal(guide.text,readFileSync('public/llms.txt','utf8'));assert.equal(guide.text,readFileSync('dist/client/llms.txt','utf8'));

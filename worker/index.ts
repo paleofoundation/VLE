@@ -5,20 +5,19 @@ import {deliverNotifications} from '../server/sourcing.js';
 import handler from "vinext/server/fetch-handler";
 import { runWithConnectorBinding } from "../lib/connector-context";
 import type { ConnectorBinding } from "../lib/connector-contract.mjs";
-
-// Retired public routes must bypass the framework's trailing-slash redirect.
-const retiredPublicRoutes: Record<string, string> = {
-  "/for-buyers": "/how-it-works",
-  "/for-laboratories": "/resources",
-  "/access": "/",
-  "/join": "/",
-};
+import { retiredPublicRedirectTarget } from "../server/retired-public-redirects.mjs";
 
 const worker = {
   fetch(request: Request, env: Cloudflare.Env, ctx: ExecutionContext<{ CONNECTORS?: ConnectorBinding }>) {
     const url = new URL(request.url);
-    const destination = retiredPublicRoutes[url.pathname.replace(/\/$/, "")];
-    if (destination) return Response.redirect(new URL(destination, url).href, 301);
+    // Vinext strips a trailing slash with 308 before next.config redirects, which
+    // would chain. Answer the same next.config map here as one 301, query included.
+    const destination = retiredPublicRedirectTarget(url.pathname);
+    if (destination) {
+      const target = new URL(destination, url);
+      target.search = url.search;
+      return Response.redirect(target.href, 301);
+    }
 
     let binding = ctx.props?.CONNECTORS;
     // Local preview emulates the same request-scoped capability. This branch and

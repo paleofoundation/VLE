@@ -12,10 +12,11 @@ async function probe(path,method='GET'){
 }
 try{
  const home=await probe('/');assert.equal(home.r.status,200);assert.equal(home.canonical,'https://vle.exchange/');assert.deepEqual(home.schemas.flatMap(s=>s['@graph'].map(n=>n['@type'])),['Organization','WebSite']);
- for(const path of ['/about','/suppliers','/suppliers/kasandrinos','/lots/KAS-227-KB','/how-it-works','/resources','/faq','/privacy','/contact']){const p=await probe(path);assert.equal(p.r.status,200,path);assert.equal(p.canonical,'https://vle.exchange'+path);assert.equal(p.schemas.length,0);}
+ for(const path of ['/about','/suppliers','/suppliers/kasandrinos','/lots/KAS-227-KB','/how-it-works','/resources','/faq','/privacy','/contact','/for-buyers','/join','/access','/for-laboratories']){const p=await probe(path);assert.equal(p.r.status,200,path);assert.equal(p.canonical,'https://vle.exchange'+path);assert.equal(p.schemas.length,0);assert.equal(p.r.headers.get('location'),null);}
  for(const path of ['/requests','/requests/new','/brand','/workspace','/workspace/documents','/workspace/storefront','/proof','/reports/ll-43301','/team','/sourcing','/deals','/deals/room','/notifications','/email-sign-in','/design-system']){const p=await probe(path);assert.equal(p.r.status,200,path);assert.equal(p.schemas.length,0);assert(p.text.includes('noindex,nofollow'));}
- const {retiredPublicRedirects}=await import('../server/retired-public-redirects.mjs');
+ const {retiredPublicRedirects,retiredPublicRedirectTarget}=await import('../server/retired-public-redirects.mjs');
  const mapping=Object.fromEntries(retiredPublicRedirects.map((rule)=>[rule.source,rule.destination]));
+ for(const path of ['/for-buyers','/join','/access','/for-laboratories']){assert.equal(retiredPublicRedirectTarget(path),null,path);const head=await probe(path,'HEAD');assert.equal(head.r.status,200,path+' HEAD');assert.equal(head.r.headers.get('location'),null);}
  for(const [source,destination] of Object.entries(mapping)){
   for(const suffix of ['','/','?source=old','/?source=old'])for(const method of ['GET','HEAD']){
    const {r,text}=await probe(source+suffix,method);assert.equal(r.status,301,source+suffix+' '+method);assert.equal(r.headers.get('location'),'https://vle.exchange'+destination+(suffix.includes('?')?'?source=old':''));assert.equal(text,'');
@@ -30,6 +31,7 @@ try{
  const robots=await probe('/robots.txt');assert.equal(robots.r.status,200);assert.match(robots.text,/Allow: \/llms.txt/);
  for(const path of ['/api/','/team','/brand','/sourcing','/requests','/deals','/notifications','/workspace','/email-sign-in','/design-system'])assert(robots.text.includes('Disallow: '+path));
  const sitemap=await probe('/sitemap.xml');assert.equal(sitemap.r.status,200);for(const source of Object.keys(mapping))assert(!sitemap.text.includes('https://vle.exchange'+source+'<'));
+ for(const path of ['/for-buyers','/join','/access','/for-laboratories'])assert(sitemap.text.includes('https://vle.exchange'+path+'<'));
  assert.deepEqual(calls,[]);writeFileSync('../evidence/vle-worker.json',JSON.stringify({rows,outbound:calls,receiver:'OFF'},null,2));
- console.log(`PASS ${rows.length} compiled Worker responses: all retired bare/slash/query/HEAD301 singlehop, destination200/selfcanonical, guideMIME/content/publiclinks, home identity only, private noindex, unknown404, robots policy and zero outbound.`);
+ console.log(`PASS ${rows.length} compiled Worker responses: indexed audience pages 200/selfcanonical, guideMIME/content/publiclinks, home identity only, private noindex, unknown404, robots policy and zero outbound.`);
 }finally{await mf.dispose();}

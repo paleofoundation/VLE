@@ -11,6 +11,10 @@ Private workspaces, reports and results require the account owner's authorizatio
 - [Home](https://vle.exchange/): The ingredient exchange.
 - [About VLE](https://vle.exchange/about): What the exchange does.
 - [How it works](https://vle.exchange/how-it-works): The sourcing process.
+- [For buyers](https://vle.exchange/for-buyers): How a brand buyer keeps a private brief and reviews documented lots.
+- [Join](https://vle.exchange/join): How buyers, suppliers, and laboratories open an account.
+- [Access](https://vle.exchange/access): Email sign-in, and what an account does not grant.
+- [For laboratories](https://vle.exchange/for-laboratories): Light Labs, and the boundary between a laboratory test and authentication.
 - [Ingredient suppliers](https://vle.exchange/suppliers): Public supplier and documented lot listings.
 - [Evidence resources](https://vle.exchange/resources): Public resources about documents and evidence roles.
 - [Contact and corrections](https://vle.exchange/contact): Onboarding, support, corrections and removal requests.

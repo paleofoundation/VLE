@@ -10,7 +10,7 @@ export function exploreGroups(role,signedIn){
  const getStarted=!signedIn?[tab('Sign in','/email-sign-in'),tab('For suppliers','/workspace'),tab('For brands','/brand')]:role==='supplier'?[tab('Supplier workspace','/workspace'),tab('Conversations','/deals')]:role==='brand'?[tab('Brand workspace','/brand'),tab('Conversations','/deals')]:[tab('Find lots','/suppliers')];
  return [
   {title:'Get started',items:getStarted},
-  {title:'Understand',items:[tab('How it works','/how-it-works'),tab('Boundaries','/boundaries'),tab('FAQ','/faq'),tab('What a TECRID is','https://tecrid.com/what-is-a-tecrid')]},
+  {title:'Understand',items:[tab('How it works','/how-it-works'),tab('Boundaries','/boundaries'),tab('FAQ','/faq'),tab('For buyers','/for-buyers'),tab('For laboratories','/for-laboratories'),tab('Join','/join'),tab('Access','/access'),tab('What a TECRID is','https://tecrid.com/what-is-a-tecrid')]},
   {title:'Trust',items:[tab('Certifications and TECRIDs','/resources'),...(signedIn&&['brand','supplier'].includes(role)?[tab('Organization proof','/proof')]:[]),tab('Sourcing boundaries','/boundaries')]},
   {title:'Account',items:signedIn?[tab('Profile, organization and team','/team')]:[tab('Sign in to your account','/email-sign-in')]},
  ];

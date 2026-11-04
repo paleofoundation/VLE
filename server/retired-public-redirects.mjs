@@ -1,11 +1,7 @@
-// Indexed paths that no longer have pages. Destinations are current routes:
-// laboratories → the laboratory page, join/access → signup, buyers → the brand desk.
-export const retiredPublicRedirects = Object.freeze([
-  Object.freeze({ source: "/for-laboratories", destination: "/resources/labs/light-labs" }),
-  Object.freeze({ source: "/access", destination: "/email-sign-in" }),
-  Object.freeze({ source: "/join", destination: "/email-sign-in" }),
-  Object.freeze({ source: "/for-buyers", destination: "/brand" }),
-]);
+// Indexed paths are public pages again: /for-buyers, /join, /access, and
+// /for-laboratories. Keep this map so a later retirement can stay one 301
+// before Vinext's trailing-slash redirect. It is empty on purpose.
+export const retiredPublicRedirects = Object.freeze([]);
 
 const bySource = new Map(retiredPublicRedirects.map((rule) => [rule.source, rule.destination]));
 

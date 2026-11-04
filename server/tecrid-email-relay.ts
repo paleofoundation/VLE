@@ -10,7 +10,7 @@ export async function tecridEmailRelay(request:Request,env:Record<string,any>,tr
  const a=await hash(supplied),b=await hash(`Bearer ${secret}`);let mismatch=0;for(let i=0;i<a.length;i++)mismatch|=a[i]^b[i];
  if(mismatch)return new Response(null,{status:401});
  const assertionHeaders=new Headers(request.headers);assertionHeaders.set('authorization',request.headers.get('x-tecrid-mail-issuance')||'');
- if(!await verifyServiceAssertion(new Request(request.clone(),{headers:assertionHeaders}),env,'mail-issuance'))return new Response(null,{status:401});
+ if(!await verifyServiceAssertion(new Request(request.clone() as unknown as RequestInfo,{headers:assertionHeaders}),env,'mail-issuance'))return new Response(null,{status:401});
  if(Number(request.headers.get('content-length'))>8192)return new Response(null,{status:413});
  let input:any;try{const body=await boundedText(request,8192);if(body.length>8192)return new Response(null,{status:413});input=JSON.parse(body);}catch{return new Response(null,{status:400});}
  const email=input?.email;

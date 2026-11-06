@@ -1,3 +1,4 @@
+import {requireApprovedSupplier} from './supplier-onboarding.js';
 import {teamRole,selectedTeam} from './teams.js';
 import {ProofError,required,identifier,dateValue,verifyDelivery,validateEnvelope,freshness} from './proof-contract.js';
 import {verifyCertification} from './proof-registry.js';
@@ -59,6 +60,7 @@ export async function proofRequest(request,db,user,env={}){
   const team=await selectedTeam(db,user);
   if(!team||!['owner','admin'].includes(team.role)||d.organizationId!==team.id)throw new ProofError('Use the active organization owner or administrator account.',403);
   if(d.action==='organization'){
+   if(Array.isArray(d.roles)&&d.roles.includes('supplier'))await requireApprovedSupplier(db,{...user,teamId:team.id},env);
    const slug=required(d.slug,'public slug',80);if(!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug))throw new ProofError('Invalid public slug.');
    if(!Array.isArray(d.roles)||!d.roles.length||d.roles.some(r=>!roles.includes(r)))throw new ProofError('Choose organization roles.');
    const existing=await db.prepare('SELECT * FROM proof_organizations WHERE id=?').bind(team.id).first();
@@ -68,6 +70,7 @@ export async function proofRequest(request,db,user,env={}){
    return json({ok:true});
   }
   await manager(db,user,team.id);
+  if(['lot','assert-release'].includes(d.action)||d.action==='certification'&&team.kind==='supplier')await requireApprovedSupplier(db,{...user,teamId:team.id},env);
   if(d.action==='lot'){
    if(!await hasRole(db,team.id,'supplier'))throw new ProofError('Supplier role required.',403);
    const id=identifier(d.id,'lot ID'),supplierLot=required(d.supplierLotId,'supplier lot ID'),code=required(d.ingredientCode||d.productSku,'ingredient code or SKU');
@@ -112,3 +115,4 @@ export async function proofRequest(request,db,user,env={}){
   throw new ProofError('Unknown proof action.');
  }catch(error){return json({error:error instanceof ProofError?error.message:'Unable to update proof. Check the record and try again.'},error.status||400);}
 }
+

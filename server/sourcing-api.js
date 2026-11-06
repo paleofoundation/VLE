@@ -1,3 +1,4 @@
+import {requireApprovedSupplier} from './supplier-onboarding.js';
 import {waitingRequest} from './waiting.js';
 import {takeBudget} from './abuse-budget.js';
 import {boundedText} from './service-assertion.js';
@@ -48,6 +49,7 @@ export async function sourcingRequest(request,db,bucket,user,p){
  if(!await takeBudget(db,'sourcing-account-mutation',user.userId,120,60000))return json({error:'Account request limit reached. Try again shortly.'},429);
  if(path.startsWith('/api/sourcing/waiting/'))return await waitingRequest(request,db,user,p);
  if(path==='/api/sourcing/upload'){
+  await requireApprovedSupplier(db,user);
   if(!supplier&&!isManager)return json({error:'Set up your supplier workspace first.'},403);
   if(Number(request.headers.get('content-length'))>12000000)return json({error:'PDF must be under 10 MB.'},413);
   const form=await request.formData(),file=form.get('file');if(form.get('accountId')!==user.userId)return json({error:'Your active account changed. Refresh before submitting.'},409);if(!(file instanceof File)||file.size>10000000||file.size<5)throw Error('Choose a PDF under 10 MB.');
@@ -81,6 +83,7 @@ export async function sourcingRequest(request,db,bucket,user,p){
   return json({ok:true});
  }
  if(d.action==='start-room'||d.action==='respond'){
+  if(d.action==='respond')await requireApprovedSupplier(db,user);
   let buyerId,supplierEmail,supplierName,summary,submissionId=null,supplierAccountId=null,lot=String(d.lot||''),b;
   if(d.action==='start-room'){
    if(!p.buyer)throw Error('An explicit brand account membership is required.');b=await brief(d.briefId);if(b.status!=='Open')throw Error('This brief is closed.');
@@ -120,3 +123,4 @@ export async function sourcingRequest(request,db,bucket,user,p){
  return json({error:'Unknown action.'},400);
  }catch(error){return json({error:'Unable to complete this sourcing action. Check the fields and try again.'},400);}
 }
+

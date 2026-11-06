@@ -1,3 +1,4 @@
+import {requireApprovedSupplier} from '../../../server/supplier-onboarding.js';
 import {phoneRequest} from '../../../server/phone-requests.js';
 import {proofProjection} from '../../../server/proof-exchange.js';
 import {reportPermission} from '../../../server/kasandrinos-report-permissions.js';
@@ -118,6 +119,7 @@ export async function POST(request:Request){
   if(action==='role'){reviewer();if(!['out','brand','supplier'].includes(data.role))throw Error('Invalid view.');s.role=data.role;}
   else if(action==='supplier'){reviewer();if(!supplierFor(data.supplier))throw Error('Unknown supplier.');s.supplier=data.supplier;}
   else if(action==='supplier-profile'){
+   await requireApprovedSupplier(database(),c.user,env);
    const name=String(data.name||'').trim(),category=String(data.category||'');
    if(name.length<2||name.length>120||!categories.includes(category))throw Error('Enter your company name and choose an ingredient category.');
    s.supplierProfile={id:'account-'+c.user.userId,name,category,initials:name.split(/\s+/).slice(0,2).map((w:string)=>w[0]).join('').toUpperCase(),person:c.user.displayName};
@@ -166,3 +168,4 @@ async function serveKasReport(c:any,report:any){
   return new Response(bytes,{headers:{...privateHeaders,'Content-Type':'application/pdf','Content-Disposition':`inline; filename="Kasandrinos-${report.id}.pdf"`,'X-Report-SHA256':report.sha256}});
  }catch(error){console.error('Kasandrinos report unavailable');return failure('This source report is unavailable or changed. Please try again after it has been reviewed.',503);}
 }
+

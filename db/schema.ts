@@ -123,3 +123,12 @@ export const phoneRequestRecipients=sqliteTable('phone_request_recipients',{
 export const phoneDocumentRecords=sqliteTable('phone_document_records',{
  id:text('id').primaryKey().notNull(),submissionId:text('submission_id').notNull().references(()=>supplierSubmissions.id),ownerAccountId:text('owner_account_id').notNull().references(()=>teamAccounts.id),kind:text('kind').notNull(),ingredientCode:text('ingredient_code').notNull(),payloadJson:text('payload_json').notNull(),sourceFileKey:text('source_file_key').notNull(),sourceHash:text('source_hash').notNull(),recordFingerprint:text('record_fingerprint').notNull(),status:text('status').notNull().default('active'),version:integer('version').notNull().default(1),reviewedBy:text('reviewed_by').notNull(),reviewReference:text('review_reference').notNull(),reviewedAt:text('reviewed_at').notNull(),
 },t=>[uniqueIndex('phone_document_submission_kind').on(t.submissionId,t.kind)]);
+
+
+
+export const supplierApplications = sqliteTable("supplier_applications", {
+ id:text("id").primaryKey(),companyName:text("company_name").notNull(),normalizedName:text("normalized_name").notNull().unique(),country:text("country").notNull(),ingredientCategories:text("ingredient_categories").notNull(),
+ contactEmail:text("contact_email").notNull().unique(),verifiedUserId:text("verified_user_id").unique(),emailVerifiedAt:text("email_verified_at"),status:text("status").notNull().default("PENDING_REVIEW"),
+ reviewedBy:text("reviewed_by"),reviewNote:text("review_note"),reviewedAt:text("reviewed_at"),createdAt:text("created_at").notNull(),
+},t=>[index("supplier_applications_queue").on(t.status,t.createdAt,t.id),index("supplier_applications_all_queue").on(t.createdAt,t.id)]);
+export const onboardingRateLimits = sqliteTable("onboarding_rate_limits", {key:text("key").primaryKey(),count:integer("count").notNull(),startedAt:integer("started_at").notNull()},t=>[index("onboarding_rate_started").on(t.startedAt)]);

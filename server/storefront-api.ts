@@ -1,3 +1,4 @@
+import {requireApprovedSupplier} from './supplier-onboarding.js';
 import {canEditKas} from './teams.js';
 import {storefrontDefaults,validateStorefront,storefrontRecord,canManageStorefront,publicStorefront,usesAsset} from './storefront.js';
 import {privateHeaders,failure} from './access';
@@ -35,6 +36,7 @@ export async function storefrontRequest(request:Request,db:any,bucket:any,user:a
  if(!request.headers.get('content-type')?.startsWith('application/json'))return failure('JSON required',415);
  const raw=await request.text();if(raw.length>24000)return failure('Request too large',413);
  const data=JSON.parse(raw);
+ if(data.action==='publish') {try{await requireApprovedSupplier(db,user);}catch{return failure('Your supplier application must be verified and approved before publishing.',403);}}
  if(data.revision!==(row?.revision||0))return failure('The storefront changed in another tab. Reload before saving.',409);
  // Initialize only after authorization. Draft changes are never public until publish.
  if(!row){await db.prepare('INSERT OR IGNORE INTO supplier_storefronts (supplier,draft,revision,updated_at) VALUES (?,?,0,?)').bind('kasandrinos',JSON.stringify(storefrontDefaults),new Date().toISOString()).run();row=await storefrontRecord(db);}
